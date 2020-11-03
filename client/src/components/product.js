@@ -1,6 +1,7 @@
 import React from 'react';
 
 export default(props) => {
+    return(
     <div>
         <h1>{props.title}</h1>
         <img src= {props.img}/>
@@ -9,4 +10,5 @@ export default(props) => {
         <h2>Stock: {props.stock} unidades</h2>
         <h3>{props.description}</h3>
     </div>
+    )
 }

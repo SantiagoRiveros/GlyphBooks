@@ -13,7 +13,7 @@ module.exports = (sequelize) => {
       defaultValue: 'No hay una descripcion'
     },
     author:{
-      type: DataTypes.String,
+      type: DataTypes.STRING,
       defaultValue: 'No especificado'
     },
     price: {

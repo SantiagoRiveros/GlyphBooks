@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
 
-const lineOrder = db.define('lineOrder', {
+const lineOrder = sequelize.define('lineOrder', {
   price: {
       type: DataTypes.INTEGER, 
   },

@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
 
-const Order = db.define('order', {
+const Order = sequelize.define('order', {
   status: {
     type: DataTypes.ENUM('carrito', 'creada', 'procesando', 'cancelada', 'completa')
   },

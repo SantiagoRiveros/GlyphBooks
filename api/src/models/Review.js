@@ -3,7 +3,7 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
 
 
-const Review = db.define('review', {
+const Review = sequelize.define('review', {
     rating: {
         type: DataTypes.INTEGER,
         allowNull: false,    

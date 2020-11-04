@@ -8,22 +8,7 @@ function App() {
 
   return (
     <div className="homepage">
-      <Product/>
-      <Product/>
-      <Product/>
-      <Product/>
-      <Product/>
-      <Product/>
-      <Product/>
-      <Product/>
-      <Product/>
-      <Product/>
-      <Product/>
-      <Product/>
-      <Product/>
-      <Product/>
-      <Product/>
-      <Product/>
+
     </div>
   )
 }

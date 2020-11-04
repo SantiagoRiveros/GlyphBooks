@@ -27,14 +27,25 @@ server.get('/search', (req, res, next) => {
 	.catch(next);
 })
 
+server.get('/search/:id', (req, res) => {
+	Product.findOne({where: {id: req.params.id}})
+		.then(book => {
+			if(!book) {
+				res.json({book: 'No encontrado'})
+			} else {
+				res.json({book: book})
+			}
+		})
+		.catch(err => res.json({err}))
+})
+
 server.post('/', (req, res, next) => {
 	const request = req.body
-
+  
 	Product.create({...request})
 		.then(book => {
 			res.send(book)
 		})
-
 })
 
 server.put('/:id', (req, res, next) => {

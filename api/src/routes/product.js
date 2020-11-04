@@ -1,5 +1,5 @@
 const server = require('express').Router();
-const { Product } = require('../db.js');
+const { Product, Category } = require('../db.js');
 const { Op } = require('sequelize');
 
 server.get('/', (req, res, next) => {
@@ -29,12 +29,22 @@ server.get('/search', (req, res, next) => {
 
 server.post('/', (req, res, next) => {
 	const request = req.body
-
 	Product.create({...request})
 		.then(book => {
 			res.send(book)
 		})
+		.catch(err => {
+			res.send(err)
+		})
+})
 
+server.post('/:idProducto/category/:idCategoria', (req, res) => {
+	Product.findOne({where: {id: req.params.idProducto}})
+		.then(producto => {
+			producto.addCategories(req.params.idCategoria)
+			.then(r => res.json(r))
+		})
+		.catch(err => res.json(err))
 })
 
 server.put('/:id', (req, res, next) => {
@@ -51,6 +61,15 @@ server.put('/:id', (req, res, next) => {
 			res.send(book)
 		})
 		.catch(next);
+})
+
+server.delete('/:idProducto/category/:idCategoria', (req, res) => {
+	Product.findOne({where: {id: req.params.idProducto}})
+		.then(producto => {
+			producto.removeCategories(req.params.idCategoria)
+			.then(r => res.json(r))
+		})
+		.catch(err => res.json(err))
 })
 
 server.delete('/:id', (req, res, next) => {

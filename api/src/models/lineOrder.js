@@ -4,11 +4,11 @@ module.exports = (sequelize) => {
 
 const lineOrder = sequelize.define('lineOrder', {
   price: {
-      type: DataTypes.INTEGER, 
+      type: DataTypes.INTEGER,
   },
   // productId: {
   //     type: DataTypes.INTEGER,
-  //     allowNull: false,    
+  //     allowNull: false,
   // },
   // orderId: {
   //   type: DataTypes.INTEGER,
@@ -16,7 +16,7 @@ const lineOrder = sequelize.define('lineOrder', {
   // },
   quantity: {
       type: DataTypes.INTEGER,
-      allowNull: false,    
+      allowNull: false,
   }
 });
 }

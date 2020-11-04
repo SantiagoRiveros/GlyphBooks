@@ -1,9 +1,12 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import Catalogue from "./components/Catalogue"
+import Product from "./components/Product.jsx"
 import './App.css';
 import SearchBar from './components/searchBar';
 
+
 function App() {
+
   return (
     <div className="App">
       <header className="App-header">
@@ -22,7 +25,7 @@ function App() {
         </a>
       </header>
     </div>
-  );
+  )
 }
 
 export default App;

@@ -16,8 +16,8 @@ server.get('/search', (req, res, next) => {
 	Product.findAll({
 		where: {
 			[Op.or]: [
-			 {title: { [Op.like]: `%${value}%` }},
-			 {description: { [Op.like]: `%${value}%` }}
+				{title: { [Op.substring]: value }},
+				{description: { [Op.substring]: value }}
 			]
 		}
 	})
@@ -30,9 +30,10 @@ server.get('/search', (req, res, next) => {
 server.post('/', (req, res, next) => {
 	const request = req.body
 
-	
-
-	Product.Create({...request})
+	Product.create({...request})
+		.then(book => {
+			res.send(book)
+		})
 
 })
 
@@ -43,12 +44,12 @@ server.put('/:id', (req, res, next) => {
 	Product.findOne({where:{id}})
 		.then(book => {
 			for (const key in request) {
-				if (!book.hasOwnProperty(key)) return res.sendStatus(400)
+				if (book[key] === undefined) return res.sendStatus(400)
 				book[key] = request[key]
 			}
-			return book.save()
+			book.save()
+			res.send(book)
 		})
-		.then(book => res.send(book))
 		.catch(next);
 })
 
@@ -60,6 +61,7 @@ server.delete('/:id', (req, res, next) => {
 			book.destroy()
 		})
 		.then(() => res.sendStatus(200))
+		.catch(next)
 })
 
 module.exports = server;

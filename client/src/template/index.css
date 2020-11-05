@@ -7,8 +7,7 @@
     width: 1170px;
     margin: auto;
 }
-header{
-    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url("../Images/homepage2.jpg");
+header{    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(/static/media/homepage2.60257434.jpg);
     height: 100vh;
     -webkit-background-size: cover;
     background-size: cover;
@@ -71,4 +70,45 @@ header{
 .welcome-text a:hover{
     background: #fff;
     color: #333;
+}
+
+.catalogue{
+    background-color:lightgreen; 
+    height: 100vh;
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+
+}
+
+
+.catalogue h1{
+    text-align: center;
+}
+
+.Producto {
+    background-color: lightgray;
+    width: 20%;
+    border: 1px solid black;
+    margin: 20px 30px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    box-shadow: 5px 10px #888888;
+}
+
+.Center {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.Libroimg {
+    padding-top: 15px;
+    width: 150px;
+    height: 150px;
+}
+
+.description {
+    padding: 0;
 }

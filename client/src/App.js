@@ -5,7 +5,6 @@ import Catalogo from "./routing/Catalogo.jsx"
 import { BrowserRouter as Router, Switch ,Route ,Link } from "react-router-dom";
 
 
-
 function App() {
 
   return (
@@ -32,7 +31,6 @@ function App() {
       <div className="catalogo">
         <Catalogue/>
       </div>
-
     </div>
   )
 }

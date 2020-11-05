@@ -2,14 +2,14 @@ const sequelize = require('sequelize');
 const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-    sequelize.define('Category',{
-        name:{
+    sequelize.define('Category', {
+        name: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        description:{
+        description: {
             type: DataTypes.STRING,
-            defaultValue: 'Esta categoria no posee descripcion'
-        },
+            defaultValue: 'Esta categoria no posee descripción'
+        }
     });
 };

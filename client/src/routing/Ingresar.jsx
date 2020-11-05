@@ -1,7 +1,6 @@
 import React from 'react'
 
-function Ingresa(){
+export default function Ingresar(){
     return <h1>Ingresa</h1>
 }
 
-export default Ingresa;

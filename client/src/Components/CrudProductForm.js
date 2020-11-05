@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import NewForm from './NewCategoryForm'
 
 
 export default function CrudProducts (action, product) {
@@ -11,7 +12,7 @@ export default function CrudProducts (action, product) {
         img: '',
     })
 
-    
+
     useEffect(() => {
         if (action === 'change') {
             input = input.product
@@ -21,7 +22,7 @@ export default function CrudProducts (action, product) {
     })
 
 
-    
+
     const handleChange = (e) => {
         setInput({
             ...input,
@@ -34,7 +35,7 @@ export default function CrudProducts (action, product) {
         alert('Category was submitted: ' + e.target.value);
         e.preventDefault();
         }
-        
+
             return (
                 <form onSubmit={handleSubmit}>
                     <label>
@@ -61,9 +62,10 @@ export default function CrudProducts (action, product) {
                         Img:
                         <input type="text" value={img} name ='img' onChange={handleChange}/>
                     </label>
+                    <newForm />
                     <input type="submit" value="Submit"/>
                     <button>delete</button>
                 </form>
-            ); 
+            );
 
 }

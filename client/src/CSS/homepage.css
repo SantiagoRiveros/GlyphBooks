@@ -1,0 +1,30 @@
+.btn{ 
+    height: 200px;
+    position: relative;
+}
+
+.imgLibros{
+    background: url("../template/Images/homepage2.jpg");
+    background-size: cover;
+    height: calc(100vh - 80px);
+
+}
+.center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+
+  .fondo{
+      background: #FCA311;
+      background-size: cover;
+      height: calc(100vh - 80px);
+  }
+  .titulo{
+      text-align: center;
+      background-color: #313c5e;
+      color: white
+  }

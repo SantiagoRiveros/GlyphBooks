@@ -39,33 +39,9 @@ nav ul li a{
     transition: .5s;
 }
 
-.imgLibros{
-    background: url("./template/Images/homepage2.jpg") no-repeat;
-    background-size: cover;
-    height: calc(100vh - 80px);
-}
 .imgLogo{
     margin-left: 50px;
-    margin-top: 6px;
-    width: 80px;
-    height: 70px;
+    margin-top: 5px;
+    width: 250px;
+    height: 80%;
 }
-
-.btn{ 
-    height: 200px;
-    position: relative;
-}
-.center {
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-  }
-
-  .catalogo{
-      background: yellow;
-      background-size: cover;
-      height: calc(100vh - 80px);
-  }

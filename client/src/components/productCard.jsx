@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Portada from "../template/Images/poretada1.jpg"
-import "../Sccs/Product.scss"
+import "../CSS/Product.scss"
 
 export default function Product(){
 

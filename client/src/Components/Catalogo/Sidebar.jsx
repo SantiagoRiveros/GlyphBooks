@@ -1,23 +1,29 @@
-import React, {useEffect, useState} from 'react';
-import axios from 'axios'
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
 
-export default({setCategorias})=>{
-    useEffect(() => {
-        axios.get("http://localhost:3000/category")
-        .then(data => {setCategorias(data)})
-    })
-    //HandleClick muestra donde se hizo click, entonces OnClick=HandleClick(category.name)
-    HandleClick((event)=>{
-        setCategorias(event.target.innerHTML);
-    }, [])
-    return(
-        <div>
-            <h1>CATEGORIAS</h1>
-            <ul>
-                {props.category.map((category)=>{
-                    return <li OnClick={HandleClick}>{category.name}</li>
-                })}
-            </ul>
-        </div>
-    )
-}
+export default ({ setCategorias, categorias }) => {
+  useEffect(() => {
+    axios.get("http://localhost:3000/category").then((data) => {
+      setCategorias(data);
+    });
+  }, []);
+  //HandleClick muestra donde se hizo click, entonces OnClick=HandleClick(category.name)
+  const HandleClick = (name) => {
+    setCategorias(name);
+  };
+  //const { push } = useHistory();
+  // onClick={() => push("/products/1")}
+  return (
+    <div>
+      <h1>CATEGORIAS</h1>
+      <ul>
+        {categorias.map((category) => {
+          return (
+            <li OnClick={() => HandleClick(category.name)}>{category.name}</li>
+          );
+        })}
+      </ul>
+    </div>
+  );
+};

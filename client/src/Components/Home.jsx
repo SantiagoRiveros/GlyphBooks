@@ -1,12 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch ,Route ,Link } from "react-router-dom";
-import Catalogue from "../components/Catalogue"
-import "../CSS/homepage.css"
+import Catalogue from "./Catalogo/Catalogue"
+import style from '../CSS/homepage.module.css'
 
 export default function Homepage(){
     return(
             <div>
-                <div className="imgLibros">
+                <div className={style.imgLibros}>
                     <div className="btn">
                         <div className="center">
                         <input type="text"/>

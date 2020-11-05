@@ -13,7 +13,7 @@ module.exports = (sequelize) => {
       defaultValue: 'No hay una descripcion'
     },
     author:{
-      type: DataTypes.String,
+      type: DataTypes.STRING,
       defaultValue: 'No especificado'
     },
     price: {
@@ -28,5 +28,5 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       defaultValue: 'image not found'
     }
-  });
+  },{ timestamps: false });
 };

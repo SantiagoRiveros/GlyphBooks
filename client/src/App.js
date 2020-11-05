@@ -1,29 +1,36 @@
 import React, { useState } from 'react';
 import Catalogue from "./components/Catalogue"
-import Product from "./components/Product.jsx"
-import './App.css';
-import SearchBar from './components/searchBar';
+import './navbar.css';
+import Catalogo from "./routing/Catalogo.jsx"
+import { BrowserRouter as Router, Switch ,Route ,Link } from "react-router-dom";
 
 
 function App() {
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <SearchBar></SearchBar>
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <nav>
+        <img className="imgLogo" src="https://media.discordapp.net/attachments/772911955349340171/773583574975774780/Glyphbooks1.png?width=1017&height=671"/>
+        <ul>
+          <li><a className="active" href="#">Home</a></li>
+          <li><a href="#">Catalogo</a></li>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Ingresar</a></li>
+          <li><a href="#">Carrito</a></li>
+        </ul>
+        <div className="btn">
+          <div className="center">
+              <input type="text"/>
+          </div>
+
+        </div>
+      </nav>
+      <div className="imgLibros"></div>
+      
+      <h1>Ofertas</h1>
+      <div className="catalogo">
+        <Catalogue/>
+      </div>
     </div>
   )
 }

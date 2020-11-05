@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Portada from "../Images/poretada1.jpg"
+import Portada from "../template/Images/poretada1.jpg"
 import "../Sccs/Product.scss"
 
 export default function Product(){

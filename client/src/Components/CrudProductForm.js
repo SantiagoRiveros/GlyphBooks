@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 
-export default function CrudProducts () {
+export default function CrudProducts (action, product) {
     const [input, setInput] = useState({
         title: '',
         description: '',
@@ -10,6 +10,17 @@ export default function CrudProducts () {
         stock: 0,
         img: '',
     })
+
+    
+    useEffect(() => {
+        if (action === 'change') {
+            input = input.product
+        }else if(action === 'create') {
+            input = input
+        }
+    })
+
+
     
     const handleChange = (e) => {
         setInput({
@@ -17,6 +28,7 @@ export default function CrudProducts () {
             [e.target.name] : e.target.value
         });
     }
+
 
     const handleSubmit = (e) => {
         alert('Category was submitted: ' + e.target.value);
@@ -39,17 +51,18 @@ export default function CrudProducts () {
                     </label>
                     <label>
                         Price:
-                        <input type="text" value={price} name ='price' onChange={handleChange}/>
+                        <input type="num" value={price} name ='price' onChange={handleChange}/>
                     </label>
                     <label>
                         Stock:
-                        <input type="text" value={stock} name ='stock' onChange={handleChange}/>
+                        <input type="num" value={stock} name ='stock' onChange={handleChange}/>
                     </label>
                     <label>
                         Img:
                         <input type="text" value={img} name ='img' onChange={handleChange}/>
                     </label>
-                    <input type="submit" value="Submit" />
+                    <input type="submit" value="Submit"/>
+                    <button>delete</button>
                 </form>
             ); 
 

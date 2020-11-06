@@ -3,7 +3,8 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
+    align-items: left;
+    background-color: #F4F6F6;
     flex: 80%;
 }
 

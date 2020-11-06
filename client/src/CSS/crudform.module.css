@@ -15,6 +15,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  padding: 20px;
 }
 
 .title {
@@ -31,4 +32,13 @@
   height: 38px;
   border-radius: 10px;
   border-color: #fca311;
+}
+
+.Btn {
+  padding: 10px;
+  border-radius: 10px;
+  background-color: red;
+  color: white;
+  margin-left: 250px;
+  border-color: red;
 }

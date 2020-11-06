@@ -2,13 +2,13 @@ import React, { useState } from "react";
 
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 //componentes
-import NavBar from "./Components/NavBar.jsx";
-import Homepage from "./Components/Home.jsx";
+import NavBar from "./components/NavBar.jsx";
+import Homepage from "./components/Home.jsx";
 import Carrito from "./routing/Carrito.jsx";
 import Ingresar from "./routing/Ingresar.jsx";
-import Faq from "./routing/faq.jsx";
-import Catalogo from "./Components/Catalogo/Catalogue";
-import Crud from "./Components/Forms/CrudProductForm";
+import Faq from "./routing/Faq.jsx";
+import Catalogo from "./components/Catalogo/Catalogue";
+import Crud from "./components/Forms/CrudProductForm";
 
 function App() {
   const [producto, setProducto] = useState(null);

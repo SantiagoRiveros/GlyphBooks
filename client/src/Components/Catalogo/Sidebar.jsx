@@ -20,12 +20,11 @@ export default ({ setCategorias, categorias }) => {
       <ul>
         {categorias.map((category) => {
           return (
-            <li OnClick={() => push(`/productos/${category.name}`)}>
-              {category.name}
-            </li>
+            <li OnClick={setCategorias(category.name)}>{category.name}</li>
           );
         })}
       </ul>
     </div>
   );
 };
+//OnClick = setCategorias(category.name)

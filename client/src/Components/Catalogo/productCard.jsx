@@ -18,8 +18,8 @@ export default function Product(props) {
       >
         <img className={style.Libroimg} src={props.img} />
         <div className={style.description}>
-          <h2 className={style.title}>{props.title}</h2>
-          <h3 className={style.Price}>${props.price}</h3>
+          <h2 className={style.Price}>${props.price}</h2>
+          <h3 className={style.title}>{props.title}</h3>
         </div>
       </div>
       <button onClick={handleClick}>Edit</button>

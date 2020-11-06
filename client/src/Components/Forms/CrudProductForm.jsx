@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+import style from "../../CSS/crudform.module.css";
 
 export default function CrudProducts({ product }) {
   const [input, setInput] = useState({
@@ -59,64 +60,73 @@ export default function CrudProducts({ product }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Name:
-        <input
-          type="text"
-          value={input.title}
-          name="title"
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        Description:
-        <input
-          type="text"
-          value={input.description}
-          name="description"
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        Author:
-        <input
-          type="text"
-          value={input.author}
-          name="author"
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        Price:
-        <input
-          type="num"
-          value={input.price}
-          name="price"
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        Stock:
-        <input
-          type="num"
-          value={input.stock}
-          name="stock"
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        Img:
-        <input
-          type="text"
-          value={input.img}
-          name="img"
-          onChange={handleChange}
-        />
-      </label>
-      <newForm />
-      <input type="submit" value="Submit" />
-      <button onClick={handleDelete}>delete</button>
-    </form>
+    <div className={style.imgLibros}>
+      <form onSubmit={handleSubmit} className={style.form}>
+        <h3 className={style.title}>CREAR O MODIFICAR PRODUCTO</h3>
+        <label className={style.label}>
+          Name:
+          <input
+            className={style.input}
+            type="text"
+            value={input.title}
+            name="title"
+            onChange={handleChange}
+          />
+        </label>
+        <label className={style.label}>
+          Description:
+          <input
+            className={style.input}
+            type="text"
+            value={input.description}
+            name="description"
+            onChange={handleChange}
+          />
+        </label>
+        <label className={style.label}>
+          Author:
+          <input
+            className={style.input}
+            type="text"
+            value={input.author}
+            name="author"
+            onChange={handleChange}
+          />
+        </label>
+        <label className={style.label}>
+          Price:
+          <input
+            className={style.input}
+            type="num"
+            value={input.price}
+            name="price"
+            onChange={handleChange}
+          />
+        </label>
+        <label className={style.label}>
+          Stock:
+          <input
+            className={style.input}
+            type="num"
+            value={input.stock}
+            name="stock"
+            onChange={handleChange}
+          />
+        </label>
+        <label className={style.label}>
+          Img:
+          <input
+            className={style.input}
+            type="text"
+            value={input.img}
+            name="img"
+            onChange={handleChange}
+          />
+        </label>
+        <newForm />
+        <input type="submit" value="Submit" />
+        <button onClick={handleDelete}>delete</button>
+      </form>
+    </div>
   );
 }

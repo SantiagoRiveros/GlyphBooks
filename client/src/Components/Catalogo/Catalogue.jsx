@@ -4,7 +4,7 @@ import Sidebar from "./Sidebar.jsx";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 
-export default function Catalogue() {
+export default function Catalogue({ setProducto }) {
   const [productos, setProductos] = useState([]);
   const [categorias, setCategorias] = useState([]);
   useEffect(() => {
@@ -27,7 +27,9 @@ export default function Catalogue() {
               img={producto.img}
               title={producto.title}
               price={producto.price}
+              id={producto.id}
               OnClick={() => push(`/productos/${producto.id}`)}
+              edit={() => setProducto(producto)}
             />
           );
         })}

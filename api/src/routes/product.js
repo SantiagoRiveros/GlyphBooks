@@ -67,7 +67,6 @@ server.put("/:id", (req, res, next) => {
   Product.findOne({ where: { id } })
     .then((book) => {
       for (const key in request) {
-        if (book[key] === undefined) return res.sendStatus(400);
         book[key] = request[key];
       }
       book.save();

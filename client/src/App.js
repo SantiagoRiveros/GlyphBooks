@@ -11,15 +11,20 @@ import Catalogo from "./Components/Catalogo/Catalogue";
 import Crud from "./Components/Forms/CrudProductForm";
 
 function App() {
+  const [producto, setProducto] = useState(null);
+
   return (
     <Router>
       <Route path="/" component={NavBar} />
       <Route exact path="/" component={Homepage} />
-      <Route path="/catalogo" component={Catalogo} />
+      <Route
+        path="/catalogo"
+        render={() => <Catalogo setProducto={setProducto} />}
+      />
       <Route path="/faq" component={Faq} />
       <Route path="/ingresar" component={Ingresar} />
       <Route path="/carrito" component={Carrito} />
-      <Route path="/crud" component={Crud} />
+      <Route path="/crud" render={() => <Crud product={producto} />} />
     </Router>
   );
 }

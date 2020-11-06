@@ -3,29 +3,35 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 import style from "../../CSS/Categoria.module.scss";
 
-export default ({ setCategorias, categorias }) => {
+export default function SideBar({ setCategory }) {
+  const [categorias, setCategorias] = useState([]);
+
+  const { push } = useHistory();
+
   useEffect(() => {
-    axios.get("http://localhost:3000/category").then((data) => {
+    axios.get("http://localhost:3000/category").then(({ data }) => {
       setCategorias(data);
     });
   }, []);
-  //HandleClick muestra donde se hizo click, entonces OnClick=HandleClick(category.name)
-  /*  const HandleClick = (name) => {
-    setCategorias(name);
-  }; */
-  const { push } = useHistory();
-  // onClick={() => push("/products/1")}
+
+  console.log("hola Diego", categorias);
+
   return (
     <div className={style.Categorias}>
       <h1 className={style.Title}>CATEGORIAS</h1>
       <ul className={style.Lista}>
-        {categorias.map((category) => {
-          return (
-            <li className={style.Name} OnClick={setCategorias(category.name)}>{category.name}</li>
-          );
-        })}
+        {categorias.length &&
+          categorias.map((category) => (
+            <li
+              className={style.category}
+              onClick={() => {
+                setCategory(category.name);
+              }}
+            >
+              {category.name}
+            </li>
+          ))}
       </ul>
     </div>
   );
-};
-//OnClick = setCategorias(category.name)
+}

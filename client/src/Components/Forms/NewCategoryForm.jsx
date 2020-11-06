@@ -1,4 +1,6 @@
+import Axios from "axios";
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import style from "../../CSS/newcategory.module.css";
 
 export default function NewForm() {
@@ -6,6 +8,8 @@ export default function NewForm() {
     name: "",
     description: "",
   });
+
+  const { push } = useHistory();
 
   const handleChange = (e) => {
     setInput({
@@ -15,7 +19,11 @@ export default function NewForm() {
   };
 
   const handleSubmit = (e) => {
-    alert("Category was submitted: " + e.target.value);
+    Axios.post("http://localhost:3000/category", input).then(() => {
+      alert("category was submitted");
+      push("/catalogo");
+    });
+
     e.preventDefault();
   };
 

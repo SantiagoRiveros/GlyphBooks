@@ -8,20 +8,37 @@ import style from "../../CSS/catalogue.module.css";
 export default function Catalogue({ setProducto }) {
   const { push } = useHistory();
   const [productos, setProductos] = useState([]);
-  const [categorias, setCategorias] = useState([]);
+  const [category, setCategory] = useState("");
+
   useEffect(() => {
     axios
       .get("http://localhost:3000/products")
       .then((data) => {
-        console.log(data);
         setProductos(data.data);
       })
       .catch((err) => console.log(err));
   }, []);
+
+  useEffect(() => {
+    setProductos(
+      productos.filter((p) => {
+        return p.category === category;
+      })
+    );
+  }, [category]);
+
   return (
     <div>
-      <Sidebar className={style.Sidebar} categorias={categorias} setCategorias={setCategorias} />
+      <Sidebar className={style.Sidebar} setCategory={setCategory} />
       <div className={style.Catalogue}>
+        <div>
+          <button name="crud" onClick={() => push("/crud")}>
+            add product
+          </button>
+          <button name="newCategory" onClick={() => push("/newCategory")}>
+            add category
+          </button>
+        </div>
         {productos.length &&
           productos.map((producto) => {
             return (

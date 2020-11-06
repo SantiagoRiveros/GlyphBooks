@@ -1,36 +1,42 @@
-const category = require('express').Router();
-const { Category } = require('../db.js');
-const { Product } = require('../db.js');
-const { Op } = require('sequelize');
+const category = require("express").Router();
+const { Category } = require("../db.js");
+const { Product } = require("../db.js");
+const { Op } = require("sequelize");
 
-category.post('/', (req, res , next) => {
-    const request = req.body
+category.post("/", (req, res, next) => {
+  const request = req.body;
 
-    Category.create(request)
-      .then((cat) => res.send(cat))
-})
+  Category.create({ ...request })
+    .then(() => res.sendStatus(204))
+    .catch(next);
+});
 
-category.get('/:id', (req, res) => {
-    Category.findOne({where: {id: req.params.id}})
-      .then(categoria => res.json({category: categoria}))
-      .catch(err => res.json({error: err}))
-})
+category.get("/", (req, res) => {
+  Category.findAll().then((categories) => {
+    res.send(categories);
+  });
+});
 
-category.delete('/:id', (req, res, next) => {
-    const { id } = req.params
+category.get("/:id", (req, res) => {
+  Category.findOne({ where: { id: req.params.id } })
+    .then((categoria) => res.json({ category: categoria }))
+    .catch((err) => res.json({ error: err }));
+});
 
-    Category.findOne({where: {id}})
-      .then(cat => {
-          cat.destroy()
-      })
-})
+category.delete("/:id", (req, res, next) => {
+  const { id } = req.params;
 
-category.put('/:id', (req, res, next) => {
-    const { id } = req.params;
+  Category.findOne({ where: { id } }).then((cat) => {
+    cat.destroy();
+  });
+});
 
-    Category.findOne({where: {id}})
-      .then(cat => res.send(cat))
-      .catch(next);
-})
+category.put("/:id", (req, res, next) => {
+  const { id } = req.params;
+
+  Category.findOne({ where: { id } })
+    .then((cat) => res.send(cat))
+    .catch(next);
+});
 
 module.exports = category;

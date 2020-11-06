@@ -17,9 +17,9 @@ export default function Catalogue({ setProducto }) {
       })
       .catch((err) => console.log(err));
   }, []);
-  const { push } = useHistory();
   return (
     <div>
+
       <Sidebar className={style.Sidebar} categorias={categorias} setCategorias={setCategorias} />
       <div className={style.Catalogue}>
         {productos.length &&
@@ -36,6 +36,5 @@ export default function Catalogue({ setProducto }) {
             );
           })}
         </div>
-    </div>
   );
 }

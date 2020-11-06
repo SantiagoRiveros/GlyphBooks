@@ -6,6 +6,7 @@ import axios from "axios";
 import style from "../../CSS/catalogue.module.css";
 
 export default function Catalogue({ setProducto }) {
+  const { push } = useHistory();
   const [productos, setProductos] = useState([]);
   const [categorias, setCategorias] = useState([]);
   useEffect(() => {
@@ -19,7 +20,6 @@ export default function Catalogue({ setProducto }) {
   }, []);
   return (
     <div>
-
       <Sidebar className={style.Sidebar} categorias={categorias} setCategorias={setCategorias} />
       <div className={style.Catalogue}>
         {productos.length &&
@@ -35,6 +35,7 @@ export default function Catalogue({ setProducto }) {
               />
             );
           })}
-        </div>
+      </div>
+    </div>
   );
 }

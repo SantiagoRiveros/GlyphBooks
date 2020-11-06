@@ -7,9 +7,10 @@ import NavBar from "./Components/NavBar";
 import Homepage from "./Components/Home";
 import Carrito from "./routing/Carrito";
 import Ingresar from "./routing/Ingresar";
-import Faq from "./routing/faq.jsx";
-import Catalogo from "./Components/Catalogo/Catalogue";
-import Crud from "./Components/Forms/CrudProductForm";
+import Faq from "./routing/Faq.jsx";
+import Catalogo from "./components/Catalogo/Catalogue";
+import Crud from "./components/Forms/CrudProductForm";
+
 
 function App() {
   const [producto, setProducto] = useState(null);

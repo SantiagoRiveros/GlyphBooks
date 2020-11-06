@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import style from "../../CSS/crudform.module.css";
 
-export default function CrudProducts({ product }) {
+export default function CrudProducts({ product, setProduct }) {
   const [input, setInput] = useState({
     title: "",
     description: "",
@@ -30,9 +30,10 @@ export default function CrudProducts({ product }) {
 
   const handleSubmit = (e) => {
     if (!product) {
-      axios.post("http://localhost:3000/products", input).then(() => {
+      axios.post("http://localhost:3000/products", input).then((book) => {
         alert("Product was submitted");
-        push("/catalogo");
+        setProduct(book);
+        push("/setCategory");
       });
 
       e.preventDefault();

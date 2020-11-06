@@ -26,7 +26,10 @@ function App() {
       <Route path="/faq" component={Faq} />
       <Route path="/ingresar" component={Ingresar} />
       <Route path="/carrito" component={Carrito} />
-      <Route path="/crud" render={() => <Crud product={producto} />} />
+      <Route
+        path="/crud"
+        render={() => <Crud product={producto} setProduct={setProducto} />}
+      />
       <Route path="/newCategory" component={newCategory} />
     </Router>
   );

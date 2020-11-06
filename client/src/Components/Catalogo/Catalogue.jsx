@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Producto from "./productCard.jsx";
-import Sidebar from "./Sidebar.jsx";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 export default function Catalogue() {
@@ -15,9 +15,10 @@ export default function Catalogue() {
       })
       .catch((err) => console.log(err));
   }, []);
+  const { push } = useHistory();
   return (
     <div>
-      <Sidebar categorias={categorias} setCategorias={setCategorias} />
+      <Sidebar setCategorias={setCategorias} />
       {productos.length &&
         productos.map((producto) => {
           return (
@@ -25,6 +26,7 @@ export default function Catalogue() {
               img={producto.img}
               title={producto.title}
               price={producto.price}
+              OnClick={() => push(`/productos/${producto.id}`)}
             />
           );
         })}

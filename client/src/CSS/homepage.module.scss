@@ -1,0 +1,53 @@
+.btn { 
+    height: 200px;
+    position: relative;
+}
+
+.imgLibros {
+    background: url("../template/Images/homepage2.jpg");
+    background-size: cover;
+    height: calc(100vh - 80px);
+
+}
+.center {
+    margin: 0;
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+
+.fondo {
+      background-size: cover;
+      height: calc(100vh - 80px);
+  }
+.titulo {
+    width: auto;
+    text-align: center;
+    background-color: #313c5e;
+    font-family: roboto;
+    color: white
+  }
+
+.input {
+    font-family: 'Roboto', sans-serif;
+  color: gray;
+  font-size: 20px;
+  text-align: center;
+	margin: 0 auto;
+  padding: 1.5rem 2rem;
+  border-radius: 20px;
+  background-color: white;
+  width: 100%;
+  display: block;
+
+}
+
+.buscador {
+    width: auto;
+    text-align: center;
+    color: white;
+    font-size: 40px;
+    font-family: Cambria
+}

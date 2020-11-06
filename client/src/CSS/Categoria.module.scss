@@ -1,13 +1,12 @@
 .Categorias {
     height: 800px;
-    padding-top: 20px;
     width: 25px;
     float: left;
     margin-top: 15px;
     background-color: orange;
-    border-top-right-radius: 25px;
     border-bottom-right-radius: 25px;
-    transition: 500ms linear; 
+    transition: 500ms linear;
+    margin-top: 0px
   }
 
 .Categorias:hover {
@@ -18,9 +17,10 @@
     background-color: orange;
     overflow-x: hidden;
     padding-top: 20px;
-    border-radius: 25px;
+    border-bottom-right-radius: 25px;
     margin: 15px;
-    margin-left: 0px
+    margin-left: 0px;
+    margin-top: 0px
 }
                 
 .Title {

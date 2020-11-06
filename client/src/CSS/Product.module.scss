@@ -10,13 +10,14 @@
     background-color: white;
     width: auto;
     margin: 10px 10px;
-    display:inline-block;
+    display: inline-block;
+    border-radius: 15px;
 }
 
 .Producto:hover {
     transition: 250ms linear;
     box-shadow: 0px 5px 10px rgba(183,183,183,0.69);
-    border-radius: 5px;
+    border-radius: 15px;
 }
 
 .Center {
@@ -24,7 +25,7 @@
     align-items: center;
     flex-direction: column;
     width: 260px;
-    height: 360px
+    height: 300px;
 }
 
 .Libroimg {
@@ -38,7 +39,7 @@
 }
 
 .description {
-   
+
     width: 80%;
     font-family: Cambria;
     padding-left: 20px;
@@ -49,7 +50,7 @@
 }
 
 .Price {
-   
+
     margin-top: 7px;
     font-size: 24px;
 }
@@ -59,8 +60,8 @@
     margin-bottom: -17px;
     margin: 0px;
     text-overflow: ellipsis;
-    white-space: nowrap; 
-    overflow: hidden; 
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .title:hover{
@@ -77,4 +78,12 @@
     color: gray;
 }
 
-
+.Button {
+    display: flex;
+    background-color: #85929E;
+    border-radius: 6px;
+    padding: 5px;
+    margin-bottom: 10px;
+    margin-left: 200px;
+    border-bottom: 0px;
+}

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import style from "../../CSS/newcategory.module.css";
 
 export default function NewForm() {
   const [input, setInput] = useState({
@@ -19,26 +20,28 @@ export default function NewForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Name:
-        <input
-          type="text"
-          value={input.name}
-          name="name"
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        description:
-        <input
-          type="text"
-          value={input.description}
-          name="description"
-          onChange={handleChange}
-        />
-      </label>
-      <input type="submit" value="Submit" />
-    </form>
+    <div className={style.imgLibros}>
+      <form onSubmit={handleSubmit} className={style.form}>
+        <label>
+          Name:
+          <input
+            type="text"
+            value={input.name}
+            name="name"
+            onChange={handleChange}
+          />
+        </label>
+        <label>
+          description:
+          <input
+            type="text"
+            value={input.description}
+            name="description"
+            onChange={handleChange}
+          />
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
+    </div>
   );
 }

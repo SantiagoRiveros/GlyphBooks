@@ -33,7 +33,7 @@ export default function CrudProducts({ product, setProduct }) {
       axios.post("http://localhost:3000/products", input).then((book) => {
         alert("Product was submitted");
         setProduct(book);
-        push("/setCategory");
+        push("/addCategory");
       });
 
       e.preventDefault();
@@ -42,7 +42,7 @@ export default function CrudProducts({ product, setProduct }) {
         .put(`http://localhost:3000/products/${product.id}`, input)
         .then(() => {
           alert("Product was changed");
-          push("/catalogo");
+          push("/addCategory");
         });
 
       e.preventDefault();

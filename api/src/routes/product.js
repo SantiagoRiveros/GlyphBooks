@@ -55,9 +55,13 @@ server.post("/", (req, res, next) => {
 server.post("/:idProducto/category/:idCategoria", (req, res) => {
   Product.findOne({ where: { id: req.params.idProducto } })
     .then((producto) => {
-      producto.addCategories(req.params.idCategoria).then((r) => res.json(r));
+      producto.addCategories(req.params.idCategoria);
+      console.log(producto);
     })
-    .catch((err) => res.json(err));
+    .then((r) => res.json(r))
+    .catch((err) => {
+      res.json(err);
+    });
 });
 
 server.put("/:id", (req, res, next) => {

@@ -1,18 +1,22 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 
-export default function CategorySelector(props) {
+export default function AddCategory({ producto, setProducto }) {
   const [categorias, setCategorias] = useState([]);
-  const [selected, setSelected] = useState([]);
   useEffect(() => {
     axios.get("http://localhost:3000/category").then(({ data }) => {
       setCategorias(data);
     });
+
+    return setProducto(null);
   }, []);
   const handleSubmit = (e) => {
-    setSelected((old) => {
-      [...old, e.target.value];
-    });
+    axios.post(
+      `http://localhost:3000/products/${producto.id}/category/${e.target.value}`
+    );
   };
+
+  const handleClick = () => {};
   return (
     <div>
       <h1>Agrega categorias a tu producto!</h1>
@@ -20,11 +24,12 @@ export default function CategorySelector(props) {
         <select>
           {categorias.length &&
             categorias.map((category) => (
-              <option value={category}>{category.name}</option>
+              <option value={category.id}>{category.name}</option>
             ))}
         </select>
-        <button onSubmit={() => handleSubmit}>Agrega Categoria</button>
+        <button onSubmit={handleSubmit}>seleccionar</button>
       </form>
+      <button onClick={handleClick}>agregar</button>
     </div>
   );
 }

@@ -9,10 +9,10 @@ export default ({ setCategorias, categorias }) => {
     });
   }, []);
   //HandleClick muestra donde se hizo click, entonces OnClick=HandleClick(category.name)
-  const HandleClick = (name) => {
+  /*  const HandleClick = (name) => {
     setCategorias(name);
-  };
-  //const { push } = useHistory();
+  }; */
+  const { push } = useHistory();
   // onClick={() => push("/products/1")}
   return (
     <div>
@@ -20,10 +20,11 @@ export default ({ setCategorias, categorias }) => {
       <ul>
         {categorias.map((category) => {
           return (
-            <li OnClick={() => HandleClick(category.name)}>{category.name}</li>
+            <li OnClick={setCategorias(category.name)}>{category.name}</li>
           );
         })}
       </ul>
     </div>
   );
 };
+//OnClick = setCategorias(category.name)

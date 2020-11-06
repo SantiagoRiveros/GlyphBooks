@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 //componentes
+
 import NavBar from "./Components/NavBar";
 import Homepage from "./Components/Home";
 import Carrito from "./routing/Carrito";

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import style from "../../CSS/Categoria.module.scss";
 
 export default ({ setCategorias, categorias }) => {
   useEffect(() => {
@@ -15,12 +16,12 @@ export default ({ setCategorias, categorias }) => {
   const { push } = useHistory();
   // onClick={() => push("/products/1")}
   return (
-    <div>
-      <h1>CATEGORIAS</h1>
-      <ul>
+    <div className={style.Categorias}>
+      <h1 className={style.Title}>CATEGORIAS</h1>
+      <ul className={style.Lista}>
         {categorias.map((category) => {
           return (
-            <li OnClick={setCategorias(category.name)}>{category.name}</li>
+            <li className={style.Name} OnClick={setCategorias(category.name)}>{category.name}</li>
           );
         })}
       </ul>

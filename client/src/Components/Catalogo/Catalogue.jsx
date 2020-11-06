@@ -16,7 +16,6 @@ export default function Catalogue({ setProducto }) {
       })
       .catch((err) => console.log(err));
   }, []);
-  const { push } = useHistory();
   return (
     <div>
       <Sidebar categorias={categorias} setCategorias={setCategorias} />
@@ -28,7 +27,6 @@ export default function Catalogue({ setProducto }) {
               title={producto.title}
               price={producto.price}
               id={producto.id}
-              OnClick={() => push(`/productos/${producto.id}`)}
               edit={() => setProducto(producto)}
             />
           );

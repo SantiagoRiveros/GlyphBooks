@@ -31,8 +31,9 @@
     padding-top: 0px;
     padding-left: 50px;
     padding-right: 50px;
-    width: 150px;
-    height: auto;
+    width: 250px;
+    height: 250px;
+    transition: 500ms linear;
     border-bottom: 1px solid rgb(210, 210, 210);
 }
 
@@ -48,17 +49,28 @@
 }
 
 .Price {
-    margin-bottom: -14px;
+   
     margin-top: 7px;
-    display: inline-flex;
     font-size: 24px;
 }
 
 .title {
     color: gray;
     margin-bottom: -17px;
-    display: inline-flex;
-    margin: 0px
+    margin: 0px;
+    text-overflow: ellipsis;
+    white-space: nowrap; 
+    overflow: hidden; 
+}
+
+.title:hover{
+    color: gray;
+    margin-bottom: -17px;
+    margin: 0px;
+    width: auto;
+    height: 65px;
+    white-space: initial;
+    cursor: pointer;
 }
 
 .Stock{

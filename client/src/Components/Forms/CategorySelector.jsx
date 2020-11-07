@@ -14,7 +14,7 @@ export default function AddCategory({ producto, setProducto }) {
       if (!data) {
         push("/catalogo");
       } else {
-        setSelected(data[0]);
+        setSelected(data[0].id);
       }
     });
 
@@ -25,13 +25,20 @@ export default function AddCategory({ producto, setProducto }) {
     e.preventDefault();
 
     axios
-      .put(`http://localhost:3000/products/category/${producto.id}`, selected)
+      .put(`http://localhost:3000/products/category/${producto.id}/${selected}`)
       .then(() => {
         alert("category added");
+        setCategorias((oldCategories) =>
+          oldCategories.filter((c) => {
+            return c.id != selected;
+          })
+        );
+        setSelected(categorias[0].id);
       });
   };
 
   const handleChange = (e) => {
+    console.log(e.target);
     setSelected(e.target.value);
   };
   return (
@@ -40,11 +47,16 @@ export default function AddCategory({ producto, setProducto }) {
       <form onSubmit={handleSubmit}>
         <select onChange={handleChange}>
           {categorias.length &&
-            categorias.map((category) => (
-              <option key={category.id} value={category}>
-                {category.name}
-              </option>
-            ))}
+            categorias.map(
+              (category) => (
+                console.log(category),
+                (
+                  <option key={category.id} value={category.id}>
+                    {category.name}
+                  </option>
+                )
+              )
+            )}
         </select>
         <input type="submit" value="Submit" />
       </form>

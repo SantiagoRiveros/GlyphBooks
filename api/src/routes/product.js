@@ -52,12 +52,11 @@ server.post("/", (req, res, next) => {
     });
 });
 
-server.put("/category/:idProducto", (req, res) => {
-  const category = req.body;
+server.put("/category/:idProducto/:idCategoria", (req, res) => {
+  const category = req.params.idCategoria;
   Product.findOne({ where: { id: req.params.idProducto } })
     .then((producto) => {
       producto.addCategories(category);
-      console.log(req.body);
     })
     .then((r) => res.send(r))
     .catch((err) => {

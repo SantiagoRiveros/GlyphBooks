@@ -25,7 +25,7 @@ export default function SideBar({ setCategory }) {
             <li
               className={style.category}
               onClick={() => {
-                setCategory(category.name);
+                setCategory(category.id);
               }}
             >
               {category.name}

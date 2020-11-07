@@ -9,22 +9,26 @@ export default function Catalogue({ setProducto }) {
   const { push } = useHistory();
   const [productos, setProductos] = useState([]);
   const [category, setCategory] = useState("");
+  const [display, setDisplay] = useState([]);
 
   useEffect(() => {
     axios
       .get("http://localhost:3000/products")
       .then((data) => {
         setProductos(data.data);
+        setDisplay(data.data);
       })
       .catch((err) => console.log(err));
   }, []);
 
   useEffect(() => {
-    setProductos(
-      productos.filter((p) => {
-        return p.category === category;
-      })
-    );
+    if (category) {
+      setDisplay(
+        productos.filter((p) => {
+          return p.Categories && p.Categories.find((c) => c.id === category);
+        })
+      );
+    } else setDisplay(productos);
   }, [category]);
 
   return (
@@ -39,8 +43,8 @@ export default function Catalogue({ setProducto }) {
             add category
           </button>
         </div>
-        {productos.length &&
-          productos.map((producto) => {
+        {display.length &&
+          display.map((producto) => {
             return (
               <Producto
                 img={producto.img}
@@ -49,6 +53,7 @@ export default function Catalogue({ setProducto }) {
                 id={producto.id}
                 OnClick={() => push(`/productos/${producto.id}`)}
                 edit={() => setProducto(producto)}
+                categories={producto.Categories}
               />
             );
           })}

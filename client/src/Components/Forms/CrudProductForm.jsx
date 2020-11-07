@@ -64,66 +64,56 @@ export default function CrudProducts({ product, setProduct }) {
     <div className={style.imgLibros}>
       <form onSubmit={handleSubmit} className={style.form}>
         <h3 className={style.title}>CREAR O MODIFICAR PRODUCTO</h3>
-        <label className={style.label}>
-          Name:
-          <input
-            className={style.input}
-            type="text"
-            value={input.title}
-            name="title"
-            onChange={handleChange}
-          />
-        </label>
-        <label className={style.label}>
-          Description:
-          <input
-            className={style.input}
-            type="text"
-            value={input.description}
-            name="description"
-            onChange={handleChange}
-          />
-        </label>
-        <label className={style.label}>
-          Author:
-          <input
-            className={style.input}
-            type="text"
-            value={input.author}
-            name="author"
-            onChange={handleChange}
-          />
-        </label>
-        <label className={style.label}>
+        <label className={style.label}>Name:</label>
+        <input
+          className={style.input}
+          type="text"
+          value={input.title}
+          name="title"
+          onChange={handleChange}
+        />
+        <label className={style.label}>Description:</label>
+        <input
+          className={style.input}
+          type="text"
+          value={input.description}
+          name="description"
+          onChange={handleChange}
+        />
+        <label className={style.label}>Author:</label>
+        <input
+          className={style.input}
+          type="text"
+          value={input.author}
+          name="author"
+          onChange={handleChange}
+        />
+        <label className={style.label} placeholder="">
           Price:
-          <input
-            className={style.input}
-            type="num"
-            value={input.price}
-            name="price"
-            onChange={handleChange}
-          />
         </label>
-        <label className={style.label}>
-          Stock:
-          <input
-            className={style.input}
-            type="num"
-            value={input.stock}
-            name="stock"
-            onChange={handleChange}
-          />
-        </label>
-        <label className={style.label}>
-          Img:
-          <input
-            className={style.input}
-            type="text"
-            value={input.img}
-            name="img"
-            onChange={handleChange}
-          />
-        </label>
+        <input
+          className={style.input}
+          type="num"
+          value={input.price}
+          name="price"
+          onChange={handleChange}
+        />
+        <label className={style.label}>Stock:</label>
+        <input
+          className={style.input}
+          type="num"
+          value={input.stock}
+          name="stock"
+          onChange={handleChange}
+        />
+        <label className={style.label}>Img:</label>
+        <input
+          className={style.input}
+          type="text"
+          value={input.img}
+          name="img"
+          onChange={handleChange}
+        />
         <newForm />
         <input type="submit" value="Submit" />
         <button onClick={handleDelete}>delete</button>

@@ -3,15 +3,15 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 //componentes
 
-import NavBar from "./components/NavBar";
-import Homepage from "./components/Home";
+import NavBar from "./Components/NavBar";
+import Homepage from "./Components/Home";
 import Carrito from "./routing/Carrito";
 import Ingresar from "./routing/Ingresar";
 import Faq from "./routing/faq.jsx";
-import Catalogo from "./components/Catalogo/Catalogue";
-import Crud from "./components/Forms/CrudProductForm";
-import newCategory from "./components/Forms/NewCategoryForm";
-import AddCategory from "./components/Forms/CategorySelector";
+import Catalogo from "./Components/Catalogo/Catalogue";
+import Crud from "./Components/Forms/CrudProductForm";
+import newCategory from "./Components/Forms/NewCategoryForm";
+import AddCategory from "./Components/Forms/CategorySelector";
 
 function App() {
   const [producto, setProducto] = useState(null);

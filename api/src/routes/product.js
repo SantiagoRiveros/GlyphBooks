@@ -52,13 +52,14 @@ server.post("/", (req, res, next) => {
     });
 });
 
-server.post("/:idProducto/category/:idCategoria", (req, res) => {
+server.put("/category/:idProducto", (req, res) => {
+  const category = req.body;
   Product.findOne({ where: { id: req.params.idProducto } })
     .then((producto) => {
-      producto.addCategories(req.params.idCategoria);
-      console.log(producto);
+      producto.addCategories(category);
+      console.log(req.body);
     })
-    .then((r) => res.json(r))
+    .then((r) => res.send(r))
     .catch((err) => {
       res.json(err);
     });

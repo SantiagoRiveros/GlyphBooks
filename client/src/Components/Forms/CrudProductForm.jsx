@@ -30,9 +30,9 @@ export default function CrudProducts({ product, setProduct }) {
 
   const handleSubmit = (e) => {
     if (!product) {
-      axios.post("http://localhost:3000/products", input).then((book) => {
+      axios.post("http://localhost:3000/products", input).then(({ data }) => {
         alert("Product was submitted");
-        setProduct(book);
+        setProduct(data);
         push("/addCategory");
       });
 

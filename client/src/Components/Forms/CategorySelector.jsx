@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 
 export default function CategorySelector(props) {
   const [categorias, setCategorias] = useState([]);
@@ -13,6 +14,7 @@ export default function CategorySelector(props) {
       [...old, e.target.value];
     });
   };
+  const { push } = useHistory();
   return (
     <div>
       <h1>Agrega categorias a tu producto!</h1>
@@ -23,7 +25,13 @@ export default function CategorySelector(props) {
               <option value={category}>{category.name}</option>
             ))}
         </select>
-        <button onSubmit={() => handleSubmit}>Agrega Categoria</button>
+        <div>
+          {selected.length && selected.map((cat) => <h5>{cat.name}</h5>)}
+        </div>
+        <div>
+          <button onSubmit={() => handleSubmit}>Agrega Categoria</button>
+          <button OnClick={() => push("/Catalogue")}>Terminado</button>
+        </div>
       </form>
     </div>
   );

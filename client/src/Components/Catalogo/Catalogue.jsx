@@ -32,9 +32,9 @@ export default function Catalogue({ setProducto }) {
   }, [category]);
 
   return (
-    <div>
+    <div className={style.Fondo}>
       <Sidebar className={style.Sidebar} setCategory={setCategory} />
-      <div className={style.Catalogue}>
+      <div className={style.Btns}>
         <button className={style.add} name="crud" onClick={() => push("/crud")}>
           add product
         </button>
@@ -45,6 +45,8 @@ export default function Catalogue({ setProducto }) {
         >
           add category
         </button>
+      </div>
+      <div className={style.Catalogue}>
         {display.length &&
           display.map((producto) => {
             return (

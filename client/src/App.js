@@ -12,6 +12,7 @@ import Catalogo from "./Components/Catalogo/Catalogue";
 import Crud from "./Components/Forms/CrudProductForm";
 import newCategory from "./Components/Forms/NewCategoryForm";
 import AddCategory from "./Components/Forms/CategorySelector";
+import Producto from "./Components/Catalogo/Product";
 
 function App() {
   const [producto, setProducto] = useState(null);
@@ -25,6 +26,7 @@ function App() {
         render={() => <Catalogo setProducto={setProducto} />}
       />
       <Route path="/faq" component={Faq} />
+      <Route path="/producto" component={Producto} />
       <Route path="/ingresar" component={Ingresar} />
       <Route path="/carrito" component={Carrito} />
       <Route

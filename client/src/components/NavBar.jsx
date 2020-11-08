@@ -27,6 +27,9 @@ export default function NavBar() {
         <li>
           <Link to="/carrito">Carrito</Link>
         </li>
+        <li>
+          <Link to="/producto">producto</Link>
+        </li>
       </ul>
     </nav>
   );

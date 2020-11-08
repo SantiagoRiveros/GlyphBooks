@@ -2,18 +2,17 @@
   background: url("../template/Images/homepage2.jpg");
   background-size: cover;
   height: calc(100vh - 80px);
-  padding-top: 5%;
+  padding-top: 2%;
 }
 
 .form {
   background: rgba(255, 255, 255, 0.8);
   border-radius: 24px;
   width: 350px;
-  height: 500px;
+  height: auto;
   margin-left: 37%;
   display: flex;
   justify-content: center;
-  align-items: center;
   flex-direction: column;
   padding: 20px;
 }
@@ -22,20 +21,23 @@
 }
 
 .label {
-  margin: auto;
+  margin-bottom: 5px;
+  margin-top: 20px;
 }
 
 .input {
-  height: 25px;
+  min-height: 25px;
   border-radius: 10px;
   border-color: #fca311;
 }
 
-.Btn {
-  padding: 10px;
-  border-radius: 10px;
-  background-color: red;
-  color: white;
-  margin-left: 250px;
-  border-color: red;
+.crudBTN {
+  width: 50px;
+  margin-top: 20px;
+  margin-left: 5px;
+}
+
+.divBTN {
+  display: flex;
+  flex-direction: row;
 }

@@ -1,13 +1,17 @@
 .Catalogue {
-    flex-direction: row;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: left;
-    background-color: #F4F6F6;
-    flex: 80%;
+  flex-direction: row;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: left;
+  background-color: #f4f6f6;
+  flex: 80%;
 }
 
 .Sidebar {
-    flex: 20%;
+  flex: 20%;
+}
+.add {
+  height: 100px;
+  width: 100px;
 }

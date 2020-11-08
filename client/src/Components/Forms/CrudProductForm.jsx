@@ -73,9 +73,9 @@ export default function CrudProducts({ product, setProduct }) {
           onChange={handleChange}
         />
         <label className={style.label}>Description:</label>
-        <input
+        <textarea
+          rows={5}
           className={style.input}
-          type="text"
           value={input.description}
           name="description"
           onChange={handleChange}
@@ -115,8 +115,12 @@ export default function CrudProducts({ product, setProduct }) {
           onChange={handleChange}
         />
         <newForm />
-        <input type="submit" value="Submit" />
-        <button onClick={handleDelete}>delete</button>
+        <div className={style.divBTN}>
+          <input className={style.crudBTN} type="submit" value="Submit" />
+          <button className={style.crudBTN} onClick={handleDelete}>
+            Delete
+          </button>
+        </div>
       </form>
     </div>
   );

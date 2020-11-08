@@ -30,25 +30,21 @@ export default function NewForm() {
   return (
     <div className={style.imgLibros}>
       <form onSubmit={handleSubmit} className={style.form}>
-        <label>
-          Name:
-          <input
-            type="text"
-            value={input.name}
-            name="name"
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          description:
-          <input
-            type="text"
-            value={input.description}
-            name="description"
-            onChange={handleChange}
-          />
-        </label>
-        <input type="submit" value="Submit" />
+        <label className={style.label}>Name:</label>
+        <input
+          type="text"
+          value={input.name}
+          name="name"
+          onChange={handleChange}
+        />
+        <label className={style.label}>description:</label>
+        <input
+          type="text"
+          value={input.description}
+          name="description"
+          onChange={handleChange}
+        />
+        <input className={style.submitBTN} type="submit" value="Submit" />
       </form>
     </div>
   );

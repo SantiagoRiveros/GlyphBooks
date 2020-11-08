@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Catalogue from "./Catalogo/Catalogue";
+import Footer from "./Footer";
 import style from "../CSS/homepage.module.scss";
 
 export default function Homepage() {
@@ -25,11 +26,12 @@ export default function Homepage() {
         <Catalogue />
       </div>
       <div className={style.titulo}>
-        <h1>Novedades</h1>
+        <h1 className={style.nov}>Novedades</h1>
       </div>
       <div className={style.fondo}>
         <Catalogue />
       </div>
+      <Footer />
     </div>
   );
 }

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import style from "../../CSS/crudform.module.scss";
+import AddCategory from "./CategorySelector";
 
 export default function CrudProducts({ product, setProduct }) {
   const [input, setInput] = useState({
@@ -13,6 +14,8 @@ export default function CrudProducts({ product, setProduct }) {
     img: null,
   });
 
+  const [error, setError] = useState("este campo es obligatorio");
+
   const { push } = useHistory();
 
   useEffect(() => {
@@ -20,6 +23,14 @@ export default function CrudProducts({ product, setProduct }) {
       setInput(product);
     }
   }, [product]);
+
+  useEffect(() => {
+    if (!input.title || !input.author || !input.price || !input.stock) {
+      setError("este campo es obligatorio");
+    } else {
+      setError(null);
+    }
+  }, [input, setError]);
 
   const handleChange = (e) => {
     setInput({
@@ -32,16 +43,13 @@ export default function CrudProducts({ product, setProduct }) {
     if (!product) {
       axios.post("http://localhost:3000/products", input).then(({ data }) => {
         setProduct(data);
-        push("/addCategory");
       });
 
       e.preventDefault();
     } else {
       axios
         .put(`http://localhost:3000/products/${product.id}`, input)
-        .then(() => {
-          push("/addCategory");
-        });
+        .then(() => {});
 
       e.preventDefault();
     }
@@ -70,6 +78,9 @@ export default function CrudProducts({ product, setProduct }) {
           name="title"
           onChange={handleChange}
         />
+        <div className={style.error}>
+          {!input.title && <span>{error}</span>}
+        </div>
         <label className={style.label}>DESCRIPCIÓN:</label>
         <textarea
           rows={5}
@@ -86,6 +97,9 @@ export default function CrudProducts({ product, setProduct }) {
           name="author"
           onChange={handleChange}
         />
+        <div className={style.error}>
+          {!input.author && <span>{error}</span>}
+        </div>
         <label className={style.label}>PRECIO:</label>
         <input
           className={style.input}
@@ -94,6 +108,9 @@ export default function CrudProducts({ product, setProduct }) {
           name="price"
           onChange={handleChange}
         />
+        <div className={style.error}>
+          {!input.price && <span>{error}</span>}
+        </div>
         <label className={style.label}>STOCK:</label>
         <input
           className={style.input}
@@ -102,6 +119,9 @@ export default function CrudProducts({ product, setProduct }) {
           name="stock"
           onChange={handleChange}
         />
+        <div className={style.error}>
+          {!input.stock && <span>{error}</span>}
+        </div>
         <label className={style.label}>Img URL:</label>
         <input
           className={style.input}
@@ -111,11 +131,16 @@ export default function CrudProducts({ product, setProduct }) {
           onChange={handleChange}
         />
         <div className={style.divBTN}>
-          <input className={style.crudBTN} type="submit" value="AGREGAR" />
+          {!error && (
+            <input className={style.crudBTN} type="submit" value="AGREGAR" />
+          )}
           <button className={style.crudBTN} onClick={handleDelete}>
             ELIMINAR
           </button>
         </div>
+        {!product ? null : (
+          <AddCategory producto={product} setProducto={setProduct} />
+        )}
       </form>
     </div>
   );

@@ -19,9 +19,13 @@ export default function NewForm () {
     }
     
     const handleSubmit = (e) => {
-    alert('Category was submitted: ' + e.target.value);
-    e.preventDefault();
-    }
+        Axios.post(`http://localhost:3000/user`, input).then(() => {
+          alert("user was submitted");
+        });
+    
+        e.preventDefault();
+      };
+    
     
         return (
             <form onSubmit={handleSubmit}>

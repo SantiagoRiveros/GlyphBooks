@@ -25,7 +25,21 @@
 }
 
 .Fondo {
-  background-color: #f4f6f6;
+  background: url("../template/Images/catalogo.jpeg");
+  
+}
+
+.Relleno {
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 24px;
+  width: auto;
+  height: auto;
+  margin-left: 15%;
+  margin-right: 15%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 20px;
 }
 
 .Button {

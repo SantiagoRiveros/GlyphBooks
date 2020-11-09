@@ -5,7 +5,7 @@ import style from "../CSS/homepage.module.scss";
 
 export default function Homepage() {
   return (
-    <div>
+    <div className={style.tamaño}>
       <div className={style.imgLibros}>
         <div className={style.btn}>
           <div className={style.center}>

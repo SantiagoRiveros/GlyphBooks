@@ -9,9 +9,18 @@ export default function AddCategory({ producto, setProducto }) {
   const { push } = useHistory();
 
   useEffect(() => {
+    if (!producto) push("/catalogo");
     axios.get("http://localhost:3000/category").then(({ data }) => {
       setCategorias(data);
-      if (!data) {
+      setCategorias((oldCategories) =>
+        oldCategories.filter((c) => {
+          return (
+            !producto.Categories ||
+            !producto.Categories.find((C) => C.id === c.id)
+          );
+        })
+      );
+      if (!data.length) {
         push("/catalogo");
       } else {
         setSelected(data[0].id);
@@ -19,7 +28,7 @@ export default function AddCategory({ producto, setProducto }) {
     });
 
     return () => setProducto(null);
-  }, []);
+  }, [push, producto, setProducto]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -27,10 +36,9 @@ export default function AddCategory({ producto, setProducto }) {
     axios
       .put(`http://localhost:3000/products/category/${producto.id}/${selected}`)
       .then(() => {
-        alert("category added");
         setCategorias((oldCategories) =>
           oldCategories.filter((c) => {
-            return c.id != selected;
+            return c.id !== selected;
           })
         );
         setSelected(categorias[0].id);
@@ -47,18 +55,14 @@ export default function AddCategory({ producto, setProducto }) {
       <form onSubmit={handleSubmit}>
         <select onChange={handleChange}>
           {categorias.length &&
-            categorias.map(
-              (category) => (
-                console.log(category),
-                (
-                  <option key={category.id} value={category.id}>
-                    {category.name}
-                  </option>
-                )
-              )
-            )}
+            categorias.map((category) => (
+              <option key={category.id} value={category.id}>
+                {category.name}
+              </option>
+            ))}
         </select>
-        <input type="submit" value="Submit" />
+        <input type="submit" value="Agregar" />
+        <button onClick={() => push("/catalogo")}>hecho</button>
       </form>
     </div>
   );

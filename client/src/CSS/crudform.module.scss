@@ -17,9 +17,6 @@
   padding: 20px;
 }
 
-.title {
-}
-
 .label {
   margin-bottom: 5px;
   margin-top: 20px;
@@ -32,12 +29,24 @@
 }
 
 .crudBTN {
-  width: 50px;
-  margin-top: 20px;
-  margin-left: 5px;
+  background-color: transparent;
+  border-radius: 0px;
+  color: #14213d;
+  border: 4px solid #14213d;
+  border-radius: 6px;
+  padding: 5px 10px;
+  margin: 5px 10px;
+  transition: all 0.5s;
+  &:hover {
+    color: white;
+    transform: scale(1.15);
+    border-color: transparent;
+    background-color: orange;
+  }
 }
 
 .divBTN {
   display: flex;
+  justify-content: space-around;
   flex-direction: row;
 }

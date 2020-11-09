@@ -1,5 +1,4 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Catalogue from "./Catalogo/Catalogue";
 import Footer from "./Footer";
 import style from "../CSS/homepage.module.scss";

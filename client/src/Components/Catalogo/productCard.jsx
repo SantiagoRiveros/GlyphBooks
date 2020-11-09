@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
 import style from "../../CSS/Product.module.scss";
 
@@ -16,13 +16,19 @@ export default function Product(props) {
         className={style.Center}
         onClick={() => push(`/products/${props.id}`)}
       >
-        <img className={style.Libroimg} src={props.img} />
+        <img
+          className={style.Libroimg}
+          src={props.img}
+          alt="imagen del producto"
+        />
         <div className={style.description}>
           <h2 className={style.Price}>${props.price}</h2>
           <h3 className={style.title}>{props.title}</h3>
         </div>
       </div>
-      <button onClick={handleClick}>Edit</button>
+      <button className={style.Button} onClick={handleClick}>
+        EDITAR
+      </button>
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import style from "../CSS/navbar.module.css";
 
 export default function NavBar() {
@@ -8,6 +8,7 @@ export default function NavBar() {
       <img
         className={style.imgLogo}
         src="https://media.discordapp.net/attachments/772911955349340171/773903872740556820/Logo_horizontal.png?width=1443&height=338"
+        alt="Logo"
       />
       <ul>
         <li>

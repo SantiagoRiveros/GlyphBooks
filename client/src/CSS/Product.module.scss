@@ -1,0 +1,96 @@
+.homepage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.Producto {
+  background-color: white;
+  width: auto;
+  margin: 10px 10px;
+  display: inline-block;
+  border-radius: 15px;
+}
+
+.Producto:hover {
+  transition: 250ms linear;
+  box-shadow: 0px 5px 10px rgba(183, 183, 183, 0.69);
+  border-radius: 15px;
+}
+
+.Center {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 260px;
+  height: 300px;
+}
+
+.Libroimg {
+  padding-top: 0px;
+  padding-left: 50px;
+  padding-right: 50px;
+  width: 250px;
+  height: 250px;
+  transition: 500ms linear;
+  border-bottom: 1px solid rgb(210, 210, 210);
+}
+
+.description {
+  width: 80%;
+  font-family: Cambria;
+  padding-left: 20px;
+  padding-right: 2px;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.3;
+}
+
+.Price {
+  margin-top: 7px;
+  font-size: 24px;
+}
+
+.title {
+  color: gray;
+  margin-bottom: -17px;
+  margin: 0px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.title:hover {
+  color: gray;
+  margin-bottom: -17px;
+  margin: 0px;
+  width: auto;
+  height: 65px;
+  white-space: initial;
+  cursor: pointer;
+}
+
+.Stock {
+  color: gray;
+}
+
+.Button {
+  display: flex;
+  background-color: #ffffff;
+  border-radius: 6px;
+  color: #14213d;
+  border: 2px solid #14213d;
+  padding: 5px 10px;
+  margin: 5px 10px;
+  margin-left: 200px;
+  transition: all 0.5s;
+  &:hover {
+    cursor: pointer;
+    color: white;
+    transform: scale(1.15);
+    border-color: transparent;
+    background-color: orange;
+  }
+}

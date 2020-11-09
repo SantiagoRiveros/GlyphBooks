@@ -1,25 +1,50 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+
+import { BrowserRouter as Router, Route } from "react-router-dom";
+//componentes
+
+import NavBar from "./components/NavBar";
+import Homepage from "./components/Home";
+import Carrito from "./routing/Carrito";
+import Ingresar from "./routing/Ingresar";
+import Faq from "./routing/faq.jsx";
+import Catalogo from "./components/Catalogo/Catalogue";
+import Crud from "./components/Forms/CrudProductForm";
+import newCategory from "./components/Forms/NewCategoryForm";
+import AddCategory from "./components/Forms/CategorySelector";
+import Producto from "./components/Catalogo/Product";
 
 function App() {
+  const [producto, setProducto] = useState(null);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Route path="/" component={NavBar} />
+      <Route exact path="/" component={Homepage} />
+      <Route
+        path="/catalogo"
+        render={() => <Catalogo setProducto={setProducto} />}
+      />
+      <Route path="/faq" component={Faq} />
+      <Route
+        exact
+        path="/products/:id"
+        render={({ match }) => <Producto id={match.params.id} />}
+      />
+      <Route path="/ingresar" component={Ingresar} />
+      <Route path="/carrito" component={Carrito} />
+      <Route
+        path="/crud"
+        render={() => <Crud product={producto} setProduct={setProducto} />}
+      />
+      <Route path="/newCategory" component={newCategory} />
+      <Route
+        path="/addCategory"
+        render={() => (
+          <AddCategory producto={producto} setProducto={setProducto} />
+        )}
+      />
+    </Router>
   );
 }
 

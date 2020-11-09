@@ -34,6 +34,7 @@ export default function Catalogue({ setProducto }) {
   return (
     <div className={style.Fondo}>
       <Sidebar className={style.Sidebar} setCategory={setCategory} />
+      <div className={style.Relleno}>
       <div className={style.Btns}>
         <button
           className={style.Button}
@@ -66,6 +67,7 @@ export default function Catalogue({ setProducto }) {
               />
             );
           })}
+      </div>
       </div>
     </div>
   );

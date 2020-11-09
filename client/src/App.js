@@ -11,7 +11,6 @@ import Faq from "./routing/faq.jsx";
 import Catalogo from "./components/Catalogo/Catalogue";
 import Crud from "./components/Forms/CrudProductForm";
 import newCategory from "./components/Forms/NewCategoryForm";
-import AddCategory from "./components/Forms/CategorySelector";
 import Producto from "./components/Catalogo/Product";
 
 function App() {
@@ -38,12 +37,6 @@ function App() {
         render={() => <Crud product={producto} setProduct={setProducto} />}
       />
       <Route path="/newCategory" component={newCategory} />
-      <Route
-        path="/addCategory"
-        render={() => (
-          <AddCategory producto={producto} setProducto={setProducto} />
-        )}
-      />
     </Router>
   );
 }

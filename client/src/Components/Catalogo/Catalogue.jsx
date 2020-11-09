@@ -3,7 +3,7 @@ import Producto from "./productCard.jsx";
 import Sidebar from "./Sidebar.jsx";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
-import style from "../../CSS/catalogue.module.css";
+import style from "../../CSS/catalogue.module.scss";
 
 export default function Catalogue({ setProducto }) {
   const { push } = useHistory();
@@ -14,9 +14,9 @@ export default function Catalogue({ setProducto }) {
   useEffect(() => {
     axios
       .get("http://localhost:3000/products")
-      .then((data) => {
-        setProductos(data.data);
-        setDisplay(data.data);
+      .then(({ data }) => {
+        setProductos(data);
+        setDisplay(data);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -29,21 +29,25 @@ export default function Catalogue({ setProducto }) {
         })
       );
     } else setDisplay(productos);
-  }, [category]);
+  }, [category, productos]);
 
   return (
     <div className={style.Fondo}>
       <Sidebar className={style.Sidebar} setCategory={setCategory} />
       <div className={style.Btns}>
-        <button className={style.add} name="crud" onClick={() => push("/crud")}>
-          add product
+        <button
+          className={style.Button}
+          name="crud"
+          onClick={() => push("/crud")}
+        >
+          NUEVO PRODUCTO
         </button>
         <button
-          className={style.add}
+          className={style.Button}
           name="newCategory"
           onClick={() => push("/newCategory")}
         >
-          add category
+          NUEVA CATEGORÍA
         </button>
       </div>
       <div className={style.Catalogue}>
@@ -54,6 +58,7 @@ export default function Catalogue({ setProducto }) {
                 img={producto.img}
                 title={producto.title}
                 price={producto.price}
+                key={producto.id}
                 id={producto.id}
                 OnClick={() => push(`/productos/${producto.id}`)}
                 edit={() => setProducto(producto)}

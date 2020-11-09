@@ -42,7 +42,10 @@ server.get("/search/:id", (req, res) => {
 
 server.post("/", (req, res, next) => {
   const request = req.body;
-
+  if (!request.img) {
+    request.img =
+      "https://www.pinclipart.com/picdir/big/324-3245234_closed-book-clipart-transparent-background-books-png.png";
+  }
   Product.create({ ...request })
     .then((book) => {
       res.send(book);

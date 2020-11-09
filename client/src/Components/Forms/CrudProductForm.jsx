@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
-import style from "../../CSS/crudform.module.css";
+import style from "../../CSS/crudform.module.scss";
 
 export default function CrudProducts({ product, setProduct }) {
   const [input, setInput] = useState({
     title: "",
     description: "",
     author: "",
-    price: 0,
-    stock: 0,
-    img: "",
+    price: 1,
+    stock: 1,
+    img: null,
   });
 
   const { push } = useHistory();
@@ -19,7 +19,7 @@ export default function CrudProducts({ product, setProduct }) {
     if (product) {
       setInput(product);
     }
-  }, []);
+  }, [product]);
 
   const handleChange = (e) => {
     setInput({
@@ -31,7 +31,6 @@ export default function CrudProducts({ product, setProduct }) {
   const handleSubmit = (e) => {
     if (!product) {
       axios.post("http://localhost:3000/products", input).then(({ data }) => {
-        alert("Product was submitted");
         setProduct(data);
         push("/addCategory");
       });
@@ -41,7 +40,6 @@ export default function CrudProducts({ product, setProduct }) {
       axios
         .put(`http://localhost:3000/products/${product.id}`, input)
         .then(() => {
-          alert("Product was changed");
           push("/addCategory");
         });
 
@@ -52,7 +50,7 @@ export default function CrudProducts({ product, setProduct }) {
   const handleDelete = () => {
     if (product) {
       axios.delete(`http://localhost:3000/products/${product.id}`).then(() => {
-        alert("Product was deleted");
+        setProduct(null);
         push("/catalogo");
       });
     } else {
@@ -64,7 +62,7 @@ export default function CrudProducts({ product, setProduct }) {
     <div className={style.imgLibros}>
       <form onSubmit={handleSubmit} className={style.form}>
         <h3 className={style.title}>CREAR O MODIFICAR PRODUCTO</h3>
-        <label className={style.label}>Name:</label>
+        <label className={style.label}>TÍTULO:</label>
         <input
           className={style.input}
           type="text"
@@ -72,7 +70,7 @@ export default function CrudProducts({ product, setProduct }) {
           name="title"
           onChange={handleChange}
         />
-        <label className={style.label}>Description:</label>
+        <label className={style.label}>DESCRIPCIÓN:</label>
         <textarea
           rows={5}
           className={style.input}
@@ -80,7 +78,7 @@ export default function CrudProducts({ product, setProduct }) {
           name="description"
           onChange={handleChange}
         />
-        <label className={style.label}>Author:</label>
+        <label className={style.label}>AUTOR:</label>
         <input
           className={style.input}
           type="text"
@@ -88,25 +86,23 @@ export default function CrudProducts({ product, setProduct }) {
           name="author"
           onChange={handleChange}
         />
-        <label className={style.label} placeholder="">
-          Price:
-        </label>
+        <label className={style.label}>PRECIO:</label>
         <input
           className={style.input}
-          type="num"
+          type="number"
           value={input.price}
           name="price"
           onChange={handleChange}
         />
-        <label className={style.label}>Stock:</label>
+        <label className={style.label}>STOCK:</label>
         <input
           className={style.input}
-          type="num"
+          type="number"
           value={input.stock}
           name="stock"
           onChange={handleChange}
         />
-        <label className={style.label}>Img:</label>
+        <label className={style.label}>Img URL:</label>
         <input
           className={style.input}
           type="text"
@@ -114,11 +110,10 @@ export default function CrudProducts({ product, setProduct }) {
           name="img"
           onChange={handleChange}
         />
-        <newForm />
         <div className={style.divBTN}>
-          <input className={style.crudBTN} type="submit" value="Submit" />
+          <input className={style.crudBTN} type="submit" value="AGREGAR" />
           <button className={style.crudBTN} onClick={handleDelete}>
-            Delete
+            ELIMINAR
           </button>
         </div>
       </form>

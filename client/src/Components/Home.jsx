@@ -21,15 +21,11 @@ export default function Homepage() {
       <div className={style.titulo}>
         <h1>Ofertas</h1>
       </div>
-      <div className={style.fondo}>
-        <Catalogue />
-      </div>
+      <div className={style.fondo}></div>
       <div className={style.titulo}>
         <h1 className={style.nov}>Novedades</h1>
       </div>
-      <div className={style.fondo}>
-        <Catalogue />
-      </div>
+      <div className={style.fondo}></div>
       <Footer />
     </div>
   );

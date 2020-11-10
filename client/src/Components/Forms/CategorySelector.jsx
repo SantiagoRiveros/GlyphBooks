@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import style from "../../CSS/addCategory.module.scss";
 
 export default function AddCategory({ producto, setProducto }) {
   const [categorias, setCategorias] = useState([]);
@@ -47,10 +48,10 @@ export default function AddCategory({ producto, setProducto }) {
 
   const handleChange = (e) => {
     console.log(e.target);
-    setSelected(e.target.value);
+    setSelected(Number(e.target.value));
   };
   return (
-    <div>
+    <div className={style.container}>
       <h1>Agrega categorias a tu producto!</h1>
       <form onSubmit={handleSubmit}>
         <select onChange={handleChange}>

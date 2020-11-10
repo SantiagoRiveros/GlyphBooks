@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import style from "../../CSS/catalogue.module.scss";
 
-export default function Catalogue({ setProducto }) {
+export default function Catalogue() {
   const { push } = useHistory();
   const [productos, setProductos] = useState([]);
   const [category, setCategory] = useState("");
@@ -73,7 +73,6 @@ export default function Catalogue({ setProducto }) {
                     key={producto.id}
                     id={producto.id}
                     OnClick={() => push(`/productos/${producto.id}`)}
-                    edit={() => setProducto(producto)}
                     categories={producto.Categories}
                   />
                 );

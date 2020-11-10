@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Producto from "./productCard.jsx";
 import Sidebar from "./Sidebar.jsx";
+import Searchbar from "./searchBar";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import style from "../../CSS/catalogue.module.scss";
@@ -31,6 +32,14 @@ export default function Catalogue({ setProducto }) {
     } else setDisplay(productos);
   }, [category, productos]);
 
+  const onSearch = (search) => {
+    axios
+      .get(`http://localhost:3000/products/search?value=${search}`)
+      .then(({ data }) => {
+        setDisplay(data);
+      });
+  };
+
   return (
     <div className={style.Fondo}>
       <div className={style.Size}>
@@ -51,6 +60,7 @@ export default function Catalogue({ setProducto }) {
             >
               NUEVA CATEGORÍA
             </button>
+            <Searchbar onSearch={onSearch} />
           </div>
           <div className={style.Catalogue}>
             {display.length &&

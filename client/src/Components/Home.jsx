@@ -1,5 +1,4 @@
 import React from "react";
-import Catalogue from "./Catalogo/Catalogue";
 import Footer from "./Footer";
 import style from "../CSS/homepage.module.scss";
 

@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 
 export default function SearchBar({ onSearch }) {
+  const [book, setBook] = useState("");
   return (
     <form
       onSubmit={(e) => {
@@ -10,7 +11,7 @@ export default function SearchBar({ onSearch }) {
     >
       <input
         type="text"
-        placeholder="Search books..."
+        placeholder="Autor, título, descripción..."
         value={book}
         onChange={(e) => setBook(e.target.value)}
       />

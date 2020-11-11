@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 //componentes
@@ -11,13 +11,14 @@ import Catalogo from "./components/Catalogo/Catalogue";
 import Producto from "./components/Catalogo/Product";
 import Admin from "./components/Admin/admin";
 import store from "./store";
-import Footer from "./components/Footer.jsx";
+import Carrito from "./components/Catalogo/Carrito.jsx";
 
 function App() {
   return (
     <Provider store={store}>
       <Router>
         <NavBar />
+        <Carrito />
         <Switch>
           <Route exact path="/" component={Homepage} />
           <Route path="/catalogo" render={() => <Catalogo />} />
@@ -28,11 +29,10 @@ function App() {
             render={({ match }) => <Producto id={match.params.id} />}
           />
           <Route path="/ingresar" component={Login} />
-          <Route path="/carrito" />
+          <Route path="/" component={Carrito} />
           <Route path="/admin" component={Admin} />
         </Switch>
       </Router>
-      <Footer />
     </Provider>
   );
 }

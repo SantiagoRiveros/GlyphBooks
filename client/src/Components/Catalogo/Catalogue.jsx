@@ -45,9 +45,7 @@ export default function Catalogue() {
       <Sidebar className={style.Sidebar} setCategory={setCategory} />
       <div className={style.Size}>
         <div className={style.Relleno}>
-          <div className={style.Btns}>
             <Searchbar onSearch={onSearch} />
-          </div>
           <div className={style.Catalogue}>
             {display.length &&
               display.map((producto) => {

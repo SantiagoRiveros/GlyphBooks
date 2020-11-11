@@ -7,12 +7,12 @@ import NavBar from "./Components/NavBar";
 import Homepage from "./Components/Home";
 import Carrito from "./routing/Carrito";
 import Ingresar from "./routing/Ingresar";
-import Faq from "./routing/faq.jsx";
-import AddCategory from "./components/Forms/CategorySelector";
-import Catalogo from "./components/Catalogo/Catalogue";
-import Crud from "./components/Forms/CrudProductForm";
-import newCategory from "./components/Forms/NewCategoryForm";
-import Producto from "./components/Catalogo/Product";
+import Faq from "./routing/Faq.jsx";
+import AddCategory from "./Components/Forms/CategorySelector";
+import Catalogo from "./Components/Catalogo/Catalogue";
+import Crud from "./Components/Forms/CrudProductForm";
+import newCategory from "./Components/Forms/NewCategoryForm";
+import Producto from "./Components/Catalogo/Product";
 
 
 function App() {

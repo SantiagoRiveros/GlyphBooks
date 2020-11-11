@@ -10,17 +10,17 @@ import "../../CSS/pagination.module.css";
 
 export default function Catalogue() {
   const { push } = useHistory();
-  this.state = {
+  useState({
     offset: 0,
     data: [],
     perPage: 9,
     currentPage: 0,
-  };
+  });
   const [productos, setProductos] = useState([]);
   const [category, setCategory] = useState("");
   const [display, setDisplay] = useState([]);
 
-  receivedData(() => {
+  const receivedData = () => {
     axios.get(`http://localhost:3000/products`).then((res) => {
       const data = res.data;
       const slice = data.slice(
@@ -47,9 +47,9 @@ export default function Catalogue() {
         postData,
       });
     });
-  });
+  };
 
-  handlePageClick = (e) => {
+  const handlePageClick = (e) => {
     const selectedPage = e.selected;
     const offset = selectedPage * this.state.perPage;
 
@@ -59,7 +59,7 @@ export default function Catalogue() {
         offset: offset,
       },
       () => {
-        this.receivedData();
+        receivedData();
       }
     );
   };
@@ -124,7 +124,7 @@ export default function Catalogue() {
               pageCount={this.state.pageCount}
               marginPagesDisplayed={2}
               pageRangeDisplayed={5}
-              onPageChange={this.handlePageClick}
+              onPageChange={handlePageClick}
               containerClassName={"pagination"}
               subContainerClassName={"pages pagination"}
               activeClassName={"active"}

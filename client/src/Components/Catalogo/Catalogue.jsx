@@ -10,7 +10,7 @@ import "../../CSS/pagination.module.css";
 
 export default function Catalogue() {
   const { push } = useHistory();
-  useState({
+  const paginado = useState({
     offset: 0,
     data: [],
     perPage: 9,

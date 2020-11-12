@@ -26,7 +26,7 @@ export default function NavBar() {
           <Link to="/ingresar">Ingresar</Link>
         </li>
         <li>
-          <Link to="/carrito">Carrito</Link>
+          <Link> </Link>
         </li>
       </ul>
     </nav>

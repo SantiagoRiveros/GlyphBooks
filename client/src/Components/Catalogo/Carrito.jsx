@@ -1,17 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import style from "../../CSS/carrito.module.css";
 
-export default function Carrito() {
-  const [show, setShow] = useState(false);
-  const open = show ? style.sidebarOpen : style.sidebar;
-
+export default function Carrito(props) {
+  const open = props.cartShow ? style.sidebarOpen : style.sidebar;
   return (
     <div className={style.container}>
       <div className={open}>
         <div className={style.togglebtn}>
-          <button onClick={() => setShow((prevShow) => !prevShow)}>
-            toggloe show
-          </button>
+          <button onClick={props.onCartClick}>toggloe show</button>
         </div>
         <ul>
           <li>A</li>

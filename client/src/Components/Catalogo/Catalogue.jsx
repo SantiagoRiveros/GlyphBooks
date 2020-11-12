@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Producto from "./productCard.jsx";
 import Sidebar from "./Sidebar.jsx";
+import Searchbar from "./searchBar";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import style from "../../CSS/catalogue.module.scss";
 
-export default function Catalogue({ setProducto }) {
+export default function Catalogue() {
   const { push } = useHistory();
   const [productos, setProductos] = useState([]);
   const [category, setCategory] = useState("");
@@ -31,27 +32,20 @@ export default function Catalogue({ setProducto }) {
     } else setDisplay(productos);
   }, [category, productos]);
 
+  const onSearch = (search) => {
+    axios
+      .get(`http://localhost:3000/products/search?value=${search}`)
+      .then(({ data }) => {
+        setDisplay(data);
+      });
+  };
+
   return (
     <div className={style.Fondo}>
+      <Sidebar className={style.Sidebar} setCategory={setCategory} />
       <div className={style.Size}>
-        <Sidebar className={style.Sidebar} setCategory={setCategory} />
         <div className={style.Relleno}>
-          <div className={style.Btns}>
-            <button
-              className={style.Button}
-              name="crud"
-              onClick={() => push("/crud")}
-            >
-              NUEVO PRODUCTO
-            </button>
-            <button
-              className={style.Button}
-              name="newCategory"
-              onClick={() => push("/newCategory")}
-            >
-              NUEVA CATEGORÍA
-            </button>
-          </div>
+            <Searchbar onSearch={onSearch} />
           <div className={style.Catalogue}>
             {display.length &&
               display.map((producto) => {
@@ -63,7 +57,6 @@ export default function Catalogue({ setProducto }) {
                     key={producto.id}
                     id={producto.id}
                     OnClick={() => push(`/productos/${producto.id}`)}
-                    edit={() => setProducto(producto)}
                     categories={producto.Categories}
                   />
                 );

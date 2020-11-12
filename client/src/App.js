@@ -1,45 +1,40 @@
-import React, { useState } from "react";
-
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import React from "react";
+import { Provider } from "react-redux";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 //componentes
 
-import NavBar from "./Components/NavBar";
-import Homepage from "./Components/Home";
-import Carrito from "./routing/Carrito";
-import Ingresar from "./routing/Ingresar";
-import Faq from "./routing/Faq.jsx";
-import AddCategory from "./Components/Forms/CategorySelector";
-import Catalogo from "./Components/Catalogo/Catalogue";
-import Crud from "./Components/Forms/CrudProductForm";
-import newCategory from "./Components/Forms/NewCategoryForm";
-import Producto from "./Components/Catalogo/Product";
+import NavBar from "./components/NavBar";
+import Homepage from "./components/Home";
+import Login from "./components/Login.jsx";
+import Faq from "./components/Faq";
+import Catalogo from "./components/Catalogo/Catalogue";
+import Producto from "./components/Catalogo/Product";
+import Admin from "./components/Admin/admin";
+import store from "./store";
+import Carrito from "./components/Catalogo/Carrito.jsx";
 
 
 function App() {
-  const [producto, setProducto] = useState(null);
-
   return (
-    <Router>
-      <Route path="/" component={NavBar} />
-      <Route exact path="/" component={Homepage} />
-      <Route
-        path="/catalogo"
-        render={() => <Catalogo setProducto={setProducto} />}
-      />
-      <Route path="/faq" component={Faq} />
-      <Route
-        exact
-        path="/products/:id"
-        render={({ match }) => <Producto id={match.params.id} />}
-      />
-      <Route path="/ingresar" component={Ingresar} />
-      <Route path="/carrito" component={Carrito} />
-      <Route
-        path="/crud"
-        render={() => <Crud product={producto} setProduct={setProducto} />}
-      />
-      <Route path="/newCategory" component={newCategory} />
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <NavBar />
+        <Carrito />
+        <Switch>
+          <Route exact path="/" component={Homepage} />
+          <Route path="/catalogo" render={() => <Catalogo />} />
+          <Route path="/faq" component={Faq} />
+          <Route
+            exact
+            path="/products/:id"
+            render={({ match }) => <Producto id={match.params.id} />}
+          />
+          <Route path="/ingresar" component={Login} />
+          <Route path="/" component={Carrito} />
+          <Route path="/admin" component={Admin} />
+        </Switch>
+      </Router>
+    </Provider>
   );
 }
 

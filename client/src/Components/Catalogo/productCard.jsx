@@ -26,9 +26,6 @@ export default function Product(props) {
           <h3 className={style.title}>{props.title}</h3>
         </div>
       </div>
-      <button className={style.Button} onClick={handleClick}>
-        EDITAR
-      </button>
     </div>
   );
 }

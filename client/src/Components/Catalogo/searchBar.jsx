@@ -1,16 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
+import style from "../../CSS/searchBar.module.scss";
 
 export default function SearchBar({ onSearch }) {
+  const [book, setBook] = useState("");
   return (
-    <form
+    <form className={style.form}
       onSubmit={(e) => {
         e.preventDefault();
         onSearch(book);
       }}
     >
-      <input
+      <input className={style.input}
         type="text"
-        placeholder="Search books..."
+        placeholder="Autor, título, descripción..."
         value={book}
         onChange={(e) => setBook(e.target.value)}
       />

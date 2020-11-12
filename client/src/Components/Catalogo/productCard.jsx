@@ -24,7 +24,7 @@ export default function Product(props) {
         <div className={style.description}>
           <h2 className={style.Price}>${props.price}</h2>
           <h3 className={style.title}>{props.title}</h3>
-          <button>Agregar al carrito</button>
+          <button onClick>Agregar al carrito</button>
         </div>
       </div>
     </div>

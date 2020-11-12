@@ -13,6 +13,11 @@ export default function Product({ id }) {
       });
   }, [id]);
 
+  /*useEffect(() => {
+    axios
+      .post(`http://localhost:3000/users/${id}/cart`)
+  })*/
+
   if (product) {
     return (
       <div className={style.container}>
@@ -29,6 +34,7 @@ export default function Product({ id }) {
             <h3 className={style.price}>${product.price}</h3>
             <p className={style.description}>{product.description}</p>
             <h3 className={style.stock}>{product.stock}</h3>
+            <button>COMPRAR</button>
           </div>
         </div>
       </div>

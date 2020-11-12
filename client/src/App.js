@@ -13,18 +13,14 @@ import Admin from "./components/Admin/admin";
 import store from "./store";
 import Carrito from "./components/Catalogo/Carrito.jsx";
 
-
 function App() {
   const [show, setShow] = useState(false);
 
   return (
     <Provider store={store}>
       <Router>
-        <NavBar />
-        <Carrito
-          cartShow={show}
-          onCartClick={() => setShow((prevShow) => !prevShow)}
-        />
+        <NavBar onCartClick={() => setShow((prevShow) => !prevShow)} />
+        <Carrito cartShow={show} />
         <Switch>
           <Route exact path="/" component={Homepage} />
           <Route path="/catalogo" render={() => <Catalogo />} />

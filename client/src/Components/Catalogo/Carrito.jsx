@@ -6,11 +6,11 @@ export default function Carrito(props) {
   return (
     <div className={style.container}>
       <div className={open}>
-        <div className={style.togglebtn}>
-          <button onClick={props.onCartClick}>toggloe show</button>
-        </div>
         <ul>
-          <li>A</li>
+          <li>
+            hola que tal soy el chico de las poesias tu fiel admirador y aunque
+            no me conocias
+          </li>
           <li>B</li>
           <li>C</li>
           <li>D</li>

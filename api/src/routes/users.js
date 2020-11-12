@@ -52,8 +52,8 @@ user.put('/:idUser/cart', (req, res, next) => {
     User.findOne({where: {id: req.params.idUser}})
       .then(usuario => usuario.getOrders({where: {status: 'carrito'}}))
       .then(orden => {
-        for (var key in request) {
-          orden[key] = request[key]
+        for (var key in req.body) {
+          orden[key] = req.body[key]
         }
         orden.save();
         res.json(orden);

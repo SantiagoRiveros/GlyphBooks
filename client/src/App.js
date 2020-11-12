@@ -13,6 +13,7 @@ import Admin from "./components/Admin/admin";
 import store from "./store";
 import Carrito from "./components/Catalogo/Carrito.jsx";
 
+
 function App() {
   return (
     <Provider store={store}>

@@ -25,9 +25,9 @@ export default function NavBar() {
         <li>
           <Link to="/ingresar">Ingresar</Link>
         </li>
-        <li>
+        {/* <li>
           <Link> </Link>
-        </li>
+        </li> */}
       </ul>
     </nav>
   );

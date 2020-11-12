@@ -25,9 +25,9 @@ export default function NavBar() {
         <li>
           <Link to="/ingresar">Ingresar</Link>
         </li>
-        {/* <li>
-          <Link> </Link>
-        </li> */}
+        <li>
+          <ion-icon onClick={props.onCartClick} name="cart-outline"></ion-icon>
+        </li>
       </ul>
     </nav>
   );

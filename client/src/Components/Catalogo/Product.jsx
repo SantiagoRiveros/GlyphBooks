@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import style from "../../CSS/Product.module.css";
 import axios from "axios";
+import store from "../../store/index.js";
+import { addToCart } from "../../actions/actions.js";
 
 export default function Product({ id }) {
   const [product, setProduct] = useState(null);
@@ -25,10 +27,11 @@ export default function Product({ id }) {
             />
           </div>
           <div className={style.right}>
-            <h3>{product.title}</h3>
-            <p>{product.description}</p>
-            <h3>${product.price}</h3>
-            <h3>{product.stock}</h3>
+            <h3 className={style.title}>{product.title}</h3>
+            <h3 className={style.price}>${product.price}</h3>
+            <p className={style.description}>{product.description}</p>
+            <h3 className={style.stock}>{product.stock}</h3>
+            <button onClick={(id) => addToCart(id)}>COMPRAR</button>
           </div>
         </div>
       </div>

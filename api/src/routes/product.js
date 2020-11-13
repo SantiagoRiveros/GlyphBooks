@@ -3,7 +3,11 @@ const { Product, Category } = require("../db.js");
 const { Op } = require("sequelize");
 
 server.get("/", (req, res, next) => {
-  Product.findAll({ include: Category })
+  const page = req.query.page;
+  const limit = 9;
+  const offset = page ? (page - 1) * limit : null;
+
+  Product.findAll({ include: Category, limit, offset })
     .then((products) => {
       res.send(products);
     })

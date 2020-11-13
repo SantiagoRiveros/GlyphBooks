@@ -11,6 +11,7 @@ export default function Catalogue() {
   const [productos, setProductos] = useState([]);
   const [category, setCategory] = useState("");
   const [display, setDisplay] = useState([]);
+  const { page } = useQuery();
 
   useEffect(() => {
     axios
@@ -45,7 +46,7 @@ export default function Catalogue() {
       <Sidebar className={style.Sidebar} setCategory={setCategory} />
       <div className={style.Size}>
         <div className={style.Relleno}>
-            <Searchbar onSearch={onSearch} />
+          <Searchbar onSearch={onSearch} />
           <div className={style.Catalogue}>
             {display.length &&
               display.map((producto) => {
@@ -63,6 +64,7 @@ export default function Catalogue() {
               })}
           </div>
         </div>
+        <Pagination page={page} quantity={display.length} />
       </div>
     </div>
   );

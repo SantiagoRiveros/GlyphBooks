@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import style from "../../CSS/carrito.module.css";
+import { removeFromCart } from "../../actions/actions";
 
 export default function Carrito() {
   const [show, setShow] = useState(false);
@@ -19,6 +20,7 @@ export default function Carrito() {
           <li>C</li>
           <li>D</li>
         </ul>
+        <button onClick={() => removeFromCart()}>X</button>
       </div>
     </div>
   );

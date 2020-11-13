@@ -1,17 +1,19 @@
 import React, { useState } from "react";
 import axios from "axios";
+import style from "../../CSS/newUser.module.scss";
+import { useHistory } from "react-router-dom";
 
 export default function NewForm() {
+  const { push } = useHistory();
   const [input, setInput] = useState({
     firstName: "",
     lastName: "",
     password: "",
     email: "",
     shippingAdress: "",
-    googleId: "",
   });
 
-  const handleInputSubmit = (e) => {
+  const handleChange = (e) => {
     setInput({
       ...input,
       [e.target.name]: e.target.value,
@@ -19,70 +21,63 @@ export default function NewForm() {
   };
 
   const handleSubmit = (e) => {
-    axios.post(`http://localhost:3000/user`, input).then(() => {
-      alert("user was submitted");
+    axios.post(`http://localhost:3000/users`, input).then(() => {
+      push("/");
     });
 
     e.preventDefault();
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        FirstName:
-        <input
-          type="text"
-          value={input.firstName}
-          name="firsName"
-          onChange={handleInputSubmit}
-        />
-      </label>
-      <label>
-        LastName:
-        <input
-          type="text"
-          value={input.lastName}
-          name="lastName"
-          onChange={handleInputSubmit}
-        />
-      </label>
-      <label>
-        Password:
-        <input
-          type="text"
-          value={input.password}
-          name="password"
-          onChange={handleInputSubmit}
-        />
-      </label>
-      <label>
-        Email:
-        <input
-          type="text"
-          value={input.email}
-          name="email"
-          onChange={handleInputSubmit}
-        />
-      </label>
-      <label>
-        ShippingAdress:
-        <input
-          type="text"
-          value={input.shippingAdress}
-          name="shippingAdress"
-          onChange={handleInputSubmit}
-        />
-      </label>
-      <label>
-        GoogleIde:
-        <input
-          type="num"
-          value={input.googleId}
-          name="googleId"
-          onChange={handleInputSubmit}
-        />
-      </label>
-      <input type="submit" value="input.Submit" />
-    </form>
+    <div>
+      <form className={style.body} onSubmit={handleSubmit}>
+        <label>
+          Nombre:
+          <input
+            type="text"
+            value={input.firstName}
+            name="firstName"
+            onChange={handleChange}
+          />
+        </label>
+        <label>
+          Apellido:
+          <input
+            type="text"
+            value={input.lastName}
+            name="lastName"
+            onChange={handleChange}
+          />
+        </label>
+        <label>
+          Contraseña:
+          <input
+            type="password"
+            value={input.password}
+            name="password"
+            onChange={handleChange}
+          />
+        </label>
+        <label>
+          Email:
+          <input
+            type="text"
+            value={input.email}
+            name="email"
+            onChange={handleChange}
+          />
+        </label>
+        <label>
+          Direccion:
+          <input
+            type="text"
+            value={input.shippingAdress}
+            name="shippingAdress"
+            onChange={handleChange}
+          />
+        </label>
+        <input type="submit" value="Crear" />
+      </form>
+    </div>
   );
 }

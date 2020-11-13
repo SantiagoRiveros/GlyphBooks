@@ -22,7 +22,7 @@ export default function AdminUsers() {
           users.map((user) => (
             <tr>
               <th>{user.id}</th>
-              <th>{user.firstName + " " + user.Lastname}</th>
+              <th>{user.firstName + " " + user.lastName}</th>
               <th>{user.email}</th>
               <th>{user.isAdmin ? "Admin" : "User"}</th>
               <th>

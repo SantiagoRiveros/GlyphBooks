@@ -6,9 +6,9 @@ export default function AdmSideBar() {
   return (
     <div>
       <ul>
-        <li OnClick={() => push(`/admin/products`)}>Productos</li>
-        <li OnClick={() => push(`/admin/orders`)}> Ordenes</li>
-        <li OnClick={() => push(`/admin/users`)}>Usuarios</li>
+        <li onClick={() => push(`/admin/products`)}>Productos</li>
+        <li onClick={() => push(`/admin/orders`)}> Ordenes</li>
+        <li onClick={() => push(`/admin/users`)}>Usuarios</li>
       </ul>
     </div>
   );

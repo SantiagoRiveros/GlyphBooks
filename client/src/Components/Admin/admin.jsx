@@ -9,7 +9,7 @@ import AdmSideBar from "./admSideBar.jsx";
 export default function Admin() {
   const [producto, setProducto] = useState(null);
   return (
-    <div>
+    <div className="admin">
       <AdmSideBar />
       <Switch>
         <Route path="/admin/orders" render={() => <OrderTable />} />

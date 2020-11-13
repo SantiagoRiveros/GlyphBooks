@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-export default function adminUsers() {
+export default function AdminUsers() {
   const [users, setUsers] = useState([]);
   useEffect(() => {
     axios.get("http://localhost:3000/users").then(({ data }) => {

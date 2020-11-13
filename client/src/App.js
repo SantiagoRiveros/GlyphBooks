@@ -31,7 +31,6 @@ function App() {
             render={({ match }) => <Producto id={match.params.id} />}
           />
           <Route path="/ingresar" component={Login} />
-          <Route path="/" component={Carrito} />
           <Route path="/admin" component={Admin} />
         </Switch>
       </Router>

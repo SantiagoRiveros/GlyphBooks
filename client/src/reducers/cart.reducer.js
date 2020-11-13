@@ -9,7 +9,7 @@ function cartReducer(state = initialState, action) {
     case ADD_TO_CART: {
       return {
         ...state,
-        productos: [...state.productos, action.id],
+        productos: [...state.productos, action.lineOrder[0]],
       };
     }
     case REMOVE_FROM_CART: {

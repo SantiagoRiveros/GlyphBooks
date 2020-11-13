@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
 import style from "../../CSS/newUser.module.scss";
+import { useHistory } from "react-router-dom";
 
 export default function NewForm() {
+  const { push } = useHistory();
   const [input, setInput] = useState({
     firstName: "",
     lastName: "",
@@ -20,7 +22,7 @@ export default function NewForm() {
 
   const handleSubmit = (e) => {
     axios.post(`http://localhost:3000/users`, input).then(() => {
-      alert("user was submitted");
+      push("/");
     });
 
     e.preventDefault();

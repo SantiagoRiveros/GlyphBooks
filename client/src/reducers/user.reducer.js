@@ -1,19 +1,19 @@
 import { LOGIN, LOGOUT } from "../constants/user.constants";
 
-const initialState = { name: "guest" };
+const initialState = { user: "guest" };
 
 function userReducer(state = initialState, action) {
   switch (action.type) {
     case LOGIN: {
       return {
         ...state,
-        name: action.name,
+        user: action.user,
       };
     }
     case LOGOUT: {
       return {
         ...state,
-        name: "guest",
+        user: "guest",
       };
     }
     default:

@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 export default function orderTable() {
   const [order, setOrder] = useState([]);
@@ -19,7 +20,7 @@ export default function orderTable() {
           <th>Details</th>
         </tr>
         {order.length &&
-          order.map((orden) => (
+          order.map((order) => (
             <tr>
               <th>{order.id}</th>
               <th>User ID</th>

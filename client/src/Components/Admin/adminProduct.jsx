@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function adminProduct({ setProducto }) {
   const [productos, setProductos] = useState([]);

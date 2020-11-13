@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Switch, Route } from "react-router-dom";
 import Crud from "../Forms/CrudProductForm";
+import NewCategory from "../Forms/NewCategoryForm";
 import AdminProduct from "./adminProduct";
 import OrderTable from "./orderTable.jsx";
 import AdminUsers from "./adminUsers.jsx";
@@ -23,6 +24,7 @@ export default function Admin() {
           path="/admin/crud"
           render={() => <Crud product={producto} setProduct={setProducto} />}
         />
+        <Route path="/admin/newCategory" render={() => <NewCategory />} />
       </Switch>
     </div>
   );

@@ -49,22 +49,6 @@ export default function Catalogue({ setProducto }) {
     <div className={style.Fondo}>
       <Sidebar className={style.Sidebar} setCategory={setCategory} />
       <div className={style.Relleno}>
-        <div className={style.Btns}>
-          <button
-            className={style.Button}
-            name="crud"
-            onClick={() => push("/crud")}
-          >
-            NUEVO PRODUCTO
-          </button>
-          <button
-            className={style.Button}
-            name="newCategory"
-            onClick={() => push("/newCategory")}
-          >
-            NUEVA CATEGORÍA
-          </button>
-        </div>
         <div className={style.Catalogue}>
           {display.length &&
             display.map((producto) => {

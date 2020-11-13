@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import style from "../CSS/navbar.module.css";
 
-export default function NavBar() {
+export default function NavBar(props) {
   return (
     <nav>
       <img
@@ -26,7 +26,7 @@ export default function NavBar() {
           <Link to="/ingresar">Ingresar</Link>
         </li>
         <li>
-          <Link to="/carrito">Carrito</Link>
+          <ion-icon onClick={props.onCartClick} name="cart-outline"></ion-icon>
         </li>
       </ul>
     </nav>

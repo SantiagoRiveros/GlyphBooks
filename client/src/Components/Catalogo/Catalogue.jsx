@@ -1,26 +1,40 @@
 import React, { useEffect, useState } from "react";
 import Producto from "./productCard.jsx";
 import Sidebar from "./Sidebar.jsx";
-import Searchbar from "./searchBar";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import style from "../../CSS/catalogue.module.scss";
+import Pagination from "./pagination.jsx";
+import { useLocation } from "react-router";
 
-export default function Catalogue() {
+function useQuery() {
+  let search = useLocation().search;
+  let result = search.slice(1).split("&");
+  result = result.reduce((dataResult, item) => {
+    const pair = item.split("=");
+    dataResult[pair[0]] = pair[1];
+    return dataResult;
+  }, {});
+  return result;
+}
+
+export default function Catalogue({ setProducto }) {
   const { push } = useHistory();
   const [productos, setProductos] = useState([]);
   const [category, setCategory] = useState("");
   const [display, setDisplay] = useState([]);
+  /* const [page, setPage] = useState(1); */
+  const { page } = useQuery();
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/products")
+      .get(`http://localhost:3000/products?page=${page || 1}`)
       .then(({ data }) => {
         setProductos(data);
         setDisplay(data);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [page]);
 
   useEffect(() => {
     if (category) {
@@ -32,37 +46,44 @@ export default function Catalogue() {
     } else setDisplay(productos);
   }, [category, productos]);
 
-  const onSearch = (search) => {
-    axios
-      .get(`http://localhost:3000/products/search?value=${search}`)
-      .then(({ data }) => {
-        setDisplay(data);
-      });
-  };
-
   return (
     <div className={style.Fondo}>
       <Sidebar className={style.Sidebar} setCategory={setCategory} />
-      <div className={style.Size}>
-        <div className={style.Relleno}>
-            <Searchbar onSearch={onSearch} />
-          <div className={style.Catalogue}>
-            {display.length &&
-              display.map((producto) => {
-                return (
-                  <Producto
-                    img={producto.img}
-                    title={producto.title}
-                    price={producto.price}
-                    key={producto.id}
-                    id={producto.id}
-                    OnClick={() => push(`/productos/${producto.id}`)}
-                    categories={producto.Categories}
-                  />
-                );
-              })}
-          </div>
+      <div className={style.Relleno}>
+        <div className={style.Btns}>
+          <button
+            className={style.Button}
+            name="crud"
+            onClick={() => push("/crud")}
+          >
+            NUEVO PRODUCTO
+          </button>
+          <button
+            className={style.Button}
+            name="newCategory"
+            onClick={() => push("/newCategory")}
+          >
+            NUEVA CATEGORÍA
+          </button>
         </div>
+        <div className={style.Catalogue}>
+          {display.length &&
+            display.map((producto) => {
+              return (
+                <Producto
+                  img={producto.img}
+                  title={producto.title}
+                  price={producto.price}
+                  key={producto.id}
+                  id={producto.id}
+                  OnClick={() => push(`/productos/${producto.id}`)}
+                  edit={() => setProducto(producto)}
+                  categories={producto.Categories}
+                />
+              );
+            })}
+        </div>
+        <Pagination page={page} />
       </div>
     </div>
   );

@@ -5,7 +5,7 @@ const { Op } = require("sequelize");
 server.get("/", (req, res, next) => {
   const page = req.query.page;
   const limit = 9;
-  const offset = (page - 1) * limit;
+  const offset = page ? (page - 1) * limit : null;
 
   Product.findAll({ include: Category, limit, offset })
     .then((products) => {

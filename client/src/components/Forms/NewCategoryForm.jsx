@@ -1,5 +1,5 @@
 import Axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import style from "../../CSS/newcategory.module.css";
 
@@ -20,20 +20,19 @@ export default function NewForm() {
     });
   };
 
-  useEffect(() => {
-    if(category) {
-      setInput(category)
+  /* useEffect(() => {
+    if (category) {
+      setInput(category);
     }
-  }, [category]);
-  
+  }, [category]); */
+
   useEffect(() => {
     if (!input.name || !input.description) {
-      setError("Este campo es obligatorio")
+      setError("Este campo es obligatorio");
     } else {
       setError(null);
     }
   }, [input, setError]);
-
 
   const handleSubmit = (e) => {
     Axios.post("http://localhost:3000/category", input).then(() => {

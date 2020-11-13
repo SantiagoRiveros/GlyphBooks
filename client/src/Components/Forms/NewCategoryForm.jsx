@@ -9,8 +9,6 @@ export default function NewForm() {
     description: "",
   });
 
-  const [error, setError] = useState("este campo es obligatorio");
-
   const { push } = useHistory();
 
   const handleChange = (e) => {
@@ -19,21 +17,6 @@ export default function NewForm() {
       [e.target.name]: e.target.value,
     });
   };
-
-  useEffect(() => {
-    if(category) {
-      setInput(category)
-    }
-  }, [category]);
-  
-  useEffect(() => {
-    if (!input.name || !input.description) {
-      setError("Este campo es obligatorio")
-    } else {
-      setError(null);
-    }
-  }, [input, setError]);
-
 
   const handleSubmit = (e) => {
     Axios.post("http://localhost:3000/category", input).then(() => {

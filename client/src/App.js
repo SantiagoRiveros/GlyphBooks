@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 //componentes
@@ -13,14 +13,13 @@ import Admin from "./components/Admin/admin";
 import store from "./store";
 import Carrito from "./components/Catalogo/Carrito.jsx";
 
-function App() {
-  const [show, setShow] = useState(false);
 
+function App() {
   return (
     <Provider store={store}>
       <Router>
-        <NavBar onCartClick={() => setShow((prevShow) => !prevShow)} />
-        <Carrito cartShow={show} />
+        <NavBar />
+        <Carrito />
         <Switch>
           <Route exact path="/" component={Homepage} />
           <Route path="/catalogo" render={() => <Catalogo />} />

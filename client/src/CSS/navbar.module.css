@@ -14,8 +14,6 @@ nav {
   background: #14213d;
   height: 80px;
   width: 100%;
-  position: fixed;
-  z-index: 9999;
 }
 nav ul {
   float: right;

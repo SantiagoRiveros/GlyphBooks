@@ -12,6 +12,7 @@ import Producto from "./components/Catalogo/Product";
 import Admin from "./components/Admin/admin";
 import store from "./store";
 import Carrito from "./components/Catalogo/ItemCarrito.jsx";
+import NewUser from "./components/Forms/UserForm.jsx";
 
 function App() {
   const [show, setShow] = useState(false);
@@ -32,6 +33,7 @@ function App() {
           />
           <Route path="/ingresar" component={Login} />
           <Route path="/admin" component={Admin} />
+          <Route path="/signup" component={NewUser} />
         </Switch>
       </Router>
     </Provider>

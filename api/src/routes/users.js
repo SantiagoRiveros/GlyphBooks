@@ -36,9 +36,12 @@ user.post("/:idUser/cart", (req, res, next) => {
 user.get("/:idUser/cart", (req, res, next) => {
   User.findOne({ where: { id: req.params.idUser } })
     .then((usuario) => {
-      usuario.getOrders({ where: { status: "carrito" } });
+      return usuario.getOrders({
+        where: { status: "carrito" },
+        include: Product,
+      });
     })
-    .then((orden) => res.json(orden))
+    .then((orden) => res.send(orden))
     .catch(next);
 });
 

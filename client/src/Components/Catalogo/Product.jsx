@@ -1,11 +1,24 @@
 import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import style from "../../CSS/Product.module.css";
 import axios from "axios";
-import store from "../../store/index.js";
+import store from "../../store/index";
 import { addToCart } from "../../actions/actions.js"
 
 export default function Product({ id }) {
   const [product, setProduct] = useState(null);
+
+  const idUser = 1
+  const dispatch = useDispatch();
+
+  const handleClick = () => {
+    axios
+      .post(`http://localhost:3000/users/${idUser}/cart`, { id: id, price: product.price, quantity: 1 })
+      .then(({data}) => {
+        dispatch(addToCart(data))
+      })
+      .catch(err => console.log(err));
+  };
 
   useEffect(() => {
     axios

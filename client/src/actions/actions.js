@@ -15,10 +15,10 @@ export function logout() {
   };
 }
 
-export function addToCart(id) {
+export function addToCart(lineOrder) {
   return {
     type: ADD_TO_CART,
-    id
+    lineOrder
   };
 }
 

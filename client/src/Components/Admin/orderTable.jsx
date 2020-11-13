@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-export default function orderTable() {
+export default function OrderTable() {
   const [order, setOrder] = useState([]);
   useEffect(() => {
     axios.get("http://localhost:3000/order").then(({ data }) => {

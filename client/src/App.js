@@ -11,7 +11,7 @@ import Catalogo from "./components/Catalogo/Catalogue";
 import Producto from "./components/Catalogo/Product";
 import Admin from "./components/Admin/admin";
 import store from "./store";
-import Carrito from "./components/Catalogo/Carrito.jsx";
+import Carrito from "./components/Catalogo/ItemCarrito.jsx";
 
 function App() {
   const [show, setShow] = useState(false);

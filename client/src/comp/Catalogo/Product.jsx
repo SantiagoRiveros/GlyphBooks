@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import style from "../../CSS/Product.module.css";
 import axios from "axios";
 import store from "../../store/index.js";
-import { addToCart } from "../../actions/actions.js";
+import { addToCart } from "../../actions/actions.js"
 
 export default function Product({ id }) {
   const [product, setProduct] = useState(null);
@@ -14,6 +14,11 @@ export default function Product({ id }) {
         setProduct(data.book);
       });
   }, [id]);
+
+  /*useEffect(() => {
+    axios
+      .post(`http://localhost:3000/users/${id}/cart`)
+  })*/
 
   if (product) {
     return (
@@ -31,7 +36,7 @@ export default function Product({ id }) {
             <h3 className={style.price}>${product.price}</h3>
             <p className={style.description}>{product.description}</p>
             <h3 className={style.stock}>{product.stock}</h3>
-            <button onClick={(id) => addToCart(id)}>COMPRAR</button>
+            <button onClick={id => addToCart(id)}>COMPRAR</button>
           </div>
         </div>
       </div>

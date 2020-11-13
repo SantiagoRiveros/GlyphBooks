@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import style from "../CSS/navbar.module.css";
+import { useSelector } from "react-redux";
 
 export default function NavBar(props) {
+  const user = useSelector((state) => state.user);
+  const test = () => {
+    console.log(user);
+  };
   return (
     <nav>
       <img
@@ -27,6 +32,9 @@ export default function NavBar(props) {
         </li>
         <li>
           <ion-icon onClick={props.onCartClick} name="cart-outline"></ion-icon>
+        </li>
+        <li>
+          <button onClick={test}>CHEN</button>
         </li>
       </ul>
     </nav>

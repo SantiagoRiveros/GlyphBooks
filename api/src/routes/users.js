@@ -83,6 +83,16 @@ user.get("/", (req, res, next) => {
     .catch(next);
 });
 
+user.get("/login", (req, res, next) => {
+  User.findOne({
+    where: { email: req.query.email, password: req.query.contraseña },
+  })
+    .then((user) => {
+      res.send(user);
+    })
+    .catch(next);
+});
+
 user.delete("/:idUser/cart", (req, res, next) => {
   User.findOne({ where: { id: req.params.idUser } })
     .then((usuario) => usuario.getOrders({ where: { status: "carrito" } }))

@@ -13,6 +13,7 @@ import Admin from "./components/Admin/admin";
 import store from "./store";
 import Carrito from "./components/Catalogo/ItemCarrito.jsx";
 import NewUser from "./components/Forms/UserForm.jsx";
+import Footer from "./components/Footer";
 
 function App() {
   const [show, setShow] = useState(false);

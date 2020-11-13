@@ -9,15 +9,17 @@ function cartReducer(state = initialState, action) {
     case ADD_TO_CART: {
       return {
         ...state,
-        productos: [...state.productos, action.producto],
+        productos: [...state.productos, action.id],
       };
     }
     case REMOVE_FROM_CART: {
       return {
         ...state,
-        productos: state.productos.filter((e) => !e.id === action.id),
+        productos: state.productos.filter((e) => e.id !== action.id),
       };
     }
+    default:
+      return state;
   }
 }
 

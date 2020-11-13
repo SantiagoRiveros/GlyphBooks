@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import style from "../../CSS/carrito.module.css";
+import { removeFromCart } from "../../actions/actions"
 
 export default function Carrito(props) {
   const open = props.cartShow ? style.sidebarOpen : style.sidebar;
@@ -17,7 +18,7 @@ export default function Carrito(props) {
           </li>
           <li>D</li>
         </ul>
-        <button>X</button>
+        <button onClick={() => removeFromCart()}>X</button>
       </div>
     </div>
   );

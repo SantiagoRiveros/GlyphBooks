@@ -23,7 +23,6 @@ export default function Catalogue({ setProducto }) {
   const [productos, setProductos] = useState([]);
   const [category, setCategory] = useState("");
   const [display, setDisplay] = useState([]);
-  /* const [page, setPage] = useState(1); */
   const { page } = useQuery();
 
   useEffect(() => {
@@ -83,7 +82,7 @@ export default function Catalogue({ setProducto }) {
               );
             })}
         </div>
-        <Pagination page={page} />
+        <Pagination page={page} quantity={display.length} />
       </div>
     </div>
   );

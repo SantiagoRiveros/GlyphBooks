@@ -4,24 +4,15 @@ const { Op } = require("sequelize");
 
 server.get("/", (req, res, next) => {
   const page = req.query.page;
-  const offset = (page - 1) * 9;
+  const limit = 9;
+  const offset = (page - 1) * limit;
 
-  Product.findAll({ include: Category, limit: 9, offset })
+  Product.findAll({ include: Category, limit, offset })
     .then((products) => {
       res.send(products);
     })
     .catch(next);
 });
-
-/* server.get("/:pag", (req, res, next) => {
-  const offset = (req.params.pag - 1) * 9;
-
-  Product.findAndCountAll({ limit: 9, offset })
-    .then((products) => {
-      res.send(products);
-    })
-    .catch(next);
-}); */
 
 server.get("/search", (req, res, next) => {
   const { value } = req.query;

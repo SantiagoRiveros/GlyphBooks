@@ -5,11 +5,12 @@ import AdminProducts from "./adminProducts";
 import OrderTable from "./orderTable.jsx";
 import AdminUsers from "./adminUsers.jsx";
 import AdmSideBar from "./admSideBar.jsx";
+import style from "../../CSS/adminProducts.module.scss";
 
 export default function Admin() {
   const [producto, setProducto] = useState(null);
   return (
-    <div>
+    <div className={style.admin}>
       <AdmSideBar />
       <Switch>
         <Route path="/admin/orders" render={() => <OrderTable />} />

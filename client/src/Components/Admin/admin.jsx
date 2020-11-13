@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Switch, Route } from "react-router-dom";
 import Crud from "../Forms/CrudProductForm";
-import AdminProducts from "./adminProducts";
+import AdminProduct from "./adminProduct";
 import OrderTable from "./orderTable.jsx";
 import AdminUsers from "./adminUsers.jsx";
 import AdmSideBar from "./admSideBar.jsx";
@@ -17,7 +17,7 @@ export default function Admin() {
         <Route path="/admin/users" render={() => <AdminUsers />} />
         <Route
           path="/admin/products"
-          render={() => <AdminProducts setProducto={setProducto} />}
+          render={() => <AdminProduct setProducto={setProducto} />}
         />
         <Route
           path="/admin/crud"

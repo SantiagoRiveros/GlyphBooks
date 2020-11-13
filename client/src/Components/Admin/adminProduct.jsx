@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-export default function adminProduct({ setProducto }) {
+export default function AdminProduct({ setProducto }) {
   const [productos, setProductos] = useState([]);
   useEffect(() => {
     axios.get("http://localhost:3000/products").then(({ data }) => {

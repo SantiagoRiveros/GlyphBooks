@@ -8,48 +8,45 @@ export default function Faq() {
         <div className={style.accordion}>
           <div className={style.accordionitem} id="question1">
             <a className={style.accordionlink} href="#question1">
-              Que tan larga tienes la pichula
+              ¿Quienes Somos?
             </a>
             <div className={style.answer}>
               <p>
-                v viva el sexo wachoasdasdasdasdasdasdasdswdviva el sexo
-                wachoasdasdasdasdasdasdasdswdviva el sexo
-                wachoasdasdasdasdasdasdasdswdviva el sexo
-                wachoasdasdasdasdasdasdasdswdviva el sexo
-                wachoasdasdasdasdasdasdasdswdviva el sexo
-                wachoasdasdasdasdasdasdasdswd
+                GlyphBooks® comenzo como un micro emprendimiento en el año 2011.
+                Gracias a nuestro arzobispo de SQL, Peter Chen, pudimos salir
+                adelante. Hoy estamos aqui predicando la palabra del modelo
+                entidad relacion.
               </p>
             </div>
           </div>
 
           <div className={style.accordionitem} id="question2">
             <a className={style.accordionlink} href="#question2">
-              Que tan larga tienes el guevo
+              ¿Quien es Peter Chen?
             </a>
             <div className={style.answer}>
               <p>
-                viva el sexo wachoasdasdasdasdasdasdasdswdviva el sexo
-                wachoasdasdasdasdasdasdasdswdviva el sexo
-                wachoasdasdasdasdasdasdasdswdviva el sexo
-                wachoasdasdasdasdasdasdasdswdviva el sexo
-                wachoasdasdasdasdasdasdasdswdviva el sexo
-                wachoasdasdasdasdasdasdasdswd
+                El Dr. Peter Pin-Shan Chen (en chino: Chen Pin-Shan (en chino
+                tradicional, 陳品山; pinyin, Chén Pǐnshān, Taichung; 3 de enero
+                de 1947) Es el creador del Modelo Entidad-Relación (Modelo ER) y
+                arzobispo de la iglesia de SQL. El vino al mundo para JOINEAR
+                nuestros corazones en la TABLE de la vida.
               </p>
             </div>
           </div>
 
           <div className={style.accordionitem} id="question3">
             <a className={style.accordionlink} href="#question3">
-              Que tan larga tienes la tula
+              ¿Como es el paraiso de SQL?
             </a>
             <div className={style.answer}>
               <p>
-                viva el sexo wachoasdasdasdasdasdasdasdswdviva el sexo
-                wachoasdasdasdasdasdasdasdswdviva el sexo
-                wachoasdasdasdasdasdasdasdswdviva el sexo
-                wachoasdasdasdasdasdasdasdswdviva el sexo
-                wachoasdasdasdasdasdasdasdswdviva el sexo
-                wachoasdasdasdasdasdasdasdswd
+                El paraiso profetizado por el arzobispo Chen, es un lugar donde
+                no habra mas fallas de sintaxis, donde podremos crear relaciones
+                entre nuestras TABLES sin temor al Demonio Error 404. Porque,
+                Peter Chen Dijo "Venid a mi, y os dare la gracia de JavaScript,
+                y la dicha de Sequelize, todo aquel que me siga, podra crear
+                modelos fuera del command prompt"
               </p>
             </div>
           </div>

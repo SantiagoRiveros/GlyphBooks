@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import { removeFromCart } from "../../actions/actions";
 
 export default function CartProduct(props) {

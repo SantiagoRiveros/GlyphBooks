@@ -15,7 +15,7 @@ export default function NavBar(props) {
         src="https://media.discordapp.net/attachments/772911955349340171/773903872740556820/Logo_horizontal.png?width=1443&height=338"
         alt="Logo"
       />
-      <ul>
+      <ul className={style.links}>
         <li>
           <Link className={style.active} to="/">
             Home
@@ -34,10 +34,10 @@ export default function NavBar(props) {
           <ion-icon onClick={props.onCartClick} name="cart-outline"></ion-icon>
         </li>
         <li>
-          <button onClick={props.showLocalStorage}>CHEN</button>
+        {/*  <button onClick={props.showLocalStorage}>CHEN</button>*/}
         </li>
         <li>
-          <button onClick={props.emptyLocalStorage}>CHEN</button>
+        {/*  <button onClick={props.emptyLocalStorage}>CHEN</button>*/}
         </li>
       </ul>
     </nav>

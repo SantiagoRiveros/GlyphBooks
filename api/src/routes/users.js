@@ -26,7 +26,7 @@ user.post("/:idUser/cart", (req, res, next) => {
     })
     .then((orden) => {
       return orden.addProducts(req.body.id, {
-        through: { price: req.body.price, quantity: req.body.quantity },
+        through: { price: req.body.price, quantity: 1 },
       });
     })
     .then((r) => res.send(r))

@@ -1,6 +1,9 @@
 import React, { useState } from "react";
-import { Provider } from "react-redux";
+
+import { useSelector } from "react-redux";
+import useLocalStorage from "./useLocalStorage";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import axios from "axios";
 //componentes
 
 import NavBar from "./components/NavBar";
@@ -10,34 +13,57 @@ import Faq from "./components/Faq";
 import Catalogo from "./components/Catalogo/Catalogue";
 import Producto from "./components/Catalogo/Product";
 import Admin from "./components/Admin/admin";
-import store from "./store";
-import Carrito from "./components/Catalogo/ItemCarrito.jsx";
+import Carrito from "./components/Carrito/Carrito.jsx";
 import NewUser from "./components/Forms/UserForm.jsx";
-import Footer from "./components/Footer";
 
 function App() {
   const [show, setShow] = useState(false);
+  const [items, setItems] = useLocalStorage("items", []);
+  const { user } = useSelector((state) => state.user);
+
+  const agregarCarrito = (producto) => {
+    if (user !== "guest") {
+      axios
+        .post(`http://localhost:3000/users/${user.id}/cart`, {
+          id: producto.id,
+          price: producto.price,
+        })
+        .then(({ data }) => {
+          if (data.length) setItems((oldItems) => [...oldItems, producto]);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      setItems((oldItems) => [...oldItems, producto]);
+    }
+  };
 
   return (
-    <Provider store={store}>
-      <Router>
-        <NavBar onCartClick={() => setShow((prevShow) => !prevShow)} />
-        <Carrito cartShow={show} />
-        <Switch>
-          <Route exact path="/" component={Homepage} />
-          <Route path="/catalogo" render={() => <Catalogo />} />
-          <Route path="/faq" component={Faq} />
-          <Route
-            exact
-            path="/products/:id"
-            render={({ match }) => <Producto id={match.params.id} />}
-          />
-          <Route path="/ingresar" component={Login} />
-          <Route path="/admin" component={Admin} />
-          <Route path="/signup" component={NewUser} />
-        </Switch>
-      </Router>
-    </Provider>
+    <Router>
+      <NavBar
+        showLocalStorage={() => console.log(items)}
+        emptyLocalStorage={() => setItems([])}
+        onCartClick={() => setShow((prevShow) => !prevShow)}
+      />
+      <Carrito cartShow={show} items={items} />
+      <Switch>
+        <Route exact path="/" component={Homepage} />
+        <Route
+          path="/catalogo"
+          render={() => <Catalogo agregarCarrito={agregarCarrito} />}
+        />
+        <Route path="/faq" component={Faq} />
+        <Route
+          exact
+          path="/products/:id"
+          render={({ match }) => <Producto id={match.params.id} />}
+        />
+        <Route path="/ingresar" component={Login} />
+        <Route path="/admin" component={Admin} />
+        <Route path="/signup" component={NewUser} />
+      </Switch>
+    </Router>
   );
 }
 

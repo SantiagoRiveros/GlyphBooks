@@ -45,7 +45,12 @@ export default function AdminProduct({ setProducto }) {
               <th>{product.price}</th>
               <th>{product.stock}</th>
               <th>
-                <button />
+                <button
+                  onClick={() => {
+                    setProducto(product);
+                    push("/admin/crud");
+                  }}
+                />
               </th>
             </tr>
           ))}

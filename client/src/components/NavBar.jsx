@@ -34,7 +34,10 @@ export default function NavBar(props) {
           <ion-icon onClick={props.onCartClick} name="cart-outline"></ion-icon>
         </li>
         <li>
-          <button onClick={test}>CHEN</button>
+          <button onClick={props.showLocalStorage}>CHEN</button>
+        </li>
+        <li>
+          <button onClick={props.emptyLocalStorage}>CHEN</button>
         </li>
       </ul>
     </nav>

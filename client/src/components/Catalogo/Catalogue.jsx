@@ -61,7 +61,7 @@ export default function Catalogue({ agregarCarrito }) {
                   id={producto.id}
                   OnClick={() => push(`/productos/${producto.id}`)}
                   categories={producto.Categories}
-                  agregarCarrito={(producto) => agregarCarrito(producto)}
+                  agregarCarrito={() => agregarCarrito(producto)}
                 />
               );
             })}

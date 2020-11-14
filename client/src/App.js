@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { useSelector } from "react-redux";
-import useLocalStorage from "react-use-localstorage";
+import useLocalStorage from "./useLocalStorage";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import axios from "axios";
 //componentes
@@ -13,14 +13,13 @@ import Faq from "./components/Faq";
 import Catalogo from "./components/Catalogo/Catalogue";
 import Producto from "./components/Catalogo/Product";
 import Admin from "./components/Admin/admin";
-import store from "./store";
-import Carrito from "./components/Catalogo/ItemCarrito.jsx";
+import Carrito from "./components/Carrito/Carrito.jsx";
 import NewUser from "./components/Forms/UserForm.jsx";
 
 function App() {
   const [show, setShow] = useState(false);
   const [items, setItems] = useLocalStorage("items", []);
-  const user = useSelector((state) => state.user);
+  const { user } = useSelector((state) => state.user);
 
   const agregarCarrito = (producto) => {
     if (user !== "guest") {
@@ -29,8 +28,8 @@ function App() {
           id: producto.id,
           price: producto.price,
         })
-        .then(() => {
-          setItems((oldItems) => [...oldItems, producto]);
+        .then(({ data }) => {
+          if (data.length) setItems((oldItems) => [...oldItems, producto]);
         })
         .catch((error) => {
           console.log(error);
@@ -42,8 +41,12 @@ function App() {
 
   return (
     <Router>
-      <NavBar onCartClick={() => setShow((prevShow) => !prevShow)} />
-      <Carrito cartShow={show} />
+      <NavBar
+        showLocalStorage={() => console.log(items)}
+        emptyLocalStorage={() => setItems([])}
+        onCartClick={() => setShow((prevShow) => !prevShow)}
+      />
+      <Carrito cartShow={show} items={items} />
       <Switch>
         <Route exact path="/" component={Homepage} />
         <Route

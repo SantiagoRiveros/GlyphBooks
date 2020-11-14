@@ -1,24 +1,22 @@
 import React, { useState } from "react";
 import style from "../../CSS/carrito.module.css";
+import CartProduct from "./cartProduct";
 import { removeFromCart } from "../../actions/actions";
 
 export default function Carrito(props) {
   const open = props.cartShow ? style.sidebarOpen : style.sidebar;
   const [count, setCount] = useState(1);
+
   return (
     <div className={style.container}>
       <div className={open}>
         <ul>
-          <li>{props.title}</li>
-          <li>{props.price}</li>
-          <li>
-            {count}
-            <button onClick={() => setCount(count - 1)}>-</button>
-            <button onClick={() => setCount(count + 1)}>+</button>
-          </li>
-          <li>
-            <button onClick={() => removeFromCart()}>X</button>
-          </li>
+          {props.items.length &&
+            props.items.map((item) => (
+              <li key={item.id}>
+                <CartProduct title={item.title} price={item.price} />
+              </li>
+            ))}
         </ul>
       </div>
     </div>

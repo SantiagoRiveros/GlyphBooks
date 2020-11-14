@@ -7,14 +7,12 @@ export default function Product(props) {
 
   return (
     <div className={style.Producto}>
-      <div
-        className={style.Center}
-        onClick={() => push(`/products/${props.id}`)}
-      >
+      <div className={style.Center}>
         <img
           className={style.Libroimg}
           src={props.img}
           alt="imagen del producto"
+          onClick={() => push(`/products/${props.id}`)}
         />
         <div className={style.description}>
           <h2 className={style.Price}>${props.price}</h2>

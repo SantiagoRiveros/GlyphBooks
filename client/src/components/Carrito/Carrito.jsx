@@ -14,7 +14,7 @@ export default function Carrito(props) {
           {props.items.length &&
             props.items.map((item) => (
               <li key={item.id}>
-                <CartProduct title={item.title} price={item.price} />
+                <CartProduct title={item.title} price={item.price} producto={item} />
               </li>
             ))}
         </ul>

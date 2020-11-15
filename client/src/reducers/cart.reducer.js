@@ -1,7 +1,8 @@
-import { ADD_TO_CART, REMOVE_FROM_CART } from "../constants/cart.constants";
+import { ADD_TO_CART, REMOVE_FROM_CART, AGREGAR_CARRITO, REMOVER_CARRITO } from "../constants/cart.constants";
 
 const initialState = {
   productos: [],
+  items: []
 };
 
 function cartReducer(state = initialState, action) {
@@ -16,6 +17,18 @@ function cartReducer(state = initialState, action) {
       return {
         ...state,
         productos: state.productos.filter((e) => e.id !== action.id),
+      };
+    }
+    case AGREGAR_CARRITO: {
+      return {
+        ...state,
+        items: [...state.items, action.producto],
+      };
+    }
+    case REMOVER_CARRITO: {
+      return {
+        ...state,
+        items: state.items.filter((e) => e !== action.producto),
       };
     }
     default:

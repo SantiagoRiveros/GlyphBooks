@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import style from "../../CSS/cartProduct.module.scss";
+import { removerCarrito } from "../../actions/actions";
+import { connect } from "react-redux";
 
-export default function CartProduct(props) {
+function CartProduct(props) {
   const [count, setCount] = useState(1);
 
   const handleCount = (num) => {
@@ -12,7 +14,7 @@ export default function CartProduct(props) {
 
   return (
     <div>
-      <button onClick={() => {}}>X</button>
+      <button onClick={() => props.dispatch(removerCarrito(props.producto))}>X</button>
       <h3 classname={style.text}>{props.title}</h3>
       <h3 classname={style.text}>{props.price}</h3>
       <div>
@@ -23,3 +25,5 @@ export default function CartProduct(props) {
     </div>
   );
 }
+
+export default connect()(CartProduct)

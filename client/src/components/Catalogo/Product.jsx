@@ -1,24 +1,40 @@
 import React, { useEffect, useState } from "react";
+import { useSelector, connect } from "react-redux";
+import { agregarAlCarrito } from "../../actions/actions";
 import style from "../../CSS/Product.module.css";
 import axios from "axios";
-import store from "../../store/index.js";
-import { addToCart } from "../../actions/actions.js"
 
-export default function Product({ id }) {
+
+function Product(props) {
   const [product, setProduct] = useState(null);
+  const { user } = useSelector((state) => state.user);
+
+  const agregarCarrito = (producto) => {
+    console.log(producto)
+    if (user !== "guest") {
+      axios
+        .post(`http://localhost:3000/users/${user.id}/cart`, {
+          id: producto.id,
+          price: producto.price,
+        })
+        .then(({ data }) => {
+          if (data.length) props.dispatch(agregarAlCarrito(producto));
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      props.dispatch(agregarAlCarrito(producto));
+    }
+  };
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/products/search/${id}`)
+    .get(`http://localhost:3000/products/search/${props.id}`)
       .then(({ data }) => {
         setProduct(data.book);
       });
-  }, [id]);
-
-  /*useEffect(() => {
-    axios
-      .post(`http://localhost:3000/users/${id}/cart`)
-  })*/
+    }, [props.id]);
 
   if (product) {
     return (
@@ -36,7 +52,7 @@ export default function Product({ id }) {
             <h3 className={style.price}>${product.price}</h3>
             <p className={style.description}>{product.description}</p>
             <h3 className={style.stock}>{product.stock}</h3>
-            <button onClick={id => addToCart(id)}>COMPRAR</button>
+            <button onClick={() => agregarCarrito(props.id)}>COMPRAR</button>
           </div>
         </div>
       </div>
@@ -45,3 +61,5 @@ export default function Product({ id }) {
     return <div>Buscando</div>;
   }
 }
+
+export default connect()(Product);

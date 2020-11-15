@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
-import Producto from "./productCard.jsx";
 import Sidebar from "./Sidebar.jsx";
-import { useHistory } from "react-router-dom";
-import axios from "axios";
-import style from "../../CSS/catalogue.module.scss";
-import Pagination from "./pagination.jsx";
-import { useLocation } from "react-router";
 import SearchBar from "./searchBar";
+import Producto from "./productCard.jsx";
+import Pagination from "./pagination.jsx";
+import { useHistory } from "react-router-dom";
+import { useLocation } from "react-router";
+import { connect } from "react-redux";
+import { agregarAlCarrito } from "../../actions/actions";
+import style from "../../CSS/catalogue.module.scss";
+import axios from "axios";
 
 function useQuery() {
   let search = useLocation().search;
@@ -19,7 +21,7 @@ function useQuery() {
   return result;
 }
 
-export default function Catalogue({ agregarCarrito }) {
+function Catalogue(props) {
   const { push } = useHistory();
   const [productos, setProductos] = useState([]);
   const [category, setCategory] = useState("");
@@ -71,6 +73,7 @@ export default function Catalogue({ agregarCarrito }) {
       <Sidebar className={style.Sidebar} setCategory={setCategory} />
       <div className={style.Relleno}>
         <div className={style.Catalogue}>
+          <button onClick={() => console.log(props.estado.user)}>ESTADO</button>
           <SearchBar onSearch={onSearch} />
           {display.length &&
             display.map((producto) => {
@@ -83,7 +86,6 @@ export default function Catalogue({ agregarCarrito }) {
                   id={producto.id}
                   OnClick={() => push(`/productos/${producto.id}`)}
                   categories={producto.Categories}
-                  agregarCarrito={() => agregarCarrito(producto)}
                 />
               );
             })}
@@ -93,3 +95,11 @@ export default function Catalogue({ agregarCarrito }) {
     </div>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    estado: state
+  };
+};
+
+export default connect(mapStateToProps)(Catalogue);

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import style from "../../CSS/Admin/adminUsers.module.scss";
 
 export default function AdminUsers() {
   const [users, setUsers] = useState([]);
@@ -9,25 +10,25 @@ export default function AdminUsers() {
     });
   }, []);
   return (
-    <div>
-      <table>
-        <tr>
-          <th>ID:</th>
-          <th>Nombre:</th>
-          <th>Email:</th>
-          <th>Rol:</th>
-          <th>Detalles:</th>
+    <div className={style.size}>
+      <table className={style.users}>
+        <tr className={style.tr}>
+          <th className={style.th}>ID:</th>
+          <th className={style.th}>Nombre:</th>
+          <th className={style.th}>Email:</th>
+          <th className={style.th}>Rol:</th>
+          <th className={style.th}>Detalles:</th>
         </tr>
         {users.length &&
           users.map((user) => (
-            <tr>
-              <th>{user.id}</th>
-              <th>{user.firstName + " " + user.lastName}</th>
-              <th>{user.email}</th>
-              <th>{user.isAdmin ? "Admin" : "User"}</th>
-              <th>
+            <tr className={style.tr}>
+              <td className={style.td}>{user.id}</td>
+              <td className={style.td}>{user.firstName + " " + user.lastName}</td>
+              <td className={style.td}>{user.email}</td>
+              <td className={style.td}>{user.isAdmin ? "Admin" : "User"}</td>
+              <td className={style.td}>
                 <button />
-              </th>
+              </td>
             </tr>
           ))}
       </table>

@@ -71,8 +71,8 @@ function Catalogue(props) {
     <div className={style.Fondo}>
       <Sidebar className={style.Sidebar} setCategory={setCategory} />
       <div className={style.Relleno}>
+      <SearchBar onSearch={onSearch} />
         <div className={style.Catalogue}>
-          <SearchBar onSearch={onSearch} />
           {display.length &&
             display.map((producto) => {
               return (

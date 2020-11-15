@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import style from "../CSS/login.module.css";
+import style from "../CSS/login.module.scss";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../actions/actions";

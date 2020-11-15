@@ -67,74 +67,81 @@ export default function CrudProducts({ product, setProduct }) {
   };
 
   return (
-    <div className={style.imgLibros}>
+    <div className={style.fondo}>
       <form onSubmit={handleSubmit} className={style.form}>
-        <h3 className={style.title}>CREAR O MODIFICAR PRODUCTO</h3>
-        <label className={style.label}>TÍTULO:</label>
+      <h1>CREAR O MODIFICAR PRODUCTO</h1>
+      <div className={style.textbox}>
         <input
-          className={style.input}
+          placeholder="Titulo"
           type="text"
           value={input.title}
           name="title"
           onChange={handleChange}
         />
+        </div>
         <div className={style.error}>
           {!input.title && <span>{error}</span>}
         </div>
-        <label className={style.label}>DESCRIPCIÓN:</label>
+        <div>
         <textarea
+          className={style.textarea}
           rows={5}
-          className={style.input}
+          placeholder="Descripcion"
           value={input.description}
           name="description"
           onChange={handleChange}
         />
-        <label className={style.label}>AUTOR:</label>
+        </div>
+       <div className={style.textbox}>
         <input
-          className={style.input}
+          placeholder="Autor"
           type="text"
           value={input.author}
           name="author"
           onChange={handleChange}
         />
+        </div>
         <div className={style.error}>
           {!input.author && <span>{error}</span>}
         </div>
-        <label className={style.label}>PRECIO:</label>
+        <div className={style.textbox}>
         <input
-          className={style.input}
+          placeholder="Precio"
           type="number"
           value={input.price}
           name="price"
           onChange={handleChange}
         />
+        </div>
         <div className={style.error}>
           {!input.price && <span>{error}</span>}
         </div>
-        <label className={style.label}>STOCK:</label>
+        <div className={style.textbox}>
         <input
-          className={style.input}
+          placeholder="Stock"
           type="number"
           value={input.stock}
           name="stock"
           onChange={handleChange}
         />
+        </div>
         <div className={style.error}>
           {!input.stock && <span>{error}</span>}
         </div>
-        <label className={style.label}>Img URL:</label>
+        <div className={style.textbox}>
         <input
-          className={style.input}
+          placeholder="Imagen"
           type="text"
           value={input.img}
           name="img"
           onChange={handleChange}
         />
-        <div className={style.divBTN}>
+        </div>
+        <div className={style.btnDiv}>
           {!error && (
-            <input className={style.crudBTN} type="submit" value="AGREGAR" />
+            <input className={style.btn} type="submit" value="AGREGAR" />
           )}
-          <button className={style.crudBTN} onClick={handleDelete}>
+          <button className={style.btn} onClick={handleDelete}>
             ELIMINAR
           </button>
         </div>

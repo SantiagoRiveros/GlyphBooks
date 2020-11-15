@@ -1,0 +1,71 @@
+.admin {
+  position: relative;
+  top: 100px;
+}
+
+.size {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 5%;
+  margin-left: 125px;
+}
+
+.btns {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  max-width: 80%;
+  text-align: center;
+  margin-top: 15px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
+}
+
+.button {
+  display: flex;
+  background-color: #ffffff;
+  border-radius: 6px;
+  color: #14213d;
+  border: 2px solid #14213d;
+  padding: 5px 10px;
+  margin: 5px 30px;
+  transition: all 0.5s;
+  &:hover {
+    cursor: pointer;
+    color: white;
+    transform: scale(1.15);
+    border-color: transparent;
+    background-color: orange;
+  }
+}
+
+.products {
+  font-family: Avantgarde, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: orange;
+  color: white;
+  border: 1px solid #ddd;
+  padding: 8px; 
+}
+
+.td {
+  border: 1px solid #ddd;
+  padding: 8px; 
+}
+
+.tr:nth-child(even) {
+  background-color: #dbdbdb93;
+}
+
+.tr:hover {
+  background-color: rgb(194, 194, 194);
+}

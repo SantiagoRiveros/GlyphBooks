@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import style from "../../CSS/catalogue.module.scss";
+import style from "../../CSS/Admin/adminProduct.module.scss";
 import { useHistory } from "react-router-dom";
 
 export default function AdminProduct({ setProducto }) {
@@ -12,49 +12,65 @@ export default function AdminProduct({ setProducto }) {
     });
   }, []);
   return (
-    <div>
-      <div className={style.Btns}>
+    <div className={style.size}>
+      <div className={style.btns}>
         <button
-          className={style.Button}
+          className={style.button}
           name="crud"
           onClick={() => push("/admin/crud")}
         >
           NUEVO PRODUCTO
         </button>
         <button
-          className={style.Button}
+          className={style.button}
           name="newCategory"
           onClick={() => push("/admin/newCategory")}
         >
           NUEVA CATEGORÍA
         </button>
       </div>
-      <table>
-        <tr>
-          <th>Nombre:</th>
-          <th>Descripcion:</th>
-          <th>Precio:</th>
-          <th>Stock:</th>
-          <th>+Agregar:</th>
+      <table className={style.products}>
+        <tr className={style.tr}>
+          <th className={style.th}>Nombre:</th>
+          <th className={style.th}>Descripcion:</th>
+          <th className={style.th}>Precio:</th>
+          <th className={style.th}>Stock:</th>
+          <th className={style.th}>+Agregar:</th>
         </tr>
         {productos.length &&
           productos.map((product) => (
-            <tr>
-              <th>{product.title}</th>
-              <th>{product.description}</th>
-              <th>{product.price}</th>
-              <th>{product.stock}</th>
-              <th>
-                <button
+            <tr className={style.tr}>
+              <td className={style.td}>{product.title}</td>
+              <td className={style.td}>{product.description}</td>
+              <td className={style.td}>{product.price}</td>
+              <td className={style.td}>{product.stock}</td>
+              <td className={style.td}>
+                <button className={style.button}
                   onClick={() => {
                     setProducto(product);
                     push("/admin/crud");
                   }}
-                />
-              </th>
+                >+</button>
+              </td>
             </tr>
           ))}
       </table>
+      <div className={style.btns}>
+        <button
+          className={style.button}
+          name="crud"
+          onClick={() => push("/admin/crud")}
+        >
+          NUEVO PRODUCTO
+        </button>
+        <button 
+          className={style.button}
+          name="newCategory"
+          onClick={() => push("/admin/newCategory")}
+        >
+          NUEVA CATEGORÍA
+        </button>
+      </div>
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import { LOGIN, LOGOUT } from "../constants/user.constants";
-import { ADD_TO_CART, REMOVE_FROM_CART } from "../constants/cart.constants";
+import { AGREGAR_CARRITO, REMOVER_CARRITO } from "../constants/cart.constants";
+
 
 export function login(user) {
   return {
@@ -14,16 +15,16 @@ export function logout() {
   };
 }
 
-export function addToCart(id) {
+export function agregarAlCarrito(producto) {
   return {
-    type: ADD_TO_CART,
-    id,
+    type: AGREGAR_CARRITO,
+    producto,
   };
 }
 
-export function removeFromCart(id) {
+export function removerCarrito(producto) {
   return {
-    type: REMOVE_FROM_CART,
-    id,
+    type: REMOVER_CARRITO,
+    producto,
   };
 }

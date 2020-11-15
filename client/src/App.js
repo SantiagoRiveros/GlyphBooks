@@ -1,9 +1,6 @@
 import React, { useState } from "react";
-
-import { useSelector } from "react-redux";
-import useLocalStorage from "./useLocalStorage";
+import { connect } from "react-redux";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import axios from "axios";
 //componentes
 
 import NavBar from "./components/NavBar";
@@ -16,42 +13,20 @@ import Admin from "./components/Admin/admin";
 import Carrito from "./components/Carrito/Carrito.jsx";
 import NewUser from "./components/Forms/UserForm.jsx";
 
-function App() {
+function App(props) {
   const [show, setShow] = useState(false);
-  const [items, setItems] = useLocalStorage("items", []);
-  const { user } = useSelector((state) => state.user);
-
-  const agregarCarrito = (producto) => {
-    if (user !== "guest") {
-      axios
-        .post(`http://localhost:3000/users/${user.id}/cart`, {
-          id: producto.id,
-          price: producto.price,
-        })
-        .then(({ data }) => {
-          if (data.length) setItems((oldItems) => [...oldItems, producto]);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    } else {
-      setItems((oldItems) => [...oldItems, producto]);
-    }
-  };
 
   return (
     <Router>
       <NavBar
-        showLocalStorage={() => console.log(items)}
-        emptyLocalStorage={() => setItems([])}
         onCartClick={() => setShow((prevShow) => !prevShow)}
       />
-      <Carrito cartShow={show} items={items} />
+      <Carrito cartShow={show} items={props.carrito.cart.items} />
       <Switch>
         <Route exact path="/" component={Homepage} />
         <Route
           path="/catalogo"
-          render={() => <Catalogo agregarCarrito={agregarCarrito} />}
+          render={() => <Catalogo />}
         />
         <Route path="/faq" component={Faq} />
         <Route
@@ -65,6 +40,12 @@ function App() {
       </Switch>
     </Router>
   );
-}
+};
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    carrito: state
+  };
+};
+
+export default connect(mapStateToProps)(App);

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import style from "../../CSS/cartProduct.module.scss";
 import { removerCarrito } from "../../actions/actions";
 import { connect } from "react-redux";
+import style from "../../CSS/cartProduct.module.scss";
 
 function CartProduct(props) {
   const [count, setCount] = useState(1);
@@ -24,6 +24,6 @@ function CartProduct(props) {
       </div>
     </div>
   );
-}
+};
 
-export default connect()(CartProduct)
+export default connect()(CartProduct);

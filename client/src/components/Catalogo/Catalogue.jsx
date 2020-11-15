@@ -6,7 +6,6 @@ import Pagination from "./pagination.jsx";
 import { useHistory } from "react-router-dom";
 import { useLocation } from "react-router";
 import { connect } from "react-redux";
-import { agregarAlCarrito } from "../../actions/actions";
 import style from "../../CSS/catalogue.module.scss";
 import axios from "axios";
 
@@ -73,7 +72,6 @@ function Catalogue(props) {
       <Sidebar className={style.Sidebar} setCategory={setCategory} />
       <div className={style.Relleno}>
         <div className={style.Catalogue}>
-          <button onClick={() => console.log(props.estado.user)}>ESTADO</button>
           <SearchBar onSearch={onSearch} />
           {display.length &&
             display.map((producto) => {

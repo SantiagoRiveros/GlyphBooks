@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import style from "../CSS/navbar.module.css";
 import { useSelector } from "react-redux";
+import style from "../CSS/navbar.module.css";
 
 export default function NavBar(props) {
   const user = useSelector((state) => state.user);
@@ -32,12 +32,6 @@ export default function NavBar(props) {
         </li>
         <li>
           <ion-icon onClick={props.onCartClick} name="cart-outline"></ion-icon>
-        </li>
-        <li>
-          <button onClick={props.showLocalStorage}>MOSTRAR</button>
-        </li>
-        <li>
-          <button onClick={props.emptyLocalStorage}>VACIAR</button>
         </li>
       </ul>
     </nav>

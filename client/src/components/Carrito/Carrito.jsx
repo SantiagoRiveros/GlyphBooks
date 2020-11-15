@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import style from "../../CSS/carrito.module.css";
 import CartProduct from "./cartProduct";
-import { removeFromCart } from "../../actions/actions";
+import style from "../../CSS/carrito.module.css";
 
 export default function Carrito(props) {
   const open = props.cartShow ? style.sidebarOpen : style.sidebar;

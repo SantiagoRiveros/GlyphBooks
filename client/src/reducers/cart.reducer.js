@@ -1,21 +1,22 @@
-import { ADD_TO_CART, REMOVE_FROM_CART } from "../constants/cart.constants";
+import { AGREGAR_CARRITO, REMOVER_CARRITO } from "../constants/cart.constants";
 
 const initialState = {
   productos: [],
+  items: []
 };
 
 function cartReducer(state = initialState, action) {
   switch (action.type) {
-    case ADD_TO_CART: {
+    case AGREGAR_CARRITO: {
       return {
         ...state,
-        productos: [...state.productos, action.id],
+        items: [...state.items, action.producto],
       };
     }
-    case REMOVE_FROM_CART: {
+    case REMOVER_CARRITO: {
       return {
         ...state,
-        productos: state.productos.filter((e) => e.id !== action.id),
+        items: state.items.filter((e) => e !== action.producto),
       };
     }
     default:

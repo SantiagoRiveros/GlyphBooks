@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import style from "../../CSS/carrito.module.css";
 import CartProduct from "./cartProduct";
+import style from "../../CSS/carrito.module.css";
 
 export default function Carrito(props) {
   const open = props.cartShow ? style.sidebarOpen : style.sidebar;
@@ -13,7 +13,7 @@ export default function Carrito(props) {
           {props.items.length &&
             props.items.map((item) => (
               <li key={item.id}>
-                <CartProduct title={item.title} price={item.price} stock={item.stock} />
+                <CartProduct title={item.title} price={item.price} producto={item} />
               </li>
             ))}
         </ul>

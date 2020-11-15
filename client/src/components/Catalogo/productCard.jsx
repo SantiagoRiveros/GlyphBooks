@@ -18,7 +18,7 @@ export default function Product(props) {
           <h2 className={style.Price}>${props.price}</h2>
           <h3 className={style.title}>{props.title}</h3>
         </div>
-        <button onClick={props.agregarCarrito} className={style.Button}>
+        <button onClick={() => push(`/products/${props.id}`)} className={style.Button}>
           Agregar al carrito
         </button>
       </div>

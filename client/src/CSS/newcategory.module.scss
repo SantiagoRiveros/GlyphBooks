@@ -8,8 +8,8 @@
   height: calc(100vh - 80px);
 }
 
-.loginbox {
-  width: 300px;
+.form {
+  width: 400px;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -17,7 +17,7 @@
   color: #fca311;
 }
 
-.loginbox h1 {
+.form h1 {
   float: left;
   font-size: 40px;
   border-bottom: 6px solid #fca311;

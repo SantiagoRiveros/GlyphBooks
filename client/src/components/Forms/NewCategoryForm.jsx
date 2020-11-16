@@ -1,7 +1,7 @@
 import Axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import style from "../../CSS/newcategory.module.css";
+import style from "../../CSS/newcategory.module.scss";
 
 export default function NewForm() {
   const [input, setInput] = useState({
@@ -44,23 +44,28 @@ export default function NewForm() {
   };
 
   return (
-    <div className={style.imgLibros}>
+    <div className={style.fondo}>
       <form onSubmit={handleSubmit} className={style.form}>
-        <label className={style.label}>Name:</label>
+       <h1>CREAR CATEGORIA</h1>
+        <div className={style.textbox}>
         <input
+          placeholder="Nombre"
           type="text"
           value={input.name}
           name="name"
           onChange={handleChange}
         />
-        <label className={style.label}>description:</label>
+        </div>
+        <div className={style.textbox}>
         <input
+          placeholder="Descripcion"
           type="text"
           value={input.description}
           name="description"
           onChange={handleChange}
         />
-        <input className={style.submitBTN} type="submit" value="Submit" />
+        </div>
+        <input className={style.btn} type="submit" value="Submit" />
       </form>
     </div>
   );

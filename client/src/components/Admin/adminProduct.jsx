@@ -45,12 +45,15 @@ export default function AdminProduct({ setProducto }) {
               <td className={style.td}>{product.price}</td>
               <td className={style.td}>{product.stock}</td>
               <td className={style.td}>
-                <button className={style.button}
+                <button
+                  className={style.button}
                   onClick={() => {
                     setProducto(product);
                     push("/admin/crud");
                   }}
-                >+</button>
+                >
+                  +
+                </button>
               </td>
             </tr>
           ))}
@@ -63,7 +66,7 @@ export default function AdminProduct({ setProducto }) {
         >
           NUEVO PRODUCTO
         </button>
-        <button 
+        <button
           className={style.button}
           name="newCategory"
           onClick={() => push("/admin/newCategory")}

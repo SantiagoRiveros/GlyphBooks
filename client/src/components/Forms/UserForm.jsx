@@ -49,8 +49,8 @@ export default function NewForm() {
             onChange={handleChange}
             placeholder="Apellido"
           />
-          </div>
-          <div className={style.textbox}>
+        </div>
+        <div className={style.textbox}>
           <input
             type="password"
             value={input.password}
@@ -58,8 +58,8 @@ export default function NewForm() {
             onChange={handleChange}
             placeholder="Constraseña"
           />
-          </div>
-          <div className={style.textbox}>
+        </div>
+        <div className={style.textbox}>
           <input
             type="text"
             value={input.email}
@@ -67,8 +67,8 @@ export default function NewForm() {
             onChange={handleChange}
             placeholder="Email"
           />
-          </div>
-          <div className={style.textbox}>
+        </div>
+        <div className={style.textbox}>
           <input
             type="text"
             value={input.shippingAdress}
@@ -76,13 +76,14 @@ export default function NewForm() {
             onChange={handleChange}
             placeholder="Direccion"
           />
-          </div>
-          <input
+        </div>
+        <input
+          onClick={handleSubmit}
           type="button"
           className={style.btn}
           value="Crear cuenta"
         />
-    </div>
+      </div>
     </div>
   );
 }

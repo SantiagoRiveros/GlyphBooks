@@ -16,7 +16,11 @@ function Product(props) {
           price: producto.price,
         })
         .then(({ data }) => {
-          if (data.length) props.dispatch(agregarAlCarrito(producto));
+          if (data.length) {
+            producto.ordenId = data[0].orderId;
+            producto.lineOrder = { id: data[0].id };
+            props.dispatch(agregarAlCarrito(producto));
+          }
         })
         .catch((error) => {
           console.log(error);

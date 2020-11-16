@@ -10,6 +10,7 @@ user.post("/", (req, res, next) => {
 
 user.post("/:idUser/cart", (req, res, next) => {
   var usuario;
+  var orden;
   User.findOne({ where: { id: req.params.idUser } })
     .then((u) => {
       usuario = u;
@@ -24,8 +25,9 @@ user.post("/:idUser/cart", (req, res, next) => {
       }
       return orden[0];
     })
-    .then((orden) => {
-      return orden.addProducts(req.body.id, {
+    .then((ord) => {
+      orden = ord;
+      return ord.addProducts(req.body.id, {
         through: { price: req.body.price, quantity: 1 },
       });
     })

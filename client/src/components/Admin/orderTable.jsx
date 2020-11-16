@@ -24,7 +24,7 @@ export default function OrderTable() {
           order.map((order) => (
             <tr className={style.tr}>
               <td className={style.td}>{order.id}</td>
-              <td className={style.td}>User ID</td>
+              <td className={style.td}>{order.userId}</td>
               <td className={style.td}>{order.status}</td>
               <td className={style.td}>{order.createdAt}</td>
               <td className={style.td}>

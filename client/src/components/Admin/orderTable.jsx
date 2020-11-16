@@ -26,7 +26,7 @@ export default function OrderTable() {
               <td className={style.td}>{order.id}</td>
               <td className={style.td}>User ID</td>
               <td className={style.td}>{order.status}</td>
-              <td className={style.td}>{order.date}</td>
+              <td className={style.td}>{order.createdAt}</td>
               <td className={style.td}>
                 <button />
               </td>

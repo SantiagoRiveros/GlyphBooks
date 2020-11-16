@@ -1,0 +1,1 @@
+export const BUSCAR_PRODUCTOS = "BUSCAR_PRODUCTOS";

@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from "react";
 import style from "../CSS/searchBar.module.scss";
+import { buscarProductos } from "../actions/actions";
+import { connect } from "react-redux";
 import axios from "axios";
+import Catalogue from "./Catalogo/Catalogue"
+import {useHistory} from "react-router-dom"
 
-export default function SearchBar({ onSearch }) {
+function SearchBar({onSearch}) {
   const [book, setBook] = useState("");
-
-  function onSearch () => {
-    push(`/catalogue/${producto.id}`)
-  }
+  const {push} = useHistory();
 
   return (
     <form
       className={style.form}
       onSubmit={(e) => {
         e.preventDefault();
-        onSearch(book);
+        push("/catalogo")
       }}
     >
       <input
@@ -28,4 +29,5 @@ export default function SearchBar({ onSearch }) {
   );
 }
 
-// Las lineas comentadas son parametros y funciones a utilizar o realizar mas adelante
+
+export default connect()(SearchBar);

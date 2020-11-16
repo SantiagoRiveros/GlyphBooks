@@ -19,7 +19,7 @@ function useQuery() {
   return result;
 }
 
-function Catalogue(props) {
+export function Catalogue(props) {
   const { push } = useHistory();
   const [productos, setProductos] = useState([]);
   const [category, setCategory] = useState("");
@@ -55,16 +55,7 @@ function Catalogue(props) {
     } else setDisplay(productos);
   }, [category, productos]);
 
-  const onSearch = (book) => {
-    axios
-      .get(`http://localhost:3000/products/search?value=${book}`)
-      .then(({ data }) => {
-        setDisplay(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  
 
   return (
     <div className={style.Fondo}>

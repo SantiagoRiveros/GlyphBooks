@@ -1,31 +1,36 @@
 import React, { useState } from "react";
-import { removerCarrito } from "../../actions/actions";
+import { agregarAlCarrito, removerCarrito } from "../../actions/actions";
 import { connect } from "react-redux";
 import style from "../../CSS/cartProduct.module.scss";
 
 function CartProduct(props) {
-  const [count, setCount] = useState(1);
-
-  const handleCount = (num) => {
-    if (count + num > 0 && count + num <= props.stock) {
-      setCount(count + num);
+  const quantity = id => {
+    for (var i = 0; i < props.carrito.length; i++) {
+      if(props.carrito[i].id === id) {
+        return props.carrito[i].cantidad
+      }
     }
-  };
-
+  }
   return (
     <div>
-      <button onClick={() => props.dispatch(removerCarrito(props.producto))}>
+      <button onClick={() => props.dispatch(removerCarrito(props.producto, "all"))}>
         X
       </button>
-      <h3 classname={style.text}>{props.title}</h3>
-      <h3 classname={style.text}>{props.price}</h3>
+      <h3 className={style.text}>{props.title}</h3>
+      <h3 className={style.text}>{props.price}</h3>
       <div>
-        <button onClick={() => handleCount(-1)}>-</button>
-        <h3>{count}</h3>
-        <button onClick={() => handleCount(1)}>+</button>
+        <button onClick={() => props.dispatch(removerCarrito(props.producto, 1))}>-</button>
+        <h3>{quantity(props.producto.id)}</h3>
+        <button onClick={() => props.dispatch(agregarAlCarrito(props.producto))}>+</button>
       </div>
     </div>
   );
 }
 
-export default connect()(CartProduct);
+const mapStateToProps = state => {
+  return {
+    carrito: state.cart.items
+  }
+}
+
+export default connect(mapStateToProps)(CartProduct);

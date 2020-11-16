@@ -22,9 +22,10 @@ export function agregarAlCarrito(producto) {
   };
 }
 
-export function removerCarrito(producto) {
+export function removerCarrito(producto, cantidad) {
   return {
     type: REMOVER_CARRITO,
     producto,
+    cantidad,
   };
 }

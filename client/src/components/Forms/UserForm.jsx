@@ -29,55 +29,60 @@ export default function NewForm() {
   };
 
   return (
-    <div>
-      <form className={style.body} onSubmit={handleSubmit}>
-        <label>
-          Nombre:
+    <div className={style.fondo}>
+      <div className={style.loginbox}>
+        <h1>Nuevo usuario</h1>
+        <div className={style.textbox}>
           <input
             type="text"
             value={input.firstName}
             name="firstName"
             onChange={handleChange}
+            placeholder="Nombre"
           />
-        </label>
-        <label>
-          Apellido:
+        </div>
+        <div className={style.textbox}>
           <input
             type="text"
             value={input.lastName}
             name="lastName"
             onChange={handleChange}
+            placeholder="Apellido"
           />
-        </label>
-        <label>
-          Contraseña:
+          </div>
+          <div className={style.textbox}>
           <input
             type="password"
             value={input.password}
             name="password"
             onChange={handleChange}
+            placeholder="Constraseña"
           />
-        </label>
-        <label>
-          Email:
+          </div>
+          <div className={style.textbox}>
           <input
             type="text"
             value={input.email}
             name="email"
             onChange={handleChange}
+            placeholder="Email"
           />
-        </label>
-        <label>
-          Direccion:
+          </div>
+          <div className={style.textbox}>
           <input
             type="text"
             value={input.shippingAdress}
             name="shippingAdress"
             onChange={handleChange}
+            placeholder="Direccion"
           />
-        </label>
-        <input type="submit" value="Crear" />
-      </form>
+          </div>
+          <input
+          type="button"
+          className={style.btn}
+          value="Crear cuenta"
+        />
+    </div>
     </div>
   );
 }

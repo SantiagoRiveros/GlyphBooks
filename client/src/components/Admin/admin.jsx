@@ -6,13 +6,14 @@ import AdminProduct from "./adminProduct";
 import OrderTable from "./orderTable.jsx";
 import AdminUsers from "./adminUsers.jsx";
 import AdmSideBar from "./admSideBar.jsx";
-import style from "../../CSS/adminProducts.module.scss";
+import style from "../../CSS/Admin/admin.module.scss";
 
 export default function Admin() {
   const [producto, setProducto] = useState(null);
   return (
-    <div className={style.admin}>
+    <div className={style.fondo}>
       <AdmSideBar />
+      <div className={style.relleno}>
       <Switch>
         <Route path="/admin/orders" render={() => <OrderTable />} />
         <Route path="/admin/users" render={() => <AdminUsers />} />
@@ -26,6 +27,7 @@ export default function Admin() {
         />
         <Route path="/admin/newCategory" render={() => <NewCategory />} />
       </Switch>
+      </div>
     </div>
   );
 }

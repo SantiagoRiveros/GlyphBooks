@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import style from "../../CSS/Categoria.module.scss";
+import style from "../../CSS/sideBar.module.scss";
 
 export default function SideBar({ setCategory }) {
   const [categorias, setCategorias] = useState([]);

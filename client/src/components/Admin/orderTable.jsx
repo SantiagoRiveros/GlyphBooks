@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import style from "../../CSS/Admin/orderTable.module.scss";
 
 export default function OrderTable() {
   const [order, setOrder] = useState([]);
@@ -10,25 +11,25 @@ export default function OrderTable() {
   }, []);
 
   return (
-    <div>
-      <table>
+    <div className={style.size}>
+      <table className={style.orders}>
         <tr>
-          <th>ID:</th>
-          <th>User ID</th>
-          <th>Status</th>
-          <th>Creation Date</th>
-          <th>Details</th>
+          <th className={style.th}>ID:</th>
+          <th className={style.th}>User ID</th>
+          <th className={style.th}>Status</th>
+          <th className={style.th}>Creation Date</th>
+          <th className={style.th}>Details</th>
         </tr>
         {order.length &&
           order.map((order) => (
-            <tr>
-              <th>{order.id}</th>
-              <th>User ID</th>
-              <th>{order.status}</th>
-              <th>{order.date}</th>
-              <th>
+            <tr className={style.tr}>
+              <td className={style.td}>{order.id}</td>
+              <td className={style.td}>User ID</td>
+              <td className={style.td}>{order.status}</td>
+              <td className={style.td}>{order.date}</td>
+              <td className={style.td}>
                 <button />
-              </th>
+              </td>
             </tr>
           ))}
       </table>

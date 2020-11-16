@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from "./Sidebar.jsx";
-import SearchBar from "./searchBar";
 import Producto from "./productCard.jsx";
 import Pagination from "./pagination.jsx";
 import { useHistory } from "react-router-dom";
@@ -71,7 +70,7 @@ function Catalogue(props) {
     <div className={style.Fondo}>
       <Sidebar className={style.Sidebar} setCategory={setCategory} />
       <div className={style.Relleno}>
-        <SearchBar onSearch={onSearch} />
+        
         <div className={style.Catalogue}>
           {display.length &&
             display.map((producto) => {

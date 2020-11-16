@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
-import style from "../../CSS/searchBar.module.scss";
+import style from "../CSS/searchBar.module.scss";
 import axios from "axios";
 
 export default function SearchBar({ onSearch }) {
   const [book, setBook] = useState("");
+
+  function onSearch () => {
+    push(`/catalogue/${producto.id}`)
+  }
 
   return (
     <form

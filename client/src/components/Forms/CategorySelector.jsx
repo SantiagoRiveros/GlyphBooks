@@ -21,9 +21,7 @@ export default function AddCategory({ producto, setProducto }) {
           );
         })
       );
-      if (!data.length) {
-        push("/catalogo");
-      } else {
+      if (data.length) {
         setSelected(data[0].id);
       }
     });

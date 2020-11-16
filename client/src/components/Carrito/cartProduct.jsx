@@ -14,16 +14,18 @@ function CartProduct(props) {
 
   return (
     <div>
-      <button onClick={() => props.dispatch(removerCarrito(props.producto))}>X</button>
+      <button onClick={() => props.dispatch(removerCarrito(props.producto))}>
+        X
+      </button>
       <h3 classname={style.text}>{props.title}</h3>
       <h3 classname={style.text}>{props.price}</h3>
       <div>
-          <button onClick={() => handleCount(-1)}>-</button>
-          <h3>{count}</h3>
-          <button onClick={() => handleCount(1)}>+</button>
+        <button onClick={() => handleCount(-1)}>-</button>
+        <h3>{count}</h3>
+        <button onClick={() => handleCount(1)}>+</button>
       </div>
     </div>
   );
-};
+}
 
 export default connect()(CartProduct);

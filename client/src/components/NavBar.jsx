@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import style from "../CSS/navbar.module.css";
 
 export default function NavBar(props) {
-  const user = useSelector((state) => state.user);
+  const { user } = useSelector((state) => state.user);
   const test = () => {
     console.log(user);
   };
@@ -16,6 +16,11 @@ export default function NavBar(props) {
         alt="Logo"
       />
       <ul className={style.links}>
+        {user.isAdmin && (
+          <li>
+            <Link to="/admin">admin</Link>
+          </li>
+        )}
         <li>
           <Link className={style.active} to="/">
             Home

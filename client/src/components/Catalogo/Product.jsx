@@ -4,13 +4,11 @@ import { agregarAlCarrito } from "../../actions/actions";
 import style from "../../CSS/Product.module.css";
 import axios from "axios";
 
-
 function Product(props) {
   const [product, setProduct] = useState(null);
   const { user } = useSelector((state) => state.user);
 
   const agregarCarrito = (producto) => {
-    console.log(producto)
     if (user !== "guest") {
       axios
         .post(`http://localhost:3000/users/${user.id}/cart`, {
@@ -30,11 +28,11 @@ function Product(props) {
 
   useEffect(() => {
     axios
-    .get(`http://localhost:3000/products/search/${props.id}`)
+      .get(`http://localhost:3000/products/search/${props.id}`)
       .then(({ data }) => {
         setProduct(data.book);
       });
-    }, [props.id]);
+  }, [props.id]);
 
   if (product) {
     return (
@@ -52,7 +50,7 @@ function Product(props) {
             <h3 className={style.price}>${product.price}</h3>
             <p className={style.description}>{product.description}</p>
             <h3 className={style.stock}>{product.stock}</h3>
-            <button onClick={() => agregarCarrito(props.id)}>COMPRAR</button>
+            <button onClick={() => agregarCarrito(product)}>COMPRAR</button>
           </div>
         </div>
       </div>

@@ -71,21 +71,23 @@ function Catalogue(props) {
     <div className={style.Fondo}>
       <Sidebar className={style.Sidebar} setCategory={setCategory} />
       <div className={style.Relleno}>
-      <SearchBar onSearch={onSearch} />
+        <SearchBar onSearch={onSearch} />
         <div className={style.Catalogue}>
           {display.length &&
             display.map((producto) => {
-              return (
-                <Producto
-                  img={producto.img}
-                  title={producto.title}
-                  price={producto.price}
-                  key={producto.id}
-                  id={producto.id}
-                  OnClick={() => push(`/productos/${producto.id}`)}
-                  categories={producto.Categories}
-                />
-              );
+              if (producto.stock) {
+                return (
+                  <Producto
+                    img={producto.img}
+                    title={producto.title}
+                    price={producto.price}
+                    key={producto.id}
+                    id={producto.id}
+                    OnClick={() => push(`/productos/${producto.id}`)}
+                    categories={producto.Categories}
+                  />
+                );
+              }
             })}
         </div>
         <Pagination page={page} quantity={display.length} />
@@ -96,7 +98,7 @@ function Catalogue(props) {
 
 const mapStateToProps = (state) => {
   return {
-    estado: state
+    estado: state,
   };
 };
 

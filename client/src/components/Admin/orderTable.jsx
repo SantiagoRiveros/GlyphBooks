@@ -14,7 +14,7 @@ export default function OrderTable() {
     <div className={style.size}>
       <table className={style.orders}>
         <tr>
-          <th className={style.th}>ID:</th>
+          <th className={style.th}>ID</th>
           <th className={style.th}>User ID</th>
           <th className={style.th}>Status</th>
           <th className={style.th}>Creation Date</th>

@@ -31,11 +31,11 @@ export default function AdminProduct({ setProducto }) {
       </div>
       <table className={style.products}>
         <tr className={style.tr}>
-          <th className={style.th}>Nombre:</th>
-          <th className={style.th}>Descripcion:</th>
-          <th className={style.th}>Precio:</th>
-          <th className={style.th}>Stock:</th>
-          <th className={style.th}>+Agregar:</th>
+          <th className={style.th}>Nombre</th>
+          <th className={style.th}>Descripcion</th>
+          <th className={style.th}>Precio</th>
+          <th className={style.th}>Stock</th>
+          <th className={style.th}>Editar</th>
         </tr>
         {productos.length &&
           productos.map((product) => (
@@ -45,15 +45,7 @@ export default function AdminProduct({ setProducto }) {
               <td className={style.td}>{product.price}</td>
               <td className={style.td}>{product.stock}</td>
               <td className={style.td}>
-                <button
-                  className={style.button}
-                  onClick={() => {
-                    setProducto(product);
-                    push("/admin/crud");
-                  }}
-                >
-                  +
-                </button>
+               <ion-icon name="create-outline"  className={style.ionicon} onClick={() => {setProducto(product); push("/admin/crud");}}></ion-icon>
               </td>
             </tr>
           ))}

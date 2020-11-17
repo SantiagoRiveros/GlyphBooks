@@ -5,7 +5,8 @@ const { Op } = require("sequelize");
 user.post("/", (req, res, next) => {
   const request = req.body;
 
-  User.create({ ...request }).then((u) => res.send(u));
+  User.create({ ...request }).then((u) => res.send(u))
+    .catch(next)
 });
 
 user.post("/:idUser/cart", (req, res, next) => {
@@ -92,6 +93,12 @@ user.get("/login", (req, res, next) => {
     })
     .catch(next);
 });
+
+user.delete("/:id", (req, res, next) => {
+  User.findOne({ where: { id: req.params.id } })
+    .then(user => user.destroy()).then(() => res.sendStatus(200))
+    .catch(next);
+})
 
 user.delete("/:idUser/cart", (req, res, next) => {
   User.findOne({ where: { id: req.params.idUser } })

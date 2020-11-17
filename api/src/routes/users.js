@@ -34,6 +34,13 @@ user.post("/:idUser/cart", (req, res, next) => {
     .catch(next);
 });
 
+// user.post("/:id/passwordReset", (req, res, next) => {
+//     User.findOne({ where: { id: req.params.id } })
+//     .then(usuario =>{
+//       return req.body.password
+//     })
+//   })
+
 user.get("/:idUser/cart", (req, res, next) => {
   User.findOne({ where: { id: req.params.idUser } })
     .then((usuario) => {

@@ -31,21 +31,27 @@ export default function AdminProduct({ setProducto }) {
       </div>
       <table className={style.products}>
         <tr className={style.tr}>
-          <th className={style.th}>Nombre</th>
-          <th className={style.th}>Descripcion</th>
-          <th className={style.th}>Precio</th>
-          <th className={style.th}>Stock</th>
-          <th className={style.th}>Editar</th>
+
+          <th className={style.th}>Nombre:</th>
+          <th className={style.th}>Descripcion:</th>
+          <th className={style.th}>Precio:</th>
+          <th className={style.th}>Stock:</th>
+          <th className={style.th}>Editar:</th>
+
         </tr>
-        {productos.length &&
-          productos.map((product) => (
+        {productos.count &&
+          productos.rows.map((product) => (
             <tr className={style.tr}>
               <td className={style.td}>{product.title}</td>
               <td className={style.td}>{product.description}</td>
               <td className={style.td}>{product.price}</td>
               <td className={style.td}>{product.stock}</td>
               <td className={style.td}>
+               
+              
+
                <ion-icon name="create-outline"  className={style.ionicon} onClick={() => {setProducto(product); push("/admin/crud");}}></ion-icon>
+
               </td>
             </tr>
           ))}

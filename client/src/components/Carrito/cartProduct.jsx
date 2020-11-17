@@ -40,7 +40,7 @@ function CartProduct(props) {
     } else props.dispatch(removerCarrito(props.producto, "all"));
   };
   return (
-    <div>
+    <div className={style.container}>
       <button onClick={handleDelete}>X</button>
       <h3 className={style.text}>{props.title}</h3>
       <h3 className={style.text}>{props.price}</h3>

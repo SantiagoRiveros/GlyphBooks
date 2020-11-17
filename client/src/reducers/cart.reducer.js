@@ -2,6 +2,7 @@ import {
   AGREGAR_CARRITO,
   REMOVER_CARRITO,
   AGREGAR_VARIOS,
+  CERRAR_CARRITO,
 } from "../constants/cart.constants";
 
 const initialState = {
@@ -65,6 +66,13 @@ function cartReducer(state = initialState, action) {
       return {
         ...state,
         items: action.productos,
+      };
+    }
+
+    case CERRAR_CARRITO: {
+      return {
+        ...state,
+        items: [],
       };
     }
     default:

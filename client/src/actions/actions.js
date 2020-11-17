@@ -3,6 +3,7 @@ import {
   AGREGAR_CARRITO,
   REMOVER_CARRITO,
   AGREGAR_VARIOS,
+  CERRAR_CARRITO,
 } from "../constants/cart.constants";
 
 export function login(user) {
@@ -37,5 +38,11 @@ export function agregarVarios(productos) {
   return {
     type: AGREGAR_VARIOS,
     productos,
+  };
+}
+
+export function cerrarCarrito() {
+  return {
+    type: CERRAR_CARRITO,
   };
 }

@@ -13,11 +13,11 @@ export default function AdminUsers() {
     <div className={style.size}>
       <table className={style.users}>
         <tr className={style.tr}>
-          <th className={style.th}>ID:</th>
-          <th className={style.th}>Nombre:</th>
-          <th className={style.th}>Email:</th>
-          <th className={style.th}>Rol:</th>
-          <th className={style.th}>Detalles:</th>
+          <th className={style.th}>ID</th>
+          <th className={style.th}>Nombre</th>
+          <th className={style.th}>Email</th>
+          <th className={style.th}>Rol</th>
+          <th className={style.th}>Detalles</th>
         </tr>
         {users.length &&
           users.map((user) => (

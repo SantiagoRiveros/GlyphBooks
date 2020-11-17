@@ -39,6 +39,7 @@ export default function NewForm() {
             name="firstName"
             onChange={handleChange}
             placeholder="Nombre"
+            required
           />
         </div>
         <div className={style.textbox}>
@@ -48,6 +49,7 @@ export default function NewForm() {
             name="lastName"
             onChange={handleChange}
             placeholder="Apellido"
+            required
           />
           </div>
           <div className={style.textbox}>
@@ -57,15 +59,17 @@ export default function NewForm() {
             name="password"
             onChange={handleChange}
             placeholder="Constraseña"
+            required
           />
           </div>
           <div className={style.textbox}>
           <input
-            type="text"
+            type="email"
             value={input.email}
             name="email"
             onChange={handleChange}
             placeholder="Email"
+            required
           />
           </div>
           <div className={style.textbox}>

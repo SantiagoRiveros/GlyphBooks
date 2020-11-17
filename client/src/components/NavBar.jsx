@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import style from "../CSS/navbar.module.css";
+import style from "../CSS/navbar.module.scss";
 
 export default function NavBar(props) {
   const { user } = useSelector((state) => state.user);

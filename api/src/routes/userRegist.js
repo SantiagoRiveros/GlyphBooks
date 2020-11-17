@@ -25,7 +25,7 @@ autenticate.post('/login', (req, res, next) => {
         } else {
             return res.json( {
                 user,
-                token: jwt.sign(user, SECRET)
+                token: jwt.sign(user, "SECRET")
             })
         }
     })(req,res,next);

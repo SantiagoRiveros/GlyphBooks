@@ -1,61 +1,75 @@
-import { AGREGAR_CARRITO, REMOVER_CARRITO } from "../constants/cart.constants";
+import {
+  AGREGAR_CARRITO,
+  REMOVER_CARRITO,
+  AGREGAR_VARIOS,
+} from "../constants/cart.constants";
 
 const initialState = {
   productos: [],
-  items: []
+  items: [],
 };
 
 function cartReducer(state = initialState, action) {
   switch (action.type) {
     case AGREGAR_CARRITO: {
-      var found = false
-      var newItems = state.items.map(product => {
-        if(product.id === action.producto.id) {
-          if(product.cantidad < action.producto.stock) {
-            product.cantidad++;
+      var found = false;
+      !action.producto.lineOrder &&
+        (action.producto.lineOrder = { quantity: 1 });
+      var newItems = state.items.map((product) => {
+        if (product.id === action.producto.id) {
+          if (product.lineOrder.quantity < action.producto.stock) {
+            product.lineOrder.quantity++;
           }
           found = true;
         }
-        return product
-      })
-      if(found === false) {
-        action.producto.cantidad = 1;
+        return product;
+      });
+      if (found === false) {
         return {
           ...state,
-          items: [...state.items, action.producto]
-        }
+          items: [...state.items, action.producto],
+        };
       }
       return {
         ...state,
-        items: [...newItems]
+        items: [...newItems],
       };
     }
     case REMOVER_CARRITO: {
-      var deleteThis = false
-      var newItems = state.items.map(product => {
-        if(product.id === action.producto.id) {
-          if(product.cantidad > 1) {
-            product.cantidad--;
+      console.log(action);
+      var deleteThis = false;
+      var newItems = state.items.map((product) => {
+        if (product.id === action.producto.id) {
+          if (product.lineOrder.quantity > 1) {
+            product.lineOrder.quantity--;
             return product;
           } else {
-            deleteThis = true
+            deleteThis = true;
           }
         }
-      })
-      if(deleteThis === true || action.cantidad === "all") {
+      });
+      if (deleteThis === true || action.cantidad === "all") {
         return {
           ...state,
           items: state.items.filter((e) => e !== action.producto),
-        }
+        };
       }
+
       return {
         ...state,
-        items: [...newItems]
-      }
-    };
+        items: [...newItems],
+      };
+    }
+
+    case AGREGAR_VARIOS: {
+      return {
+        ...state,
+        items: action.productos,
+      };
+    }
     default:
       return state;
   }
-};
+}
 
 export default cartReducer;

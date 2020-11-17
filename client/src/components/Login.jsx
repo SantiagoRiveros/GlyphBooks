@@ -3,7 +3,7 @@ import axios from "axios";
 import style from "../CSS/login.module.scss";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { login, agregarAlCarrito } from "../actions/actions";
+import { login, agregarVarios } from "../actions/actions";
 
 export default function Login() {
   const { push } = useHistory();
@@ -12,25 +12,63 @@ export default function Login() {
 
   const { items } = useSelector((state) => state.cart);
 
+  const mandarAlBack = (idUser) => {
+    axios
+      .post(`http://localhost:3000/users/${idUser}/cart`, {
+        id: items[0].id,
+        price: items[0].price,
+      })
+      .then(() =>
+        Promise.all(
+          items.map((p) => {
+            return axios.post(`http://localhost:3000/users/${idUser}/cart`, {
+              id: p.id,
+              price: p.price,
+            });
+          })
+        )
+      );
+  };
+
   const handleSubmit = (e) => {
+    var idUser;
     axios
       .get(
         `http://localhost:3000/users/login?email=${input.email}&contraseña=${input.contraseña}`
       )
       .then(({ data }) => {
         data.id && dispatch(login(data));
-        return axios.get(`http://localhost:3000/users/${data.id}/cart`);
+        idUser = data.id;
+      })
+      .then(() => {
+        if (items.length) {
+          return axios
+            .post(`http://localhost:3000/users/${idUser}/cart`, {
+              id: items[0].id,
+              price: items[0].price,
+            })
+            .then(() =>
+              Promise.all(
+                items.map((p) => {
+                  return axios.post(
+                    `http://localhost:3000/users/${idUser}/cart`,
+                    {
+                      id: p.id,
+                      price: p.price,
+                    }
+                  );
+                })
+              )
+            );
+        }
+      })
+      .then(() => {
+        return axios.get(`http://localhost:3000/users/${idUser}/cart`);
       })
       .then(({ data }) => {
         if (data[0]) {
-          console.log(data[0]);
-          let products = [];
-          data[0].products.forEach((p) => {
-            if (!items.find((el) => el.id === p.id)) {
-              products.push(p);
-            }
-          });
-          dispatch(agregarAlCarrito(products));
+          console.log(data);
+          dispatch(agregarVarios(data[0].products));
         }
       })
       .catch((error) => {

@@ -7,19 +7,32 @@ import axios from "axios";
 function Product(props) {
   const [product, setProduct] = useState(null);
   const { user } = useSelector((state) => state.user);
+  const { items } = useSelector((state) => state.cart);
 
   const agregarCarrito = (producto) => {
     if (user !== "guest") {
+      const notNew = items.find((p) => p.id === producto.id);
+      if (notNew) {
+        let { quantity, orderId, id } = notNew.lineOrder;
+        let newQuantity = quantity + 1;
+        console.log(id, newQuantity, orderId);
+        axios.put(`http://localhost:3000/order/${orderId}/lineorder`, {
+          id,
+          quantity: newQuantity,
+        });
+      }
       axios
         .post(`http://localhost:3000/users/${user.id}/cart`, {
           id: producto.id,
           price: producto.price,
         })
+        .then(() => {
+          return axios.get(`http://localhost:3000/users/${user.id}/cart`);
+        })
         .then(({ data }) => {
           if (data.length) {
-            producto.ordenId = data[0].orderId;
-            producto.lineOrder = { id: data[0].id };
-            props.dispatch(agregarAlCarrito(producto));
+            let libro = data[0].products.find((p) => p.id === producto.id);
+            props.dispatch(agregarAlCarrito(libro));
           }
         })
         .catch((error) => {

@@ -8,6 +8,8 @@ export default function Carrito(props) {
   const open = props.cartShow ? style.sidebarOpen : style.sidebar;
   const [count, setCount] = useState(1);
 
+  const idUser = useSelector((state) => state.user.user.id);
+
   return (
     <div className={style.container}>
       <div className={open}>

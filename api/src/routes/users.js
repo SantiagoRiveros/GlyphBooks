@@ -14,7 +14,7 @@ user.post("/:idUser/cart", (req, res, next) => {
   User.findOne({ where: { id: req.params.idUser } })
     .then((u) => {
       usuario = u;
-      return u.getOrders({ where: { status: "carrito" } });
+      return u.getOrders({ where: { status: "carrito" }, include: Product });
     })
     .then((orden) => {
       if (!orden.length) {
@@ -27,8 +27,9 @@ user.post("/:idUser/cart", (req, res, next) => {
     })
     .then((ord) => {
       orden = ord;
+      const quantity = req.body.quantity ? req.body.quantity : 1;
       return ord.addProducts(req.body.id, {
-        through: { price: req.body.price, quantity: 1 },
+        through: { price: req.body.price, quantity },
       });
     })
     .then((r) => res.send(r))

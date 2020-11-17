@@ -3,6 +3,7 @@ import { useSelector, connect } from "react-redux";
 import { agregarAlCarrito } from "../../actions/actions";
 import style from "../../CSS/Product.module.css";
 import axios from "axios";
+import Review from "./review";
 
 function Product(props) {
   const [product, setProduct] = useState(null);
@@ -51,6 +52,7 @@ function Product(props) {
             <p className={style.description}>{product.description}</p>
             <h3 className={style.stock}>{product.stock}</h3>
             <button onClick={() => agregarCarrito(product)}>COMPRAR</button>
+            <Review/>
           </div>
         </div>
       </div>

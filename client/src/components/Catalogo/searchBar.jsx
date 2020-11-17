@@ -10,14 +10,14 @@ export default function SearchBar({ onSearch }) {
       className={style.form}
       onSubmit={(e) => {
         e.preventDefault();
-        onSearch(book);
+        onSearch(book); 
       }}
     >
       <input
         className={style.input}
         type="text"
         placeholder="Autor, título, descripción..."
-        value={book.toLowerCase().includes(props.title.toLowerCase())}
+        value={book}
         onChange={(e) => setBook(e.target.value)}
       />
     </form>

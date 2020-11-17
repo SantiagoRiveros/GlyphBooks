@@ -12,24 +12,6 @@ export default function Login() {
 
   const { items } = useSelector((state) => state.cart);
 
-  const mandarAlBack = (idUser) => {
-    axios
-      .post(`http://localhost:3000/users/${idUser}/cart`, {
-        id: items[0].id,
-        price: items[0].price,
-      })
-      .then(() =>
-        Promise.all(
-          items.map((p) => {
-            return axios.post(`http://localhost:3000/users/${idUser}/cart`, {
-              id: p.id,
-              price: p.price,
-            });
-          })
-        )
-      );
-  };
-
   const handleSubmit = (e) => {
     var idUser;
     axios

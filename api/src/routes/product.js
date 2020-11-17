@@ -7,7 +7,7 @@ server.get("/", (req, res, next) => {
   const limit = 9;
   const offset = page ? (page - 1) * limit : null;
 
-  Product.findAll({ include: Category, limit, offset })
+  Product.findAndCountAll({ include: Category, limit, offset })
     .then((products) => {
       res.send(products);
     })

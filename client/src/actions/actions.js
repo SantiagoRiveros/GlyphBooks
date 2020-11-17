@@ -1,6 +1,10 @@
 import { LOGIN, LOGOUT } from "../constants/user.constants";
-import { AGREGAR_CARRITO, REMOVER_CARRITO } from "../constants/cart.constants";
-
+import {
+  AGREGAR_CARRITO,
+  REMOVER_CARRITO,
+  AGREGAR_VARIOS,
+  CERRAR_CARRITO,
+} from "../constants/cart.constants";
 
 export function login(user) {
   return {
@@ -22,9 +26,23 @@ export function agregarAlCarrito(producto) {
   };
 }
 
-export function removerCarrito(producto) {
+export function removerCarrito(producto, cantidad) {
   return {
     type: REMOVER_CARRITO,
     producto,
+    cantidad,
+  };
+}
+
+export function agregarVarios(productos) {
+  return {
+    type: AGREGAR_VARIOS,
+    productos,
+  };
+}
+
+export function cerrarCarrito() {
+  return {
+    type: CERRAR_CARRITO,
   };
 }

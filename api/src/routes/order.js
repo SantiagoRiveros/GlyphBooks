@@ -34,4 +34,29 @@ order.put("/:id", (req, res, next) => {
     .catch(next);
 });
 
+order.put("/:orderId/lineorder", (req, res, next) => {
+  const { quantity, id } = req.body;
+  const { orderId } = req.params;
+  Order.findByPk(orderId, { include: Product })
+    .then(({ products }) => {
+      const lineOrder = products.find((p) => p.lineOrder.id === id);
+      console.log(req.body);
+      lineOrder.quantity = quantity;
+      lineOrder.save();
+      res.send(lineOrder);
+    })
+    .catch(next);
+});
+
+order.delete("/:orderId/lineorder/:productId", (req, res, next) => {
+  const { orderId, productId } = req.params;
+  Order.findByPk(orderId, { include: Product })
+    .then(({ products }) => {
+      const { lineOrder } = products.find((p) => p.id === Number(productId));
+      return lineOrder.destroy();
+    })
+    .then((data) => res.send(data))
+    .catch(next);
+});
+
 module.exports = order;

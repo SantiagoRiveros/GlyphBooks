@@ -14,7 +14,7 @@ export default function OrderTable() {
     <div className={style.size}>
       <table className={style.orders}>
         <tr>
-          <th className={style.th}>ID:</th>
+          <th className={style.th}>ID</th>
           <th className={style.th}>User ID</th>
           <th className={style.th}>Status</th>
           <th className={style.th}>Creation Date</th>
@@ -24,9 +24,9 @@ export default function OrderTable() {
           order.map((order) => (
             <tr className={style.tr}>
               <td className={style.td}>{order.id}</td>
-              <td className={style.td}>User ID</td>
+              <td className={style.td}>{order.userId}</td>
               <td className={style.td}>{order.status}</td>
-              <td className={style.td}>{order.date}</td>
+              <td className={style.td}>{order.createdAt}</td>
               <td className={style.td}>
                 <button />
               </td>

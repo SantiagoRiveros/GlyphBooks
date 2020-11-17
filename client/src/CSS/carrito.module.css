@@ -19,6 +19,7 @@
 
 .sidebarOpen {
   position: absolute;
+  z-index: 10;
   width: 500px;
   height: 88.9%;
   background: rgba(255, 255, 255, 0.65);

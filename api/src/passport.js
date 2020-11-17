@@ -22,7 +22,18 @@ new LocalStrategy(
       return done(null, false, {
         message: "Username or password is incorrect",
       });
-    return done(null, user);
+    const {
+      id,
+      firstName,
+      lastName,
+      isAdmin,
+    } = user
+    return done(null, {
+      id,
+      firstName,
+      lastName,
+      isAdmin,
+    });
   }
 )
 );
@@ -95,7 +106,7 @@ new LocalStrategy(
 
 passport.use(
 new BearerStrategy((token, done) => {
-  jwt.verify(token, SECRET, function (err, user) {
+  jwt.verify(token, "SECRET", function (err, user) {
     if (err) return done(err);
     return done(null, user ? user : false);
   });

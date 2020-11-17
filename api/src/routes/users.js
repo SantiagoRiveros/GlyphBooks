@@ -83,6 +83,12 @@ user.get("/", (req, res, next) => {
     .catch(next);
 });
 
+user.get("/:id", (req, res, next) => {
+  User.findByPk(req.params.id)
+    .then((user) => res.send(user))
+    .catch(next);
+});
+
 user.get("/login", (req, res, next) => {
   User.findOne({
     where: { email: req.query.email, password: req.query.contraseña },

@@ -10,10 +10,11 @@ user.post("/", (req, res, next) => {
 
 user.post("/:idUser/cart", (req, res, next) => {
   var usuario;
+  var orden;
   User.findOne({ where: { id: req.params.idUser } })
     .then((u) => {
       usuario = u;
-      return u.getOrders({ where: { status: "carrito" } });
+      return u.getOrders({ where: { status: "carrito" }, include: Product });
     })
     .then((orden) => {
       if (!orden.length) {
@@ -24,9 +25,11 @@ user.post("/:idUser/cart", (req, res, next) => {
       }
       return orden[0];
     })
-    .then((orden) => {
-      return orden.addProducts(req.body.id, {
-        through: { price: req.body.price, quantity: 1 },
+    .then((ord) => {
+      orden = ord;
+      const quantity = req.body.quantity ? req.body.quantity : 1;
+      return ord.addProducts(req.body.id, {
+        through: { price: req.body.price, quantity },
       });
     })
     .then((r) => res.send(r))
@@ -71,11 +74,9 @@ user.put("/:id", (req, res, next) => {
 
 user.put("/:idUser/cart", (req, res, next) => {
   User.findOne({ where: { id: req.params.idUser } })
-    .then((usuario) => usuario.getOrders({ where: { status: "carrito" } }))
-    .then((orden) => {
-      for (var key in request) {
-        orden[key] = request[key];
-      }
+    .then((usuario) => usuario.getOrders({ where: { id: req.body.orderId } }))
+    .then(([orden]) => {
+      orden.status = req.body.status;
       orden.save();
       res.json(orden);
     })
@@ -103,7 +104,8 @@ user.get("/login", (req, res, next) => {
 user.delete("/:idUser/cart", (req, res, next) => {
   User.findOne({ where: { id: req.params.idUser } })
     .then((usuario) => usuario.getOrders({ where: { status: "carrito" } }))
-    .then((orden) => orden.destroy())
+    .then(([orden]) => orden.destroy())
+    .then(() => res.sendStatus(204))
     .catch(next);
 });
 

@@ -73,8 +73,8 @@ function Catalogue(props) {
       <div className={style.Relleno}>
         <SearchBar onSearch={onSearch} />
         <div className={style.Catalogue}>
-          {display.length &&
-            display.map((producto) => {
+          {display.count &&
+            display.rows.map((producto) => {
               if (producto.stock) {
                 return (
                   <Producto
@@ -90,7 +90,7 @@ function Catalogue(props) {
               }
             })}
         </div>
-        <Pagination page={page} quantity={display.length} />
+        <Pagination page={page} quantity={productos.count} />
       </div>
     </div>
   );

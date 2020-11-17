@@ -35,10 +35,10 @@ export default function AdminProduct({ setProducto }) {
           <th className={style.th}>Descripcion:</th>
           <th className={style.th}>Precio:</th>
           <th className={style.th}>Stock:</th>
-          <th className={style.th}>+Agregar:</th>
+          <th className={style.th}>Editar:</th>
         </tr>
-        {productos.length &&
-          productos.map((product) => (
+        {productos.count &&
+          productos.rows.map((product) => (
             <tr className={style.tr}>
               <td className={style.td}>{product.title}</td>
               <td className={style.td}>{product.description}</td>
@@ -52,7 +52,7 @@ export default function AdminProduct({ setProducto }) {
                     push("/admin/crud");
                   }}
                 >
-                  +
+                  EDIT
                 </button>
               </td>
             </tr>

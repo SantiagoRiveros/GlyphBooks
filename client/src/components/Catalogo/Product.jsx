@@ -52,7 +52,7 @@ function Product(props) {
             <p className={style.description}>{product.description}</p>
             <h3 className={style.stock}>{product.stock}</h3>
             <button onClick={() => agregarCarrito(product)}>COMPRAR</button>
-            <Review/>
+            <Review id={product.id} />
           </div>
         </div>
       </div>

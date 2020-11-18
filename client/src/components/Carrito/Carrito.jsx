@@ -1,19 +1,68 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import CartProduct from "./cartProduct";
 import style from "../../CSS/carrito.module.css";
+import axios from "axios";
+import { cerrarCarrito } from "../../actions/actions";
 
 export default function Carrito(props) {
   const open = props.cartShow ? style.sidebarOpen : style.sidebar;
-  const [count, setCount] = useState(1);
+  const [total, setTotal] = useState(0);
+  const dispatch = useDispatch();
+
+  const idUser = useSelector((state) => state.user.user.id);
+
+  useEffect(() => {
+    if (props.items.length) {
+      setTotal(
+        props.items
+          .map((i) => i.price * i.lineOrder.quantity)
+          .reduce((acc, cur) => acc + cur)
+      );
+    } else {
+      setTotal(0);
+    }
+  }, [props.items]);
+
+  const handleDelete = () => {
+    if (idUser) {
+      axios
+        .delete(`http://localhost:3000/users/${idUser}/cart`)
+        .then(() => dispatch(cerrarCarrito()));
+    } else {
+      dispatch(cerrarCarrito());
+    }
+  };
+
+  const handleSubmit = () => {
+    const { orderId } = props.items[0].lineOrder;
+    if (idUser) {
+      axios
+        .put(`http://localhost:3000/users/${idUser}/cart`, {
+          orderId,
+          status: "procesando",
+        })
+        .then((res) => {
+          console.log(res);
+          dispatch(cerrarCarrito());
+        });
+    }
+  };
 
   return (
     <div className={style.container}>
       <div className={open}>
+        <div>
+          <p>Total: ${total}</p>
+          <button onClick={handleSubmit}>finalizar</button>
+          <button onClick={handleDelete}>eliminar</button>
+        </div>
         <ul>
           {props.items.length &&
             props.items.map((item) => (
               <li key={item.id}>
                 <CartProduct
+                  key={item.id}
                   stock={item.stock}
                   title={item.title}
                   price={item.price}

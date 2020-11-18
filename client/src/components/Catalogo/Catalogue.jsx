@@ -58,7 +58,7 @@ function Catalogue(props) {
 
   const onSearch = (book) => {
     axios
-      .get(`http://localhost:3000/products/search?value=${book}`)
+      .get(`http://localhost:3000/products/search?value=${book.toLowerCase()}`)
       .then(({ data }) => {
         setDisplay(data);
       })
@@ -73,8 +73,8 @@ function Catalogue(props) {
       <div className={style.Relleno}>
         <SearchBar onSearch={onSearch} />
         <div className={style.Catalogue}>
-          {display.length &&
-            display.map((producto) => {
+          {display.count &&
+            display.rows.map((producto) => {
               if (producto.stock) {
                 return (
                   <Producto
@@ -90,7 +90,7 @@ function Catalogue(props) {
               }
             })}
         </div>
-        <Pagination page={page} quantity={display.length} />
+        <Pagination page={page} quantity={productos.count} />
       </div>
     </div>
   );

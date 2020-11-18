@@ -21,7 +21,7 @@ export default function NewForm() {
   };
 
   const handleSubmit = (e) => {
-    axios.post(`http://localhost:3000/users`, input).then(() => {
+    axios.post(`http://localhost:3000/auth/register`, input).then(() => {
       push("/");
     });
 
@@ -39,6 +39,7 @@ export default function NewForm() {
             name="firstName"
             onChange={handleChange}
             placeholder="Nombre"
+            required
           />
         </div>
         <div className={style.textbox}>
@@ -48,27 +49,30 @@ export default function NewForm() {
             name="lastName"
             onChange={handleChange}
             placeholder="Apellido"
+            required
           />
-          </div>
-          <div className={style.textbox}>
+        </div>
+        <div className={style.textbox}>
           <input
             type="password"
             value={input.password}
             name="password"
             onChange={handleChange}
             placeholder="Constraseña"
+            required
           />
-          </div>
-          <div className={style.textbox}>
+        </div>
+        <div className={style.textbox}>
           <input
-            type="text"
+            type="email"
             value={input.email}
             name="email"
             onChange={handleChange}
             placeholder="Email"
+            required
           />
-          </div>
-          <div className={style.textbox}>
+        </div>
+        <div className={style.textbox}>
           <input
             type="text"
             value={input.shippingAdress}
@@ -76,13 +80,14 @@ export default function NewForm() {
             onChange={handleChange}
             placeholder="Direccion"
           />
-          </div>
-          <input
+        </div>
+        <input
+          onClick={handleSubmit}
           type="button"
           className={style.btn}
           value="Crear cuenta"
         />
-    </div>
+      </div>
     </div>
   );
 }

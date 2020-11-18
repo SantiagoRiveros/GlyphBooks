@@ -39,8 +39,8 @@ export default function AdminProduct({ setProducto }) {
           <th className={style.th}>Stock</th>
           <th className={style.th}>Editar</th>
         </tr>
-        {productos.length &&
-          productos.map((product) => (
+        {productos.count &&
+          productos.rows.map((product) => (
             <tr className={style.tr}>
               <td className={style.td}>{product.id}</td>
               <td className={style.td}>{product.title}</td>
@@ -49,7 +49,11 @@ export default function AdminProduct({ setProducto }) {
               <td className={style.td}>{product.price}</td>
               <td className={style.td}>{product.stock}</td>
               <td className={style.td}>
+               
+              
+
                <ion-icon name="create-outline"  className={style.ionicon} onClick={() => {setProducto(product); push("/admin/crud");}}></ion-icon>
+
               </td>
             </tr>
           ))}

@@ -8,8 +8,6 @@ import AdminUsers from "./adminUsers.jsx";
 import AdmSideBar from "./admSideBar.jsx";
 import AdminReviews from "./adminReviews.jsx";
 import ProductCrud from "../Forms/CrudProductForm";
-import ReviewCrud from "../Forms/CrudReviewForm";
-import RevCrud from "../Forms/CrudProductForm";
 import style from "../../CSS/Admin/admin.module.scss";
 
 export default function Admin() {
@@ -24,7 +22,6 @@ export default function Admin() {
         <Route path="/admin/users" render={() => <AdminUsers />} />
         <Route path="/admin/reviews" render={() => <AdminReviews />} />
         <Route path="/admin/crud" render={() => <ProductCrud />} />
-        <Route path="/admin/reviewcrud" render={() => <ReviewCrud />} />
         <Route
           path="/admin/products"
           render={() => <AdminProduct setProducto={setProducto} />}
@@ -32,10 +29,6 @@ export default function Admin() {
         <Route
           path="/admin/crud"
           render={() => <Crud product={producto} setProduct={setProducto} />}
-        />
-        <Route
-          path="/admin/reviewcrud"
-          render={() => <RevCrud review={review} setReview={setReview} />}
         />
         <Route path="/admin/newCategory" render={() => <NewCategory />} />
       </Switch>

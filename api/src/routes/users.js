@@ -83,12 +83,23 @@ user.put("/:id", (req, res, next) => {
 });
 
 user.put("/:idUser/cart", (req, res, next) => {
+  var sinStock = [];
   User.findOne({ where: { id: req.params.idUser } })
-    .then((usuario) => usuario.getOrders({ where: { id: req.body.orderId } }))
+    .then((usuario) =>
+      usuario.getOrders({ where: { id: req.body.orderId }, include: Product })
+    )
     .then(([orden]) => {
+      orden.products.forEach((p) => {
+        if (p.lineOrder.quantity > p.stock) {
+          sinStock.push(p);
+        }
+      });
+      if (sinStock.length) {
+        return res.status(409).send(sinStock);
+      }
       orden.status = req.body.status;
       orden.save();
-      res.json(orden);
+      res.status(200).json(orden);
     })
     .catch(next);
 });

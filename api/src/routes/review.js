@@ -1,21 +1,24 @@
 const review = require("express").Router(),
-{ Review } = require("../db.js")
+  { Review, Product } = require("../db.js");
 const { Op } = require("sequelize");
 
-
-review.post("/products/:id/review", (req, res,next) => {
-    const request = req.body;
-
-    Review.create({ ...request })
-      .then(() => res.sendStatus(204))
-      .catch(next);
-})
+review.post("/products/:id/review", async (req, res, next) => {
+  const request = req.body;
+  try {
+    const review = await Review.create({ ...request });
+    const product = await Product.findByPk(req.params.id);
+    await review.setProduct(product);
+    res.status(201).json(review);
+  } catch (err) {
+    next(err);
+  }
+});
 
 review.get("/products/:id/review/", (req, res, next) => {
-    Review.findAll().then((reviews) => {
-        res.send(reviews);
-      });
-})
+  Review.findAll().then((reviews) => {
+    res.send(reviews);
+  });
+});
 
 review.put("/:id", (req, res, next) => {
   const { id } = req.params;
@@ -32,8 +35,8 @@ review.put("/:id", (req, res, next) => {
     .catch(next);
 });
 
-review.delete("products/:id/review/:idReview", (req, res, next) => {
-  console.log(req.params)
+review.delete("/products/:id/review/:idReview", (req, res, next) => {
+  console.log(req.params);
   Review.findOne({ where: { id: req.params.idReview } })
     .then((review) => {
       review.destroy();

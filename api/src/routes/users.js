@@ -5,8 +5,9 @@ const { Op } = require("sequelize");
 user.post("/", (req, res, next) => {
   const request = req.body;
 
-  User.create({ ...request }).then((u) => res.send(u))
-    .catch(next)
+  User.create({ ...request })
+    .then((u) => res.send(u))
+    .catch(next);
 });
 
 user.post("/:idUser/cart", (req, res, next) => {
@@ -37,12 +38,20 @@ user.post("/:idUser/cart", (req, res, next) => {
     .catch(next);
 });
 
-// user.post("/:id/passwordReset", (req, res, next) => {
-//     User.findOne({ where: { id: req.params.id } })
-//     .then(usuario =>{
-//       return req.body.password
-//     })
-//   })
+user.post("/:id/passwordReset", async (req, res, next) => {
+  const userData = await User.findOne({ where: { id: req.params.id } });
+  if (userData && userData.password) {
+    const compare = userData.compare(req.body.password);
+    if (compare) {
+      userData.password = req.body.newPassword;
+      await userData.save({ fields: ["password"] });
+      return res.status(201).json({ message: "se cambio la contraseña" });
+    } else {
+      return res.status(404).json({ message: "la contraseña no es valida" });
+    }
+  }
+  return res.status(404).json({ message: "Ocurrio un error" });
+});
 
 user.get("/:idUser/cart", (req, res, next) => {
   User.findOne({ where: { id: req.params.idUser } })
@@ -110,9 +119,10 @@ user.get("/login", (req, res, next) => {
 
 user.delete("/:id", (req, res, next) => {
   User.findOne({ where: { id: req.params.id } })
-    .then(user => user.destroy()).then(() => res.sendStatus(200))
+    .then((user) => user.destroy())
+    .then(() => res.sendStatus(200))
     .catch(next);
-})
+});
 
 user.delete("/:idUser/cart", (req, res, next) => {
   User.findOne({ where: { id: req.params.idUser } })

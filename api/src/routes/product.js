@@ -20,9 +20,9 @@ server.get("/search", (req, res, next) => {
   Product.findAll({
     where: {
       [Op.or]: [
-        { title: { [Op.substring]: value } },
-        { description: { [Op.substring]: value } },
-        { author: { [Op.substring]: value } },
+        { title: { [Op.like]: "%" + value + "%" } },
+        { description: { [Op.like]: "%" + value + "%" } },
+        { author: { [Op.like]: "%" + value + "%" } },
       ],
     },
   })

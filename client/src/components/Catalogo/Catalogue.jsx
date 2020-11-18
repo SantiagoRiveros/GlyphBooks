@@ -58,7 +58,7 @@ function Catalogue(props) {
 
   const onSearch = (book) => {
     axios
-      .get(`http://localhost:3000/products/search?value=${book}`)
+      .get(`http://localhost:3000/products/search?value=${book.toLowerCase()}`)
       .then(({ data }) => {
         setDisplay(data);
       })

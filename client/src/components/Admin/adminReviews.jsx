@@ -37,7 +37,7 @@ export default function AdminUsers() {
               <td className={style.td}>{review.title}</td>
               <td className={style.td}>{review.body}</td>
               <td className={style.td}>{review.rating}</td>
-              <td className={style.td}>{review.user}</td>
+              <td className={style.td}>{review.userId}</td>
               <td className={style.td}>{review.createdAt}</td>
               <td className={style.td}>
                <ion-icon name="trash-outline"  className={style.ionicon} onClick={() => handleDelete(review.id, review.productId)}></ion-icon>

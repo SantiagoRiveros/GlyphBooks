@@ -20,8 +20,8 @@ function Review(props) {
     <div className={style.container}>
         <h1  className={style.title}>{review.title}</h1>
         <h4 className={style.date}>{review.createdAt}</h4>
-        <h1 className={style.user}>{review.userId}</h1>
-        <div>{review.rating}5</div>
+        <h3 className={style.user}>{review.userId}</h3>
+        <div>{review.rating}</div>
         <h3 className={style.description}>{review.body}</h3>
     </div>
     );

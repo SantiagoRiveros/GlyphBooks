@@ -143,7 +143,7 @@ VALUES ('2', 'Maomeno noma', 'Flojeli flojeli este autor', '2017-08-09 07:00:00 
 ('2', 'Bastante chotero', 'La verdad lo voy a pensar dos veces la proxima vez que use esto', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00', 2, 6),
 ('4', 'Me gusta', 'Me hace sentir bien', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00', 3, 7),
 ('5', 'Me volo la tanga', 'No puedo creer lo piola que esta este libro', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00', 7, 8),
-('4', 'Increible', 'Mucha reflexion y misterio, lo reomiendo!', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00', 1, 3),
+('4', 'Increible', 'Mucha reflexion y misterio, lo recomiendo!', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00', 1, 3),
 ('3', 'Meh..', 'No me convencio del todo pero igual le doy 3 estrellas por lastima', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00', 1, 5),
 ('4', 'A gusto', 'Era lo que queria, el libro vino en muy buenas condiciones', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00', 5, 4),
 ('1', 'EL LIBRO LLEGO ROTO', 'PESIMO SERVICIO ME LLEGO ROTO EL LIBRO, PREPARENSE PARA CAUSAS PENALES', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00', 8, 6),

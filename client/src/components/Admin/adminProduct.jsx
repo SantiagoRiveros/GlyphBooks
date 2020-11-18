@@ -31,7 +31,9 @@ export default function AdminProduct({ setProducto }) {
       </div>
       <table className={style.products}>
         <tr className={style.tr}>
+        <th className={style.th}>ID</th>
           <th className={style.th}>Nombre</th>
+          <th className={style.th}>Autor</th>
           <th className={style.th}>Descripcion</th>
           <th className={style.th}>Precio</th>
           <th className={style.th}>Stock</th>
@@ -40,7 +42,9 @@ export default function AdminProduct({ setProducto }) {
         {productos.length &&
           productos.map((product) => (
             <tr className={style.tr}>
+              <td className={style.td}>{product.id}</td>
               <td className={style.td}>{product.title}</td>
+              <td className={style.td}>{product.author}</td>
               <td className={style.td}>{product.description}</td>
               <td className={style.td}>{product.price}</td>
               <td className={style.td}>{product.stock}</td>

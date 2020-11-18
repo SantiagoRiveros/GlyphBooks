@@ -11,6 +11,8 @@ export default function AdmSideBar() {
         <li className={style.option} onClick={() => push(`/admin/products`)}>Productos</li>
         <li className={style.option} onClick={() => push(`/admin/orders`)}> Ordenes</li>
         <li className={style.option} onClick={() => push(`/admin/users`)}>Usuarios</li>
+        <li className={style.option} onClick={() => push(`/admin/reviews`)}>Reviews</li>
+        <li className={style.option} onClick={() => push(`/admin/reviewcrud`)}>ReviewCRUD</li>
       </ul>
     </div>
   );

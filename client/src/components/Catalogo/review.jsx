@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react"
 import style from "../../CSS/review.module.scss";
+import { connect } from "react-redux";
 import axios from "axios";
 
-export default function Review(props) {
+function Review(props) {
     const [review, setReview] = useState();
 
     useEffect(() => {
         axios
-          .get(`http://localhost:3000/reviews/search/${props.id}`)
+        .get(`http://localhost:3000/reviews/search/${props.id}`)
           .then(({ data }) => {
-            setReview(data.book);
+            setReview(data.review);
+            console.log(data)
           });
       }, [props.id]);
 
@@ -27,3 +29,5 @@ export default function Review(props) {
     return <div>No hay reseñas disponibles para este producto</div>;
   }
 }
+
+export default connect()(Review);

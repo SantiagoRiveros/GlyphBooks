@@ -4,31 +4,40 @@ const { Op } = require("sequelize");
 const passport = require('passport')
 const jwt = require('jsonwebtoken')
 
-
+const SECRET = process.env.AUTH_SECRET || "secret"
 
 
 autenticate.post('/register', (req, res, next) => {
-    const users = req.body;
+  const users = req.body;
 
-    User.create({ ...users})
-      .then(() => res.sendStatus(201))
-      .catch(next);
+  User.create({ ...users})
+    .then(() => res.sendStatus(201))
+    .catch(next);
 });
 
 
 
 autenticate.post('/login', (req, res, next) => {
-    passport.authenticate('local', function(err, user, info) {
-        if(err) return next(err);
-        if(!user) {
-            return res.sendStatus(401)
-        } else {
-            return res.json( {
-                user,
-                token: jwt.sign(user, "SECRET")
-            })
-        }
-    })(req,res,next);
+  passport.authenticate('local', function(err, user, info) {
+    if(err) return next(err);
+    if(!user) {
+      return res.sendStatus(401)
+    } else {
+      return res.json( {
+        user,
+        token: jwt.sign({ user }, SECRET)
+      })
+    }
+  })(req,res,next);
 });
 
-module.exports= autenticate;
+autenticate.get("/me", (req, res, next) => {
+  console.log(req.user)
+   if(req.user === undefined) {
+     return res.sendStatus(401)
+   } else {
+     return res.status(200).json(req.user)
+   }
+})
+
+module.exports = autenticate;

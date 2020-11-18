@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import CartProduct from "./cartProduct";
 import style from "../../CSS/carrito.module.css";
@@ -7,10 +7,22 @@ import { cerrarCarrito } from "../../actions/actions";
 
 export default function Carrito(props) {
   const open = props.cartShow ? style.sidebarOpen : style.sidebar;
-  const [count, setCount] = useState(1);
+  const [total, setTotal] = useState(0);
   const dispatch = useDispatch();
 
   const idUser = useSelector((state) => state.user.user.id);
+
+  useEffect(() => {
+    if (props.items.length) {
+      setTotal(
+        props.items
+          .map((i) => i.price * i.lineOrder.quantity)
+          .reduce((acc, cur) => acc + cur)
+      );
+    } else {
+      setTotal(0);
+    }
+  }, [props.items]);
 
   const handleDelete = () => {
     if (idUser) {
@@ -30,7 +42,10 @@ export default function Carrito(props) {
           orderId,
           status: "procesando",
         })
-        .then(() => dispatch(cerrarCarrito()));
+        .then((res) => {
+          console.log(res);
+          dispatch(cerrarCarrito());
+        });
     }
   };
 
@@ -38,6 +53,7 @@ export default function Carrito(props) {
     <div className={style.container}>
       <div className={open}>
         <div>
+          <p>Total: ${total}</p>
           <button onClick={handleSubmit}>finalizar</button>
           <button onClick={handleDelete}>eliminar</button>
         </div>

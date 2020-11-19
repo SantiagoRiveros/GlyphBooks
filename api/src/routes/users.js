@@ -108,12 +108,14 @@ user.put("/:idUser/cart", (req, res, next) => {
 });
 
 user.get("/", (req, res, next) => {
-  if (req.user?.isAdmin) {
-    User.findAll()
-      .then((user) => {
-        res.send(user);
-      })
-      .catch(next);
+  if (req.user) {
+    if (req.user.isAdmin) {
+      User.findAll()
+        .then((user) => {
+          res.send(user);
+        })
+        .catch(next);
+    } else res.sendStatus(401);
   } else res.sendStatus(401);
 });
 

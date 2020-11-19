@@ -2,10 +2,12 @@ const order = require("express").Router();
 const { Order, Product } = require("../db.js");
 
 order.get("/", (req, res, next) => {
-  if (req.user?.isAdmin) {
-    Order.findAll({ include: Product })
-      .then((ordenes) => res.json(ordenes))
-      .catch(next);
+  if (req.user) {
+    if (req.user.isAdmin) {
+      Order.findAll({ include: Product })
+        .then((ordenes) => res.json(ordenes))
+        .catch(next);
+    } else res.sendStatus(401);
   } else res.sendStatus(401);
 });
 

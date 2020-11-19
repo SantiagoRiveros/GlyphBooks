@@ -4,7 +4,7 @@ const { Op } = require("sequelize");
 const passport = require('passport')
 const jwt = require('jsonwebtoken')
 
-const SECRET = process.env.AUTH_SECRET || "secret"
+const SECRET = process.env.AUTH_SECRET || "SECRET"
 
 
 autenticate.post('/register', (req, res, next) => {
@@ -33,11 +33,9 @@ autenticate.post('/login', (req, res, next) => {
 
 autenticate.get("/me", (req, res, next) => {
   console.log(req.user)
-   if(req.user === undefined) {
-     return res.sendStatus(401)
-   } else {
-     return res.status(200).json(req.user)
-   }
+  User.findByPk(req.user.id)
+    .then(user => res.status(200).json(user))
+    .catch(next)
 })
 
 module.exports = autenticate;

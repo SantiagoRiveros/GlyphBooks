@@ -8,9 +8,11 @@ const SECRET = process.env.AUTH_SECRET || "secret"
 
 
 passport.use(
-new LocalStrategy({ usernameField: "email", passwordField: "password", session: true, passReqToCallback: true },
-  async (req, email, password, done) => {
-    console.log({email, password})
+new LocalStrategy({
+  usernameField: "email",
+  passwordField: "password",
+  session: false },
+  async (email, password, done) => {
     const user = await User.findOne({where: {
       email
     }});
@@ -39,15 +41,6 @@ new LocalStrategy({ usernameField: "email", passwordField: "password", session: 
 )
 );
 
-passport.serializeUser(function(user, done) {
-  done(null, user.id);
-});
-
-passport.deserializeUser(function(id, done) {
-  User.findOne({ where: {id: id} }).then(user => {
-    done(null, user);
-  });
-});
 
 // passport.use(
 // new GoogleStrategy(

@@ -25,6 +25,16 @@ server.use((req, res, next) => {
   next();
 });
 
+server.all("*", function (req, res, next) {
+  passport.authenticate("bearer", function (err, user) {
+    if (err) return next(err);
+    if (user) {
+      req.user = user;
+    }
+    return next();
+  })(req, res, next);
+});
+
 server.use('/', routes);
 
 // Error catching endware.
@@ -35,15 +45,6 @@ server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
   res.status(status).send(message);
 });
 
-server.all("*", function (req, res, next) {
-  passport.authenticate("bearer", function (err, user) {
-    if (err) return next(err);
-    if (user) {
-      req.user = user;
-    }
-    return next();
-  })(req, res, next);
-});
 
 // server.use((req, _res, next) => {
 //   console.log("pre-test");

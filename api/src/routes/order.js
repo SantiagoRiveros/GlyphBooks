@@ -8,7 +8,7 @@ order.get("/", (req, res, next) => {
 });
 
 order.get("/:id/order", (req, res, next) => {
-  Order.findOne({ where: { id: req.params.id } })
+  Order.findOne({ where: { id: req.params.id }, include: Product })
     .then((orden) => res.json(orden))
     .catch(next);
 });

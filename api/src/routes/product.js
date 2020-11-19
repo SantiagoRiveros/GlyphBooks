@@ -17,12 +17,12 @@ server.get("/", (req, res, next) => {
 server.get("/search", (req, res, next) => {
   const { value } = req.query;
 
-  Product.findAll({
+  Product.findAndCountAll({
     where: {
       [Op.or]: [
-        { title: { [Op.like]: "%" + value + "%" } },
-        { description: { [Op.like]: "%" + value + "%" } },
-        { author: { [Op.like]: "%" + value + "%" } },
+        { title: { [Op.iLike]: "%" + value + "%" } },
+        { description: { [Op.iLike]: "%" + value + "%" } },
+        { author: { [Op.iLike]: "%" + value + "%" } },
       ],
     },
   })

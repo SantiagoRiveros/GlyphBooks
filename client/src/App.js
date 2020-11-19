@@ -18,6 +18,7 @@ import Admin from "./components/Admin/admin";
 import Carrito from "./components/Carrito/Carrito.jsx";
 import NewUser from "./components/Forms/UserForm.jsx";
 import ResetPassword from "./components/ResetPassword";
+import Forgot from "./components/Forgot";
 
 function App(props) {
   const [show, setShow] = useState(false);
@@ -98,6 +99,7 @@ function App(props) {
         <Route path="/admin" component={Admin} />
         <Route path="/signup" component={NewUser} />
         <Route path="/password" component={ResetPassword} />
+        <Route path="/forgot" component={Forgot} />
       </Switch>
     </Router>
   );

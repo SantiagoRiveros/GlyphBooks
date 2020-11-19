@@ -31,13 +31,11 @@ export default function AdminProduct({ setProducto }) {
       </div>
       <table className={style.products}>
         <tr className={style.tr}>
-
           <th className={style.th}>Nombre:</th>
           <th className={style.th}>Descripcion:</th>
           <th className={style.th}>Precio:</th>
           <th className={style.th}>Stock:</th>
           <th className={style.th}>Editar:</th>
-
         </tr>
         {productos.count &&
           productos.rows.map((product) => (
@@ -47,31 +45,18 @@ export default function AdminProduct({ setProducto }) {
               <td className={style.td}>{product.price}</td>
               <td className={style.td}>{product.stock}</td>
               <td className={style.td}>
-               
-              
-
-               <ion-icon name="create-outline"  className={style.ionicon} onClick={() => {setProducto(product); push("/admin/crud");}}></ion-icon>
-
+                <ion-icon
+                  name="create-outline"
+                  className={style.ionicon}
+                  onClick={() => {
+                    setProducto(product);
+                    push("/admin/crud");
+                  }}
+                ></ion-icon>
               </td>
             </tr>
           ))}
       </table>
-      <div className={style.btns}>
-        <button
-          className={style.button}
-          name="crud"
-          onClick={() => push("/admin/crud")}
-        >
-          NUEVO PRODUCTO
-        </button>
-        <button
-          className={style.button}
-          name="newCategory"
-          onClick={() => push("/admin/newCategory")}
-        >
-          NUEVA CATEGORÍA
-        </button>
-      </div>
     </div>
   );
 }

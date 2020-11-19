@@ -56,32 +56,27 @@ user.post("/:id/passwordReset", async (req, res, next) => {
   return res.status(404).json({ message: "Ocurrio un error" });
 });
 
-user.post("/:id/forgot"),
+user.post("/forgot"),
   async (req, res, next) => {
-    const userEmail = await User.findOne({ where: { email: req.params.id } });
-    if (userEmail && userEmail.email) {
-      const compare = userData.compare(req.body.email);
-      if (compare) {
-        var data = {
-          from: "wachu <mauroocando@gmail.com>",
-          to: "mauroocando@gmail.com",
-          subject: "Q FUNCIONE LA PUTA Q ME PARIO",
-          text:
-            "Has solicitado un cambio de contraseña, entra en el siguiente link para proceder: http://localhost:3000/password si no has pedido este cambio, contacta con el soporte tecnico",
-        };
+    const userData = await User.findOne({
+      where: { email: req.params.email },
+    });
+    if (req.body.email === userData.email) {
+      var data = {
+        from: "wachu <mauroocando@gmail.com>",
+        to: "mauroocando@gmail.com",
+        subject: "Q FUNCIONE LA PUTA Q ME PARIO",
+        text:
+          "Has solicitado un cambio de contraseña, entra en el siguiente link para proceder: http://localhost:3000/password si no has pedido este cambio, contacta con el soporte tecnico",
+      };
 
-        mailgun.messages().send(data, function (error, body) {
-          if (error) {
-            console.log(error);
-          }
-          console.log(body);
-        });
-        return res.status(201).json({ message: "El correo ha sido enviado" });
-      } else {
-        return res
-          .status(404)
-          .json({ message: "No hay ningun email asignado al usuario" });
-      }
+      mailgun.messages().send(data, function (error, body) {
+        if (error) {
+          console.log(error);
+        }
+        console.log(body);
+      });
+      return res.status(201).json({ message: "El correo ha sido enviado" });
     }
     return res.status(404).json({ message: "ocurrio un error" });
   };

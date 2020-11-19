@@ -42,7 +42,7 @@ export default function NavBar(props) {
           <ion-icon onClick={props.onCartClick} name="cart-outline"></ion-icon>
         </li>
         <li>
-          <Link to="/password">
+          <Link to="/forgot">
             <ion-icon name="person-circle-outline"></ion-icon>
           </Link>
         </li>

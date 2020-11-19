@@ -15,12 +15,9 @@ export default function Forgot() {
   };
 
   const handleSubmit = async (e) => {
-    const handlePass = await axios.post(
-      `http://localhost:3000/users/${user.user.email}/forgot`,
-      {
-        email: input.email,
-      }
-    );
+    const handlePass = await axios.post(`http://localhost:3000/users/forgot`, {
+      email: input.email,
+    });
   };
 
   return (

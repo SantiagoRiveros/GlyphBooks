@@ -25,17 +25,18 @@ autenticate.post('/login', (req, res, next) => {
     } else {
       return res.json( {
         user,
-        token: jwt.sign({ user }, SECRET)
+        token: jwt.sign(user , SECRET)
       })
     }
   })(req,res,next);
 });
 
 autenticate.get("/me", (req, res, next) => {
-  console.log(req.user)
-  User.findByPk(req.user.id)
-    .then(user => res.status(200).json(user))
-    .catch(() => sendStatus(401))
+  if(req.user) {
+    User.findByPk(req.user.id)
+      .then(user => res.status(200).json(user))
+      .catch(next)
+  } else res.sendStatus(401);
 })
 
 module.exports = autenticate;

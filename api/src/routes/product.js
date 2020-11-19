@@ -46,65 +46,75 @@ server.get("/search/:id", (req, res) => {
 
 server.post("/", (req, res, next) => {
   const request = req.body;
-  if (!request.img) {
-    request.img =
-      "https://www.pinclipart.com/picdir/big/324-3245234_closed-book-clipart-transparent-background-books-png.png";
-  }
-  Product.create({ ...request })
-    .then((book) => {
-      res.send(book);
-    })
-    .catch((err) => {
-      res.send(err);
-    });
+  if (req.user?.isAdmin) {
+    if (!request.img) {
+      request.img =
+        "https://www.pinclipart.com/picdir/big/324-3245234_closed-book-clipart-transparent-background-books-png.png";
+    }
+    Product.create({ ...request })
+      .then((book) => {
+        res.send(book);
+      })
+      .catch((err) => {
+        res.send(err);
+      });
+  } else res.sendStatus(401);
 });
 
 server.put("/category/:idProducto/:idCategoria", (req, res) => {
   const category = req.params.idCategoria;
-  Product.findOne({ where: { id: req.params.idProducto } })
-    .then((producto) => {
-      producto.addCategories(category);
-    })
-    .then((r) => res.send(r))
-    .catch((err) => {
-      res.json(err);
-    });
+  if (req.user?.isAdmin) {
+    Product.findOne({ where: { id: req.params.idProducto } })
+      .then((producto) => {
+        producto.addCategories(category);
+      })
+      .then((r) => res.send(r))
+      .catch((err) => {
+        res.json(err);
+      });
+  } else res.sendStatus(401);
 });
 
 server.put("/:id", (req, res, next) => {
   const { id } = req.params;
   const request = req.body;
 
-  Product.findOne({ where: { id } })
-    .then((book) => {
-      for (const key in request) {
-        book[key] = request[key];
-      }
-      book.save();
-      res.send(book);
-    })
-    .catch(next);
+  if (req.user?.isAdmin) {
+    Product.findOne({ where: { id } })
+      .then((book) => {
+        for (const key in request) {
+          book[key] = request[key];
+        }
+        book.save();
+        res.send(book);
+      })
+      .catch(next);
+  } else res.sendStatus(401);
 });
 
 server.delete("/:idProducto/category/:idCategoria", (req, res) => {
-  Product.findOne({ where: { id: req.params.idProducto } })
-    .then((producto) => {
-      producto
-        .removeCategories(req.params.idCategoria)
-        .then((r) => res.json(r));
-    })
-    .catch((err) => res.json(err));
+  if (req.user?.isAdmin) {
+    Product.findOne({ where: { id: req.params.idProducto } })
+      .then((producto) => {
+        producto
+          .removeCategories(req.params.idCategoria)
+          .then((r) => res.json(r));
+      })
+      .catch((err) => res.json(err));
+  } else res.sendStatus(401);
 });
 
 server.delete("/:id", (req, res, next) => {
   const { id } = req.params;
 
-  Product.findOne({ where: { id } })
-    .then((book) => {
-      book.destroy();
-    })
-    .then(() => res.sendStatus(200))
-    .catch(next);
+  if (req.user?.isAdmin) {
+    Product.findOne({ where: { id } })
+      .then((book) => {
+        book.destroy();
+      })
+      .then(() => res.sendStatus(200))
+      .catch(next);
+  } else res.sendStatus(401);
 });
 
 module.exports = server;

@@ -35,7 +35,7 @@ autenticate.get("/me", (req, res, next) => {
   console.log(req.user)
   User.findByPk(req.user.id)
     .then(user => res.status(200).json(user))
-    .catch(next)
+    .catch(() => sendStatus(401))
 })
 
 module.exports = autenticate;

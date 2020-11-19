@@ -24,7 +24,6 @@ new LocalStrategy({
       return done(null, false, {
         message: "Username or password is incorrect",
       });
-    req.login(user, (err => {if(err) return next(err)}))
     const {
       id,
       firstName,

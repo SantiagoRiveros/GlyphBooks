@@ -1,6 +1,9 @@
 const user = require("express").Router();
 const { Product, Category, User, Order } = require("../db.js");
 const { Op } = require("sequelize");
+var api_key = "b5c113301e92d7905ae874c95a2a0d3b-2af183ba-def9cce4";
+var domain = "sandboxe9e3450cb5b04c92a05e5501df8811fe.mailgun.org";
+var mailgun = require("mailgun-js")({ apiKey: api_key, domain: domain });
 
 user.post("/", (req, res, next) => {
   const request = req.body;
@@ -83,12 +86,23 @@ user.put("/:id", (req, res, next) => {
 });
 
 user.put("/:idUser/cart", (req, res, next) => {
+  var sinStock = [];
   User.findOne({ where: { id: req.params.idUser } })
-    .then((usuario) => usuario.getOrders({ where: { id: req.body.orderId } }))
+    .then((usuario) =>
+      usuario.getOrders({ where: { id: req.body.orderId }, include: Product })
+    )
     .then(([orden]) => {
+      orden.products.forEach((p) => {
+        if (p.lineOrder.quantity > p.stock) {
+          sinStock.push(p);
+        }
+      });
+      if (sinStock.length) {
+        return res.status(409).send(sinStock);
+      }
       orden.status = req.body.status;
       orden.save();
-      res.json(orden);
+      res.status(200).json(orden);
     })
     .catch(next);
 });

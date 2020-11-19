@@ -37,7 +37,6 @@ function cartReducer(state = initialState, action) {
       };
     }
     case REMOVER_CARRITO: {
-      console.log(action);
       var deleteThis = false;
       var newItems = state.items.map((product) => {
         if (product.id === action.producto.id) {
@@ -47,15 +46,14 @@ function cartReducer(state = initialState, action) {
           } else {
             deleteThis = true;
           }
-        }
+        } else return product;
       });
       if (deleteThis === true || action.cantidad === "all") {
         return {
           ...state,
-          items: state.items.filter((e) => e !== action.producto),
+          items: [...state.items.filter((e) => e !== action.producto)],
         };
       }
-
       return {
         ...state,
         items: [...newItems],

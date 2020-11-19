@@ -22,6 +22,9 @@ export default function NavBar(props) {
           </li>
         )}
         <li>
+          <button onClick={props.logOut}>logOut</button>
+        </li>
+        <li>
           <Link className={style.active} to="/">
             Home
           </Link>

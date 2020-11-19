@@ -21,7 +21,7 @@ export default function NewForm() {
   };
 
   const handleSubmit = (e) => {
-    axios.post(`http://localhost:3000/users`, input).then(() => {
+    axios.post(`http://localhost:3000/auth/register`, input).then(() => {
       push("/");
     });
 

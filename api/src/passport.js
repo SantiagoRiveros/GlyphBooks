@@ -8,8 +8,10 @@ const SECRET = process.env.AUTH_SECRET || "secret"
 
 
 passport.use(
-new LocalStrategy(
-  { usernameField: "email", passwordField: "password", session: false },
+new LocalStrategy({
+  usernameField: "email",
+  passwordField: "password",
+  session: false },
   async (email, password, done) => {
     const user = await User.findOne({where: {
       email
@@ -22,6 +24,7 @@ new LocalStrategy(
       return done(null, false, {
         message: "Username or password is incorrect",
       });
+    req.login(user, (err => {if(err) return next(err)}))
     const {
       id,
       firstName,
@@ -37,6 +40,8 @@ new LocalStrategy(
   }
 )
 );
+
+
 // passport.use(
 // new GoogleStrategy(
 //   {

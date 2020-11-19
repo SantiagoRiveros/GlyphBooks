@@ -10,7 +10,7 @@ export default function SearchBar({ onSearch }) {
       className={style.form}
       onSubmit={(e) => {
         e.preventDefault();
-        onSearch(book);
+        onSearch(book); 
       }}
     >
       <input

@@ -45,7 +45,17 @@ function CartProduct(props) {
       <h3 className={style.text}>{props.title}</h3>
       <h3 className={style.text}>{props.price}</h3>
       <div>
-        <button onClick={() => handleChange()}>-</button>
+        <button
+          onClick={() => {
+            if (quantity > 1) {
+              handleChange();
+            } else {
+              handleDelete();
+            }
+          }}
+        >
+          -
+        </button>
         <h3>{quantity}</h3>
         <button onClick={() => handleChange(1)}>+</button>
       </div>

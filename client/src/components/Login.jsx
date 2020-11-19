@@ -5,22 +5,21 @@ import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login, agregarVarios } from "../actions/actions";
 
-export default function Login() {
+export default function Login({ setLocalUser }) {
   const { push } = useHistory();
   const dispatch = useDispatch();
-  const [input, setInput] = useState({ email: "", contraseña: "" });
+  const [input, setInput] = useState({ email: "", password: "" });
 
   const { items } = useSelector((state) => state.cart);
 
   const handleSubmit = (e) => {
     var idUser;
     axios
-      .get(
-        `http://localhost:3000/users/login?email=${input.email}&contraseña=${input.contraseña}`
-      )
+      .post(`http://localhost:3000/auth/login`, input)
       .then(({ data }) => {
-        data.id && dispatch(login(data));
-        idUser = data.id;
+        console.log(data);
+        setLocalUser(data);
+        idUser = data.user.id;
       })
       .then(() => {
         if (items.length) {
@@ -49,9 +48,9 @@ export default function Login() {
       })
       .then(({ data }) => {
         if (data[0]) {
-          console.log(data);
           dispatch(agregarVarios(data[0].products));
         }
+        push("/");
       })
       .catch((error) => {
         console.log(error);
@@ -80,9 +79,9 @@ export default function Login() {
         </div>
         <div className={style.textbox}>
           <input
-            name="contraseña"
+            name="password"
             onChange={handleChange}
-            value={input.contraseña}
+            value={input.password}
             type="password"
             placeholder="Contraseña"
           />

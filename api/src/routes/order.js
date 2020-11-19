@@ -40,7 +40,6 @@ order.put("/:orderId/lineorder", (req, res, next) => {
   Order.findByPk(orderId, { include: Product })
     .then(({ products }) => {
       const lineOrder = products.find((p) => p.lineOrder.id === id);
-      console.log(req.body);
       lineOrder.quantity = quantity;
       lineOrder.save();
       res.send(lineOrder);

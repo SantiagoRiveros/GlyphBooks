@@ -1,6 +1,9 @@
 const user = require("express").Router();
 const { Product, Category, User, Order } = require("../db.js");
 const { Op } = require("sequelize");
+var api_key = "b5c113301e92d7905ae874c95a2a0d3b-2af183ba-def9cce4";
+var domain = "sandboxe9e3450cb5b04c92a05e5501df8811fe.mailgun.org";
+var mailgun = require("mailgun-js")({ apiKey: api_key, domain: domain });
 
 user.post("/", (req, res, next) => {
   const request = req.body;

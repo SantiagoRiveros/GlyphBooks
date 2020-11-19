@@ -8,8 +8,10 @@ const SECRET = process.env.AUTH_SECRET || "secret"
 
 
 passport.use(
-new LocalStrategy(
-  { usernameField: "email", passwordField: "password", session: false },
+new LocalStrategy({
+  usernameField: "email",
+  passwordField: "password",
+  session: false },
   async (email, password, done) => {
     const user = await User.findOne({where: {
       email
@@ -37,6 +39,8 @@ new LocalStrategy(
   }
 )
 );
+
+
 // passport.use(
 // new GoogleStrategy(
 //   {

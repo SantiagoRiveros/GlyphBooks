@@ -12,6 +12,8 @@ const server = express();
 
 server.name = 'API';
 
+server.use(passport.initialize());
+server.use(passport.session());
 server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 server.use(bodyParser.json({ limit: '50mb' }));
 server.use(cookieParser());
@@ -21,16 +23,6 @@ server.use((req, res, next) => {
   res.header('Access-Control-Allow-Credentials', 'true');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
-});
-
-server.use('/', routes);
-
-// Error catching endware.
-server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
-  const status = err.status || 500;
-  const message = err.message || err;
-  console.error(err);
-  res.status(status).send(message);
 });
 
 server.all("*", function (req, res, next) {
@@ -43,6 +35,17 @@ server.all("*", function (req, res, next) {
   })(req, res, next);
 });
 
+server.use('/', routes);
+
+// Error catching endware.
+server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
+  const status = err.status || 500;
+  const message = err.message || err;
+  console.error(err);
+  res.status(status).send(message);
+});
+
+
 // server.use((req, _res, next) => {
 //   console.log("pre-test");
 //   passport.authorize("bearer", function (_err, user) {
@@ -51,8 +54,6 @@ server.all("*", function (req, res, next) {
 //     next();
 //   });
 // });
-
-server.use(passport.initialize());
 
 server.use("/", routes);
 

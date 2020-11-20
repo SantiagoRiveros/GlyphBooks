@@ -93,6 +93,14 @@ user.get("/:idUser/cart", (req, res, next) => {
     .catch(next);
 });
 
+user.get("/:idUser/orders", (req, res, next) => {
+  User.findOne({ where: { id: req.params.idUser } })
+    .then((usuario) => {
+      return usuario.getOrders({ include: Product });
+    })
+    .then((orders) => res.send(orders));
+});
+
 user.get("/:id/orders", (req, res, next) => {
   User.findOne({ where: { id: req.params.id } })
     .then((usuario) => {

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Switch, Route } from "react-router-dom";
-import Crud from "../Forms/CrudProductForm";
 import NewCategory from "../Forms/NewCategoryForm";
 import AdminProduct from "./adminProduct";
 import OrderTable from "./orderTable.jsx";

@@ -31,6 +31,22 @@ autenticate.post('/login', (req, res, next) => {
   })(req,res,next);
 });
 
+autenticate.get('/login/auth/google', passport.authenticate('google', { scope: ['profile'] }));
+
+autenticate.get('/login/auth/google/callback', 
+  passport.authenticate('google', { failureRedirect: '/login' }),
+  function(req, res) {
+    return res.sendStatus(200);
+  });
+
+autenticate.get('/login/auth/facebook',passport.authenticate('facebook'));
+
+autenticate.get('/login/auth/facebook/callback',
+  passport.authenticate('facebook', { failureRedirect: '/login' }),
+  function(req, res) {
+    return res.sendStatus(200);
+  });
+
 autenticate.get("/me", (req, res, next) => {
   if(req.user) {
     User.findByPk(req.user.id)

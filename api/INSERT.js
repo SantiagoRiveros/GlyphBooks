@@ -2,76 +2,59 @@ const { conn } = require("./src/db");
 
 conn.query(`
 INSERT INTO products (title, description, author, price, img)
-VALUES ('Harry Potter y la piedra filosofal', 'El día que un búho misterioso deja una carta con una invitación al Colegio Hogwarts de Magia y Hechicería, su vida da un vuelco para siempre.', 'J. K. Rowling', 1500, 'https://www.harrymedia.com/data/media/9/hp1-es-2020.jpg'),
-('Harry Potter y la camara secreta', 'Descripcion', 'J. K. Rowling', 1500, 'http://2.bp.blogspot.com/_mC3p3y_gsQY/S7CdmXNyomI/AAAAAAAAAGQ/kGeZNIgSGk4/s1600/harry+potter+2.jpg'),
-('Harry Potter and the secret chamber', 'Una descripcion random', 'J. K. Rowling', 1002, 'https://th.bing.com/th/id/OIP.FLI2qc5HJcWmYvuscdeY0wHaLW?pid=Api&rs=1'),
-('The music of you & me', 'Una descripcion random', 'Eloise Alden', 1500, 'https://itswritenow.com/wp-content/uploads/2020/07/B07P9FHQ1N-171x258.jpg'),
-('El bosque negro', 'Una descripcion random', 'Steve Hillard', 1536, 'http://arealibros.republica.com/files/2012/09/el-bosque-negro.jpg'),
-('Healing energy meditation', 'Una descripcion random', 'Money Channel', 1545, 'https://th.bing.com/th/id/OIP.qCkFmdM_tsYRJZXGGWvUBAHaLG?pid=Api&w=735&h=1102&rs=1'),
-('Gallows wedding', 'Una descripcion random', 'Anonimo', 1523, 'https://i.ebayimg.com/images/g/pEoAAOSwfVpYn6wG/s-l600.jpg'),
-('Roman der Anthropologic', 'Una descripcion random', 'C. W. Ceram', 1550, 'https://imagecache.markt.de/a0bMXqtiNM8qUzjKpfjFhvsbjCM=/fit-in/222x320/images_classifieds/7c/80/37b5-6554-4244-81d3-4332421d4deb/large.jpg'),
-('Passionate pursuit', 'Una descripcion random', 'James W. Goll', 1550, 'https://i.gr-assets.com/images/S/photo.goodreads.com/books/1426714327l/22789890.jpg'),
-('A day and a life', 'Una descripcion random', 'Penelope Wilcock', 1530, 'https://4.bp.blogspot.com/-VsCn56HaLQ8/V73-HsAdLAI/AAAAAAAAKdQ/XW-ezUUR1oIwuLqviKM3EpnXF0EQ1eAbwCLcB/s1600/514brqOCxYL.SX316.jpg'),
-('Animales fantasticos y donde encontrarlos', 'Una descripcion random', 'J. K. Rowling', 1340, 'http://media.biobiochile.cl/wp-content/uploads/2017/02/animales-fanasticos-nueva-portada.jpg'),
-('Los ojos de la noche', 'Una descripcion random', 'Ines Garland', 1450, 'https://www.loqueleo.com/ar/uploads/2016/03/tapalosojosdelanoche.jpg'),
-('En los lugares de la inocencia perdida', 'Una descripcion random', 'Jose Luis Palma', 1380, 'https://i.pinimg.com/originals/8e/cd/2d/8ecd2d01bc0307e14eb505af75075a13.jpg'),
-('Diario futuro', 'Una descripcion random', 'Aura', 1270, 'http://3.bp.blogspot.com/-UXRu9v32vGM/UEC83WH6TqI/AAAAAAAABeM/8hdHdHPG04I/s1600/diaF.jpg'),
-('El libro de los errores', 'Una descripcion random', 'Skip Prichard', 1460, 'https://www.planetadelibros.com.ar/usuaris/libros/fotos/282/m_libros/281012_portada_el-libro-de-los-errores_skip-prichard_201809252045.jpg'),
-('El libro de la selva', 'Una descripcion random', 'Rudyard Kipling', 1320, 'https://www.planetadelibros.com.ar/usuaris/libros/fotos/214/original/portada_el-libro-de-la-selva_rudyard-kipling_201602291625.jpg'),
-('Harry Potter y el caliz de fuego', 'Una descripcion random', 'J. K. Rowling', 1360, 'https://ciervomaya.files.wordpress.com/2011/07/harry.jpg'),
-('He died with his eyes open', 'Una descripcion random', 'Derek Raymond', 1390, 'https://www.recreoviral.com/wp-content/uploads/2015/06/30-asombrosas-portadas-de-libros-26.jpg'),
-('La vida escondida entre los libros', 'Una descripcion random', 'Stephanie Butland', 1290, 'https://www.udllibros.com/imagenes/9788417/978841730204.JPG'),
-('Two', 'Una descripcion random', 'Leigh Ann Kopans', 1940, 'http://2.bp.blogspot.com/-ho2AmW0d35M/VXisfjyPTXI/AAAAAAAARhk/fmAbLid3MxQ/s1600/two-leighann-kopans-one-universe.jpg'),
-('The sisters brothers', 'Una descripcion random', 'Patrick de Witt', 1270, 'https://www.recreoviral.com/wp-content/uploads/2015/06/30-asombrosas-portadas-de-libros-28.jpg'),
-('High and dry', 'Una descripcion random', 'Sarah Skilton', 1840, 'https://roc21cdn-roc21.netdna-ssl.com/blog/wp-content/uploads/2014/11/portadas-libros-2014-seis.jpg'),
-('Batalla de reyes', 'Una descripcion random', 'M. K. HUME', 1000, 'https://bibliobulimica.files.wordpress.com/2014/07/portada-libro.jpg'),
-('Marketing extraordiario', 'Una descripcion random', 'Damian Di Pace', 1770, 'https://www.ecoeediciones.com/wp-content/uploads/2018/02/Marketing-extraordinario.jpg');
+VALUES ('Harry Potter y la piedra filosofal', 'Harry el sucio Potter agarra una piedra y muere el malo', 'J. K. Rowling', 1500, 'https://www.harrymedia.com/data/media/9/hp1-es-2020.jpg'),
+('Alice in Wonderland', 'Una falopera se pasa de linea y se pega el viaje de su vida', 'Lewis Carroll', 1430, 'http://2.bp.blogspot.com/_JXi92wDCOGk/TGF1W98DwWI/AAAAAAAABqI/jmXaiB8h0nE/s1600/Alice+book+cover2.jpg'),
+('Harry Potter y la camara secreta', 'Harry el sucio Potter entra al baño y casi se lo come una serpiente', 'J. K. Rowling', 1500, 'http://2.bp.blogspot.com/_mC3p3y_gsQY/S7CdmXNyomI/AAAAAAAAAGQ/kGeZNIgSGk4/s1600/harry+potter+2.jpg'),
+('Marketing extraordiario', '¿QUERES SER TU PROPIO JEFE PA? Este libro es para vos', 'Damian Di Pace', 1770, 'https://www.ecoeediciones.com/wp-content/uploads/2018/02/Marketing-extraordinario.jpg'),
+('The music of you & me', 'Una novela adolescente depresiva para leer un dia lluvioso', 'Eloise Alden', 1500, 'https://itswritenow.com/wp-content/uploads/2020/07/B07P9FHQ1N-171x258.jpg'),
+('El bosque negro', 'Vos entra si queres y sali si podes', 'Steve Hillard', 1536, 'http://arealibros.republica.com/files/2012/09/el-bosque-negro.jpg'),
+('Rapunzel encuentra a un amigo', '¿Que clase de amigo? Yo tambien quiero', 'Disney Princesas', 1931, 'https://th.bing.com/th/id/OIP.WN6_ZKlhthjGUfCTqOSPdgHaKQ?pid=Api&rs=1'),
+('El dia que se perdio la cordura', 'Todo estaba tranquilo hasta que un chino se comio un murcielago', 'Javier Castillo', 2164, 'https://ep01.epimg.net/elpais/imagenes/2018/06/18/escaparate/1529337843_719213_1529340158_sumario_normal.jpg'),
+('Healing energy meditation', 'Deja de estresarte al pedo y aprende a respirar', 'Money Channel', 1545, 'https://th.bing.com/th/id/OIP.qCkFmdM_tsYRJZXGGWvUBAHaLG?pid=Api&w=735&h=1102&rs=1'),
+('Gallows wedding', 'No tenemos la menor idea de que trata pero leelo y contanos', 'Anonimo', 1523, 'https://i.ebayimg.com/images/g/pEoAAOSwfVpYn6wG/s-l600.jpg'),
+('Roman der Anthropologic', 'Historia aburrida sobre algo de Roma', 'C. W. Ceram', 1550, 'https://imagecache.markt.de/a0bMXqtiNM8qUzjKpfjFhvsbjCM=/fit-in/222x320/images_classifieds/7c/80/37b5-6554-4244-81d3-4332421d4deb/large.jpg'),
+('Matilda', 'La famosa niña falopera que lee mucho y hace volar cosas', 'Roald Dahl', 3170, 'https://th.bing.com/th/id/OIP.IF0Y-VvNGlvNKiFHVlHkcQHaMa?pid=Api&rs=1'),
+('High and dry', 'Aprende a drogarte sanamente, manija', 'Sarah Skilton', 1840, 'https://roc21cdn-roc21.netdna-ssl.com/blog/wp-content/uploads/2014/11/portadas-libros-2014-seis.jpg'),
+('Passionate pursuit', 'Jebus en su maximo esplendor #SalvenLasDosVidas', 'James W. Goll', 1550, 'https://i.gr-assets.com/images/S/photo.goodreads.com/books/1426714327l/22789890.jpg'),
+('A day and a life', 'Un dia en la vida, eso, ¿Esperabas algo mas?', 'Penelope Wilcock', 1530, 'https://4.bp.blogspot.com/-VsCn56HaLQ8/V73-HsAdLAI/AAAAAAAAKdQ/XW-ezUUR1oIwuLqviKM3EpnXF0EQ1eAbwCLcB/s1600/514brqOCxYL.SX316.jpg'),
+('Animales fantasticos y donde encontrarlos', 'Todo el bicherio del mundo del sucio Potter', 'J. K. Rowling', 1340, 'http://media.biobiochile.cl/wp-content/uploads/2017/02/animales-fanasticos-nueva-portada.jpg'),
+('Batalla de reyes', 'Sangre, muerte, y muchos hombres en cuero y traspirados. Lo que nos gusta a los machos', 'M. K. HUME', 1000, 'https://bibliobulimica.files.wordpress.com/2014/07/portada-libro.jpg'),
+('En los lugares de la inocencia perdida', 'Mejor no describimos esto porque nos bajan la pagina', 'Jose Luis Palma', 1380, 'https://i.pinimg.com/originals/8e/cd/2d/8ecd2d01bc0307e14eb505af75075a13.jpg'),
+('Diario futuro', 'Renacer, crecer, amar, ser... y esas cosas', 'Aura', 1270, 'http://3.bp.blogspot.com/-UXRu9v32vGM/UEC83WH6TqI/AAAAAAAABeM/8hdHdHPG04I/s1600/diaF.jpg'),
+('El libro de los errores', 'Te vas a sentir muy identificad@ con esto', 'Skip Prichard', 1460, 'https://www.planetadelibros.com.ar/usuaris/libros/fotos/282/m_libros/281012_portada_el-libro-de-los-errores_skip-prichard_201809252045.jpg'),
+('El libro de la selva', 'Un niño abandonado por padres neglijentes entabla una extraña relacion afectiva con un oso', 'Rudyard Kipling', 1320, 'https://www.planetadelibros.com.ar/usuaris/libros/fotos/214/original/portada_el-libro-de-la-selva_rudyard-kipling_201602291625.jpg'),
+('Harry Potter y el caliz de fuego', 'Harry el sucio Potter le entra a un caliz con contenido sospechoso', 'J. K. Rowling', 1360, 'https://ciervomaya.files.wordpress.com/2011/07/harry.jpg'),
+('He died with his eyes open', 'La historia de alguien que se murio con los ojos abiertos, todo muy literal', 'Derek Raymond', 1390, 'https://www.recreoviral.com/wp-content/uploads/2015/06/30-asombrosas-portadas-de-libros-26.jpg'),
+('La vida escondida entre los libros', 'Libro chick para regalar a chicas tumblr o a los putitos de sus amigos', 'Stephanie Butland', 1290, 'https://www.udllibros.com/imagenes/9788417/978841730204.JPG'),
+('Two', 'Copia barata de Insurgente, Los juegos del hambre, Maze runner y esos libros choteros', 'Leigh Ann Kopans', 1940, 'http://2.bp.blogspot.com/-ho2AmW0d35M/VXisfjyPTXI/AAAAAAAARhk/fmAbLid3MxQ/s1600/two-leighann-kopans-one-universe.jpg'),
+('The sisters brothers', 'Thelma y Louise pero en pandemia 2020', 'Patrick de Witt', 1270, 'https://www.recreoviral.com/wp-content/uploads/2015/06/30-asombrosas-portadas-de-libros-28.jpg'),
+('Los ojos de la noche', 'Del creador de los ojos del dia', 'Ines Garland', 1450, 'https://www.loqueleo.com/ar/uploads/2016/03/tapalosojosdelanoche.jpg'),
+('Harry Potter and the secret chamber', 'Lo mismo que el otro pero en ingles', 'J. K. Rowling', 1002, 'https://th.bing.com/th/id/OIP.FLI2qc5HJcWmYvuscdeY0wHaLW?pid=Api&rs=1');
 
 INSERT INTO "Categories" (name, "createdAt", "updatedAt")
 
 VALUES ('Accion', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Aventura', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Terror', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Novela', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Policial', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Espiritual', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Comedia', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Drama', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Teatro', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Deportes', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Finanzas', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Cocina', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Autoayuda', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Politica', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Actualidad', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Niños', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Ciencia-ficcion', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Tecnologia', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Psicologia', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Poemas', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Musica', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
 ('Historia', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Otro', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00');
 
 INSERT INTO "prod_Category" ("createdAt", "updatedAt", "productId", "CategoryId")
@@ -132,7 +115,6 @@ VALUES ('Admin', 'Admin', 'adminadmin', 'admin@admin.com', 'Administracion', tru
 ('Wachu', 'Ocando', 'wachuocando', 'wachuwachito@hotmail.com', 'Chilecito pa', false, '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
 ('Sergio', 'Pepe', 'sergiopepe', 'pepelagarto@yahoo.com', 'Ibiza', false, '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
 ('Dieguito', 'Armando', 'lamanodedior', 'diegoarcoiris@live.com', 'Pueblito undefined', false, '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00');
-
 
 INSERT INTO "reviews" ("rating", "title", "body", "createdAt", "updatedAt", "productId", "userId")
 VALUES ('2', 'Maomeno noma', 'Flojeli flojeli este autor', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00', 2, 2),

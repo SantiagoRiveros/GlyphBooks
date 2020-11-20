@@ -1,6 +1,7 @@
 const { conn } = require("./src/db");
 
 conn.query(`
+
 INSERT INTO products (title, description, author, stock, price, img)
 VALUES ('Harry Potter y la piedra filosofal', 'El día que un búho misterioso deja una carta con una invitación al Colegio Hogwarts de Magia y Hechicería, su vida da un vuelco para siempre.', 'J. K. Rowling', 10, 1500, 'https://www.harrymedia.com/data/media/9/hp1-es-2020.jpg'),
 ('Harry Potter y la camara secreta', 'Descripcion', 'J. K. Rowling', 10, 1500, 'http://2.bp.blogspot.com/_mC3p3y_gsQY/S7CdmXNyomI/AAAAAAAAAGQ/kGeZNIgSGk4/s1600/harry+potter+2.jpg'),
@@ -27,51 +28,31 @@ VALUES ('Harry Potter y la piedra filosofal', 'El día que un búho misterioso d
 ('Batalla de reyes', 'Una descripcion random', 'M. K. HUME', 10, 1000, 'https://bibliobulimica.files.wordpress.com/2014/07/portada-libro.jpg'),
 ('Marketing extraordiario', 'Una descripcion random', 'Damian Di Pace', 10, 1770, 'https://www.ecoeediciones.com/wp-content/uploads/2018/02/Marketing-extraordinario.jpg');
 
+
 INSERT INTO "Categories" (name, "createdAt", "updatedAt")
 
 VALUES ('Accion', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Aventura', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Terror', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Novela', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Policial', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Espiritual', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Comedia', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Drama', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Teatro', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Deportes', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Finanzas', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Cocina', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Autoayuda', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Politica', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Actualidad', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Niños', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Ciencia-ficcion', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Tecnologia', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Psicologia', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Poemas', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Musica', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
 ('Historia', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Otro', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00');
 
 INSERT INTO "prod_Category" ("createdAt", "updatedAt", "productId", "CategoryId")
@@ -132,7 +113,6 @@ VALUES ('Admin', 'Admin', 'adminadmin', 'admin@admin.com', 'Administracion', tru
 ('Wachu', 'Ocando', 'wachuocando', 'wachuwachito@hotmail.com', 'Chilecito pa', false, '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
 ('Sergio', 'Pepe', 'sergiopepe', 'pepelagarto@yahoo.com', 'Ibiza', false, '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
 ('Dieguito', 'Armando', 'lamanodedior', 'diegoarcoiris@live.com', 'Pueblito undefined', false, '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00');
-
 
 INSERT INTO "reviews" ("rating", "title", "body", "createdAt", "updatedAt", "productId", "userId")
 VALUES ('2', 'Maomeno noma', 'Flojeli flojeli este autor', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00', 2, 2),

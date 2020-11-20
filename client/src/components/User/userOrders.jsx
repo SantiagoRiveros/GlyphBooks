@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-export default function userOrders({ user }) {
-  const [order, setOrder] = usestate([]);
+export default function UserOrders({ user }) {
+  const [order, setOrder] = useState([]);
   useEffect(() => {
     axios.get(`http://localhost:3000/${user.id}/orders`).then(({ data }) => {
       setOrder(data);

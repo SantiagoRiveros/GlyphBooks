@@ -8,34 +8,29 @@ export default function Orden({ id }) {
   const [currentOrder, setCurrentOrder] = useState(null);
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:3000/order/${id}`)
-        .then(data => {
-          setOrder(data);
-        });
+    axios.get(`http://localhost:3000/order/${id}`).then((data) => {
+      setOrder(data);
+    });
 
-      axios
-      .get(`http://localhost:3000/order/${id}/order`)
-        .then(data => {
-          setCurrentOrder(data);
-        })
+    axios.get(`http://localhost:3000/order/${id}/order`).then((data) => {
+      setCurrentOrder(data);
+    });
   }, [id]);
 
-
   var precioTotal = orders.reduce((total, order) => {
-    return total + order.price * order.quantity
-  }, 0)
+    return total + order.price * order.quantity;
+  }, 0);
   if (currentOrder) {
-      return (
-        <div>
-          <div>ESTADO: {currentOrder.status}</div>
-          <div>FECHA DE COMPRA: {currentOrder.date}</div>
-          <div>NÚMERO DE ORDEN: {this.props.id}</div>
-          <div>TOTAL: {precioTotal}</div>
-          <Product>
-        </div>
-      );
+    return (
+      <div>
+        <div>ESTADO: {currentOrder.status}</div>
+        <div>FECHA DE COMPRA: {currentOrder.date}</div>
+        <div>NÚMERO DE ORDEN: {this.props.id}</div>
+        <div>TOTAL: {precioTotal}</div>
+        <Product />
+      </div>
+    );
   } else {
-    return <div>No se halló la orden</div>
+    return <div>No se halló la orden</div>;
   }
 }

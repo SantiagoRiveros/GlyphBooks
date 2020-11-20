@@ -48,11 +48,12 @@ function Catalogue(props) {
 
   useEffect(() => {
     if (category) {
-      setDisplay(
-        productos.filter((p) => {
+      setDisplay({
+        ...display,
+        rows: productos.rows.filter((p) => {
           return p.Categories && p.Categories.find((c) => c.id === category);
-        })
-      );
+        }),
+      });
     } else setDisplay(productos);
   }, [category, productos]);
 

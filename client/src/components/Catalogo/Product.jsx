@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, connect } from "react-redux";
-import { agregarAlCarrito } from "../../actions/actions";
+import { agregarAlCarrito, agregarVarios } from "../../actions/actions";
 import style from "../../CSS/Product.module.css";
 import axios from "axios";
 import Review from "./review";
@@ -12,28 +12,34 @@ function Product(props) {
 
   const agregarCarrito = (producto) => {
     if (user !== "guest") {
-      const notNew = items.find((p) => p.id === producto.id);
+      console.log(items, producto);
+      const notNew = items.find((p) => Number(p.id) === Number(producto.id));
+      var nextStep;
       if (notNew) {
         let { quantity, orderId, id } = notNew.lineOrder;
         let newQuantity = quantity + 1;
         console.log(id, newQuantity, orderId);
-        axios.put(`http://localhost:3000/order/${orderId}/lineorder`, {
-          id,
-          quantity: newQuantity,
-        });
-      }
-      axios
-        .post(`http://localhost:3000/users/${user.id}/cart`, {
+        nextStep = axios.put(
+          `http://localhost:3000/order/${orderId}/lineorder`,
+          {
+            id,
+            quantity: newQuantity,
+          }
+        );
+      } else {
+        nextStep = axios.post(`http://localhost:3000/users/${user.id}/cart`, {
           id: producto.id,
           price: producto.price,
-        })
+        });
+      }
+      nextStep
         .then(() => {
           return axios.get(`http://localhost:3000/users/${user.id}/cart`);
         })
         .then(({ data }) => {
           if (data.length) {
             let libro = data[0].products.find((p) => p.id === producto.id);
-            props.dispatch(agregarAlCarrito(libro));
+            props.dispatch(agregarVarios(data[0].products));
           }
         })
         .catch((error) => {

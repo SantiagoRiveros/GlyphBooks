@@ -33,8 +33,7 @@ export default function AdminProduct({ setProducto }) {
       </div>
       <table className={style.products}>
         <tr className={style.tr}>
-
-        <th className={style.th}>ID</th>
+          <th className={style.th}>ID</th>
           <th className={style.th}>Nombre</th>
           <th className={style.th}>Autor</th>
           <th className={style.th}>Descripcion</th>

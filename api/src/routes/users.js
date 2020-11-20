@@ -13,6 +13,20 @@ user.post("/", (req, res, next) => {
     .catch(next);
 });
 
+user.post("/forgot"),
+  async (req, res, next) => {
+    const userData = await User.findOne({
+      where: { email: req.body.email },
+    });
+    if (userData) {
+      res.status(200).json({ id: userData.id });
+    } else {
+      res
+        .status(404)
+        .json({ message: "No hay ningun usuario asociado a ese email" });
+    }
+  };
+
 user.post("/:idUser/cart", (req, res, next) => {
   var usuario;
   var orden;
@@ -43,43 +57,13 @@ user.post("/:idUser/cart", (req, res, next) => {
 
 user.post("/:id/passwordReset", async (req, res, next) => {
   const userData = await User.findOne({ where: { id: req.params.id } });
-  if (userData && userData.password) {
-    const compare = userData.compare(req.body.password);
-    if (compare) {
-      userData.password = req.body.newPassword;
-      await userData.save({ fields: ["password"] });
-      return res.status(201).json({ message: "se cambio la contraseña" });
-    } else {
-      return res.status(404).json({ message: "la contraseña no es valida" });
-    }
+  if (userData) {
+    userData.password = req.body.password;
+    await userData.save({ fields: ["password"] });
+    return res.status(201).json({ message: "se cambio la contraseña" });
   }
   return res.status(404).json({ message: "Ocurrio un error" });
 });
-
-user.post("/forgot"),
-  async (req, res, next) => {
-    const userData = await User.findOne({
-      where: { email: req.params.email },
-    });
-    if (req.body.email === userData.email) {
-      var data = {
-        from: "wachu <mauroocando@gmail.com>",
-        to: "mauroocando@gmail.com",
-        subject: "Q FUNCIONE LA PUTA Q ME PARIO",
-        text:
-          "Has solicitado un cambio de contraseña, entra en el siguiente link para proceder: http://localhost:3000/password si no has pedido este cambio, contacta con el soporte tecnico",
-      };
-
-      mailgun.messages().send(data, function (error, body) {
-        if (error) {
-          console.log(error);
-        }
-        console.log(body);
-      });
-      return res.status(201).json({ message: "El correo ha sido enviado" });
-    }
-    return res.status(404).json({ message: "ocurrio un error" });
-  };
 
 user.get("/:idUser/cart", (req, res, next) => {
   User.findOne({ where: { id: req.params.idUser } })

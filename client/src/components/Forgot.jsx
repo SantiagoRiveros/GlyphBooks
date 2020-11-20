@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 import style from "../CSS/login.module.scss";
 
 export default function Forgot() {
   const [input, setInput] = useState({ email: "" });
   const { user } = useSelector((state) => state.user);
+  const { push } = useHistory();
 
   const handleChange = (e) => {
     setInput({
@@ -15,9 +17,14 @@ export default function Forgot() {
   };
 
   const handleSubmit = async (e) => {
-    const handlePass = await axios.post(`http://localhost:3000/users/forgot`, {
+    const response = await axios.post(`http://localhost:3000/users/forgot`, {
       email: input.email,
     });
+    if (response.status == 404) {
+    } else {
+      console.log(response.data);
+      push("/password?id=" + response.data.id);
+    }
   };
 
   return (

@@ -5,9 +5,9 @@ import style from "../CSS/navbar.module.scss";
 
 export default function NavBar(props) {
   const { user } = useSelector((state) => state.user);
-  const test = () => {
+  /* const test = () => {
     console.log(user);
-  };
+  }; */
   return (
     <nav>
       <img
@@ -16,11 +16,6 @@ export default function NavBar(props) {
         alt="Logo"
       />
       <ul className={style.links}>
-        {user.isAdmin && (
-          <li>
-            <Link to="/admin">admin</Link>
-          </li>
-        )}
         <li>
           <button onClick={props.logOut}>logOut</button>
         </li>
@@ -45,11 +40,11 @@ export default function NavBar(props) {
         <li>
           <ion-icon onClick={props.onCartClick} name="cart-outline"></ion-icon>
         </li>
-        <li>
+        {/*  <li>
           <Link to="/forgot">
             <ion-icon name="person-circle-outline"></ion-icon>
           </Link>
-        </li>
+        </li> */}
       </ul>
     </nav>
   );

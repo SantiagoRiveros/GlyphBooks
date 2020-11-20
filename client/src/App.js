@@ -102,7 +102,18 @@ function App(props) {
         <Route path="/signup" component={NewUser} />
         <Route path="/password" component={ResetPassword} />
         <Route path="/forgot" component={Forgot} />
-        <Route path="/cuenta" component={Cuenta} />
+        <Route
+          path="/cuenta"
+          render={() => (
+            <Cuenta
+              logOut={() => {
+                removeLocalUser();
+                setCarritoLocal([]);
+                dispatch(agregarVarios([]));
+              }}
+            />
+          )}
+        />
       </Switch>
     </Router>
   );

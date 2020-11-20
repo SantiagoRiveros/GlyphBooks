@@ -67,6 +67,7 @@ function Catalogue(props) {
       });
   };
 
+  console.log(display.count);
   return (
     <div className={style.Fondo}>
       <Sidebar className={style.Sidebar} setCategory={setCategory} />

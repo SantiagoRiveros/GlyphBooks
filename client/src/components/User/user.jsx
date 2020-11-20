@@ -5,11 +5,11 @@ import UserOrders from "./userOrders.jsx";
 import { Switch, Route } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-export default function User() {
+export default function User(logOut) {
   const { user } = useSelector((state) => state.user);
   return (
     <div>
-      <UserSidebar user={user} />
+      <UserSidebar user={user} logOut={logOut} />
       <Switch>
         <Route
           path="/cuenta/details"

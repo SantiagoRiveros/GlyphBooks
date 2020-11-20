@@ -1,45 +1,42 @@
 const jwt = require("jsonwebtoken"),
-{ User } = require("./db"),
-passport = require("passport"),
-LocalStrategy = require("passport-local").Strategy,
-BearerStrategy = require("passport-http-bearer").Strategy;
+  { User } = require("./db"),
+  passport = require("passport"),
+  LocalStrategy = require("passport-local").Strategy,
+  BearerStrategy = require("passport-http-bearer").Strategy;
 
-const SECRET = process.env.AUTH_SECRET || "secret"
-
+const SECRET = process.env.AUTH_SECRET || "secret";
 
 passport.use(
-new LocalStrategy({
-  usernameField: "email",
-  passwordField: "password",
-  session: false },
-  async (email, password, done) => {
-    const user = await User.findOne({where: {
-      email
-    }});
-    if (!user)
-      return done(null, false, {
-        message: "Username or password is incorrect",
+  new LocalStrategy(
+    {
+      usernameField: "email",
+      passwordField: "password",
+      session: false,
+    },
+    async (email, password, done) => {
+      const user = await User.findOne({
+        where: {
+          email,
+        },
       });
-    if (!user.compare(password))
-      return done(null, false, {
-        message: "Username or password is incorrect",
+      if (!user)
+        return done(null, false, {
+          message: "Username or password is incorrect",
+        });
+      if (!user.compare(password))
+        return done(null, false, {
+          message: "Username or password is incorrect",
+        });
+      const { id, firstName, lastName, isAdmin } = user;
+      return done(null, {
+        id,
+        firstName,
+        lastName,
+        isAdmin,
       });
-    const {
-      id,
-      firstName,
-      lastName,
-      isAdmin,
-    } = user
-    return done(null, {
-      id,
-      firstName,
-      lastName,
-      isAdmin,
-    });
-  }
-)
+    }
+  )
 );
-
 
 // passport.use(
 // new GoogleStrategy(
@@ -109,13 +106,12 @@ new LocalStrategy({
 // );
 
 passport.use(
-new BearerStrategy((token, done) => {
-  jwt.verify(token, "SECRET", function (err, user) {
-    if (err) return done(err);
-    return done(null, user ? user : false);
-  });
-})
+  new BearerStrategy((token, done) => {
+    jwt.verify(token, SECRET, function (err, user) {
+      if (err) return done(err);
+      return done(null, user ? user : false);
+    });
+  })
 );
-
 
 module.exports = passport;

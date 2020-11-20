@@ -55,12 +55,12 @@
   background-color: orange;
   color: white;
   border: 1px solid #ddd;
-  padding: 8px; 
+  padding: 8px;
 }
 
 .td {
   border: 1px solid #ddd;
-  padding: 8px; 
+  padding: 8px;
 }
 
 .tr:nth-child(even) {
@@ -84,3 +84,28 @@
   transition: 0.5s;
   border-radius: 3px;
 }
+
+.Btn {
+    display: flex;
+    background-color: #ffffff;
+    border-radius: 6px;
+    color: #14213d;
+    border: 2px solid #14213d;
+    padding: 5px 10px;
+    margin: 5px 30px;
+    transition: all 0.5s;
+    &:hover {
+      cursor: pointer;
+      color: white;
+      transform: scale(1.15);
+      border-color: transparent;
+      background-color: orange;
+    }
+  }
+
+  .Pagination {
+    display: flex;
+    align-items: center;
+    margin: auto;
+    height: 50px
+  }

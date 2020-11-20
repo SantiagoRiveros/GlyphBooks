@@ -22,6 +22,9 @@ export default function NavBar(props) {
           </li>
         )}
         <li>
+          <button onClick={props.logOut}>logOut</button>
+        </li>
+        <li>
           <Link className={style.active} to="/">
             Home
           </Link>
@@ -37,6 +40,11 @@ export default function NavBar(props) {
         </li>
         <li>
           <ion-icon onClick={props.onCartClick} name="cart-outline"></ion-icon>
+        </li>
+        <li>
+          <Link to="/password">
+            <ion-icon name="person-circle-outline"></ion-icon>
+          </Link>
         </li>
       </ul>
     </nav>

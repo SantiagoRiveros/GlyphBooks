@@ -7,14 +7,21 @@ export default function Pagination({ page = 1, quantity }) {
   const pageLimit = Math.ceil(quantity / 9);
   return (
     <div className={style.Pagination}>
-      <button className={style.Button}
+      <button
+        className={style.Button}
         disabled={page === 1 || page === "1"}
         onClick={() => push(`/catalogo?page=${--page}`)}
       >
         Back
       </button>
       <h1>{page}</h1>
-      <button className={style.Button} onClick={() => push(`/catalogo?page=${++page}`)}>Next</button>
+      <button
+        disabled={parseInt(page) === pageLimit}
+        className={style.Button}
+        onClick={() => push(`/catalogo?page=${++page}`)}
+      >
+        Next
+      </button>
     </div>
   );
 }

@@ -3,6 +3,8 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const routes = require('./routes/index.js');
+const passport = require('./passport');
+
 
 require('./db.js');
 
@@ -30,5 +32,28 @@ server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
   console.error(err);
   res.status(status).send(message);
 });
+
+server.all("*", function (req, res, next) {
+  passport.authenticate("bearer", function (err, user) {
+    if (err) return next(err);
+    if (user) {
+      req.user = user;
+    }
+    return next();
+  })(req, res, next);
+});
+
+// server.use((req, _res, next) => {
+//   console.log("pre-test");
+//   passport.authorize("bearer", function (_err, user) {
+//     console.log("test");
+//     if (user) req.user = user;
+//     next();
+//   });
+// });
+
+server.use(passport.initialize());
+
+server.use("/", routes);
 
 module.exports = server;

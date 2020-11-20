@@ -2,22 +2,54 @@ import React, { useState } from "react";
 import axios from "axios";
 import style from "../CSS/login.module.scss";
 import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { login } from "../actions/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { login, agregarVarios } from "../actions/actions";
 
-export default function Login() {
+export default function Login({ setLocalUser }) {
   const { push } = useHistory();
   const dispatch = useDispatch();
-  const [input, setInput] = useState({ email: "", contraseña: "" });
+  const [input, setInput] = useState({ email: "", password: "" });
+
+  const { items } = useSelector((state) => state.cart);
 
   const handleSubmit = (e) => {
+    var idUser;
     axios
-      .get(
-        `http://localhost:3000/users/login?email=${input.email}&contraseña=${input.contraseña}`
-      )
-
+      .post(`http://localhost:3000/auth/login`, input)
       .then(({ data }) => {
-        dispatch(login(data));
+        console.log(data);
+        setLocalUser(data);
+        idUser = data.user.id;
+      })
+      .then(() => {
+        if (items.length) {
+          return axios
+            .post(`http://localhost:3000/users/${idUser}/cart`, {
+              id: items[0].id,
+              price: items[0].price,
+            })
+            .then(() =>
+              Promise.all(
+                items.map((p) => {
+                  return axios.post(
+                    `http://localhost:3000/users/${idUser}/cart`,
+                    {
+                      id: p.id,
+                      price: p.price,
+                    }
+                  );
+                })
+              )
+            );
+        }
+      })
+      .then(() => {
+        return axios.get(`http://localhost:3000/users/${idUser}/cart`);
+      })
+      .then(({ data }) => {
+        if (data[0]) {
+          dispatch(agregarVarios(data[0].products));
+        }
         push("/");
       })
       .catch((error) => {
@@ -47,9 +79,9 @@ export default function Login() {
         </div>
         <div className={style.textbox}>
           <input
-            name="contraseña"
+            name="password"
             onChange={handleChange}
-            value={input.contraseña}
+            value={input.password}
             type="password"
             placeholder="Contraseña"
           />

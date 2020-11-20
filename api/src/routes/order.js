@@ -1,5 +1,5 @@
 const order = require("express").Router();
-const { Order, Product } = require("../db.js");
+const { Order, Product, User } = require("../db.js");
 
 order.get("/", (req, res, next) => {
   if (req.user) {
@@ -12,7 +12,10 @@ order.get("/", (req, res, next) => {
 });
 
 order.get("/:id/order", (req, res, next) => {
-  Order.findOne({ where: { id: req.params.id } })
+  Order.findOne({
+    where: { id: req.params.id },
+    include: [{ model: Product }, { model: User }],
+  })
     .then((orden) => res.json(orden))
     .catch(next);
 });

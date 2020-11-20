@@ -7,6 +7,7 @@ import OrderTable from "./orderTable.jsx";
 import AdminUsers from "./adminUsers.jsx";
 import AdmSideBar from "./admSideBar.jsx";
 import AdminReviews from "./adminReviews.jsx";
+import OrderDetails from "./orderDetails.jsx";
 import ProductCrud from "../Forms/CrudProductForm";
 import style from "../../CSS/Admin/admin.module.scss";
 
@@ -17,21 +18,22 @@ export default function Admin() {
     <div className={style.fondo}>
       <AdmSideBar />
       <div className={style.relleno}>
-      <Switch>
-        <Route path="/admin/orders" render={() => <OrderTable />} />
-        <Route path="/admin/users" render={() => <AdminUsers />} />
-        <Route path="/admin/reviews" render={() => <AdminReviews />} />
-        <Route path="/admin/crud" render={() => <ProductCrud />} />
-        <Route
-          path="/admin/products"
-          render={() => <AdminProduct setProducto={setProducto} />}
-        />
-        <Route
-          path="/admin/crud"
-          render={() => <Crud product={producto} setProduct={setProducto} />}
-        />
-        <Route path="/admin/newCategory" render={() => <NewCategory />} />
-      </Switch>
+        <Switch>
+          <Route path="/admin/orders" render={() => <OrderTable />} />
+          <Route path="/admin/users" render={() => <AdminUsers />} />
+          <Route path="/admin/reviews" render={() => <AdminReviews />} />
+          <Route path="/admin/crud" render={() => <ProductCrud />} />
+          <Route path="/admin/orderDetails" render={() => <OrderDetails />} />
+          <Route
+            path="/admin/products"
+            render={() => <AdminProduct setProducto={setProducto} />}
+          />
+          <Route
+            path="/admin/crud"
+            render={() => <Crud product={producto} setProduct={setProducto} />}
+          />
+          <Route path="/admin/newCategory" render={() => <NewCategory />} />
+        </Switch>
       </div>
     </div>
   );

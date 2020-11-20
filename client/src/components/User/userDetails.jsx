@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function userDetails({ user }) {
+export default function UserDetails({ user }) {
   return (
     <div>
       <ul>

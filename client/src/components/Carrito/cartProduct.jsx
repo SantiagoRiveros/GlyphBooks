@@ -19,7 +19,7 @@ function CartProduct(props) {
       axios
         .put(`http://localhost:3000/order/${orderId}/lineorder`, {
           id: id,
-          quantity: quantity,
+          quantity: quantity + num,
         })
         .then(() => handler());
     } else {
@@ -48,7 +48,7 @@ function CartProduct(props) {
         <button
           onClick={() => {
             if (quantity > 1) {
-              handleChange();
+              handleChange(-1);
             } else {
               handleDelete();
             }

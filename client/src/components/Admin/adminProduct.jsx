@@ -6,11 +6,13 @@ import { useHistory } from "react-router-dom";
 export default function AdminProduct({ setProducto }) {
   const { push } = useHistory();
   const [productos, setProductos] = useState([]);
+  const [page, setPage] = useState(1);
+  const pageLimit = Math.floor(productos.count / 9);
   useEffect(() => {
-    axios.get("http://localhost:3000/products").then(({ data }) => {
+    axios.get(`http://localhost:3000/products?page=${page}`).then(({ data }) => {
       setProductos(data);
     });
-  }, []);
+  }, [page]);
   return (
     <div className={style.size}>
       <div className={style.btns}>
@@ -31,8 +33,7 @@ export default function AdminProduct({ setProducto }) {
       </div>
       <table className={style.products}>
         <tr className={style.tr}>
-
-        <th className={style.th}>ID</th>
+          <th className={style.th}>ID</th>
           <th className={style.th}>Nombre</th>
           <th className={style.th}>Autor</th>
           <th className={style.th}>Descripcion</th>
@@ -62,6 +63,12 @@ export default function AdminProduct({ setProducto }) {
             </tr>
           ))}
       </table>
+      <button className={style.Btn}
+        disabled={page === 1 || page === "1"}
+        onClick={() => setPage(page - 1)}>Back</button>
+      <button className={style.Btn}
+        disabled={parseInt(page) === pageLimit}
+        onClick={() => setPage(page + 1)}>Next</button>
     </div>
   );
 }

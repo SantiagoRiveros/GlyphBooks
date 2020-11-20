@@ -1,5 +1,5 @@
 const order = require("express").Router();
-const { Order, Product } = require("../db.js");
+const { Order, Product, User } = require("../db.js");
 
 order.get("/", (req, res, next) => {
   if (req.user) {
@@ -12,7 +12,10 @@ order.get("/", (req, res, next) => {
 });
 
 order.get("/:id/order", (req, res, next) => {
-  Order.findOne({ where: { id: req.params.id } })
+  Order.findOne({
+    where: { id: req.params.id },
+    include: [{ model: Product }, { model: User }],
+  })
     .then((orden) => res.json(orden))
     .catch(next);
 });
@@ -43,7 +46,7 @@ order.put("/:orderId/lineorder", (req, res, next) => {
   const { orderId } = req.params;
   Order.findByPk(orderId, { include: Product })
     .then(({ products }) => {
-      const lineOrder = products.find((p) => p.lineOrder.id === id);
+      const { lineOrder } = products.find((p) => p.lineOrder.id === id);
       lineOrder.quantity = quantity;
       lineOrder.save();
       res.send(lineOrder);

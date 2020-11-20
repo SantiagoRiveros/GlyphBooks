@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 import style from "../../CSS/Admin/orderTable.module.scss";
 
 export default function OrderTable() {
   const [order, setOrder] = useState([]);
+  const { push } = useHistory();
   useEffect(() => {
     axios.get("http://localhost:3000/order").then(({ data }) => {
       setOrder(data);
@@ -28,7 +30,9 @@ export default function OrderTable() {
               <td className={style.td}>{order.status}</td>
               <td className={style.td}>{order.createdAt}</td>
               <td className={style.td}>
-                <button />
+                <button
+                  onClick={() => push(`/admin/orderDetails/${order.id}`)}
+                />
               </td>
             </tr>
           ))}

@@ -36,7 +36,11 @@ export default function NavBar(props) {
           <Link to="/faq">FAQ</Link>
         </li>
         <li>
-          <Link to="/ingresar">Ingresar</Link>
+          {!props.localUser ? (
+            <Link to="/ingresar">Ingresar</Link>
+          ) : (
+            <Link to="/cuenta">Cuenta</Link>
+          )}
         </li>
         <li>
           <ion-icon onClick={props.onCartClick} name="cart-outline"></ion-icon>

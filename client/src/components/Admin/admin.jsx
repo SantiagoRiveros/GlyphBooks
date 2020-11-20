@@ -8,7 +8,7 @@ import AdminUsers from "./adminUsers.jsx";
 import AdmSideBar from "./admSideBar.jsx";
 import AdminReviews from "./adminReviews.jsx";
 import OrderDetails from "./orderDetails.jsx";
-import ProductCrud from "../Forms/CrudProductForm";
+import Crud from "../Forms/CrudProductForm";
 import style from "../../CSS/Admin/admin.module.scss";
 
 export default function Admin() {

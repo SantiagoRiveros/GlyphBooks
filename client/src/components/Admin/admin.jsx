@@ -22,7 +22,6 @@ export default function Admin() {
           <Route path="/admin/orders" render={() => <OrderTable />} />
           <Route path="/admin/users" render={() => <AdminUsers />} />
           <Route path="/admin/reviews" render={() => <AdminReviews />} />
-          <Route path="/admin/crud" render={() => <ProductCrud />} />
           <Route path="/admin/orderDetails" render={() => <OrderDetails />} />
           <Route
             path="/admin/products"

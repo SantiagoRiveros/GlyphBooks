@@ -95,6 +95,7 @@ export default function Login({ setLocalUser }) {
         <button onClick={() => push("/signup")} className={style.btn}>
           Crear cuenta
         </button>
+        <a onClick={() => push("/forgot")}>¿Olvidaste tu contraseña?</a>
       </div>
     </div>
   );

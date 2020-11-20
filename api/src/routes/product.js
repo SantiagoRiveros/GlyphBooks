@@ -6,9 +6,19 @@ server.get("/", (req, res, next) => {
   const page = req.query.page;
   const limit = 9;
   const offset = page ? (page - 1) * limit : null;
+  var count;
 
-  Product.findAndCountAll({ include: Category, limit, offset })
+  Product.count()
+    .then((num) => {
+      count = num;
+      return Product.findAndCountAll({
+        include: [{ model: Category, requiered: false }],
+        limit,
+        offset,
+      });
+    })
     .then((products) => {
+      products.count = count;
       res.send(products);
     })
     .catch(next);

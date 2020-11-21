@@ -12,3 +12,10 @@ body {
     font-family: var(--font-family-body);
     color: var(--color-text);
   }
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-family-title);
+}

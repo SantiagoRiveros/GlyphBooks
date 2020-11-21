@@ -6,12 +6,8 @@
   box-sizing: border-box;
 }
 
-div {
-  font-family: "merriweather sans";
-}
-
 nav {
-  background: #14213d;
+  background: #fafafa;
   height: 80px;
   width: 100%;
   position: fixed;
@@ -41,13 +37,6 @@ a:hover {
   transition: 0.5s;
 }
 
-.imgLogo {
-  margin-left: 50px;
-  margin-top: 5px;
-  width: 250px;
-  height: 80%;
-}
-
 ion-icon {
   color: white;
   font-size: 23px;
@@ -60,4 +49,17 @@ ion-icon:hover {
   background: #313c5e;
   transition: 0.5s;
   border-radius: 3px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  img {
+    width: 3rem;
+    height: 3rem;
+  }
+  h1 {
+    margin-left: 1rem;
+  }
 }

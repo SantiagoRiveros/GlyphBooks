@@ -11,11 +11,10 @@ export default function NavBar(props) {
   }; */
   return (
     <nav>
-      <img
-        className={style.imgLogo}
-        src={icon}
-        alt="Logo"
-      />
+      <div className={style.logo}>
+        <img src={icon} alt="Logo" />
+        <h1>GlyphBooks</h1>
+      </div>
       <ul className={style.links}>
         <li>
           <button onClick={props.logOut}>logOut</button>

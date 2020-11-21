@@ -15,7 +15,6 @@ user.post("/", (req, res, next) => {
 
 user.post("/:idUser/cart", (req, res, next) => {
   var usuario;
-  var orden;
   User.findOne({ where: { id: req.params.idUser } })
     .then((u) => {
       usuario = u;
@@ -30,11 +29,11 @@ user.post("/:idUser/cart", (req, res, next) => {
       }
       return orden[0];
     })
-    .then((ord) => {
-      orden = ord;
+    .then((orden) => {
       const quantity = req.body.quantity ? req.body.quantity : 1;
-      return ord.addProducts(req.body.id, {
-        through: { price: req.body.price, quantity },
+      console.log(req.body);
+      return orden.addProducts(req.body.id, {
+        through: { price: req.body.price, quantity: quantity },
       });
     })
     .then((r) => res.send(r))
@@ -94,28 +93,34 @@ user.get("/:idUser/cart", (req, res, next) => {
 });
 
 user.get("/:idUser/orders", (req, res, next) => {
-  User.findOne({ where: { id: req.params.idUser } })
-    .then((usuario) => {
-      return usuario.getOrders({ include: Product });
-    })
-    .then((orders) => res.send(orders));
-});
-
-user.get("/:id/orders", (req, res, next) => {
-  User.findOne({ where: { id: req.params.id } })
-    .then((usuario) => {
-      usuario.getOrders();
-    })
-    .then((ordenes) => res.json(ordenes))
-    .catch(next);
+  if (req.user) {
+    if (req.user.isAdmin || Number(req.user.id) === Number(req.params.idUser)) {
+      User.findOne({ where: { id: req.params.idUser } })
+        .then((usuario) => {
+          return usuario.getOrders({ include: Product });
+        })
+        .then((orders) => res.send(orders));
+    } else res.sendStatus(401);
+  } else res.sendStatus(401);
 });
 
 user.put("/:id", (req, res, next) => {
   const { id } = req.params;
 
-  User.findOne({ where: { id } })
-    .then((u) => res.send(u))
-    .catch(next);
+  const request = req.body;
+  if (req.user) {
+    if (req.user.isAdmin) {
+      User.findOne({ where: { id } })
+        .then((user) => {
+          for (const key in request) {
+            user[key] = request[key];
+          }
+          user.save();
+          res.send(user);
+        })
+        .catch(next);
+    } else res.sendStatus(401);
+  } else res.sendStatus(401);
 });
 
 user.put("/:idUser/cart", (req, res, next) => {
@@ -169,10 +174,14 @@ user.get("/login", (req, res, next) => {
 });
 
 user.delete("/:id", (req, res, next) => {
-  User.findOne({ where: { id: req.params.id } })
-    .then((user) => user.destroy())
-    .then(() => res.sendStatus(200))
-    .catch(next);
+  if (req.user) {
+    if (req.user.isAdmin || Number(req.user.id) === Number(req.params.id)) {
+      User.findOne({ where: { id: req.params.id } })
+        .then((user) => user.destroy())
+        .then(() => res.sendStatus(200))
+        .catch(next);
+    } else res.sendStatus(401);
+  } else res.sendStatus(401);
 });
 
 user.delete("/:idUser/cart", (req, res, next) => {

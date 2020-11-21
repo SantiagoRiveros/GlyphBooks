@@ -19,7 +19,7 @@ export default function Admin() {
   const { replace } = useHistory();
   useEffect(() => {
     if (!user.user?.isAdmin) replace("/");
-  }, []);
+  }, [user]);
   return (
     <div className={style.fondo}>
       {user.user?.isAdmin ? (
@@ -28,7 +28,10 @@ export default function Admin() {
           <div className={style.relleno}>
             <Switch>
               <Route path="/admin/orders" render={() => <OrderTable />} />
-              <Route path="/admin/users" render={() => <AdminUsers />} />
+              <Route
+                path="/admin/users"
+                render={() => <AdminUsers user={user} />}
+              />
               <Route path="/admin/reviews" render={() => <AdminReviews />} />
               <Route
                 path="/admin/orderDetails"

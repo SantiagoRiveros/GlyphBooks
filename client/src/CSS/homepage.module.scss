@@ -2,12 +2,97 @@
   height: 200px;
   position: relative;
 }
-
-.imgLibros {
-  background: url("../template/Images/homepage2.jpg");
-  background-size: cover;
-  height: calc(100vh - 80px);
+.page {
+  margin-top: 80px;
 }
+.imgLibros {
+  background: rgb(252, 237, 211);
+  background: linear-gradient(
+    2deg,
+    rgb(250, 232, 200) 0%,
+    rgb(252, 242, 225) 25%,
+    rgba(255, 255, 255, 1) 100%
+  );
+  height: 75vh;
+  display: flex;
+
+  .content {
+    display: flex;
+    padding: 0 2rem;
+    width: 100vw;
+    max-width: 90rem;
+    margin: 0 auto;
+    height: 75vh;
+    section {
+      flex: 4;
+      padding: 2rem 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .img {
+        height: calc(75vh - 12rem);
+  position:relative;
+    -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+       -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+            box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+}
+.img:before, .img:after
+{
+content:"";
+    position:absolute;
+    z-index:-1;
+    -webkit-box-shadow:0 0 20px rgba(0,0,0,0.8);
+    -moz-box-shadow:0 0 20px rgba(0,0,0,0.8);
+    box-shadow:0 0 20px rgba(0,0,0,0.8);
+    top:10px;
+    bottom:10px;
+    left:0;
+    right:0;
+    -moz-border-radius:100px / 10px;
+    border-radius:100px / 10px;
+}
+.img:after
+{
+right:10px;
+    left:auto;
+    -webkit-transform:skew(8deg) rotate(3deg);
+       -moz-transform:skew(8deg) rotate(3deg);
+        -ms-transform:skew(8deg) rotate(3deg);
+         -o-transform:skew(8deg) rotate(3deg);
+            transform:skew(8deg) rotate(3deg);
+}
+      }
+    }
+    section + section {
+      flex-direction: column;
+      align-items: flex-start !important;
+      justify-content: flex-start !important;
+      flex: 2;
+      h1 {
+        font-weight: 400;
+        font-size: 3.5rem;
+        position: relative;
+        padding-bottom: 2rem;
+        &::after {
+          content: " ";
+          position: absolute;
+          width: 6rem;
+          height: 0.125rem;
+          background-color: var(--color-text);
+          bottom: -0.125rem;
+          left: 0;
+        }
+      }
+      p {
+        text-align: justify;
+      }
+    }
+  }
+// .imgLibros {
+//   background: url("../template/Images/homepage2.jpg");
+//   background-size: cover;
+//   height: calc(100vh - 80px);
+// }
 .center {
   margin: 0;
   position: absolute;

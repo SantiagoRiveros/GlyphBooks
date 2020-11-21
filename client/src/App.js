@@ -6,6 +6,7 @@ import { agregarVarios, login } from "./actions/actions";
 import axios from "axios";
 import ReactGA from "react-ga";
 import './App.scss'
+import './normalize.css'
 
 //componentes
 

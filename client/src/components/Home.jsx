@@ -8,7 +8,7 @@ export default function Homepage() {
       <div className={style.imgLibros}>
         <div className={style.content}>
           <section>
-          <img
+            <img
               className={style.img}
               src="https://books.google.com/books/content/images/frontcover/oU9cCgAAQBAJ?fife=w400-h600"
               alt=""
@@ -27,6 +27,7 @@ export default function Homepage() {
               iaculis egestas bibendum maecenas faucibus mauris fermentum
               rutrum.
             </p>
+            <button>Ver más</button>
           </section>
         </div>
       </div>

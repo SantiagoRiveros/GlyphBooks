@@ -1,10 +1,12 @@
 import React from "react";
 import Footer from "./Footer";
 import style from "../CSS/homepage.module.scss";
+import bkg from "../template/Images/bkg.jpg";
 
 export default function Homepage() {
   return (
     <div className={style.page}>
+      <img src={bkg} alt="" className={style.bkg} />
       <div className={style.imgLibros}>
         <div className={style.content}>
           <section>
@@ -15,7 +17,10 @@ export default function Homepage() {
             />
           </section>
           <section>
-            <h1>Alicia en el pais de las maravillas</h1>
+            <h1>
+              Alicia en el pais de las maravillas
+              <span>nuevo</span>
+            </h1>
             <p>
               Lorem ipsum dolor sit amet consectetur adipiscing elit commodo,
               elementum malesuada posuere torquent enim orci potenti, sed

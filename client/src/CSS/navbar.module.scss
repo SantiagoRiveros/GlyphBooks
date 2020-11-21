@@ -8,7 +8,7 @@
 
 .nav {
   background: #fafafa;
-  height: 80px;
+  height: 4rem;
   width: 100%;
   position: fixed;
   z-index: 9999;
@@ -69,10 +69,12 @@ ion-icon:hover {
   align-items: center;
   width: fit-content;
   img {
-    width: 3rem;
-    height: 3rem;
+    width: 2.5rem;
+    height: 2.5rem;
   }
   h1 {
+    font-size: 1.5rem;
+    margin: 0;
     margin-left: 1rem;
   }
 }

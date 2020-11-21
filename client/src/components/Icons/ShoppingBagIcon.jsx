@@ -1,18 +1,12 @@
 import React from "react";
 
-function ShoppingBagIcon({
-  size = 48,
-  color = "var(--color-text)",
-  className,
-  style,
-}) {
+function ShoppingBagIcon({ size = 48, color = "var(--color-text)", ...props }) {
   return (
     <svg
       width={size}
       height={size}
       fill={color}
-      className={className}
-      style={style}
+      {...props}
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 32 32"
     >

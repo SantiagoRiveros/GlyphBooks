@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import style from "../CSS/navbar.module.scss";
-import icon from '../template/Images/logo.svg'
-import ShoppingBagIcon from './Icons/ShoppingBagIcon'
+import icon from "../template/Images/logo.svg";
+import ShoppingBagIcon from "./Icons/ShoppingBagIcon";
 
 export default function NavBar(props) {
   const { user } = useSelector((state) => state.user);
@@ -39,7 +39,7 @@ export default function NavBar(props) {
           )}
         </li>
         <li>
-          <ShoppingBagIcon size={24}/>
+          <ShoppingBagIcon onClick={props.onCartClick} size={24} />
         </li>
         {/*  <li>
           <Link to="/forgot">

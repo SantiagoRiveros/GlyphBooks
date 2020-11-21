@@ -4,17 +4,30 @@ const { Op } = require("sequelize");
 
 server.get("/", (req, res, next) => {
   const page = req.query.page;
-  const limit = 9;
+  const limit = 12;
   const offset = page ? (page - 1) * limit : null;
   var count;
+
+  let where = req.query.where;
+  if (where) {
+    where = JSON.parse(where);
+  }
+  let order = req.query.order;
+  if (order) {
+    order = JSON.parse(order);
+  }
+
+  const category = req.query.category > 0 ? { id: req.query.category } : null;
 
   Product.count()
     .then((num) => {
       count = num;
       return Product.findAndCountAll({
-        include: [{ model: Category, requiered: false }],
+        include: [{ model: Category, requiered: false, where: category }],
         limit,
         offset,
+        order,
+        where,
       });
     })
     .then((products) => {

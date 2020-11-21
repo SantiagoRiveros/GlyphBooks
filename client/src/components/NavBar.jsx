@@ -10,7 +10,7 @@ export default function NavBar(props) {
     console.log(user);
   }; */
   return (
-    <nav>
+    <nav className={style.nav}>
       <div className={style.logo}>
         <img src={icon} alt="Logo" />
         <h1>GlyphBooks</h1>

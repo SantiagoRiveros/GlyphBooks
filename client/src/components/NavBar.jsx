@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import style from "../CSS/navbar.module.scss";
 import icon from '../template/Images/logo.svg'
+import ShoppingBagIcon from './Icons/ShoppingBagIcon'
 
 export default function NavBar(props) {
   const { user } = useSelector((state) => state.user);
@@ -38,7 +39,7 @@ export default function NavBar(props) {
           )}
         </li>
         <li>
-          <ion-icon onClick={props.onCartClick} name="cart-outline"></ion-icon>
+          <ShoppingBagIcon size={24}/>
         </li>
         {/*  <li>
           <Link to="/forgot">

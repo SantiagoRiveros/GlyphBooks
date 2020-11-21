@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import style from "../CSS/navbar.module.scss";
+import icon from '../template/Images/logo.svg'
 
 export default function NavBar(props) {
   const { user } = useSelector((state) => state.user);
@@ -12,7 +13,7 @@ export default function NavBar(props) {
     <nav>
       <img
         className={style.imgLogo}
-        src="https://media.discordapp.net/attachments/772911955349340171/773903872740556820/Logo_horizontal.png?width=1443&height=338"
+        src={icon}
         alt="Logo"
       />
       <ul className={style.links}>

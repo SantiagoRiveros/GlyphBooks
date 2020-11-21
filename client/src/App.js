@@ -5,6 +5,7 @@ import { useLocalStorage } from "react-use";
 import { agregarVarios, login } from "./actions/actions";
 import axios from "axios";
 import ReactGA from "react-ga";
+import './App.scss'
 
 //componentes
 

@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-export default function userOrders({ user }) {
-  const [order, setOrder] = usestate([]);
+export default function UserOrders({ user }) {
+  const [order, setOrder] = useState([]);
   useEffect(() => {
-    axios.get(`http://localhost:3000/${user.id}/orders`).then(({ data }) => {
-      setOrder(data);
-    });
-  }, []);
+    axios
+      .get(`http://localhost:3000/users/${user.id}/orders`)
+      .then(({ data }) => {
+        setOrder(data);
+      });
+  }, [user]);
   return (
     <div>
       <table>
@@ -17,13 +19,13 @@ export default function userOrders({ user }) {
           <th>Creation Date</th>
         </tr>
         {order.length &&
-          order.map((orden) => {
+          order.map((orden) => (
             <tr>
               <th>{orden.id}</th>
               <th>{orden.status}</th>
               <th>{orden.createdAt}</th>
-            </tr>;
-          })}
+            </tr>
+          ))}
       </table>
     </div>
   );

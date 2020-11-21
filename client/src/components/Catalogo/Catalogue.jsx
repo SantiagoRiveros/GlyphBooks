@@ -48,11 +48,12 @@ function Catalogue(props) {
 
   useEffect(() => {
     if (category) {
-      setDisplay(
-        productos.filter((p) => {
+      setDisplay({
+        ...display,
+        rows: productos.rows.filter((p) => {
           return p.Categories && p.Categories.find((c) => c.id === category);
-        })
-      );
+        }),
+      });
     } else setDisplay(productos);
   }, [category, productos]);
 
@@ -67,6 +68,7 @@ function Catalogue(props) {
       });
   };
 
+  console.log(display.count);
   return (
     <div className={style.Fondo}>
       <Sidebar className={style.Sidebar} setCategory={setCategory} />

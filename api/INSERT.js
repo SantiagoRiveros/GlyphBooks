@@ -1,77 +1,58 @@
 const { conn } = require("./src/db");
 
 conn.query(`
-INSERT INTO products (title, description, author, price, img)
-VALUES ('Harry Potter y la piedra filosofal', 'El día que un búho misterioso deja una carta con una invitación al Colegio Hogwarts de Magia y Hechicería, su vida da un vuelco para siempre.', 'J. K. Rowling', 1500, 'https://www.harrymedia.com/data/media/9/hp1-es-2020.jpg'),
-('Harry Potter y la camara secreta', 'Descripcion', 'J. K. Rowling', 1500, 'http://2.bp.blogspot.com/_mC3p3y_gsQY/S7CdmXNyomI/AAAAAAAAAGQ/kGeZNIgSGk4/s1600/harry+potter+2.jpg'),
-('Harry Potter and the secret chamber', 'Una descripcion random', 'J. K. Rowling', 1002, 'https://th.bing.com/th/id/OIP.FLI2qc5HJcWmYvuscdeY0wHaLW?pid=Api&rs=1'),
-('The music of you & me', 'Una descripcion random', 'Eloise Alden', 1500, 'https://itswritenow.com/wp-content/uploads/2020/07/B07P9FHQ1N-171x258.jpg'),
-('El bosque negro', 'Una descripcion random', 'Steve Hillard', 1536, 'http://arealibros.republica.com/files/2012/09/el-bosque-negro.jpg'),
-('Healing energy meditation', 'Una descripcion random', 'Money Channel', 1545, 'https://th.bing.com/th/id/OIP.qCkFmdM_tsYRJZXGGWvUBAHaLG?pid=Api&w=735&h=1102&rs=1'),
-('Gallows wedding', 'Una descripcion random', 'Anonimo', 1523, 'https://i.ebayimg.com/images/g/pEoAAOSwfVpYn6wG/s-l600.jpg'),
-('Roman der Anthropologic', 'Una descripcion random', 'C. W. Ceram', 1550, 'https://imagecache.markt.de/a0bMXqtiNM8qUzjKpfjFhvsbjCM=/fit-in/222x320/images_classifieds/7c/80/37b5-6554-4244-81d3-4332421d4deb/large.jpg'),
-('Passionate pursuit', 'Una descripcion random', 'James W. Goll', 1550, 'https://i.gr-assets.com/images/S/photo.goodreads.com/books/1426714327l/22789890.jpg'),
-('A day and a life', 'Una descripcion random', 'Penelope Wilcock', 1530, 'https://4.bp.blogspot.com/-VsCn56HaLQ8/V73-HsAdLAI/AAAAAAAAKdQ/XW-ezUUR1oIwuLqviKM3EpnXF0EQ1eAbwCLcB/s1600/514brqOCxYL.SX316.jpg'),
-('Animales fantasticos y donde encontrarlos', 'Una descripcion random', 'J. K. Rowling', 1340, 'http://media.biobiochile.cl/wp-content/uploads/2017/02/animales-fanasticos-nueva-portada.jpg'),
-('Los ojos de la noche', 'Una descripcion random', 'Ines Garland', 1450, 'https://www.loqueleo.com/ar/uploads/2016/03/tapalosojosdelanoche.jpg'),
-('En los lugares de la inocencia perdida', 'Una descripcion random', 'Jose Luis Palma', 1380, 'https://i.pinimg.com/originals/8e/cd/2d/8ecd2d01bc0307e14eb505af75075a13.jpg'),
-('Diario futuro', 'Una descripcion random', 'Aura', 1270, 'http://3.bp.blogspot.com/-UXRu9v32vGM/UEC83WH6TqI/AAAAAAAABeM/8hdHdHPG04I/s1600/diaF.jpg'),
-('El libro de los errores', 'Una descripcion random', 'Skip Prichard', 1460, 'https://www.planetadelibros.com.ar/usuaris/libros/fotos/282/m_libros/281012_portada_el-libro-de-los-errores_skip-prichard_201809252045.jpg'),
-('El libro de la selva', 'Una descripcion random', 'Rudyard Kipling', 1320, 'https://www.planetadelibros.com.ar/usuaris/libros/fotos/214/original/portada_el-libro-de-la-selva_rudyard-kipling_201602291625.jpg'),
-('Harry Potter y el caliz de fuego', 'Una descripcion random', 'J. K. Rowling', 1360, 'https://ciervomaya.files.wordpress.com/2011/07/harry.jpg'),
-('He died with his eyes open', 'Una descripcion random', 'Derek Raymond', 1390, 'https://www.recreoviral.com/wp-content/uploads/2015/06/30-asombrosas-portadas-de-libros-26.jpg'),
-('La vida escondida entre los libros', 'Una descripcion random', 'Stephanie Butland', 1290, 'https://www.udllibros.com/imagenes/9788417/978841730204.JPG'),
-('Two', 'Una descripcion random', 'Leigh Ann Kopans', 1940, 'http://2.bp.blogspot.com/-ho2AmW0d35M/VXisfjyPTXI/AAAAAAAARhk/fmAbLid3MxQ/s1600/two-leighann-kopans-one-universe.jpg'),
-('The sisters brothers', 'Una descripcion random', 'Patrick de Witt', 1270, 'https://www.recreoviral.com/wp-content/uploads/2015/06/30-asombrosas-portadas-de-libros-28.jpg'),
-('High and dry', 'Una descripcion random', 'Sarah Skilton', 1840, 'https://roc21cdn-roc21.netdna-ssl.com/blog/wp-content/uploads/2014/11/portadas-libros-2014-seis.jpg'),
-('Batalla de reyes', 'Una descripcion random', 'M. K. HUME', 1000, 'https://bibliobulimica.files.wordpress.com/2014/07/portada-libro.jpg'),
-('Marketing extraordiario', 'Una descripcion random', 'Damian Di Pace', 1770, 'https://www.ecoeediciones.com/wp-content/uploads/2018/02/Marketing-extraordinario.jpg');
+
+INSERT INTO products (title, description, author, stock, price, img)
+VALUES ('Harry Potter y la piedra filosofal', 'El día que un búho misterioso deja una carta con una invitación al Colegio Hogwarts de Magia y Hechicería, su vida da un vuelco para siempre.', 'J. K. Rowling', 10, 1500, 'https://www.harrymedia.com/data/media/9/hp1-es-2020.jpg'),
+('Harry Potter y la camara secreta', 'Descripcion', 'J. K. Rowling', 10, 1500, 'http://2.bp.blogspot.com/_mC3p3y_gsQY/S7CdmXNyomI/AAAAAAAAAGQ/kGeZNIgSGk4/s1600/harry+potter+2.jpg'),
+('Harry Potter and the secret chamber', 'Una descripcion random', 'J. K. Rowling', 10, 1002, 'https://th.bing.com/th/id/OIP.FLI2qc5HJcWmYvuscdeY0wHaLW?pid=Api&rs=1'),
+('The music of you & me', 'Una descripcion random', 'Eloise Alden', 10, 1500, 'https://itswritenow.com/wp-content/uploads/2020/07/B07P9FHQ1N-171x258.jpg'),
+('El bosque negro', 'Una descripcion random', 'Steve Hillard', 10, 1536, 'http://arealibros.republica.com/files/2012/09/el-bosque-negro.jpg'),
+('Healing energy meditation', 'Una descripcion random', 'Money Channel', 10, 1545, 'https://th.bing.com/th/id/OIP.qCkFmdM_tsYRJZXGGWvUBAHaLG?pid=Api&w=735&h=1102&rs=1'),
+('Gallows wedding', 'Una descripcion random', 'Anonimo', 10, 1523, 'https://i.ebayimg.com/images/g/pEoAAOSwfVpYn6wG/s-l600.jpg'),
+('Roman der Anthropologic', 'Una descripcion random', 'C. W. Ceram', 10, 1550, 'https://imagecache.markt.de/a0bMXqtiNM8qUzjKpfjFhvsbjCM=/fit-in/222x320/images_classifieds/7c/80/37b5-6554-4244-81d3-4332421d4deb/large.jpg'),
+('Passionate pursuit', 'Una descripcion random', 'James W. Goll', 10, 1550, 'https://i.gr-assets.com/images/S/photo.goodreads.com/books/1426714327l/22789890.jpg'),
+('A day and a life', 'Una descripcion random', 'Penelope Wilcock', 10, 1530, 'https://4.bp.blogspot.com/-VsCn56HaLQ8/V73-HsAdLAI/AAAAAAAAKdQ/XW-ezUUR1oIwuLqviKM3EpnXF0EQ1eAbwCLcB/s1600/514brqOCxYL.SX316.jpg'),
+('Animales fantasticos y donde encontrarlos', 'Una descripcion random', 'J. K. Rowling', 10, 1340, 'http://media.biobiochile.cl/wp-content/uploads/2017/02/animales-fanasticos-nueva-portada.jpg'),
+('Los ojos de la noche', 'Una descripcion random', 'Ines Garland', 10, 1450, 'https://www.loqueleo.com/ar/uploads/2016/03/tapalosojosdelanoche.jpg'),
+('En los lugares de la inocencia perdida', 'Una descripcion random', 'Jose Luis Palma', 10, 1380, 'https://i.pinimg.com/originals/8e/cd/2d/8ecd2d01bc0307e14eb505af75075a13.jpg'),
+('Diario futuro', 'Una descripcion random', 'Aura', 10, 1270, 'http://3.bp.blogspot.com/-UXRu9v32vGM/UEC83WH6TqI/AAAAAAAABeM/8hdHdHPG04I/s1600/diaF.jpg'),
+('El libro de los errores', 'Una descripcion random', 'Skip Prichard', 10, 1460, 'https://www.planetadelibros.com.ar/usuaris/libros/fotos/282/m_libros/281012_portada_el-libro-de-los-errores_skip-prichard_201809252045.jpg'),
+('El libro de la selva', 'Una descripcion random', 'Rudyard Kipling', 10, 1320, 'https://www.planetadelibros.com.ar/usuaris/libros/fotos/214/original/portada_el-libro-de-la-selva_rudyard-kipling_201602291625.jpg'),
+('Harry Potter y el caliz de fuego', 'Una descripcion random', 'J. K. Rowling', 10, 1360, 'https://ciervomaya.files.wordpress.com/2011/07/harry.jpg'),
+('He died with his eyes open', 'Una descripcion random', 'Derek Raymond', 10, 1390, 'https://www.recreoviral.com/wp-content/uploads/2015/06/30-asombrosas-portadas-de-libros-26.jpg'),
+('La vida escondida entre los libros', 'Una descripcion random', 'Stephanie Butland', 10, 1290, 'https://www.udllibros.com/imagenes/9788417/978841730204.JPG'),
+('Two', 'Una descripcion random', 'Leigh Ann Kopans', 10, 1940, 'http://2.bp.blogspot.com/-ho2AmW0d35M/VXisfjyPTXI/AAAAAAAARhk/fmAbLid3MxQ/s1600/two-leighann-kopans-one-universe.jpg'),
+('The sisters brothers', 'Una descripcion random', 'Patrick de Witt', 10, 1270, 'https://www.recreoviral.com/wp-content/uploads/2015/06/30-asombrosas-portadas-de-libros-28.jpg'),
+('High and dry', 'Una descripcion random', 'Sarah Skilton', 10, 1840, 'https://roc21cdn-roc21.netdna-ssl.com/blog/wp-content/uploads/2014/11/portadas-libros-2014-seis.jpg'),
+('Batalla de reyes', 'Una descripcion random', 'M. K. HUME', 10, 1000, 'https://bibliobulimica.files.wordpress.com/2014/07/portada-libro.jpg'),
+('Marketing extraordiario', 'Una descripcion random', 'Damian Di Pace', 10, 1770, 'https://www.ecoeediciones.com/wp-content/uploads/2018/02/Marketing-extraordinario.jpg');
+
 
 INSERT INTO "Categories" (name, "createdAt", "updatedAt")
 
 VALUES ('Accion', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Aventura', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Terror', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Novela', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Policial', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Espiritual', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Comedia', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Drama', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Teatro', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Deportes', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Finanzas', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Cocina', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Autoayuda', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Politica', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Actualidad', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Niños', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Ciencia-ficcion', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Tecnologia', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Psicologia', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Poemas', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Musica', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
 ('Historia', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-
 ('Otro', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00');
 
 INSERT INTO "prod_Category" ("createdAt", "updatedAt", "productId", "CategoryId")
@@ -132,7 +113,6 @@ VALUES ('Admin', 'Admin', 'adminadmin', 'admin@admin.com', 'Administracion', tru
 ('Wachu', 'Ocando', 'wachuocando', 'wachuwachito@hotmail.com', 'Chilecito pa', false, '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
 ('Sergio', 'Pepe', 'sergiopepe', 'pepelagarto@yahoo.com', 'Ibiza', false, '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
 ('Dieguito', 'Armando', 'lamanodedior', 'diegoarcoiris@live.com', 'Pueblito undefined', false, '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00');
-
 
 INSERT INTO "reviews" ("rating", "title", "body", "createdAt", "updatedAt", "productId", "userId")
 VALUES ('2', 'Maomeno noma', 'Flojeli flojeli este autor', '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00', 2, 2),

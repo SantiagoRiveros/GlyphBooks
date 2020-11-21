@@ -42,10 +42,16 @@ export default function Carrito(props) {
           orderId,
           status: "procesando",
         })
-        .then((res) => {
-          console.log(res);
-          dispatch(cerrarCarrito());
-        });
+        .then((res) =>
+          Promise.all(
+            props.items.map((i) => {
+              return axios.put(`http://localhost:3000/products/${i.id}`, {
+                stock: i.stock - i.lineOrder.quantity,
+              });
+            })
+          )
+        )
+        .then(() => dispatch(cerrarCarrito()));
     }
   };
 

@@ -20,6 +20,7 @@ import Carrito from "./components/Carrito/Carrito.jsx";
 import NewUser from "./components/Forms/UserForm.jsx";
 import ResetPassword from "./components/ResetPassword";
 import Forgot from "./components/Forgot";
+import Cuenta from "./components/User/user.jsx";
 
 function App(props) {
   const [show, setShow] = useState(false);
@@ -82,6 +83,7 @@ function App(props) {
           dispatch(agregarVarios([]));
         }}
         onCartClick={() => setShow((prevShow) => !prevShow)}
+        localUser={localUser}
       />
       <Carrito cartShow={show} items={props.carrito.cart.items} />
       <Switch>
@@ -101,6 +103,18 @@ function App(props) {
         <Route path="/signup" component={NewUser} />
         <Route path="/password" component={ResetPassword} />
         <Route path="/forgot" component={Forgot} />
+        <Route
+          path="/cuenta"
+          render={() => (
+            <Cuenta
+              logOut={() => {
+                removeLocalUser();
+                setCarritoLocal([]);
+                dispatch(agregarVarios([]));
+              }}
+            />
+          )}
+        />
       </Switch>
     </Router>
   );

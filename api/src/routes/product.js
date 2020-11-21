@@ -8,6 +8,15 @@ server.get("/", (req, res, next) => {
   const offset = page ? (page - 1) * limit : null;
   var count;
 
+  let where = req.query.where;
+  if (where) {
+    where = JSON.parse(where);
+  }
+  let order = req.query.order;
+  if (order) {
+    order = JSON.parse(order);
+  }
+
   const category = req.query.category > 0 ? { id: req.query.category } : null;
 
   Product.count()
@@ -17,6 +26,8 @@ server.get("/", (req, res, next) => {
         include: [{ model: Category, requiered: false, where: category }],
         limit,
         offset,
+        order,
+        where,
       });
     })
     .then((products) => {

@@ -18,7 +18,7 @@ export default function SideBar({ setCategory }) {
         <li
           className={style.category}
           onClick={() => {
-            setCategory(null);
+            setCategory(0);
           }}
         >
           Todo
@@ -39,4 +39,3 @@ export default function SideBar({ setCategory }) {
     </div>
   );
 }
- 

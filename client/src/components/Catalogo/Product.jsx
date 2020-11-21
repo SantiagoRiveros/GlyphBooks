@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, connect } from "react-redux";
 import { agregarAlCarrito, agregarVarios } from "../../actions/actions";
-import style from "../../CSS/Product.module.css";
+import style from "../../CSS/ProductDetail.module.scss";
 import axios from "axios";
 import Review from "./review";
+import ShoppingBagIcon from "../Icons/ShoppingBagIcon";
 
 function Product(props) {
   const [product, setProduct] = useState(null);
@@ -61,22 +62,35 @@ function Product(props) {
   if (product) {
     return (
       <div className={style.container}>
+        <div className={style.bkg} />
         <div className={style.details}>
-          <div className={style.left}>
+          <section>
             <img
-              className={style.imagen}
+              className={style.img}
               src={product.img}
               alt="imagen del producto"
             />
-          </div>
-          <div className={style.right}>
-            <h3 className={style.title}>{product.title}</h3>
-            <h3 className={style.price}>${product.price}</h3>
-            <p className={style.description}>{product.description}</p>
-            <h3 className={style.stock}>{product.stock}</h3>
-            <button onClick={() => agregarCarrito(product)}>COMPRAR</button>
+          </section>
+          <section>
+            <h1>{product.title}</h1>
+            <p>{product.description}</p>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                marginTop: "2rem",
+              }}
+            >
+              <button onClick={() => agregarCarrito(product)}>
+                <ShoppingBagIcon color="var(--color-primary)" size={24} />
+                <span>COMPRAR</span>
+                <span>{`$ ${product.price}`}</span>
+              </button>
+              <label style={{ marginLeft: "1.5rem" }}>Stock:</label>
+              <span style={{ marginLeft: "0.5rem" }}>{product.stock}</span>
+            </div>
             <Review id={product.id} />
-          </div>
+          </section>
         </div>
       </div>
     );

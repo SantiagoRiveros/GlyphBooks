@@ -7,6 +7,7 @@ import axios from "axios";
 import ReactGA from "react-ga";
 import "./App.scss";
 import "./normalize.css";
+import Footer from "./components/Footer";
 
 //componentes
 
@@ -117,6 +118,7 @@ function App(props) {
           )}
         />
       </Switch>
+      <Footer />
     </Router>
   );
 }

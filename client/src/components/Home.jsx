@@ -1,5 +1,4 @@
 import React from "react";
-import Footer from "./Footer";
 import style from "../CSS/homepage.module.scss";
 import bkg from "../template/Images/bkg.jpg";
 
@@ -44,7 +43,6 @@ export default function Homepage() {
         <h1 className={style.nov}>Novedades</h1>
       </div>
       <div className={style.fondo}></div>
-      <Footer />
     </div>
   );
 }

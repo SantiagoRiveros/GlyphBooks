@@ -22,6 +22,7 @@ export default function SideBar({ setCategory }) {
         <li
           className={style.category}
           onClick={() => {
+            dispatch(buscarProductos(""));
             setCategory(0);
           }}
         >

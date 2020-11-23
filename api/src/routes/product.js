@@ -4,13 +4,24 @@ const { Op } = require("sequelize");
 
 server.get("/", (req, res, next) => {
   const page = req.query.page;
-  const limit = 12;
+  const limit = req.query.limit || 12;
   const offset = page ? (page - 1) * limit : null;
   var count;
 
   let where = req.query.where;
   if (where) {
-    where = JSON.parse(where);
+    where = {
+      [Op.or]: [
+        { title: { [Op.iLike]: "%" + where + "%" } },
+        { description: { [Op.iLike]: "%" + where + "%" } },
+        { author: { [Op.iLike]: "%" + where + "%" } },
+      ],
+      stock: { [Op.gt]: 0 },
+    };
+  } else {
+    where = {
+      stock: { [Op.gt]: 0 },
+    };
   }
   let order = req.query.order;
   if (order) {

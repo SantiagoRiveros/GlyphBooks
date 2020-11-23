@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 // import { useSelector } from "react-redux";
 import style from "../CSS/navbar.module.scss";
+import SearchBar from "./Catalogo/searchBar";
 
 export default function NavBar(props) {
   // const { user } = useSelector((state) => state.user);
@@ -16,9 +17,9 @@ export default function NavBar(props) {
         alt="Logo"
       />
       <ul className={style.links}>
-        {/* <li>
-          <button onClick={props.logOut}>logOut</button>
-        </li> */}
+        <li>
+          <SearchBar />
+        </li>
         <li>
           <Link className={style.active} to="/">
             Home

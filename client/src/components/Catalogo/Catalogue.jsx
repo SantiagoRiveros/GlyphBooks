@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from "./Sidebar.jsx";
-import SearchBar from "./searchBar";
 import Producto from "./productCard.jsx";
 import Pagination from "./pagination.jsx";
 import { useHistory } from "react-router-dom";
 import { useLocation } from "react-router";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import style from "../../CSS/catalogue.module.scss";
 import axios from "axios";
 
@@ -26,36 +25,25 @@ function Catalogue(props) {
   const [category, setCategory] = useState("");
   const { page } = useQuery();
 
+  const searched = useSelector((state) => state.cart.productos);
+
   useEffect(() => {
     axios
       .get(
-        `http://localhost:3000/products?page=${page || 1}&category=${category}`
+        `http://localhost:3000/products?page=${
+          page || 1
+        }&category=${category}&where=${searched}`
       )
       .then(({ data }) => {
         setProductos(data);
       })
       .catch((err) => console.log(err));
-  }, [page, category]);
-
-  const onSearch = (book) => {
-    if (book.length) {
-      setCategory(-1);
-      axios
-        .get(`http://localhost:3000/products/search?value=${book}`)
-        .then(({ data }) => {
-          setProductos(data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-  };
+  }, [page, category, searched]);
 
   return (
     <div className={style.Fondo}>
       <Sidebar className={style.Sidebar} setCategory={setCategory} />
       <div className={style.Relleno}>
-        <SearchBar onSearch={onSearch} />
         <div className={style.Catalogue}>
           {productos.count &&
             productos.rows.map((producto) => {
@@ -72,6 +60,7 @@ function Catalogue(props) {
                   />
                 );
               }
+              return;
             })}
         </div>
         {category >= 0 ? (

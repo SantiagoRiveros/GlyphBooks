@@ -6,9 +6,13 @@ const { Op } = require("sequelize");
 category.post("/", (req, res, next) => {
   const request = req.body;
 
-  Category.create({ ...request })
-    .then(() => res.sendStatus(204))
-    .catch(next);
+  if (req.user) {
+    if (req.user.isAdmin) {
+      Category.create({ ...request })
+        .then(() => res.sendStatus(204))
+        .catch(next);
+    } else res.sendStatus(401);
+  } else res.sendStatus(401);
 });
 
 category.get("/", (req, res) => {

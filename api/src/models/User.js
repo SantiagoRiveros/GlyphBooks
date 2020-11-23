@@ -1,33 +1,50 @@
-const { DataTypes } = require('sequelize');
+const { DataTypes } = require("sequelize");
+const bcyrpt = require("bcrypt");
 
 module.exports = (sequelize) => {
-
-const User = sequelize.define('user', {
-    firstname: {
-        type: DataTypes.STRING,
-        allowNull: false,    
+  const User = sequelize.define("user", {
+    firstName: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     lastName: {
-        type: DataTypes.STRING,  
-        allowNull: false, 
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     password: {
-        type: DataTypes.STRING,  
-        allowNull: false, 
+      type: DataTypes.STRING,
+      allowNull: true,
+
+      set(value) {
+        if (value) {
+          const salt = bcyrpt.genSaltSync(10);
+          const hash = bcyrpt.hashSync(value, salt);
+          this.setDataValue("password", hash);
+        }
+      },
     },
     email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-            isEmail: true
-          }
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        isEmail: true,
+      },
     },
     shippingAdress: {
-        type: DataTypes.STRING,
-        allowNull: false,
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     googleId: {
-        type: DataTypes.INTEGER,
-    }
+      type: DataTypes.INTEGER,
+    },
+    isAdmin: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
   });
+  User.prototype.compare = function (pass) {
+    return bcyrpt.compareSync(pass, this.password);
+  };
+  return User;
 };

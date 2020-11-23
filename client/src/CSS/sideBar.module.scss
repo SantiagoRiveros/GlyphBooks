@@ -1,0 +1,35 @@
+.Categorias {
+  width: auto;
+  padding-top: 100px;
+  padding-left: 20px;
+  text-indent: 0px;
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+  margin-left: auto;
+  flex: 20%;
+  position: fixed
+}
+
+.Title {
+  text-align: left;
+  color: orange;
+  font-size: 25px;
+  font-family: Avantgarde;
+}
+
+.category {
+  padding: 5px;
+  color: black;
+  font-family: Avantgarde;
+  cursor: pointer;
+  transition: 0.3s;
+  &:hover {
+    background-color: rgb(211, 137, 0);
+    border-radius: 5px;
+    color: white;
+  }
+}
+
+.Lista {
+  margin-bottom: 10px;
+}

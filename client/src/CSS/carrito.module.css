@@ -1,0 +1,59 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.container {
+  font-family: "merriweather sans";
+}
+
+.sidebar {
+  position: absolute;
+  width: 500px;
+  height: 88.9%;
+  background: rgba(255, 255, 255, 0.2);
+
+  left: -500px;
+  transition: 0.4s;
+  position: fixed;
+}
+
+.sidebarOpen {
+  position: absolute;
+  z-index: 10;
+  width: 500px;
+  height: 88.9%;
+  background: rgba(255, 255, 255, 0.65);
+  transition: 0.4s;
+  left: 0;
+  top: 80px;
+  position: fixed;
+}
+
+.sidebar ul li {
+  list-style: none;
+  color: #fff;
+  font-size: 20px;
+  padding: 20px 24px;
+}
+
+.sidebarOpen ul li {
+  list-style: none;
+  color: #fff;
+  font-size: 20px;
+  padding: 20px 24px;
+}
+
+.togglebtn {
+  color: white;
+  position: absolute;
+  top: 30px;
+  left: 300px;
+}
+
+.togglebtn span {
+  width: 45px;
+  height: 4px;
+  background: #000;
+  display: block;
+  margin-top: 4px;
+}

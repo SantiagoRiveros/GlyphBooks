@@ -1,0 +1,36 @@
+.size {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 5%;
+    margin-left: 125px;
+  }
+  
+.users {
+    font-family: Avantgarde, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+.th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: orange;
+    color: white;
+    border: 1px solid #ddd;
+    padding: 8px; 
+  }
+  
+.td {
+    border: 1px solid #ddd;
+    padding: 8px; 
+  }
+  
+.tr:nth-child(even) {
+    background-color: #dbdbdb93;
+  }
+  
+.tr:hover {
+    background-color: rgb(194, 194, 194);
+  }

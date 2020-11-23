@@ -42,7 +42,7 @@ export default function Login({ setLocalUser }) {
                 })
               )
             );
-        } else console.log("esto es una mierda");
+        }
       })
       .then(() => {
         return axios.get(`http://localhost:3000/users/${idUser}/cart`);

@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import style from "../CSS/navbar.module.scss";
 
 export default function NavBar(props) {
-  const { user } = useSelector((state) => state.user);
+  // const { user } = useSelector((state) => state.user);
   /* const test = () => {
     console.log(user);
   }; */
@@ -16,9 +16,9 @@ export default function NavBar(props) {
         alt="Logo"
       />
       <ul className={style.links}>
-        <li>
+        {/* <li>
           <button onClick={props.logOut}>logOut</button>
-        </li>
+        </li> */}
         <li>
           <Link className={style.active} to="/">
             Home

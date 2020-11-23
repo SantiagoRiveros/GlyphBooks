@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { connect, useDispatch, useSelector } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { useLocalStorage } from "react-use";
 import { agregarVarios, login } from "./actions/actions";
 import axios from "axios";
-import ReactGA from "react-ga";
+// import ReactGA from "react-ga";
 
 //componentes
 
@@ -38,14 +38,14 @@ function App(props) {
         axios.defaults.headers.common[
           "Authorization"
         ] = `Bearer ${localUser.token}`;
-        ReactGA.set({ userId: localUser.user.id });
+        // ReactGA.set({ userId: localUser.user.id });
       } else {
         axios.defaults.headers.common["Authorization"] = ``;
-        ReactGA.set({ userId: undefined });
+        // ReactGA.set({ userId: undefined });
       }
     } else {
       axios.defaults.headers.common["Authorization"] = ``;
-      ReactGA.set({ userId: undefined });
+      // ReactGA.set({ userId: undefined });
     }
     dispatch(login(localUser?.user || "guest"));
   }, [localUser, dispatch]);

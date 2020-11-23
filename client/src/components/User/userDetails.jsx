@@ -8,8 +8,7 @@ export default function UserDetails({ user }) {
         <li>Apellido:{user.lastName}</li>
         <li>Email:{user.email}</li>
         <li>Direccion:{user.shippingAdress}</li>
-        {user.isAdmin && <li>Rol: Admin</li>}
-        {!user.isAdmin && <li>Rol: Usuario</li>}
+        <li>Rol: {user.isAdmin ? "Admin" : "Usuario"}</li>
         <li>Cambiar Contraseña</li>
       </ul>
     </div>

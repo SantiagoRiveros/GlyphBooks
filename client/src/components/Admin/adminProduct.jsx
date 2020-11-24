@@ -7,7 +7,7 @@ export default function AdminProduct({ setProducto }) {
   const { push } = useHistory();
   const [productos, setProductos] = useState([]);
   const [page, setPage] = useState(1);
-  const pageLimit = Math.ceil(productos.count / 9);
+  const pageLimit = Math.ceil(productos.count / 12);
   useEffect(() => {
     axios
       .get(`http://localhost:3000/products?page=${page}`)

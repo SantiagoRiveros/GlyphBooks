@@ -3,6 +3,7 @@ import {
   REMOVER_CARRITO,
   AGREGAR_VARIOS,
   CERRAR_CARRITO,
+  BUSCAR_PRODUCTOS,
 } from "../constants/cart.constants";
 
 const initialState = {
@@ -73,6 +74,14 @@ function cartReducer(state = initialState, action) {
         items: [],
       };
     }
+
+    case BUSCAR_PRODUCTOS: {
+      return {
+        ...state,
+        productos: action.productos,
+      };
+    }
+
     default:
       return state;
   }

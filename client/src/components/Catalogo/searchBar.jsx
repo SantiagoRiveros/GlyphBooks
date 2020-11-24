@@ -1,16 +1,29 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import style from "../../CSS/searchBar.module.scss";
-import axios from "axios";
+import { buscarProductos } from "../../actions/actions";
 
-export default function SearchBar({ onSearch }) {
+export default function SearchBar() {
   const [book, setBook] = useState("");
+
+  const dispatch = useDispatch();
+  const { push } = useHistory();
+
+  const onSearch = (book) => {
+    if (book.length) {
+      dispatch(buscarProductos(book));
+      setBook("");
+      push("/catalogo");
+    }
+  };
 
   return (
     <form
       className={style.form}
       onSubmit={(e) => {
         e.preventDefault();
-        onSearch(book); 
+        onSearch(book);
       }}
     >
       <input

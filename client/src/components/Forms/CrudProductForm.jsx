@@ -25,7 +25,12 @@ export default function CrudProducts({ product, setProduct }) {
   }, [product]);
 
   useEffect(() => {
-    if (!input.title || !input.author || !input.price || !input.stock) {
+    if (
+      !input.title ||
+      !input.author ||
+      !input.price ||
+      (!input.stock && input.stock != 0)
+    ) {
       setError("este campo es obligatorio");
     } else {
       setError(null);
@@ -49,7 +54,10 @@ export default function CrudProducts({ product, setProduct }) {
     } else {
       axios
         .put(`http://localhost:3000/products/${product.id}`, input)
-        .then(() => {});
+        .then(({ data }) => {
+          console.log(data);
+          setInput(data);
+        });
 
       e.preventDefault();
     }
@@ -59,13 +67,12 @@ export default function CrudProducts({ product, setProduct }) {
     if (product) {
       axios.delete(`http://localhost:3000/products/${product.id}`).then(() => {
         setProduct(null);
-        push("/catalogo");
+        push("/admin/products");
       });
     } else {
-      push("/catalogo");
+      push("/admin/products");
     }
   };
-  console.log(product);
 
   return (
     <div className={style.fondo}>
@@ -127,7 +134,7 @@ export default function CrudProducts({ product, setProduct }) {
           />
         </div>
         <div className={style.error}>
-          {!input.stock && <span>{error}</span>}
+          {!input.stock && input.stock != 0 && <span>{error}</span>}
         </div>
         <div className={style.textbox}>
           <input

@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from "./Sidebar.jsx";
-import SearchBar from "./searchBar";
 import Producto from "./productCard.jsx";
 import Pagination from "./pagination.jsx";
 import { useHistory } from "react-router-dom";
 import { useLocation } from "react-router";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import style from "../../CSS/catalogue.module.scss";
 import axios from "axios";
 
@@ -24,59 +23,30 @@ function Catalogue(props) {
   const { push } = useHistory();
   const [productos, setProductos] = useState([]);
   const [category, setCategory] = useState("");
-  const [display, setDisplay] = useState([]);
   const { page } = useQuery();
 
-  /*   useEffect(() => {
-    axios
-      .get(`http://localhost:3011/products/search?value=${data}`)
-      .then(({ data }) => {
-        setBook(data);
-      })
-      .catch((error) => console.log(error));
-  });
- */
+  const searched = useSelector((state) => state.cart.productos);
+
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/products?page=${page || 1}`)
+      .get(
+        `http://localhost:3000/products?page=${
+          page || 1
+        }&category=${category}&where=${searched}`
+      )
       .then(({ data }) => {
         setProductos(data);
-        setDisplay(data);
       })
       .catch((err) => console.log(err));
-  }, [page]);
+  }, [page, category, searched]);
 
-  useEffect(() => {
-    if (category) {
-      setDisplay({
-        ...display,
-        rows: productos.rows.filter((p) => {
-          return p.Categories && p.Categories.find((c) => c.id === category);
-        }),
-      });
-    } else setDisplay(productos);
-  }, [category, productos]);
-
-  const onSearch = (book) => {
-    axios
-      .get(`http://localhost:3000/products/search?value=${book}`)
-      .then(({ data }) => {
-        setDisplay(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  console.log(display.count);
   return (
     <div className={style.Fondo}>
       <Sidebar className={style.Sidebar} setCategory={setCategory} />
       <div className={style.Relleno}>
-        <SearchBar onSearch={onSearch} />
         <div className={style.Catalogue}>
-          {display.count &&
-            display.rows.map((producto) => {
+          {productos.count &&
+            productos.rows.map((producto) => {
               if (producto.stock) {
                 return (
                   <Producto
@@ -90,9 +60,16 @@ function Catalogue(props) {
                   />
                 );
               }
+              return;
             })}
         </div>
-        <Pagination page={page} quantity={productos.count} />
+        {category >= 0 ? (
+          <Pagination
+            page={page}
+            quantity={productos.count}
+            rows={productos.rows?.length || 1}
+          />
+        ) : null}
       </div>
     </div>
   );

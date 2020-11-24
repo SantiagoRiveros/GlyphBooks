@@ -6,23 +6,31 @@ server.get("/", (req, res, next) => {
   const page = req.query.page;
   const limit = req.query.limit || 12;
   const offset = page ? (page - 1) * limit : null;
-  var count;
+  var quantity;
 
-  let where = req.query.where;
-  if (where) {
+  let where = {};
+  let count = {};
+
+  let search = req.query.search;
+  if (search) {
     where = {
+      ...where,
       [Op.or]: [
-        { title: { [Op.iLike]: "%" + where + "%" } },
-        { description: { [Op.iLike]: "%" + where + "%" } },
-        { author: { [Op.iLike]: "%" + where + "%" } },
+        { title: { [Op.iLike]: "%" + search + "%" } },
+        { description: { [Op.iLike]: "%" + search + "%" } },
+        { author: { [Op.iLike]: "%" + search + "%" } },
       ],
-      stock: { [Op.gt]: 0 },
-    };
-  } else {
-    where = {
-      stock: { [Op.gt]: 0 },
     };
   }
+
+  if (req.query.stock) {
+    where = {
+      ...where,
+      stock: { [Op.gt]: 0 },
+    };
+    count.stock = { [Op.gt]: 0 };
+  }
+
   let order = req.query.order;
   if (order) {
     order = JSON.parse(order);
@@ -30,9 +38,9 @@ server.get("/", (req, res, next) => {
 
   const category = req.query.category > 0 ? { id: req.query.category } : null;
 
-  Product.count()
+  Product.count({ where: { ...count } })
     .then((num) => {
-      count = num;
+      quantity = num;
       return Product.findAndCountAll({
         include: [{ model: Category, requiered: false, where: category }],
         limit,
@@ -42,7 +50,7 @@ server.get("/", (req, res, next) => {
       });
     })
     .then((products) => {
-      products.count = count;
+      products.count = quantity;
       res.send(products);
     })
     .catch(next);

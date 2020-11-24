@@ -32,7 +32,7 @@ function Catalogue(props) {
       .get(
         `http://localhost:3000/products?page=${
           page || 1
-        }&category=${category}&where=${searched}`
+        }&category=${category}&search=${searched}&stock=${true}`
       )
       .then(({ data }) => {
         setProductos(data);

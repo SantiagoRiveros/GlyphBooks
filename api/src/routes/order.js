@@ -8,7 +8,7 @@ order.get("/", (req, res, next) => {
 
   if (req.user) {
     if (req.user.isAdmin) {
-      Order.findAndCountAll({ include: Product }, limit, offset)
+      Order.findAndCountAll({ include: Product, limit, offset })
         .then((ordenes) => res.json(ordenes))
         .catch(next);
     } else res.sendStatus(401);

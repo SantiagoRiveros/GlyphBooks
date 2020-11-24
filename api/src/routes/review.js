@@ -15,8 +15,9 @@ review.post("/products/:id/review", async (req, res, next) => {
   }
 });
 
-review.get("/products/:id/review/", (req, res, next) => {
-  Review.findAll().then((reviews) => {
+review.get("/:productId", (req, res, next) => {
+  const { productId } = req.params;
+  Review.findAll({ where: { productId } }).then((reviews) => {
     res.send(reviews);
   });
 });

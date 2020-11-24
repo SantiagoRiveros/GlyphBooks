@@ -4,7 +4,11 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { useLocalStorage } from "react-use";
 import { agregarVarios, login } from "./actions/actions";
 import axios from "axios";
-// import ReactGA from "react-ga";
+import ReactGA from "react-ga";
+import "./App.scss";
+import "./normalize.css";
+import Footer from "./components/Footer";
+
 
 //componentes
 
@@ -115,6 +119,7 @@ function App(props) {
           )}
         />
       </Switch>
+      <Footer />
     </Router>
   );
 }

@@ -105,9 +105,9 @@ VALUES ('2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00', 1, 2),
 ('2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00', 24, 11);
 
 INSERT INTO "users" ("firstName", "lastName", "password", "email", "shippingAdress", "isAdmin", "createdAt", "updatedAt")
-VALUES ('Admin', 'Admin', 'adminadmin', 'admin@admin.com', 'Administracion', true, '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
+VALUES ('Admin', 'Admin', '$2b$10$gXEMhz5MUjH4i3V9y8m1oOpYnxKAJbFLR/vKxRlDywjGg2T66VsPy', 'admin@admin.com', 'Administracion', true, '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
 ('Fer', 'Leiva', 'ferleiva', 'efeleiva@gmail.com', 'Chaquito', true, '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
-('Ona', 'Lore', 'onalore', 'onalamaskpa@hotmail.com', 'South Beach Miami', false, '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
+('Ona', 'Lore', '$2b$10$s7jvhy3hHVpLR8ltNg9SF.CG16laczC853UZYgvEx4wB6/RdXmGQC', 'onalamaskpa@hotmail.com', 'South Beach Miami', false, '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
 ('Santi', 'LC', 'santilc', 'locanesan@gmail.com', 'Algun lugar de zona sur', false, '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
 ('Filo', 'Riveros', 'filoriveros', 'filofiloso@yahoo.com', 'En la estratosfera', false, '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),
 ('Wachu', 'Ocando', 'wachuocando', 'wachuwachito@hotmail.com', 'Chilecito pa', false, '2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00'),

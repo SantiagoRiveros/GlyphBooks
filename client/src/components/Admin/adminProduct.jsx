@@ -7,11 +7,13 @@ export default function AdminProduct({ setProducto }) {
   const { push } = useHistory();
   const [productos, setProductos] = useState([]);
   const [page, setPage] = useState(1);
-  const pageLimit = Math.floor(productos.count / 9);
+  const pageLimit = Math.ceil(productos.count / 9);
   useEffect(() => {
-    axios.get(`http://localhost:3000/products?page=${page}`).then(({ data }) => {
-      setProductos(data);
-    });
+    axios
+      .get(`http://localhost:3000/products?page=${page}`)
+      .then(({ data }) => {
+        setProductos(data);
+      });
   }, [page]);
   return (
     <div className={style.size}>
@@ -63,12 +65,20 @@ export default function AdminProduct({ setProducto }) {
             </tr>
           ))}
       </table>
-      <button className={style.Btn}
+      <button
+        className={style.Btn}
         disabled={page === 1 || page === "1"}
-        onClick={() => setPage(page - 1)}>Back</button>
-      <button className={style.Btn}
+        onClick={() => setPage(page - 1)}
+      >
+        Back
+      </button>
+      <button
+        className={style.Btn}
         disabled={parseInt(page) === pageLimit}
-        onClick={() => setPage(page + 1)}>Next</button>
+        onClick={() => setPage(page + 1)}
+      >
+        Next
+      </button>
     </div>
   );
 }

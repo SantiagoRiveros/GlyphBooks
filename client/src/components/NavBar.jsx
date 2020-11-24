@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import style from "../CSS/navbar.module.scss";
 import icon from "../template/Images/logo.svg";
 import ShoppingBagIcon from "./Icons/ShoppingBagIcon";
+import SearchBar from "./Catalogo/searchBar";
+
 
 export default function NavBar(props) {
   // const { user } = useSelector((state) => state.user);
@@ -17,9 +19,9 @@ export default function NavBar(props) {
         <h1>GlyphBooks</h1>
       </div>
       <ul className={style.links}>
-        {/* <li>
-          <button onClick={props.logOut}>logOut</button>
-        </li> */}
+        <li>
+          <SearchBar />
+        </li>
         <li>
           <Link className={style.active} to="/">
             Home

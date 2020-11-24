@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 import style from "../../CSS/Admin/adminUsers.module.scss";
 
 export default function AdminUsers(props) {
   const [users, setUsers] = useState([]);
+  const { push } = useHistory();
 
   useEffect(() => {
     axios.get("http://localhost:3000/users").then(({ data }) => {
@@ -58,6 +60,9 @@ export default function AdminUsers(props) {
                     Eliminar
                   </ion-icon>
                 ) : null}
+                <button onClick={() => push(`/admin/userDetails/${user.id}`)}>
+                  Details
+                </button>
               </td>
             </tr>
           ))}

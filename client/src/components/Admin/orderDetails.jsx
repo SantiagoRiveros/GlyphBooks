@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
+import ReviewForm from "../Forms/ReviewForm.jsx";
 import { useLocation } from "react-router";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 function useQuery() {
@@ -11,8 +13,10 @@ function useQuery() {
 
 export default function OrderDetails() {
   const orderID = useQuery();
+  const { push } = useHistory();
   const [order, setOrder] = useState(false);
   const [review, setReview] = useState([]);
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
     axios
@@ -21,13 +25,11 @@ export default function OrderDetails() {
         setOrder(data);
         if( data.products ) {
           var axiosArr = [];
-          console.log(data.products)
           data.products.forEach((p) => {
             axiosArr.push(axios.get(`http://localhost:3000/reviews/${p.id}/${data.user.id}`))
           })
           Promise.all(axiosArr)
           .then(r => {
-            console.log(r)
             setReview(r.filter(rev => {
               return rev.data !== ""
             }).map(r => { return r.data}))
@@ -35,7 +37,7 @@ export default function OrderDetails() {
         }
       })
       .catch((error) => console.log(error));
-  }, []);
+  }, [show]);
 
 
   function Total() {
@@ -44,6 +46,10 @@ export default function OrderDetails() {
       total = total + producto.price * producto.lineOrder.quantity;
     });
     return total;
+  }
+
+  function notShow() {
+    setShow(false)
   }
 
   return (
@@ -83,7 +89,7 @@ export default function OrderDetails() {
                   if ( p.length > 0 ) {
                     return p[0].title
                   } else {
-                    return 1
+                    return <button onClick={() => setShow({true: true, pid, uid})} />
                   }
                 }
                 return (
@@ -100,6 +106,7 @@ export default function OrderDetails() {
           <h3>Total</h3>
           <h3>{Total()}</h3>
           {/* id userid status createdAt products precio */}
+          {show.true ? <ReviewForm productId={show.pid} userId={show.uid} notShow={notShow} orderId={orderID} /> : null}
         </div>
       ) : null}
     </div>

@@ -17,7 +17,6 @@ export default function Login({ setLocalUser }) {
     axios
       .post(`http://localhost:3000/auth/login`, input)
       .then(({ data }) => {
-        console.log(data);
         setLocalUser(data);
         idUser = data.user.id;
       })
@@ -31,12 +30,14 @@ export default function Login({ setLocalUser }) {
             .then(() =>
               Promise.all(
                 items.map((p) => {
+                  let request = {
+                    id: p.id,
+                    price: p.price,
+                    quantity: p.lineOrder.quantity,
+                  };
                   return axios.post(
                     `http://localhost:3000/users/${idUser}/cart`,
-                    {
-                      id: p.id,
-                      price: p.price,
-                    }
+                    request
                   );
                 })
               )

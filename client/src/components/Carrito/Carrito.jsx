@@ -10,7 +10,7 @@ export default function Carrito(props) {
   const [total, setTotal] = useState(0);
   const dispatch = useDispatch();
 
-  const idUser = useSelector((state) => state.user.user.id);
+  const idUser = useSelector((state) => state.user.user?.id);
 
   useEffect(() => {
     if (props.items.length) {

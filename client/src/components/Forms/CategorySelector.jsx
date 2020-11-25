@@ -61,7 +61,7 @@ export default function AddCategory({ producto, setProducto }) {
             ))}
         </select>
         <input type="submit" value="Agregar" />
-        <button onClick={() => push("/catalogo")}>hecho</button>
+        <button onClick={() => push("/admin/products")}>hecho</button>
       </form>
     </div>
   );

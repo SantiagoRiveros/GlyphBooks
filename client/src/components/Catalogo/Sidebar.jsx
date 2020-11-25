@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import style from "../../CSS/sideBar.module.scss";
+import { buscarProductos } from "../../actions/actions";
+import { useDispatch } from "react-redux";
 
 export default function SideBar({ setCategory }) {
   const [categorias, setCategorias] = useState([]);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     axios.get("http://localhost:3000/category").then(({ data }) => {
@@ -18,7 +22,8 @@ export default function SideBar({ setCategory }) {
         <li
           className={style.category}
           onClick={() => {
-            setCategory(null);
+            dispatch(buscarProductos(""));
+            setCategory(0);
           }}
         >
           Todo
@@ -29,6 +34,7 @@ export default function SideBar({ setCategory }) {
               key={category.id}
               className={style.category}
               onClick={() => {
+                dispatch(buscarProductos(""));
                 setCategory(category.id);
               }}
             >
@@ -39,4 +45,3 @@ export default function SideBar({ setCategory }) {
     </div>
   );
 }
- 

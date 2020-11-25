@@ -6,6 +6,7 @@ import NewCategory from "../Forms/NewCategoryForm";
 import AdminProduct from "./adminProduct";
 import OrderTable from "./orderTable.jsx";
 import AdminUsers from "./adminUsers.jsx";
+import UserDetails from "./userDetails.jsx";
 import AdmSideBar from "./admSideBar.jsx";
 import AdminReviews from "./adminReviews.jsx";
 import OrderDetails from "./orderDetails.jsx";
@@ -19,7 +20,7 @@ export default function Admin() {
   const { replace } = useHistory();
   useEffect(() => {
     if (!user.user?.isAdmin) replace("/");
-  }, []);
+  }, [user]);
   return (
     <div className={style.fondo}>
       {user.user?.isAdmin ? (
@@ -28,7 +29,11 @@ export default function Admin() {
           <div className={style.relleno}>
             <Switch>
               <Route path="/admin/orders" render={() => <OrderTable />} />
-              <Route path="/admin/users" render={() => <AdminUsers />} />
+              <Route
+                path="/admin/users"
+                render={() => <AdminUsers user={user} />}
+              />
+              <Route path="/admin/userDetails" render={() => <UserDetails />} />
               <Route path="/admin/reviews" render={() => <AdminReviews />} />
               <Route
                 path="/admin/orderDetails"

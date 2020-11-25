@@ -6,12 +6,14 @@ import style from "../../CSS/Admin/adminUsers.module.scss";
 export default function AdminUsers(props) {
   const [users, setUsers] = useState([]);
   const { push } = useHistory();
+  const [page, setPage] = useState(1);
+  const pageLimit = Math.ceil(users.count / 12);
 
   useEffect(() => {
-    axios.get("http://localhost:3000/users").then(({ data }) => {
+    axios.get(`http://localhost:3000/users?page${page}`).then(({ data }) => {
       setUsers(data);
     });
-  }, []);
+  }, [page]);
 
   async function handleDelete(id) {
     await axios.delete(`http://localhost:3000/users/${id}`);
@@ -35,8 +37,8 @@ export default function AdminUsers(props) {
           <th className={style.th}>Rol</th>
           <th className={style.th}>Eliminar</th>
         </tr>
-        {users.length &&
-          users.map((user) => (
+        {users.count &&
+          users.rows.map((user) => (
             <tr className={style.tr}>
               <td className={style.td}>{user.id}</td>
               <td className={style.td}>
@@ -67,6 +69,20 @@ export default function AdminUsers(props) {
             </tr>
           ))}
       </table>
+      <button
+        className={style.Btn}
+        disabled={page === 1 || page === "1"}
+        onClick={() => setPage(page - 1)}
+      >
+        Back
+      </button>
+      <button
+        className={style.Btn}
+        disabled={parseInt(page) === pageLimit}
+        onClick={() => setPage(page + 1)}
+      >
+        Next
+      </button>
     </div>
   );
 }

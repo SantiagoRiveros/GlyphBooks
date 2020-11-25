@@ -1,9 +1,8 @@
 const user = require("express").Router();
 const { Product, Category, User, Order } = require("../db.js");
 const { Op } = require("sequelize");
-var api_key = "b5c113301e92d7905ae874c95a2a0d3b-2af183ba-def9cce4";
-var domain = "sandboxe9e3450cb5b04c92a05e5501df8811fe.mailgun.org";
-var mailgun = require("mailgun-js")({ apiKey: api_key, domain: domain });
+const nodemailer = require("nodemailer");
+const crypto = require("crypto");
 
 user.post("/", (req, res, next) => {
   const request = req.body;
@@ -40,45 +39,128 @@ user.post("/:idUser/cart", (req, res, next) => {
     .catch(next);
 });
 
-user.post("/:id/passwordReset", async (req, res, next) => {
-  const userData = await User.findOne({ where: { id: req.params.id } });
-  if (userData && userData.password) {
-    const compare = userData.compare(req.body.password);
-    if (compare) {
-      userData.password = req.body.newPassword;
-      await userData.save({ fields: ["password"] });
-      return res.status(201).json({ message: "se cambio la contraseña" });
-    } else {
-      return res.status(404).json({ message: "la contraseña no es valida" });
-    }
+user.post("/forgot", async (req, res, next) => {
+  const userData = await User.findOne({
+    where: { email: req.body.email },
+  });
+
+  let token = crypto.randomBytes(20);
+  token = token.toString("hex");
+  console.log(token);
+
+  if (!userData) {
+    return res.redirect("/forgot");
+  } else {
+    var smtpTransport = nodemailer.createTransport({
+      service: "Gmail",
+      auth: {
+        user: "glyphbooksecommerce@gmail.com",
+        pass: "HenryEcommerce123",
+      },
+    });
+    var mailOptions = {
+      to: userData.email,
+      from: "glyphbooksecommerce@gmail.com",
+      subject: "Reseteo de contraseña",
+      text:
+        `Entra en este link para cambiar la contraseña ` +
+        `http:/localhost:3001/password/` +
+        token,
+    };
+    userData.resetPasswordExpires = Date.now() + 3600000;
+    userData.resetPasswordToken = token;
+    userData.save();
+
+    smtpTransport.sendMail(mailOptions, function (err) {
+      if (err) {
+        console.log("Ocurrio un error", err);
+      } else {
+        console.log("Email enviado");
+      }
+    });
   }
-  return res.status(404).json({ message: "Ocurrio un error" });
 });
 
-user.post("/forgot"),
-  async (req, res, next) => {
-    const userData = await User.findOne({
-      where: { email: req.params.email },
-    });
-    if (req.body.email === userData.email) {
-      var data = {
-        from: "wachu <mauroocando@gmail.com>",
-        to: "mauroocando@gmail.com",
-        subject: "Q FUNCIONE LA PUTA Q ME PARIO",
-        text:
-          "Has solicitado un cambio de contraseña, entra en el siguiente link para proceder: http://localhost:3000/password si no has pedido este cambio, contacta con el soporte tecnico",
-      };
+// user.get("/password/:token", async function (req, res) {
+//   const userData = User.findOne(
+//     {
+//       where: { resetPasswordToken: req.params.token },
+//       resetPasswordExpires: { $gt: Date.now() },
+//     },
+//     function (err, user) {
+//       if (!userData) {
+//         // req.flash("error", "El link es invalido o ya expiro.");
+//         return res.redirect("/forgot");
+//       }
+//       res.render("password", { token: req.params.token });
+//     }
+//   );
+// });
 
-      mailgun.messages().send(data, function (error, body) {
-        if (error) {
-          console.log(error);
-        }
-        console.log(body);
-      });
-      return res.status(201).json({ message: "El correo ha sido enviado" });
+user.put("/passwordReset/:token", async (req, res, next) => {
+  const userData = await User.findOne({
+    where: { resetPasswordToken: req.params.token },
+  });
+  if (userData) {
+    if (userData.resetPasswordExpires > Date.now()) {
+      userData.resetPasswordExpires = Date.now();
+      userData.password = req.body.password;
+      await userData.save();
+      return res.status(201).json({ message: "se cambio la contraseña" });
+    } else {
+      return res.status(204).json({ message: "Token invalido o ya expiro" });
     }
-    return res.status(404).json({ message: "ocurrio un error" });
-  };
+  }
+  return res.status(204).json({ message: "Ocurrio un error" });
+});
+
+// user.post("/reset/:token", function (req, res) {
+//   const userData = User.findOne(
+//     {
+//       where: { resetPasswordToken: req.params.token },
+//       resetPasswordExpires: { $gt: Date.now() },
+//     },
+//     async function (err, user) {
+//       if (!userData) {
+//         // req.flash("error", "El link es invalido o ya expiro.");
+//         return res.redirect("back");
+//       }
+//       if (req.body.password === req.body.password2) {
+//         userData.password = req.body.password;
+//         await userData.save({ fields: ["password"] });
+
+//         return res.status(201).json({ message: "se cambio la contraseña" });
+//       } else {
+//         // req.flash("error", "Las contraseñas no son iguales");
+//         return res.redirect("back");
+//       }
+//     }
+//   );
+
+//   var smtpTransport = nodemailer.createTransport({
+//     service: "Gmail",
+//     auth: {
+//       user: "glyphbooksecommerce@gmail.com",
+//       pass: "HenryEcommerce123",
+//     },
+//   });
+//   var mailOptions = {
+//     to: user.email,
+//     from: "glyphbooksecommerce@gmail.com",
+//     subject: "Tu contraseña ha sido cambiada correctamente",
+//     text:
+//       "Hola,\n\n" +
+//       "este correo es para confirmar que la contraseña de " +
+//       user.email +
+//       " ha sido cambiada correctamente.\n",
+//   };
+//   smtpTransport.sendMail(mailOptions, function (err) {
+//     // req.flash(
+//     //   "Exito",
+//     //   "Exito, tu contraseña ha sido cambiada correctamente"
+//     // );
+//   });
+// });
 
 user.get("/:idUser/cart", (req, res, next) => {
   User.findOne({ where: { id: req.params.idUser } })
@@ -146,9 +228,12 @@ user.put("/:idUser/cart", (req, res, next) => {
 });
 
 user.get("/", (req, res, next) => {
+  const page = req.query.page;
+  const limit = req.query.limit || 12;
+  const offset = page ? (page - 1) * limit : null;
   if (req.user) {
     if (req.user.isAdmin) {
-      User.findAll()
+      User.findAndCountAll({ offset, limit })
         .then((user) => {
           res.send(user);
         })

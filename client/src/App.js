@@ -9,7 +9,6 @@ import "./App.scss";
 import "./normalize.css";
 import Footer from "./components/Footer";
 
-
 //componentes
 
 import NavBar from "./components/NavBar";
@@ -24,6 +23,7 @@ import NewUser from "./components/Forms/UserForm.jsx";
 import ResetPassword from "./components/ResetPassword";
 import Forgot from "./components/Forgot";
 import Cuenta from "./components/User/user.jsx";
+import Checkout from "./components/Checkout.jsx";
 
 function App(props) {
   const [show, setShow] = useState(false);
@@ -102,9 +102,23 @@ function App(props) {
           path="/ingresar"
           render={() => <Login setLocalUser={setLocalUser} />}
         />
+        <Route
+          path="/checkout/:orderId"
+          render={() => (
+            <Checkout
+              setLocalUser={setLocalUser}
+              localUser={localUser}
+              items={props.carrito.cart.items}
+            />
+          )}
+        />
         <Route path="/admin" component={Admin} />
         <Route path="/signup" component={NewUser} />
-        <Route path="/password" component={ResetPassword} />
+        <Route
+          exact
+          path="/password/:token"
+          render={({ match }) => <ResetPassword token={match.params.token} />}
+        />
         <Route path="/forgot" component={Forgot} />
         <Route
           path="/cuenta"

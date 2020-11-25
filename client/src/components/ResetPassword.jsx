@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import style from "../CSS/login.module.scss";
 
-export default function ResetPassword() {
-  const [input, setInput] = useState({ oldpass: "", newpass: "" });
+export default function ResetPassword({ token }) {
+  const [input, setInput] = useState({ password: "", password2: "" });
+  const [error, setError] = useState("");
   const { user } = useSelector((state) => state.user);
 
   const handleChange = (e) => {
@@ -14,14 +15,25 @@ export default function ResetPassword() {
     });
   };
 
+  useEffect(() => {
+    if (input.password !== input.password2) {
+      setError("Las contraseñas no coinciden");
+    } else {
+      setError(null);
+    }
+  }, [input, setError]);
+
   const handleSubmit = async (e) => {
-    const handlePass = await axios.post(
-      `http://localhost:3000/users/${user.user.id}/passwordReset`,
-      {
-        password: input.oldpass,
-        newPassword: input.newpass,
-      }
-    );
+    const handlePass = await axios
+      .put(`http://localhost:3000/users/passwordReset/${token}`, {
+        password: input.password,
+        password2: input.password2,
+      })
+      .then((res) => {
+        if (res.status === 204) {
+          setError("Token invalido o expirado");
+        }
+      });
   };
 
   return (
@@ -30,26 +42,30 @@ export default function ResetPassword() {
         <h1>Cambiar contraseña</h1>
         <div className={style.textbox}>
           <input
-            name="oldpass"
+            name="password"
             type="password"
-            placeholder="Contraseña actual"
+            placeholder="Contraseña"
             onChange={handleChange}
           />
         </div>
         <div className={style.textbox}>
           <input
             onChange={handleChange}
-            name="newpass"
+            name="password2"
             type="password"
-            placeholder="Nueva contraseña"
+            placeholder="Repite contraseña"
           />
         </div>
-        <input
-          type="submit"
-          onClick={handleSubmit}
-          className={style.btn}
-          value="Cambiar"
-        />
+        {!error && input.password ? (
+          <input
+            type="submit"
+            onClick={handleSubmit}
+            className={style.btn}
+            value="Cambiar"
+          />
+        ) : (
+          <p>{error}</p>
+        )}
       </div>
     </div>
   );

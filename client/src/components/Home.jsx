@@ -1,46 +1,65 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import style from "../CSS/homepage.module.scss";
 import bkg from "../template/Images/bkg.jpg";
+import axios from "axios";
+import Producto from "./Catalogo/productCard";
+import { useHistory } from "react-router-dom";
 
 export default function Homepage() {
+  const [news, setNews] = useState([]);
+  const [first, setFirst] = useState(null);
+  const { push } = useHistory();
+
+  useEffect(() => {
+    const order = JSON.stringify([["id", "DESC"]]);
+    axios
+      .get(`http://localhost:3000/products?order=${order}&limit=13`)
+      .then(({ data }) => {
+        setNews(data.rows.splice(1));
+        setFirst(data.rows[0]);
+      });
+  }, []);
   return (
     <div className={style.page}>
       <img src={bkg} alt="" className={style.bkg} />
       <div className={style.imgLibros}>
         <div className={style.content}>
           <section>
-            <img
-              className={style.img}
-              src="https://books.google.com/books/content/images/frontcover/oU9cCgAAQBAJ?fife=w400-h600"
-              alt=""
-            />
+            {first && (
+              <img className={style.img} src={first.img} alt="ta roto" />
+            )}
           </section>
           <section>
             <h1>
-              Alicia en el pais de las maravillas
+              {first?.title || null}
               <span>nuevo</span>
             </h1>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipiscing elit commodo,
-              elementum malesuada posuere torquent enim orci potenti, sed
-              ultricies mi dis donec ultrices massa. Semper quis imperdiet sem
-              primis dignissim platea nibh convallis turpis, faucibus aliquet
-              vehicula blandit vel risus suspendisse. Elementum sagittis at
-              vivamus netus scelerisque facilisi vestibulum justo dis luctus,
-              quis mus integer a senectus lectus diam vel accumsan, aliquam
-              iaculis egestas bibendum maecenas faucibus mauris fermentum
-              rutrum.
-            </p>
+            <p>{first?.description || null}</p>
             <button>Ver más</button>
           </section>
         </div>
       </div>
       <div className={style.titulo}>
-        <h1>Ofertas</h1>
+        <h1>Novedades</h1>
       </div>
-      <div className={style.fondo}></div>
+      <div className={style.fondo}>
+        {news.length &&
+          news.map((producto) => {
+            return (
+              <Producto
+                img={producto.img}
+                title={producto.title}
+                price={producto.price}
+                key={producto.id}
+                id={producto.id}
+                OnClick={() => push(`/productos/${producto.id}`)}
+                categories={producto.Categories}
+              />
+            );
+          })}
+      </div>
       <div className={style.titulo}>
-        <h1 className={style.nov}>Novedades</h1>
+        <h1 className={style.nov}>Ofertas </h1>
       </div>
       <div className={style.fondo}></div>
     </div>

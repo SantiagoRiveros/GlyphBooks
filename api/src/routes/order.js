@@ -2,9 +2,13 @@ const order = require("express").Router();
 const { Order, Product, User } = require("../db.js");
 
 order.get("/", (req, res, next) => {
+  const page = req.query.page;
+  const limit = req.query.limit || 12;
+  const offset = page ? (page - 1) * limit : null;
+
   if (req.user) {
     if (req.user.isAdmin) {
-      Order.findAll({ include: Product })
+      Order.findAndCountAll({ include: Product, limit, offset })
         .then((ordenes) => res.json(ordenes))
         .catch(next);
     } else res.sendStatus(401);

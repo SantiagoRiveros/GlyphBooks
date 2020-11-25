@@ -42,6 +42,16 @@ module.exports = (sequelize) => {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
     },
+    // resetPasswordToken: String,s
+    // resetPasswordExpires: Date,
+
+    resetPasswordToken: {
+      type: DataTypes.STRING,
+    },
+
+    resetPasswordExpires: {
+      type: DataTypes.DATE,
+    },
   });
   User.prototype.compare = function (pass) {
     return bcyrpt.compareSync(pass, this.password);

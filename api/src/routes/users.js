@@ -67,7 +67,7 @@ user.post("/forgot", async (req, res, next) => {
         `http:/localhost:3001/password/` +
         token,
     };
-    userData.resetPasswordExpires = Date.now();
+    userData.resetPasswordExpires = Date.now() + 3600000;
     userData.resetPasswordToken = token;
     userData.save();
 

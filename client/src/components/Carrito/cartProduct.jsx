@@ -59,7 +59,14 @@ function CartProduct(props) {
             -
           </button>
           <h3 className={style.quantity}>{quantity}</h3>
-          <button className={style.btn} onClick={() => handleChange(1)}>
+          <button
+            className={style.btn}
+            onClick={() => {
+              if (props.producto.stock > quantity) {
+                handleChange(1);
+              }
+            }}
+          >
             +
           </button>
         </div>

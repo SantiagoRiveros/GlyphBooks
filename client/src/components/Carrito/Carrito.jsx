@@ -27,7 +27,7 @@ export default function Carrito(props) {
   }, [props.items]);
 
   const handleDelete = () => {
-    if (idUser) {
+    if (idUser && props.items.length) {
       axios
         .delete(`http://localhost:3000/users/${idUser}/cart`)
         .then(() => dispatch(cerrarCarrito()));
@@ -47,23 +47,24 @@ export default function Carrito(props) {
     <div className={style.container}>
       <div className={open}>
         <ul>
-          {props.items.length &&
-            props.items.map((item) => (
-              <li key={item.id}>
-                <CartProduct
-                  key={item.id}
-                  stock={item.stock}
-                  title={item.title}
-                  img={item.img}
-                  price={item.price}
-                  producto={item}
-                />
-              </li>
-            ))}
+          {props.items.length
+            ? props.items.map((item) => (
+                <li key={item.id}>
+                  <CartProduct
+                    key={item.id}
+                    stock={item.stock}
+                    title={item.title}
+                    img={item.img}
+                    price={item.price}
+                    producto={item}
+                  />
+                </li>
+              ))
+            : null}
         </ul>
         <p className={style.total}>TOTAL: ${total}</p>
         <div className={style.btnContainer}>
-          <button className={style.btn} onClick={handleSubmit}>
+          <button className={style.btn} onClick={handleFinalizar}>
             finalizar
           </button>
           <button className={style.btn} onClick={handleDelete}>

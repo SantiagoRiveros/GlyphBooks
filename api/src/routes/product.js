@@ -1,5 +1,5 @@
 const server = require("express").Router();
-const { Product, Category } = require("../db.js");
+const { Product, Category, Review } = require("../db.js");
 const { Op } = require("sequelize");
 
 server.get("/", (req, res, next) => {
@@ -67,7 +67,7 @@ server.get("/search", (req, res, next) => {
 });
 
 server.get("/search/:id", (req, res) => {
-  Product.findOne({ where: { id: req.params.id } })
+  Product.findOne({ where: { id: req.params.id }, include: Review })
     .then((book) => {
       if (!book) {
         res.json({ book: "No encontrado" });

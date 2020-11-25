@@ -13,20 +13,22 @@ function Product(props) {
 
   const agregarCarrito = (producto) => {
     if (user !== "guest") {
-      console.log(items, producto);
       const notNew = items.find((p) => Number(p.id) === Number(producto.id));
       var nextStep;
       if (notNew) {
-        let { quantity, orderId, id } = notNew.lineOrder;
-        let newQuantity = quantity + 1;
-        console.log(id, newQuantity, orderId);
-        nextStep = axios.put(
-          `http://localhost:3000/order/${orderId}/lineorder`,
-          {
-            id,
-            quantity: newQuantity,
-          }
-        );
+        if (notNew.stock > notNew.lineOrder.quantity) {
+          let { quantity, orderId, id } = notNew.lineOrder;
+          let newQuantity = quantity + 1;
+          nextStep = axios.put(
+            `http://localhost:3000/order/${orderId}/lineorder`,
+            {
+              id,
+              quantity: newQuantity,
+            }
+          );
+        } else {
+          return;
+        }
       } else {
         nextStep = axios.post(`http://localhost:3000/users/${user.id}/cart`, {
           id: producto.id,
@@ -89,7 +91,7 @@ function Product(props) {
               <label style={{ marginLeft: "1.5rem" }}>Stock:</label>
               <span style={{ marginLeft: "0.5rem" }}>{product.stock}</span>
             </div>
-            {product?.reviews ? (
+            {product?.reviews?.length ? (
               product.reviews.map((review, index) => (
                 <Review review={review} key={index} />
               ))

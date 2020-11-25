@@ -35,7 +35,9 @@ export default function Homepage() {
               <span>nuevo</span>
             </h1>
             <p>{first?.description || null}</p>
-            <button>Ver más</button>
+            <button onClick={() => push(`/products/${first?.id}`)}>
+              Ver más
+            </button>
           </section>
         </div>
       </div>

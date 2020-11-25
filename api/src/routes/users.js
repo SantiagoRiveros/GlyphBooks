@@ -216,9 +216,12 @@ user.put("/:idUser/cart", (req, res, next) => {
 });
 
 user.get("/", (req, res, next) => {
+  const page = req.query.page;
+  const limit = req.query.limit || 12;
+  const offset = page ? (page - 1) * limit : null;
   if (req.user) {
     if (req.user.isAdmin) {
-      User.findAll()
+      User.findAndCountAll({ offset, limit })
         .then((user) => {
           res.send(user);
         })

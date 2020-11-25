@@ -5,12 +5,15 @@ import style from "../../CSS/Admin/orderTable.module.scss";
 
 export default function OrderTable() {
   const [order, setOrder] = useState([]);
+  const [page, setPage] = useState(1);
   const { push } = useHistory();
+  const pageLimit = Math.ceil(order.count / 12);
+
   useEffect(() => {
-    axios.get("http://localhost:3000/order").then(({ data }) => {
+    axios.get(`http://localhost:3000/order?page${page}`).then(({ data }) => {
       setOrder(data);
     });
-  }, []);
+  }, [page]);
 
   return (
     <div className={style.size}>
@@ -22,8 +25,8 @@ export default function OrderTable() {
           <th className={style.th}>Creation Date</th>
           <th className={style.th}>Details</th>
         </tr>
-        {order.length &&
-          order.map((order) => (
+        {order.count &&
+          order.rows.map((order) => (
             <tr className={style.tr}>
               <td className={style.td}>{order.id}</td>
               <td className={style.td}>{order.userId}</td>
@@ -37,6 +40,20 @@ export default function OrderTable() {
             </tr>
           ))}
       </table>
+      <button
+        className={style.Btn}
+        disabled={page === 1 || page === "1"}
+        onClick={() => setPage(page - 1)}
+      >
+        Back
+      </button>
+      <button
+        className={style.Btn}
+        disabled={parseInt(page) === pageLimit}
+        onClick={() => setPage(page + 1)}
+      >
+        Next
+      </button>
     </div>
   );
 }

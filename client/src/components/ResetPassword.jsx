@@ -25,7 +25,7 @@ export default function ResetPassword() {
 
   const handleSubmit = async (e) => {
     const handlePass = await axios.post(
-      `http://localhost:3000/users/${user.user.id}/passwordReset`,
+      `http://localhost:3000/users/${user.id}/passwordReset`,
       {
         password: input.password,
         password2: input.password2,

@@ -21,11 +21,13 @@ export default function OrderDetails() {
         setOrder(data);
         if( data.products ) {
           var axiosArr = [];
+          console.log(data.products)
           data.products.forEach((p) => {
             axiosArr.push(axios.get(`http://localhost:3000/reviews/${p.id}/${data.user.id}`))
           })
           Promise.all(axiosArr)
           .then(r => {
+            console.log(r)
             setReview(r.filter(rev => {
               return rev.data !== ""
             }).map(r => { return r.data}))
@@ -75,8 +77,8 @@ export default function OrderDetails() {
             {order.products.length &&
               order.products.map((producto) => {
                 const getReview = (pid, uid) => {
-                  var p = review.filter(r => { 
-                    return r.productId === pid && uid === r.userId 
+                  var p = review.filter(r => {
+                    return r.productId === pid && uid === r.userId
                   })
                   if ( p.length > 0 ) {
                     return p[0].title

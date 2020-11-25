@@ -14,8 +14,16 @@ review.post("/products/:id/review", async (req, res, next) => {
   }
 });
 
-review.get("/products/:id/review/", (req, res, next) => {
-  Review.findAll().then((reviews) => {
+review.get("/:productId", (req, res, next) => {
+  const { productId } = req.params;
+  Review.findAll({ where: { productId } }).then((reviews) => {
+    res.send(reviews);
+  });
+});
+
+review.get("/:productId/:userId", (req, res, next) => {
+  const { productId, userId } = req.params;
+  Review.findOne({ where: { productId, userId } }).then((reviews) => {
     res.send(reviews);
   });
 });

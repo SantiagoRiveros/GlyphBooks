@@ -3,7 +3,7 @@ const { conn } = require("./src/db");
 conn.query(`
 
 INSERT INTO products (title, description, author, price, img)
-VALUES ('Harry Potter y la piedra filosofal', 'Harry el sucio Potter agarra una piedra y muere el malo', 'J. K. Rowling', 1500, 'https://www.harrymedia.com/data/media/9/hp1-es-2020.jpg'),
+VALUES ('Harry Potter y la piedra filosofal', 'Lorem ipsum dolor sit amet consectetur adipiscing elit commodo, elementum malesuada posuere torquent enim orci potenti, sed ultricies mi dis donec ultrices massa. Semper quis imperdiet sem primis dignissim platea nibh convallis turpis, faucibus aliquet vehicula blandit vel risus suspendisse. Elementum sagittis at vivamus netus scelerisque facilisi vestibulum justo dis luctus, quis mus integer a senectus lectus diam vel accumsan, aliquam iaculis egestas bibendum maecenas faucibus mauris fermentum rutrum.', 'J. K. Rowling', 1500, 'https://www.harrymedia.com/data/media/9/hp1-es-2020.jpg'),
 ('Alice in Wonderland', 'Una falopera se pasa de linea y se pega el viaje de su vida', 'Lewis Carroll', 1430, 'http://2.bp.blogspot.com/_JXi92wDCOGk/TGF1W98DwWI/AAAAAAAABqI/jmXaiB8h0nE/s1600/Alice+book+cover2.jpg'),
 ('Harry Potter y la camara secreta', 'Harry el sucio Potter entra al baño y casi se lo come una serpiente', 'J. K. Rowling', 1500, 'http://2.bp.blogspot.com/_mC3p3y_gsQY/S7CdmXNyomI/AAAAAAAAAGQ/kGeZNIgSGk4/s1600/harry+potter+2.jpg'),
 ('Marketing extraordiario', '¿QUERES SER TU PROPIO JEFE PA? Este libro es para vos', 'Damian Di Pace', 1770, 'https://www.ecoeediciones.com/wp-content/uploads/2018/02/Marketing-extraordinario.jpg'),

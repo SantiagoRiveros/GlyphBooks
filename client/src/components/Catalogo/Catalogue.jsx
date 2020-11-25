@@ -72,7 +72,7 @@ function Catalogue(props) {
   return (
     <div className={style.Fondo}>
       <Sidebar className={style.Sidebar} setCategory={setCategory} />
-      <div className={style.Relleno}>
+      <div className={style.Orden}>
         <SearchBar onSearch={onSearch} />
         <div className={style.Catalogue}>
           {display.count &&

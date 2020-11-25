@@ -20,6 +20,7 @@ import NewUser from "./components/Forms/UserForm.jsx";
 import ResetPassword from "./components/ResetPassword";
 import Forgot from "./components/Forgot";
 import Cuenta from "./components/User/user.jsx";
+import Checkout from "./components/Checkout.jsx";
 
 function App(props) {
   const [show, setShow] = useState(false);
@@ -97,6 +98,16 @@ function App(props) {
         <Route
           path="/ingresar"
           render={() => <Login setLocalUser={setLocalUser} />}
+        />
+        <Route
+          path="/checkout/:orderId"
+          render={() => (
+            <Checkout
+              setLocalUser={setLocalUser}
+              localUser={localUser}
+              items={props.carrito.cart.items}
+            />
+          )}
         />
         <Route path="/admin" component={Admin} />
         <Route path="/signup" component={NewUser} />

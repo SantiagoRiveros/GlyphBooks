@@ -100,7 +100,11 @@ function App(props) {
         />
         <Route path="/admin" component={Admin} />
         <Route path="/signup" component={NewUser} />
-        <Route path="/password" component={ResetPassword} />
+        <Route
+          exact
+          path="/password/:token"
+          render={({ match }) => <ResetPassword token={match.params.token} />}
+        />
         <Route path="/forgot" component={Forgot} />
         <Route
           path="/cuenta"

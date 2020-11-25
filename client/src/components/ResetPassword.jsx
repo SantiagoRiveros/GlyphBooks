@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import style from "../CSS/login.module.scss";
 
-export default function ResetPassword() {
+export default function ResetPassword({ token }) {
   const [input, setInput] = useState({ password: "", password2: "" });
   const [error, setError] = useState("");
   const { user } = useSelector((state) => state.user);
@@ -24,13 +24,16 @@ export default function ResetPassword() {
   }, [input, setError]);
 
   const handleSubmit = async (e) => {
-    const handlePass = await axios.post(
-      `http://localhost:3000/users/${user.id}/passwordReset`,
-      {
+    const handlePass = await axios
+      .put(`http://localhost:3000/users/passwordReset/${token}`, {
         password: input.password,
         password2: input.password2,
-      }
-    );
+      })
+      .then((res) => {
+        if (res.status === 204) {
+          setError("Token invalido o expirado");
+        }
+      });
   };
 
   return (

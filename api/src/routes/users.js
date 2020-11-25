@@ -44,10 +44,9 @@ user.post("/forgot", async (req, res, next) => {
     where: { email: req.body.email },
   });
 
-  crypto.randomBytes(20, function (err, buf) {
-    const token = buf.toString("hex");
-    return token;
-  });
+  let token = crypto.randomBytes(20);
+  token = token.toString("hex");
+  console.log(token);
 
   if (!userData) {
     return res.redirect("/forgot");
@@ -65,8 +64,13 @@ user.post("/forgot", async (req, res, next) => {
       subject: "Reseteo de contraseña",
       text:
         `Entra en este link para cambiar la contraseña ` +
-        `https:/localhost:3001/password/`,
+        `http:/localhost:3001/password/` +
+        token,
     };
+    userData.resetPasswordExpires = Date.now();
+    userData.resetPasswordToken = token;
+    userData.save();
+
     smtpTransport.sendMail(mailOptions, function (err) {
       if (err) {
         console.log("Ocurrio un error", err);
@@ -77,7 +81,7 @@ user.post("/forgot", async (req, res, next) => {
   }
 });
 
-// user.get("/reset/:token", async function (req, res) {
+// user.get("/password/:token", async function (req, res) {
 //   const userData = User.findOne(
 //     {
 //       where: { resetPasswordToken: req.params.token },
@@ -88,19 +92,26 @@ user.post("/forgot", async (req, res, next) => {
 //         // req.flash("error", "El link es invalido o ya expiro.");
 //         return res.redirect("/forgot");
 //       }
-//       res.render("reset", { token: req.params.token });
+//       res.render("password", { token: req.params.token });
 //     }
 //   );
 // });
 
-user.post("/:id/passwordReset", async (req, res, next) => {
-  const userData = await User.findOne({ where: { id: req.params.id } });
+user.put("/passwordReset/:token", async (req, res, next) => {
+  const userData = await User.findOne({
+    where: { resetPasswordToken: req.params.token },
+  });
   if (userData) {
-    userData.password = req.body.password;
-    await userData.save({ fields: ["password"] });
-    return res.status(201).json({ message: "se cambio la contraseña" });
+    if (userData.resetPasswordExpires > Date.now()) {
+      userData.resetPasswordExpires = Date.now();
+      userData.password = req.body.password;
+      await userData.save();
+      return res.status(201).json({ message: "se cambio la contraseña" });
+    } else {
+      return res.status(204).json({ message: "Token invalido o ya expiro" });
+    }
   }
-  return res.status(404).json({ message: "Ocurrio un error" });
+  return res.status(204).json({ message: "Ocurrio un error" });
 });
 
 // user.post("/reset/:token", function (req, res) {
@@ -117,6 +128,7 @@ user.post("/:id/passwordReset", async (req, res, next) => {
 //       if (req.body.password === req.body.password2) {
 //         userData.password = req.body.password;
 //         await userData.save({ fields: ["password"] });
+
 //         return res.status(201).json({ message: "se cambio la contraseña" });
 //       } else {
 //         // req.flash("error", "Las contraseñas no son iguales");

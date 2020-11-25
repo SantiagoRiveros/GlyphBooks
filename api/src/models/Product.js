@@ -11,7 +11,7 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       description: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(1000),
         defaultValue: "No hay una descripcion",
       },
       author: {

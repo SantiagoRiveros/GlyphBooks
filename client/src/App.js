@@ -4,7 +4,10 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { useLocalStorage } from "react-use";
 import { agregarVarios, login } from "./actions/actions";
 import axios from "axios";
-// import ReactGA from "react-ga";
+import ReactGA from "react-ga";
+import "./App.scss";
+import "./normalize.css";
+import Footer from "./components/Footer";
 
 //componentes
 
@@ -20,6 +23,7 @@ import NewUser from "./components/Forms/UserForm.jsx";
 import ResetPassword from "./components/ResetPassword";
 import Forgot from "./components/Forgot";
 import Cuenta from "./components/User/user.jsx";
+import Checkout from "./components/Checkout.jsx";
 
 function App(props) {
   const [show, setShow] = useState(false);
@@ -98,6 +102,16 @@ function App(props) {
           path="/ingresar"
           render={() => <Login setLocalUser={setLocalUser} />}
         />
+        <Route
+          path="/checkout/:orderId"
+          render={() => (
+            <Checkout
+              setLocalUser={setLocalUser}
+              localUser={localUser}
+              items={props.carrito.cart.items}
+            />
+          )}
+        />
         <Route path="/admin" component={Admin} />
         <Route path="/signup" component={NewUser} />
         <Route path="/password" component={ResetPassword} />
@@ -115,6 +129,7 @@ function App(props) {
           )}
         />
       </Switch>
+      <Footer />
     </Router>
   );
 }

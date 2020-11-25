@@ -1,9 +1,8 @@
 const user = require("express").Router();
 const { Product, Category, User, Order } = require("../db.js");
 const { Op } = require("sequelize");
-var api_key = "b5c113301e92d7905ae874c95a2a0d3b-2af183ba-def9cce4";
-var domain = "sandboxe9e3450cb5b04c92a05e5501df8811fe.mailgun.org";
-var mailgun = require("mailgun-js")({ apiKey: api_key, domain: domain });
+const nodemailer = require("nodemailer");
+const crypto = require("crypto");
 
 user.post("/", (req, res, next) => {
   const request = req.body;
@@ -40,45 +39,116 @@ user.post("/:idUser/cart", (req, res, next) => {
     .catch(next);
 });
 
+user.post("/forgot", async (req, res, next) => {
+  const userData = await User.findOne({
+    where: { email: req.body.email },
+  });
+
+  crypto.randomBytes(20, function (err, buf) {
+    const token = buf.toString("hex");
+    return token;
+  });
+
+  if (!userData) {
+    return res.redirect("/forgot");
+  } else {
+    var smtpTransport = nodemailer.createTransport({
+      service: "Gmail",
+      auth: {
+        user: "glyphbooksecommerce@gmail.com",
+        pass: "HenryEcommerce123",
+      },
+    });
+    var mailOptions = {
+      to: userData.email,
+      from: "glyphbooksecommerce@gmail.com",
+      subject: "Reseteo de contraseña",
+      text:
+        `Entra en este link para cambiar la contraseña ` +
+        `https:/localhost:3001/password/`,
+    };
+    smtpTransport.sendMail(mailOptions, function (err) {
+      if (err) {
+        console.log("Ocurrio un error", err);
+      } else {
+        console.log("Email enviado");
+      }
+    });
+  }
+});
+
+// user.get("/reset/:token", async function (req, res) {
+//   const userData = User.findOne(
+//     {
+//       where: { resetPasswordToken: req.params.token },
+//       resetPasswordExpires: { $gt: Date.now() },
+//     },
+//     function (err, user) {
+//       if (!userData) {
+//         // req.flash("error", "El link es invalido o ya expiro.");
+//         return res.redirect("/forgot");
+//       }
+//       res.render("reset", { token: req.params.token });
+//     }
+//   );
+// });
+
 user.post("/:id/passwordReset", async (req, res, next) => {
   const userData = await User.findOne({ where: { id: req.params.id } });
-  if (userData && userData.password) {
-    const compare = userData.compare(req.body.password);
-    if (compare) {
-      userData.password = req.body.newPassword;
-      await userData.save({ fields: ["password"] });
-      return res.status(201).json({ message: "se cambio la contraseña" });
-    } else {
-      return res.status(404).json({ message: "la contraseña no es valida" });
-    }
+  if (userData) {
+    userData.password = req.body.password;
+    await userData.save({ fields: ["password"] });
+    return res.status(201).json({ message: "se cambio la contraseña" });
   }
   return res.status(404).json({ message: "Ocurrio un error" });
 });
 
-user.post("/forgot"),
-  async (req, res, next) => {
-    const userData = await User.findOne({
-      where: { email: req.params.email },
-    });
-    if (req.body.email === userData.email) {
-      var data = {
-        from: "wachu <mauroocando@gmail.com>",
-        to: "mauroocando@gmail.com",
-        subject: "Q FUNCIONE LA PUTA Q ME PARIO",
-        text:
-          "Has solicitado un cambio de contraseña, entra en el siguiente link para proceder: http://localhost:3000/password si no has pedido este cambio, contacta con el soporte tecnico",
-      };
+// user.post("/reset/:token", function (req, res) {
+//   const userData = User.findOne(
+//     {
+//       where: { resetPasswordToken: req.params.token },
+//       resetPasswordExpires: { $gt: Date.now() },
+//     },
+//     async function (err, user) {
+//       if (!userData) {
+//         // req.flash("error", "El link es invalido o ya expiro.");
+//         return res.redirect("back");
+//       }
+//       if (req.body.password === req.body.password2) {
+//         userData.password = req.body.password;
+//         await userData.save({ fields: ["password"] });
+//         return res.status(201).json({ message: "se cambio la contraseña" });
+//       } else {
+//         // req.flash("error", "Las contraseñas no son iguales");
+//         return res.redirect("back");
+//       }
+//     }
+//   );
 
-      mailgun.messages().send(data, function (error, body) {
-        if (error) {
-          console.log(error);
-        }
-        console.log(body);
-      });
-      return res.status(201).json({ message: "El correo ha sido enviado" });
-    }
-    return res.status(404).json({ message: "ocurrio un error" });
-  };
+//   var smtpTransport = nodemailer.createTransport({
+//     service: "Gmail",
+//     auth: {
+//       user: "glyphbooksecommerce@gmail.com",
+//       pass: "HenryEcommerce123",
+//     },
+//   });
+//   var mailOptions = {
+//     to: user.email,
+//     from: "glyphbooksecommerce@gmail.com",
+//     subject: "Tu contraseña ha sido cambiada correctamente",
+//     text:
+//       "Hola,\n\n" +
+//       "este correo es para confirmar que la contraseña de " +
+//       user.email +
+//       " ha sido cambiada correctamente.\n",
+//   };
+//   smtpTransport.sendMail(mailOptions, function (err) {
+//     // req.flash(
+//     //   "Exito",
+//     //   "Exito, tu contraseña ha sido cambiada correctamente"
+//     // );
+//   });
+// });
 
 user.get("/:idUser/cart", (req, res, next) => {
   User.findOne({ where: { id: req.params.idUser } })
@@ -146,9 +216,12 @@ user.put("/:idUser/cart", (req, res, next) => {
 });
 
 user.get("/", (req, res, next) => {
+  const page = req.query.page;
+  const limit = req.query.limit || 12;
+  const offset = page ? (page - 1) * limit : null;
   if (req.user) {
     if (req.user.isAdmin) {
-      User.findAll()
+      User.findAndCountAll({ offset, limit })
         .then((user) => {
           res.send(user);
         })

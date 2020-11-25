@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import CartProduct from "./cartProduct";
 import style from "../../CSS/carrito.module.css";
@@ -9,6 +10,7 @@ export default function Carrito(props) {
   const open = props.cartShow ? style.sidebarOpen : style.sidebar;
   const [total, setTotal] = useState(0);
   const dispatch = useDispatch();
+  const { push } = useHistory();
 
   const idUser = useSelector((state) => state.user.user?.id);
 
@@ -34,24 +36,10 @@ export default function Carrito(props) {
     }
   };
 
-  const handleSubmit = () => {
-    const { orderId } = props.items[0].lineOrder;
-    if (idUser) {
-      axios
-        .put(`http://localhost:3000/users/${idUser}/cart`, {
-          orderId,
-          status: "procesando",
-        })
-        .then((res) =>
-          Promise.all(
-            props.items.map((i) => {
-              return axios.put(`http://localhost:3000/products/${i.id}`, {
-                stock: i.stock - i.lineOrder.quantity,
-              });
-            })
-          )
-        )
-        .then(() => dispatch(cerrarCarrito()));
+  const handleFinalizar = () => {
+    if (props.items.length) {
+      const { orderId } = props.items[0].lineOrder;
+      push(`/checkout/${orderId}`);
     }
   };
 
@@ -60,7 +48,9 @@ export default function Carrito(props) {
       <div className={open}>
         <div>
           <p>Total: ${total}</p>
-          {idUser && <button onClick={handleSubmit}>finalizar</button>}
+          {idUser && (
+            <button onClick={() => handleFinalizar()}>finalizar</button>
+          )}
           <button onClick={handleDelete}>eliminar</button>
         </div>
         <ul>

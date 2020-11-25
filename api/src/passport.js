@@ -27,12 +27,14 @@ passport.use(
         return done(null, false, {
           message: "Username or password is incorrect",
         });
-      const { id, firstName, lastName, isAdmin } = user;
+      const { id, firstName, lastName, isAdmin, shippingAdress } = user;
       return done(null, {
         id,
         firstName,
         lastName,
+        email,
         isAdmin,
+        shippingAdress,
       });
     }
   )

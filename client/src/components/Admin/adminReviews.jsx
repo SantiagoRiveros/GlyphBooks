@@ -6,15 +6,20 @@ import { useHistory } from "react-router-dom";
 export default function AdminUsers() {
   const { push } = useHistory();
   const [reviews, setReviews] = useState([]);
+  const [page, setPage] = useState(1);
+  const pageLimit = Math.ceil(reviews.count / 12);
+
   useEffect(() => {
-    axios.get("http://localhost:3000/reviews").then(({ data }) => {
+    axios.get(`http://localhost:3000/reviews?page=${page}`).then(({ data }) => {
       setReviews(data);
     });
-  }, []);
+  }, [page]);
 
-  async function handleDelete (id, productId) {
-    await axios.delete(`http://localhost:3000/reviews/products/${productId}/review/${id}`)
-    const { data } = await axios.get("http://localhost:3000/reviews")
+  async function handleDelete(id, productId) {
+    await axios.delete(
+      `http://localhost:3000/reviews/products/${productId}/review/${id}`
+    );
+    const { data } = await axios.get("http://localhost:3000/reviews");
     setReviews(data);
   }
 
@@ -30,8 +35,8 @@ export default function AdminUsers() {
           <th className={style.th}>Fecha de creacion</th>
           <th className={style.th}>Eliminar</th>
         </tr>
-        {reviews.length &&
-          reviews.map((review) => (
+        {reviews.count &&
+          reviews.rows.map((review) => (
             <tr className={style.tr}>
               <td className={style.td}>{review.id}</td>
               <td className={style.td}>{review.title}</td>
@@ -40,11 +45,29 @@ export default function AdminUsers() {
               <td className={style.td}>{review.userId}</td>
               <td className={style.td}>{review.createdAt}</td>
               <td className={style.td}>
-               <ion-icon name="trash-outline"  className={style.ionicon} onClick={() => handleDelete(review.id, review.productId)}></ion-icon>
+                <ion-icon
+                  name="trash-outline"
+                  className={style.ionicon}
+                  onClick={() => handleDelete(review.id, review.productId)}
+                ></ion-icon>
               </td>
             </tr>
           ))}
       </table>
+      <button
+        className={style.Btn}
+        disabled={page === 1 || page === "1"}
+        onClick={() => setPage(page - 1)}
+      >
+        Back
+      </button>
+      <button
+        className={style.Btn}
+        disabled={parseInt(page) === pageLimit}
+        onClick={() => setPage(page + 1)}
+      >
+        Next
+      </button>
     </div>
   );
 }

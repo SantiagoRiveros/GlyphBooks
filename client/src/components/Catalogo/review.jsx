@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react"
+import React from "react";
 import style from "../../CSS/review.module.scss";
 import ReactStars from "react-rating-stars-component";
 import { connect } from "react-redux";
-import axios from "axios";
 
 function Review(props) {
     const [reviews, setReviews] = useState();
@@ -32,10 +31,7 @@ function Review(props) {
           <h3 className={style.description}>{review.body}</h3>
         </div>))}
     </div>
-    );
-  } else {
-    return <div>No hay reseñas disponibles para este producto</div>;
-  }
+  );
 }
 
 export default connect()(Review);

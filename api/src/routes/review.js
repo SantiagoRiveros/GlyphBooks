@@ -1,5 +1,4 @@
 const review = require("express").Router(),
-
   { Review, Product } = require("../db.js");
 const { Op } = require("sequelize");
 
@@ -34,7 +33,7 @@ review.put("/:id", (req, res, next) => {
   const request = req.body;
 
   Review.findOne({ where: { id } })
-    .then((rivew) => {
+    .then((review) => {
       for (const key in request) {
         review[key] = request[key];
       }
@@ -55,7 +54,11 @@ review.delete("/products/:id/review/:idReview", (req, res, next) => {
 });
 
 review.get("/", (req, res, next) => {
-  Review.findAll()
+  const page = req.query.page;
+  const limit = req.query.limit || 12;
+  const offset = page ? (page - 1) * limit : null;
+
+  Review.findAndCountAll({ limit, offset })
     .then((review) => {
       res.send(review);
     })

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import CartProduct from "./cartProduct";
-import style from "../../CSS/carrito.module.css";
+import style from "../../CSS/carrito.module.scss";
 import axios from "axios";
 import { cerrarCarrito } from "../../actions/actions";
 
@@ -58,11 +58,6 @@ export default function Carrito(props) {
   return (
     <div className={style.container}>
       <div className={open}>
-        <div>
-          <p>Total: ${total}</p>
-          <button onClick={handleSubmit}>finalizar</button>
-          <button onClick={handleDelete}>eliminar</button>
-        </div>
         <ul>
           {props.items.length &&
             props.items.map((item) => (
@@ -71,12 +66,22 @@ export default function Carrito(props) {
                   key={item.id}
                   stock={item.stock}
                   title={item.title}
+                  img={item.img}
                   price={item.price}
                   producto={item}
                 />
               </li>
             ))}
         </ul>
+        <p className={style.total}>TOTAL: ${total}</p>
+        <div className={style.btnContainer}>
+          <button className={style.btn} onClick={handleSubmit}>
+            finalizar
+          </button>
+          <button className={style.btn} onClick={handleDelete}>
+            eliminar
+          </button>
+        </div>
       </div>
     </div>
   );

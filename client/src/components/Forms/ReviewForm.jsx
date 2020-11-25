@@ -38,7 +38,6 @@ export default function Review({ productId, userId, notShow, orderId }) {
       <ReactStars
         count={5}
         onChange={ratingChanged}
-        isHalf={true}
         size={24}
         activeColor="#ffd700"
       />

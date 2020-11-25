@@ -2,7 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin-top: 15px;
+  margin-top: 3rem;
   margin-left: 125px;
 }
 
@@ -14,48 +14,27 @@
   margin-bottom: 10px;
 }
 
-.Btns {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  max-width: 80%;
-  text-align: center;
-  margin-top: 15px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .Fondo {
-  background: url("../template/Images/catalogo.jpeg");
-  margin-left: auto;
-  margin-right: auto;
+  background: rgb(252, 237, 211);
+  background: linear-gradient(
+    2deg,
+    rgba(252, 237, 211, 1) 0%,
+    rgba(253, 246, 233, 1) 25%,
+    rgba(250, 250, 250, 1) 100%
+  );
+  height: auto;
+
+  min-height: 55rem;
+  display: flex;
 }
 
-.Relleno {
-  background: rgba(255, 255, 255, 0.9);
+.Orden {
   width: auto;
   height: auto;
   display: flex;
   justify-content: center;
   flex-direction: column;
   flex: 80%;
-}
-
-.Button {
-  display: inline-block;
-  background-color: #BDC3C7;
-  border-radius: 5px;
-  color: white;
-  border: 0px;
-  padding: 5px 10px;
-  margin: 5px 10px;
-  transition: all 0.5s;
-  &:hover {
-    color: white;
-    transform: scale(1.15);
-    border-color: transparent;
-    background-color: orange;
-  }
 }
 
 .Size {

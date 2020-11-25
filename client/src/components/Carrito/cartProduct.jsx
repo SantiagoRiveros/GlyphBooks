@@ -41,23 +41,31 @@ function CartProduct(props) {
   };
   return (
     <div className={style.container}>
-      <button onClick={handleDelete}>X</button>
-      <h3 className={style.text}>{props.title}</h3>
-      <h3 className={style.text}>{props.price}</h3>
-      <div>
-        <button
-          onClick={() => {
-            if (quantity > 1) {
-              handleChange(-1);
-            } else {
-              handleDelete();
-            }
-          }}
-        >
-          -
+      <img className={style.img} src={props.img} alt="imagen del producto" />
+      <div className={style.textContainer}>
+        <h3 className={style.title}>{props.title}</h3>
+        <h3 className={style.price}>$ {props.price}</h3>
+        <div className={style.btnContainer}>
+          <button
+            className={style.btn}
+            onClick={() => {
+              if (quantity > 1) {
+                handleChange(-1);
+              } else {
+                handleDelete();
+              }
+            }}
+          >
+            -
+          </button>
+          <h3 className={style.quantity}>{quantity}</h3>
+          <button className={style.btn} onClick={() => handleChange(1)}>
+            +
+          </button>
+        </div>
+        <button className={style.btnX} onClick={handleDelete}>
+          x
         </button>
-        <h3>{quantity}</h3>
-        <button onClick={() => handleChange(1)}>+</button>
       </div>
     </div>
   );

@@ -43,7 +43,7 @@ function Catalogue(props) {
   return (
     <div className={style.Fondo}>
       <Sidebar className={style.Sidebar} setCategory={setCategory} />
-      <div className={style.Relleno}>
+      <div className={style.Orden}>
         <div className={style.Catalogue}>
           {productos.count &&
             productos.rows.map((producto) => {

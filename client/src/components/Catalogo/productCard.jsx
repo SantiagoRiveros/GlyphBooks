@@ -1,6 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import style from "../../CSS/Product.module.scss";
+import style from "../../CSS/productCard.module.scss";
 
 export default function Product(props) {
   const { push } = useHistory();
@@ -15,10 +15,14 @@ export default function Product(props) {
           onClick={() => push(`/products/${props.id}`)}
         />
         <div className={style.description}>
-          <h2 className={style.Price}>${props.price}</h2>
           <h3 className={style.title}>{props.title}</h3>
+          <h2 className={style.Price}>${props.price}</h2>
         </div>
-        <button onClick={() => push(`/products/${props.id}`)} className={style.Button}>
+        <button
+          className={style.Button}
+          onClick={() => push(`/products/${props.id}`)}
+          className={style.Button}
+        >
           Agregar al carrito
         </button>
       </div>

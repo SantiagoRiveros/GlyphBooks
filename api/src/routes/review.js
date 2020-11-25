@@ -22,6 +22,13 @@ review.get("/:productId", (req, res, next) => {
   });
 });
 
+review.get("/:productId/:userId", (req, res, next) => {
+  const { productId, userId } = req.params;
+  Review.findOne({ where: { productId, userId } }).then((reviews) => {
+    res.send(reviews);
+  });
+});
+
 review.put("/:id", (req, res, next) => {
   const { id } = req.params;
   const request = req.body;

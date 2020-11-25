@@ -14,7 +14,7 @@ function Review(props) {
           });
       }, [props.id]);
       
-    if (reviews) {
+      if (reviews) {
     return (
     <div className={style.container}>
       {reviews.map(review => (

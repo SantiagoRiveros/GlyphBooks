@@ -6,9 +6,14 @@ order.get("/", (req, res, next) => {
   const limit = req.query.limit || 12;
   const offset = page ? (page - 1) * limit : null;
 
+  let order = req.query.order;
+  if (order) {
+    order = JSON.parse(order);
+  }
+
   if (req.user) {
     if (req.user.isAdmin) {
-      Order.findAndCountAll({ include: Product, limit, offset })
+      Order.findAndCountAll({ include: Product, limit, offset, order })
         .then((ordenes) => res.json(ordenes))
         .catch(next);
     } else res.sendStatus(401);

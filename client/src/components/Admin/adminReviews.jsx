@@ -7,13 +7,22 @@ export default function AdminUsers() {
   const { push } = useHistory();
   const [reviews, setReviews] = useState([]);
   const [page, setPage] = useState(1);
+  const [sort, setSort] = useState("");
   const pageLimit = Math.ceil(reviews.count / 12);
 
+  const handleSort = (e) => {
+    let newOrder = JSON.stringify([[e.target.name, "ASC"]]);
+    newOrder === sort && (newOrder = JSON.stringify([[e.target.name, "DESC"]]));
+    setSort(newOrder);
+  };
+
   useEffect(() => {
-    axios.get(`http://localhost:3000/reviews?page=${page}`).then(({ data }) => {
-      setReviews(data);
-    });
-  }, [page]);
+    axios
+      .get(`http://localhost:3000/reviews?page=${page}&order=${sort}`)
+      .then(({ data }) => {
+        setReviews(data);
+      });
+  }, [page, sort]);
 
   async function handleDelete(id, productId) {
     await axios.delete(
@@ -27,12 +36,23 @@ export default function AdminUsers() {
     <div className={style.size}>
       <table className={style.reviews}>
         <tr className={style.tr}>
-          <th className={style.th}>ID</th>
-          <th className={style.th}>Titulo</th>
+          <th className={style.th}>
+            ID <button name={"id"} onClick={handleSort}></button>
+          </th>
+          <th className={style.th}>
+            Titulo <button name={"title"} onClick={handleSort}></button>
+          </th>
           <th className={style.th}>Cuerpo</th>
-          <th className={style.th}>Calificacion</th>
-          <th className={style.th}>Creada por</th>
-          <th className={style.th}>Fecha de creacion</th>
+          <th className={style.th}>
+            Calificacion <button name={"rating"} onClick={handleSort}></button>
+          </th>
+          <th className={style.th}>
+            Creada por <button name={"userId"} onClick={handleSort}></button>
+          </th>
+          <th className={style.th}>
+            Fecha de creacion{" "}
+            <button name={"createdAt"} onClick={handleSort}></button>
+          </th>
           <th className={style.th}>Eliminar</th>
         </tr>
         {reviews.count &&

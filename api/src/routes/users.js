@@ -231,9 +231,15 @@ user.get("/", (req, res, next) => {
   const page = req.query.page;
   const limit = req.query.limit || 12;
   const offset = page ? (page - 1) * limit : null;
+
+  let order = req.query.order;
+  if (order) {
+    order = JSON.parse(order);
+  }
+
   if (req.user) {
     if (req.user.isAdmin) {
-      User.findAndCountAll({ offset, limit })
+      User.findAndCountAll({ offset, limit, order })
         .then((user) => {
           res.send(user);
         })

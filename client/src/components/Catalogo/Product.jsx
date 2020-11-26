@@ -20,7 +20,7 @@ function Product(props) {
           let { quantity, orderId, id } = notNew.lineOrder;
           let newQuantity = quantity + 1;
           nextStep = axios.put(
-            `http://localhost:3000/order/${orderId}/lineorder`,
+            `${process.env.REACT_APP_API}/order/${orderId}/lineorder`,
             {
               id,
               quantity: newQuantity,
@@ -30,14 +30,19 @@ function Product(props) {
           return;
         }
       } else {
-        nextStep = axios.post(`http://localhost:3000/users/${user.id}/cart`, {
-          id: producto.id,
-          price: producto.price,
-        });
+        nextStep = axios.post(
+          `${process.env.REACT_APP_API}/users/${user.id}/cart`,
+          {
+            id: producto.id,
+            price: producto.price,
+          }
+        );
       }
       nextStep
         .then(() => {
-          return axios.get(`http://localhost:3000/users/${user.id}/cart`);
+          return axios.get(
+            `${process.env.REACT_APP_API}/users/${user.id}/cart`
+          );
         })
         .then(({ data }) => {
           if (data.length) {
@@ -55,7 +60,7 @@ function Product(props) {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/products/search/${props.id}`)
+      .get(`${process.env.REACT_APP_API}/products/search/${props.id}`)
       .then(({ data }) => {
         setProduct(data.book);
       });

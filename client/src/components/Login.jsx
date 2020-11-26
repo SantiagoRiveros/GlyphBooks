@@ -15,7 +15,7 @@ export default function Login({ setLocalUser }) {
   const handleSubmit = (e) => {
     var idUser;
     axios
-      .post(`http://localhost:3000/auth/login`, input)
+      .post(`${process.env.REACT_APP_API}/auth/login`, input)
       .then(({ data }) => {
         setLocalUser(data);
         idUser = data.user.id;
@@ -23,7 +23,7 @@ export default function Login({ setLocalUser }) {
       .then(() => {
         if (items.length) {
           return axios
-            .post(`http://localhost:3000/users/${idUser}/cart`, {
+            .post(`${process.env.REACT_APP_API}/users/${idUser}/cart`, {
               id: items[0].id,
               price: items[0].price,
             })
@@ -36,7 +36,7 @@ export default function Login({ setLocalUser }) {
                     quantity: p.lineOrder.quantity,
                   };
                   return axios.post(
-                    `http://localhost:3000/users/${idUser}/cart`,
+                    `${process.env.REACT_APP_API}/users/${idUser}/cart`,
                     request
                   );
                 })
@@ -45,7 +45,7 @@ export default function Login({ setLocalUser }) {
         }
       })
       .then(() => {
-        return axios.get(`http://localhost:3000/users/${idUser}/cart`);
+        return axios.get(`${process.env.REACT_APP_API}/users/${idUser}/cart`);
       })
       .then(({ data }) => {
         if (data[0]) {

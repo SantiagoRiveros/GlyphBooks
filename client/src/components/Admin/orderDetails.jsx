@@ -18,17 +18,21 @@ export default function OrderDetails() {
   const [order, setOrder] = useState(false);
   const [review, setReview] = useState([]);
   const [show, setShow] = useState(false);
-
+  
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/order/${orderID}/order`)
+      .get(`${process.env.REACT_APP_API}/order/${orderID}/order`)
       .then(({ data }) => {
         setOrder(data);
         if (data.products) {
           var axiosArr = [];
           data.products.forEach((p) => {
             axiosArr.push(
-              axios.get(`http://localhost:3000/reviews/${p.id}/${data.user.id}`)
+
+              axios.get(
+                `${process.env.REACT_APP_API}/reviews/${p.id}/${data.user.id}`
+              )
+
             );
           });
           Promise.all(axiosArr).then((r) => {
@@ -73,24 +77,13 @@ export default function OrderDetails() {
               <th className={style.th}>Fecha de Inicio</th>
               <th className={style.th}>Status</th>
             </tr>
-            <tr>
-              <td className={style.td}>
-                {order.user.firstName + " " + order.user.lastName}
-              </td>
-              <td className={style.td}>{order.user.email}</td>
-              <td className={style.td}>{order.user.shippingAdress}</td>
-              <td className={style.td}>{order.createdAt}</td>
-              <td className={style.td}>{order.status}</td>
-            </tr>
-          </table>
-          <table className={style.orders}>
             <tr className={style.tr}>
-              <th className={style.th}>Producto</th>
-              <th className={style.th}>Precio Unitario</th>
-              <th className={style.th}>Cantidad</th>
-              <th className={style.th}>Subtotal</th>
-              <th className={style.th}>Total</th>
-              <th className={style.th}>Reseña</th>
+
+              <td className={style.td}>Producto</td>
+              <td className={style.td}>Precio Unidad</td>
+              <td className={style.td}>Cantidad</td>
+              <td className={style.td}>Subtotal</td>
+              {order.status === "completa" ? <td className={style.td}>Reseña</td> : null}
             </tr>
             {order.products.length &&
               order.products.map((producto) => {
@@ -103,26 +96,25 @@ export default function OrderDetails() {
                   } else {
                     return (
                       <button
+
                         className={style.Btn}
                         onClick={() => setShow({ true: true, pid, uid })}
                       >
                         Dejar reseña
                       </button>
+
                     );
                   }
                 };
                 return (
+                  
                   <tr className={style.tr}>
                     <td className={style.td}>{producto.title}</td>
                     <td className={style.td}>{producto.price}</td>
                     <td className={style.td}>{producto.lineOrder.quantity}</td>
-                    <td className={style.td}>
-                      {producto.price * producto.lineOrder.quantity}
-                    </td>
-                    <td className={style.td}>{Total()}</td>
-                    <td className={style.td}>
-                      {getReview(producto.id, order.user.id)}
-                    </td>
+                    <td className={style.td}>{producto.price * producto.lineOrder.quantity}</td>
+                    {order.status === "completa" ? <td className={style.td}>{getReview(producto.id, order.user.id)}</td> : null}
+
                   </tr>
                 );
               })}
@@ -143,6 +135,7 @@ export default function OrderDetails() {
                 orderId={orderID}
               />
             </div>
+
           ) : null}
         </div>
       ) : null}

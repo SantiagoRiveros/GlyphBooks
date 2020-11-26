@@ -7,23 +7,34 @@ export default function AdminUsers(props) {
   const [users, setUsers] = useState([]);
   const { push } = useHistory();
   const [page, setPage] = useState(1);
+  const [sort, setSort] = useState("");
   const pageLimit = Math.ceil(users.count / 12);
 
+  const handleSort = (e) => {
+    let newOrder = JSON.stringify([[e.target.name, "ASC"]]);
+    newOrder === sort && (newOrder = JSON.stringify([[e.target.name, "DESC"]]));
+    setSort(newOrder);
+  };
+
   useEffect(() => {
-    axios.get(`http://localhost:3000/users?page${page}`).then(({ data }) => {
-      setUsers(data);
-    });
-  }, [page]);
+    axios
+      .get(`${process.env.REACT_APP_API}/users?page${page}&order=${sort}`)
+      .then(({ data }) => {
+        setUsers(data);
+      });
+  }, [page, sort]);
 
   async function handleDelete(id) {
-    await axios.delete(`http://localhost:3000/users/${id}`);
-    const { data } = await axios.get("http://localhost:3000/users");
+    await axios.delete(`${process.env.REACT_APP_API}/users/${id}`);
+    const { data } = await axios.get(`${process.env.REACT_APP_API}/users`);
     setUsers(data);
   }
 
   async function handleSetRole(id, rol) {
-    await axios.put(`http://localhost:3000/users/${id}`, { isAdmin: !rol });
-    const { data } = await axios.get("http://localhost:3000/users");
+    await axios.put(`${process.env.REACT_APP_API}/users/${id}`, {
+      isAdmin: !rol,
+    });
+    const { data } = await axios.get(`${process.env.REACT_APP_API}/users`);
     setUsers(data);
   }
 
@@ -31,11 +42,20 @@ export default function AdminUsers(props) {
     <div className={style.size}>
       <table className={style.users}>
         <tr className={style.tr}>
-          <th className={style.th}>ID</th>
-          <th className={style.th}>Nombre</th>
-          <th className={style.th}>Email</th>
-          <th className={style.th}>Rol</th>
-          <th className={style.th}>Detalles</th>
+
+          <th className={style.th}>
+            ID <button name={"id"} onClick={handleSort}></button>
+          </th>
+          <th className={style.th}>
+            Nombre <button name={"lastName"} onClick={handleSort}></button>
+          </th>
+          <th className={style.th}>
+            Email <button name={"email"} onClick={handleSort}></button>
+          </th>
+          <th className={style.th}>
+            Rol <button name={"isAdmin"} onClick={handleSort}></button>
+          </th>
+
           <th className={style.th}>Eliminar</th>
         </tr>
         {users.count &&

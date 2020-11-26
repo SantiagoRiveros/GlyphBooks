@@ -30,7 +30,7 @@ function Catalogue(props) {
   useEffect(() => {
     axios
       .get(
-        `http://localhost:3000/products?page=${
+        `${process.env.REACT_APP_API}/products?page=${
           page || 1
         }&category=${category}&where=${searched}`
       )

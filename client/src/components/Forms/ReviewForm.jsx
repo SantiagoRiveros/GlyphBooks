@@ -20,7 +20,12 @@ export default function Review({ productId, userId, notShow, orderId }) {
 
   const handleSubmit = (e) => {
     axios
-      .post(`http://localhost:3000/reviews/products/${productId}/review`, input)
+
+      .post(
+        `${process.env.REACT_APP_API}/reviews/products/${productId}/review`,
+        input
+      )
+
       .then(() => {
         notShow();
       });
@@ -45,6 +50,7 @@ export default function Review({ productId, userId, notShow, orderId }) {
         size={24}
         activeColor="#ffd700"
       />
+
       <div className={style.textbox}>
         <input
           type="text"
@@ -66,6 +72,7 @@ export default function Review({ productId, userId, notShow, orderId }) {
       <button className={style.Btn} onClick={handleSubmit}>
         Listo
       </button>
+
     </div>
   );
 }

@@ -29,7 +29,7 @@ export default function Carrito(props) {
   const handleDelete = () => {
     if (idUser && props.items.length) {
       axios
-        .delete(`http://localhost:3000/users/${idUser}/cart`)
+        .delete(`${process.env.REACT_APP_API}/users/${idUser}/cart`)
         .then(() => dispatch(cerrarCarrito()));
     } else {
       dispatch(cerrarCarrito());

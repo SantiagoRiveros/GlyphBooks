@@ -17,9 +17,12 @@ export default function Forgot() {
   };
 
   const handleSubmit = async (e) => {
-    const response = await axios.post(`http://localhost:3000/users/forgot`, {
-      email: input.email,
-    });
+    const response = await axios.post(
+      `${process.env.REACT_APP_API}/users/forgot`,
+      {
+        email: input.email,
+      }
+    );
     if (response.status == 404) {
     } else {
       console.log(response.data);

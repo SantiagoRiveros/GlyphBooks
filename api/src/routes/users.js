@@ -64,7 +64,7 @@ user.post("/forgot", async (req, res, next) => {
       subject: "Reseteo de contraseña",
       text:
         `Entra en este link para cambiar la contraseña ` +
-        `http:/localhost:3001/password/` +
+        `${process.env.FRONT}/password/` +
         token,
     };
     userData.resetPasswordExpires = Date.now() + 3600000;
@@ -81,22 +81,6 @@ user.post("/forgot", async (req, res, next) => {
   }
 });
 
-// user.get("/password/:token", async function (req, res) {
-//   const userData = User.findOne(
-//     {
-//       where: { resetPasswordToken: req.params.token },
-//       resetPasswordExpires: { $gt: Date.now() },
-//     },
-//     function (err, user) {
-//       if (!userData) {
-//         // req.flash("error", "El link es invalido o ya expiro.");
-//         return res.redirect("/forgot");
-//       }
-//       res.render("password", { token: req.params.token });
-//     }
-//   );
-// });
-
 user.put("/passwordReset/:token", async (req, res, next) => {
   const userData = await User.findOne({
     where: { resetPasswordToken: req.params.token },
@@ -106,11 +90,37 @@ user.put("/passwordReset/:token", async (req, res, next) => {
       userData.resetPasswordExpires = Date.now();
       userData.password = req.body.password;
       await userData.save();
+      var smtpTransport = nodemailer.createTransport({
+        service: "Gmail",
+        auth: {
+          user: "glyphbooksecommerce@gmail.com",
+          pass: "HenryEcommerce123",
+        },
+      });
+      var mailOptions = {
+        to: userData.email,
+        from: "glyphbooksecommerce@gmail.com",
+        subject: "Tu contraseña ha sido cambiada correctamente",
+        text:
+          "Hola,\n\n" +
+          "este correo es para confirmar que la contraseña de " +
+          userData.email +
+          " ha sido cambiada correctamente.\n",
+      };
+      smtpTransport.sendMail(mailOptions, function (err) {
+        if (err) {
+          console.log("ocurrio un error", err);
+        } else {
+          console.log("confirmacion de cambio de contraseña enviado");
+        }
+      });
+
       return res.status(201).json({ message: "se cambio la contraseña" });
     } else {
       return res.status(204).json({ message: "Token invalido o ya expiro" });
     }
   }
+
   return res.status(204).json({ message: "Ocurrio un error" });
 });
 
@@ -136,30 +146,6 @@ user.put("/passwordReset/:token", async (req, res, next) => {
 //       }
 //     }
 //   );
-
-//   var smtpTransport = nodemailer.createTransport({
-//     service: "Gmail",
-//     auth: {
-//       user: "glyphbooksecommerce@gmail.com",
-//       pass: "HenryEcommerce123",
-//     },
-//   });
-//   var mailOptions = {
-//     to: user.email,
-//     from: "glyphbooksecommerce@gmail.com",
-//     subject: "Tu contraseña ha sido cambiada correctamente",
-//     text:
-//       "Hola,\n\n" +
-//       "este correo es para confirmar que la contraseña de " +
-//       user.email +
-//       " ha sido cambiada correctamente.\n",
-//   };
-//   smtpTransport.sendMail(mailOptions, function (err) {
-//     // req.flash(
-//     //   "Exito",
-//     //   "Exito, tu contraseña ha sido cambiada correctamente"
-//     // );
-//   });
 // });
 
 user.get("/:idUser/cart", (req, res, next) => {
@@ -191,7 +177,7 @@ user.put("/:id", (req, res, next) => {
 
   const request = req.body;
   if (req.user) {
-    if (req.user.isAdmin) {
+    if (req.user.isAdmin || Number(req.user.id) === Number(id)) {
       User.findOne({ where: { id } })
         .then((user) => {
           for (const key in request) {
@@ -231,9 +217,15 @@ user.get("/", (req, res, next) => {
   const page = req.query.page;
   const limit = req.query.limit || 12;
   const offset = page ? (page - 1) * limit : null;
+
+  let order = req.query.order;
+  if (order) {
+    order = JSON.parse(order);
+  }
+
   if (req.user) {
     if (req.user.isAdmin) {
-      User.findAndCountAll({ offset, limit })
+      User.findAndCountAll({ offset, limit, order })
         .then((user) => {
           res.send(user);
         })

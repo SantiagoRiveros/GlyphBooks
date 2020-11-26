@@ -11,7 +11,7 @@ export default function AddCategory({ producto, setProducto }) {
 
   useEffect(() => {
     if (!producto) push("/catalogo");
-    axios.get("http://localhost:3000/category").then(({ data }) => {
+    axios.get(`${process.env.REACT_APP_API}/category`).then(({ data }) => {
       setCategorias(data);
       setCategorias((oldCategories) =>
         oldCategories.filter((c) => {
@@ -33,7 +33,9 @@ export default function AddCategory({ producto, setProducto }) {
     e.preventDefault();
 
     axios
-      .put(`http://localhost:3000/products/category/${producto.id}/${selected}`)
+      .put(
+        `${process.env.REACT_APP_API}/products/category/${producto.id}/${selected}`
+      )
       .then(() => {
         setCategorias((oldCategories) =>
           oldCategories.filter((c) => {

@@ -15,7 +15,7 @@ export default function UserDetails() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/users/${userID}`)
+      .get(`${process.env.REACT_APP_API}/users/${userID}`)
       .then(({ data }) => {
         setUser(data);
         console.log(data);

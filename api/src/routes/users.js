@@ -191,7 +191,7 @@ user.put("/:id", (req, res, next) => {
 
   const request = req.body;
   if (req.user) {
-    if (req.user.isAdmin) {
+    if (req.user.isAdmin || Number(req.user.id) === Number(id)) {
       User.findOne({ where: { id } })
         .then((user) => {
           for (const key in request) {

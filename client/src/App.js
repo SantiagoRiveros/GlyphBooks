@@ -124,6 +124,8 @@ function App(props) {
           path="/cuenta"
           render={() => (
             <Cuenta
+              setLocalUser={setLocalUser}
+              localUser={localUser}
               logOut={() => {
                 removeLocalUser();
                 setCarritoLocal([]);

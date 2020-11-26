@@ -81,22 +81,6 @@ user.post("/forgot", async (req, res, next) => {
   }
 });
 
-// user.get("/password/:token", async function (req, res) {
-//   const userData = User.findOne(
-//     {
-//       where: { resetPasswordToken: req.params.token },
-//       resetPasswordExpires: { $gt: Date.now() },
-//     },
-//     function (err, user) {
-//       if (!userData) {
-//         // req.flash("error", "El link es invalido o ya expiro.");
-//         return res.redirect("/forgot");
-//       }
-//       res.render("password", { token: req.params.token });
-//     }
-//   );
-// });
-
 user.put("/passwordReset/:token", async (req, res, next) => {
   const userData = await User.findOne({
     where: { resetPasswordToken: req.params.token },
@@ -106,11 +90,37 @@ user.put("/passwordReset/:token", async (req, res, next) => {
       userData.resetPasswordExpires = Date.now();
       userData.password = req.body.password;
       await userData.save();
+      var smtpTransport = nodemailer.createTransport({
+        service: "Gmail",
+        auth: {
+          user: "glyphbooksecommerce@gmail.com",
+          pass: "HenryEcommerce123",
+        },
+      });
+      var mailOptions = {
+        to: userData.email,
+        from: "glyphbooksecommerce@gmail.com",
+        subject: "Tu contraseña ha sido cambiada correctamente",
+        text:
+          "Hola,\n\n" +
+          "este correo es para confirmar que la contraseña de " +
+          userData.email +
+          " ha sido cambiada correctamente.\n",
+      };
+      smtpTransport.sendMail(mailOptions, function (err) {
+        if (err) {
+          console.log("ocurrio un error", err);
+        } else {
+          console.log("confirmacion de cambio de contraseña enviado");
+        }
+      });
+
       return res.status(201).json({ message: "se cambio la contraseña" });
     } else {
       return res.status(204).json({ message: "Token invalido o ya expiro" });
     }
   }
+
   return res.status(204).json({ message: "Ocurrio un error" });
 });
 
@@ -136,30 +146,6 @@ user.put("/passwordReset/:token", async (req, res, next) => {
 //       }
 //     }
 //   );
-
-//   var smtpTransport = nodemailer.createTransport({
-//     service: "Gmail",
-//     auth: {
-//       user: "glyphbooksecommerce@gmail.com",
-//       pass: "HenryEcommerce123",
-//     },
-//   });
-//   var mailOptions = {
-//     to: user.email,
-//     from: "glyphbooksecommerce@gmail.com",
-//     subject: "Tu contraseña ha sido cambiada correctamente",
-//     text:
-//       "Hola,\n\n" +
-//       "este correo es para confirmar que la contraseña de " +
-//       user.email +
-//       " ha sido cambiada correctamente.\n",
-//   };
-//   smtpTransport.sendMail(mailOptions, function (err) {
-//     // req.flash(
-//     //   "Exito",
-//     //   "Exito, tu contraseña ha sido cambiada correctamente"
-//     // );
-//   });
 // });
 
 user.get("/:idUser/cart", (req, res, next) => {

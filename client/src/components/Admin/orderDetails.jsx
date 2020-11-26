@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ReviewForm from "../Forms/ReviewForm.jsx";
 import { useLocation } from "react-router";
+import style from "../../CSS/Admin/adminOrderDetails.module.scss";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 
@@ -23,22 +24,28 @@ export default function OrderDetails() {
       .get(`http://localhost:3000/order/${orderID}/order`)
       .then(({ data }) => {
         setOrder(data);
-        if( data.products ) {
+        if (data.products) {
           var axiosArr = [];
           data.products.forEach((p) => {
-            axiosArr.push(axios.get(`http://localhost:3000/reviews/${p.id}/${data.user.id}`))
-          })
-          Promise.all(axiosArr)
-          .then(r => {
-            setReview(r.filter(rev => {
-              return rev.data !== ""
-            }).map(r => { return r.data}))
-          })
+            axiosArr.push(
+              axios.get(`http://localhost:3000/reviews/${p.id}/${data.user.id}`)
+            );
+          });
+          Promise.all(axiosArr).then((r) => {
+            setReview(
+              r
+                .filter((rev) => {
+                  return rev.data !== "";
+                })
+                .map((r) => {
+                  return r.data;
+                })
+            );
+          });
         }
       })
       .catch((error) => console.log(error));
   }, [show]);
-
 
   function Total() {
     let total = 0;
@@ -49,64 +56,94 @@ export default function OrderDetails() {
   }
 
   function notShow() {
-    setShow(false)
+    setShow(false);
   }
 
   return (
     <div>
       {order ? (
-        <div>
-          <div>
-            <ul>
-              <li>Cliente:</li>
-              <li>Email:</li>
-              <li>Direccion:</li>
-              <li>Fecha de Inicio:</li>
-              <li>Status:</li>
-            </ul>
-            <ul>
-              <li>{order.user.firstName + " " + order.user.lastName}</li>
-              <li>{order.user.email}</li>
-              <li>{order.user.shippingAdress}</li>
-              <li>{order.createdAt}</li>
-              <li>{order.status}</li>
-            </ul>
-          </div>
-          <table>
+        <div className={style.container}>
+          <table className={style.orders}>
+            <tr className={style.tr}>
+              <th className={style.th}>Cliente</th>
+              <th className={style.th} i>
+                Email
+              </th>
+              <th className={style.th}>Direccion</th>
+              <th className={style.th}>Fecha de Inicio</th>
+              <th className={style.th}>Status</th>
+            </tr>
             <tr>
-              <td>Producto</td>
-              <td>Precio Unidad</td>
-              <td>Cantidad</td>
-              <td>Subtotal</td>
-              <td>Reseña</td>
+              <td className={style.td}>
+                {order.user.firstName + " " + order.user.lastName}
+              </td>
+              <td className={style.td}>{order.user.email}</td>
+              <td className={style.td}>{order.user.shippingAdress}</td>
+              <td className={style.td}>{order.createdAt}</td>
+              <td className={style.td}>{order.status}</td>
+            </tr>
+          </table>
+          <table className={style.orders}>
+            <tr className={style.tr}>
+              <th className={style.th}>Producto</th>
+              <th className={style.th}>Precio Unitario</th>
+              <th className={style.th}>Cantidad</th>
+              <th className={style.th}>Subtotal</th>
+              <th className={style.th}>Total</th>
+              <th className={style.th}>Reseña</th>
             </tr>
             {order.products.length &&
               order.products.map((producto) => {
                 const getReview = (pid, uid) => {
-                  var p = review.filter(r => {
-                    return r.productId === pid && uid === r.userId
-                  })
-                  if ( p.length > 0 ) {
-                    return p[0].title
+                  var p = review.filter((r) => {
+                    return r.productId === pid && uid === r.userId;
+                  });
+                  if (p.length > 0) {
+                    return p[0].title;
                   } else {
-                    return <button onClick={() => setShow({true: true, pid, uid})} />
+                    return (
+                      <button
+                        className={style.Btn}
+                        onClick={() => setShow({ true: true, pid, uid })}
+                      >
+                        Dejar reseña
+                      </button>
+                    );
                   }
-                }
+                };
                 return (
-                  <tr>
-                    <td>{producto.title}</td>
-                    <td>{producto.price}</td>
-                    <td>{producto.lineOrder.quantity}</td>
-                    <td>{producto.price * producto.lineOrder.quantity}</td>
-                    <td>{getReview(producto.id, order.user.id)}</td>
+                  <tr className={style.tr}>
+                    <td className={style.td}>{producto.title}</td>
+                    <td className={style.td}>{producto.price}</td>
+                    <td className={style.td}>{producto.lineOrder.quantity}</td>
+                    <td className={style.td}>
+                      {producto.price * producto.lineOrder.quantity}
+                    </td>
+                    <td className={style.td}>{Total()}</td>
+                    <td className={style.td}>
+                      {getReview(producto.id, order.user.id)}
+                    </td>
                   </tr>
                 );
               })}
           </table>
-          <h3>Total</h3>
-          <h3>{Total()}</h3>
+          <table>
+            <tr className={style.tr}>
+              <th className={style.th}>Total</th>
+              <th className={style.td}>{Total()}</th>
+            </tr>
+          </table>
           {/* id userid status createdAt products precio */}
-          {show.true ? <ReviewForm productId={show.pid} userId={show.uid} notShow={notShow} orderId={orderID} /> : null}
+          {show.true ? (
+            <div>
+              <ReviewForm
+                productId={show.pid}
+                userId={show.uid}
+                notShow={notShow}
+                orderId={orderID}
+              />
+            </div>
+          ) : null}
         </div>
       ) : null}
     </div>

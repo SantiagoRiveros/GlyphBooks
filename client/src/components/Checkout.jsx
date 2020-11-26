@@ -14,7 +14,9 @@ export default function Checkout(props) {
 
   const handleSubmit = () => {
     axios
-      .put(`http://localhost:3000/users/${user.id}`, { shippingAdress: input })
+      .put(`${process.env.REACT_APP_API}/users/${user.id}`, {
+        shippingAdress: input,
+      })
       .then(({ data }) => {
         props.setLocalUser({ ...props.localUser, user: data });
         push("/catalogo");
@@ -25,16 +27,19 @@ export default function Checkout(props) {
     const { orderId } = props.items[0].lineOrder;
     if (user.id) {
       axios
-        .put(`http://localhost:3000/users/${user.id}/cart`, {
+        .put(`${process.env.REACT_APP_API}/users/${user.id}/cart`, {
           orderId,
           status: "procesando",
         })
         .then((res) =>
           Promise.all(
             props.items.map((i) => {
-              return axios.put(`http://localhost:3000/products/${i.id}`, {
-                stock: i.stock - i.lineOrder.quantity,
-              });
+              return axios.put(
+                `${process.env.REACT_APP_API}/products/${i.id}`,
+                {
+                  stock: i.stock - i.lineOrder.quantity,
+                }
+              );
             })
           )
         )

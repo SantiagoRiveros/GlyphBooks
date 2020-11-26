@@ -5,33 +5,50 @@ import style from "../../CSS/Admin/orderTable.module.scss";
 
 export default function OrderTable() {
   const [order, setOrder] = useState([]);
+  const [sort, setSort] = useState("");
   const [page, setPage] = useState(1);
   const [status, setStatus] = useState(0);
   const { push } = useHistory();
   const pageLimit = Math.ceil(order.count / 12);
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/order?page${page}`).then(({ data }) => {
-      setOrder(data);
-    });
-  }, [page, status]);
+    axios
+      .get(`${process.env.REACT_APP_API}/order?page=${page}&order=${sort}`)
+      .then(({ data }) => {
+        setOrder(data);
+      });
+  }, [page, sort, status]);
 
+  const handleSort = (e) => {
+    let newOrder = JSON.stringify([[e.target.name, "ASC"]]);
+    newOrder === sort && (newOrder = JSON.stringify([[e.target.name, "DESC"]]));
+    setSort(newOrder);
+  };
+  
   const handleChange = (e) => {
     e.preventDefault()
     axios.put(`http://localhost:3000/order/${e.target.name}`, { status: e.target.value })
       .then(() => {
         setStatus(status + 1)
       })
-  };
 
   return (
     <div className={style.size}>
       <table className={style.orders}>
         <tr>
-          <th className={style.th}>ID</th>
-          <th className={style.th}>User ID</th>
-          <th className={style.th}>Status</th>
-          <th className={style.th}>Creation Date</th>
+          <th className={style.th}>
+            ID <button name={"id"} onClick={handleSort}></button>
+          </th>
+          <th className={style.th}>
+            User ID <button name={"userId"} onClick={handleSort}></button>
+          </th>
+          <th className={style.th}>
+            Status <button name={"status"} onClick={handleSort}></button>
+          </th>
+          <th className={style.th}>
+            Creation Date{" "}
+            <button name={"createdAt"} onClick={handleSort}></button>
+          </th>
           <th className={style.th}>Details</th>
         </tr>
         {order.count &&

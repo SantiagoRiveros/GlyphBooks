@@ -10,7 +10,7 @@ export default function SideBar({ setCategory }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    axios.get("http://localhost:3000/category").then(({ data }) => {
+    axios.get(`${process.env.REACT_APP_API}/category`).then(({ data }) => {
       setCategorias(data);
     });
   }, []);

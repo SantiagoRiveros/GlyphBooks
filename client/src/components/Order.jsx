@@ -8,11 +8,11 @@ export default function Orden({ id }) {
   const [currentOrder, setCurrentOrder] = useState(null);
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/order/${id}`).then((data) => {
+    axios.get(`${process.env.REACT_APP_API}/order/${id}`).then((data) => {
       setOrder(data);
     });
 
-    axios.get(`http://localhost:3000/order/${id}/order`).then((data) => {
+    axios.get(`${process.env.REACT_APP_API}/order/${id}/order`).then((data) => {
       setCurrentOrder(data);
     });
   }, [id]);

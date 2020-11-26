@@ -25,7 +25,7 @@ export default function ResetPassword({ token }) {
 
   const handleSubmit = async (e) => {
     const handlePass = await axios
-      .put(`http://localhost:3000/users/passwordReset/${token}`, {
+      .put(`${process.env.REACT_APP_API}/users/passwordReset/${token}`, {
         password: input.password,
         password2: input.password2,
       })

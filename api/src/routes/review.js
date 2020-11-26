@@ -58,7 +58,12 @@ review.get("/", (req, res, next) => {
   const limit = req.query.limit || 12;
   const offset = page ? (page - 1) * limit : null;
 
-  Review.findAndCountAll({ limit, offset })
+  let order = req.query.order;
+  if (order) {
+    order = JSON.parse(order);
+  }
+
+  Review.findAndCountAll({ limit, offset, order })
     .then((review) => {
       res.send(review);
     })

@@ -6,15 +6,23 @@ import { useHistory } from "react-router-dom";
 export default function AdminProduct({ setProducto }) {
   const { push } = useHistory();
   const [productos, setProductos] = useState([]);
+  const [sort, setSort] = useState("");
   const [page, setPage] = useState(1);
   const pageLimit = Math.ceil(productos.count / 12);
+
+  const handleSort = (e) => {
+    let newOrder = JSON.stringify([[e.target.name, "ASC"]]);
+    newOrder === sort && (newOrder = JSON.stringify([[e.target.name, "DESC"]]));
+    setSort(newOrder);
+  };
+
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/products?page=${page}`)
+      .get(`http://localhost:3000/products?page=${page}&order=${sort}`)
       .then(({ data }) => {
         setProductos(data);
       });
-  }, [page]);
+  }, [page, sort]);
   return (
     <div className={style.size}>
       <div className={style.btns}>
@@ -35,12 +43,22 @@ export default function AdminProduct({ setProducto }) {
       </div>
       <table className={style.products}>
         <tr className={style.tr}>
-          <th className={style.th}>ID</th>
-          <th className={style.th}>Nombre</th>
-          <th className={style.th}>Autor</th>
+          <th className={style.th}>
+            ID <button name={"id"} onClick={handleSort}></button>
+          </th>
+          <th className={style.th}>
+            Titulo <button name={"title"} onClick={handleSort}></button>
+          </th>
+          <th className={style.th}>
+            Autor <button name={"author"} onClick={handleSort}></button>
+          </th>
           <th className={style.th}>Descripcion</th>
-          <th className={style.th}>Precio</th>
-          <th className={style.th}>Stock</th>
+          <th className={style.th}>
+            Precio <button name={"price"} onClick={handleSort}></button>
+          </th>
+          <th className={style.th}>
+            Stock <button name={"stock"} onClick={handleSort}></button>
+          </th>
           <th className={style.th}>Editar</th>
         </tr>
         {productos.count &&

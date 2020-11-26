@@ -20,25 +20,33 @@ export default function OrderDetails() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/order/${orderID}/order`)
+      .get(`${process.env.REACT_APP_API}/order/${orderID}/order`)
       .then(({ data }) => {
         setOrder(data);
-        if( data.products ) {
+        if (data.products) {
           var axiosArr = [];
           data.products.forEach((p) => {
-            axiosArr.push(axios.get(`http://localhost:3000/reviews/${p.id}/${data.user.id}`))
-          })
-          Promise.all(axiosArr)
-          .then(r => {
-            setReview(r.filter(rev => {
-              return rev.data !== ""
-            }).map(r => { return r.data}))
-          })
+            axiosArr.push(
+              axios.get(
+                `${process.env.REACT_APP_API}/reviews/${p.id}/${data.user.id}`
+              )
+            );
+          });
+          Promise.all(axiosArr).then((r) => {
+            setReview(
+              r
+                .filter((rev) => {
+                  return rev.data !== "";
+                })
+                .map((r) => {
+                  return r.data;
+                })
+            );
+          });
         }
       })
       .catch((error) => console.log(error));
   }, [show]);
-
 
   function Total() {
     let total = 0;
@@ -49,7 +57,7 @@ export default function OrderDetails() {
   }
 
   function notShow() {
-    setShow(false)
+    setShow(false);
   }
 
   return (
@@ -83,15 +91,19 @@ export default function OrderDetails() {
             {order.products.length &&
               order.products.map((producto) => {
                 const getReview = (pid, uid) => {
-                  var p = review.filter(r => {
-                    return r.productId === pid && uid === r.userId
-                  })
-                  if ( p.length > 0 ) {
-                    return p[0].title
+                  var p = review.filter((r) => {
+                    return r.productId === pid && uid === r.userId;
+                  });
+                  if (p.length > 0) {
+                    return p[0].title;
                   } else {
-                    return <button onClick={() => setShow({true: true, pid, uid})} />
+                    return (
+                      <button
+                        onClick={() => setShow({ true: true, pid, uid })}
+                      />
+                    );
                   }
-                }
+                };
                 return (
                   <tr>
                     <td>{producto.title}</td>
@@ -106,7 +118,14 @@ export default function OrderDetails() {
           <h3>Total</h3>
           <h3>{Total()}</h3>
           {/* id userid status createdAt products precio */}
-          {show.true ? <ReviewForm productId={show.pid} userId={show.uid} notShow={notShow} orderId={orderID} /> : null}
+          {show.true ? (
+            <ReviewForm
+              productId={show.pid}
+              userId={show.uid}
+              notShow={notShow}
+              orderId={orderID}
+            />
+          ) : null}
         </div>
       ) : null}
     </div>

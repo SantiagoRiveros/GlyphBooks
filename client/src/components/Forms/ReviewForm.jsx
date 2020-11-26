@@ -7,7 +7,7 @@ export default function Review({ productId, userId, notShow, orderId }) {
     rating: "",
     title: "",
     body: "",
-    userId
+    userId,
   });
 
   const handleChange = (e) => {
@@ -18,11 +18,15 @@ export default function Review({ productId, userId, notShow, orderId }) {
   };
 
   const handleSubmit = (e) => {
-    axios.post(`http://localhost:3000/reviews/products/${productId}/review`, input)
+    axios
+      .post(
+        `${process.env.REACT_APP_API}/reviews/products/${productId}/review`,
+        input
+      )
       .then(() => {
-        notShow()
+        notShow();
       });
-      e.preventDefault();
+    e.preventDefault();
   };
 
   const ratingChanged = (newRating) => {
@@ -41,13 +45,15 @@ export default function Review({ productId, userId, notShow, orderId }) {
         size={24}
         activeColor="#ffd700"
       />
-      <input type="text"
+      <input
+        type="text"
         value={input.title}
         name="title"
         onChange={handleChange}
         placeholder="Título de tu reseña"
       />
-      <input type="text"
+      <input
+        type="text"
         value={input.body}
         name="body"
         onChange={handleChange}
@@ -55,5 +61,5 @@ export default function Review({ productId, userId, notShow, orderId }) {
       />
       <button onClick={handleSubmit}>Listo</button>
     </div>
-  )
+  );
 }

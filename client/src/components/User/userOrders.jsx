@@ -8,7 +8,7 @@ export default function UserOrders({ user }) {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/users/${user.id}/orders`)
+      .get(`${process.env.REACT_APP_API}/users/${user.id}/orders`)
       .then(({ data }) => {
         setOrder(data);
       });

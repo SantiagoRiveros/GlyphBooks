@@ -18,7 +18,7 @@ export default function AdminProduct({ setProducto }) {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/products?page=${page}&order=${sort}`)
+      .get(`${process.env.REACT_APP_API}/products?page=${page}&order=${sort}`)
       .then(({ data }) => {
         setProductos(data);
       });

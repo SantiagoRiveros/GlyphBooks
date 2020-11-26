@@ -12,7 +12,7 @@ export default function OrderTable() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/order?page=${page}&order=${sort}`)
+      .get(`${process.env.REACT_APP_API}/order?page=${page}&order=${sort}`)
       .then(({ data }) => {
         setOrder(data);
       });

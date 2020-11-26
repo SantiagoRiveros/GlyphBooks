@@ -18,21 +18,23 @@ export default function AdminUsers(props) {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/users?page${page}&order=${sort}`)
+      .get(`${process.env.REACT_APP_API}/users?page${page}&order=${sort}`)
       .then(({ data }) => {
         setUsers(data);
       });
   }, [page, sort]);
 
   async function handleDelete(id) {
-    await axios.delete(`http://localhost:3000/users/${id}`);
-    const { data } = await axios.get("http://localhost:3000/users");
+    await axios.delete(`${process.env.REACT_APP_API}/users/${id}`);
+    const { data } = await axios.get(`${process.env.REACT_APP_API}/users`);
     setUsers(data);
   }
 
   async function handleSetRole(id, rol) {
-    await axios.put(`http://localhost:3000/users/${id}`, { isAdmin: !rol });
-    const { data } = await axios.get("http://localhost:3000/users");
+    await axios.put(`${process.env.REACT_APP_API}/users/${id}`, {
+      isAdmin: !rol,
+    });
+    const { data } = await axios.get(`${process.env.REACT_APP_API}/users`);
     setUsers(data);
   }
 

@@ -18,7 +18,7 @@ export default function AdminUsers() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/reviews?page=${page}&order=${sort}`)
+      .get(`${process.env.REACT_APP_API}/reviews?page=${page}&order=${sort}`)
       .then(({ data }) => {
         setReviews(data);
       });
@@ -26,9 +26,9 @@ export default function AdminUsers() {
 
   async function handleDelete(id, productId) {
     await axios.delete(
-      `http://localhost:3000/reviews/products/${productId}/review/${id}`
+      `${process.env.REACT_APP_API}/reviews/products/${productId}/review/${id}`
     );
-    const { data } = await axios.get("http://localhost:3000/reviews");
+    const { data } = await axios.get(`${process.env.REACT_APP_API}/reviews`);
     setReviews(data);
   }
 

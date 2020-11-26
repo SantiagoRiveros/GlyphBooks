@@ -64,7 +64,7 @@ user.post("/forgot", async (req, res, next) => {
       subject: "Reseteo de contraseña",
       text:
         `Entra en este link para cambiar la contraseña ` +
-        `http:/localhost:3001/password/` +
+        `${process.env.FRONT}/password/` +
         token,
     };
     userData.resetPasswordExpires = Date.now() + 3600000;

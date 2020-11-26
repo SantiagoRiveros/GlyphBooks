@@ -17,7 +17,7 @@ function CartProduct(props) {
     if (props.user !== "guest") {
       let { orderId, id } = props.producto.lineOrder;
       axios
-        .put(`http://localhost:3000/order/${orderId}/lineorder`, {
+        .put(`${process.env.REACT_APP_API}/order/${orderId}/lineorder`, {
           id: id,
           quantity: quantity + num,
         })
@@ -32,7 +32,7 @@ function CartProduct(props) {
       let { orderId } = props.producto.lineOrder;
       axios
         .delete(
-          `http://localhost:3000/order/${orderId}/lineorder/${props.producto.id}`
+          `${process.env.REACT_APP_API}/order/${orderId}/lineorder/${props.producto.id}`
         )
         .then(() => {
           props.dispatch(removerCarrito(props.producto, "all"));

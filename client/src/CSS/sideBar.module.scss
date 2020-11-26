@@ -1,33 +1,38 @@
 .Categorias {
   width: auto;
-  padding-top: 100px;
-  padding-left: 20px;
+  padding-top: 4.5rem;
+  padding-left: 1.5rem;
   text-indent: 0px;
   border-bottom-right-radius: 5px;
   border-top-right-radius: 5px;
   margin-left: auto;
   flex: 20%;
-  position: fixed
+  position: fixed;
 }
 
 .Title {
   text-align: left;
-  color: orange;
-  font-size: 25px;
+  color: var(--color-primary);
+  font-size: 1.5rem;
+  font-weight: 600;
 }
 
 .category {
   padding: 5px;
-  color: black;
+  color: var(--color-text);
   cursor: pointer;
   transition: 0.3s;
+  font-size: 1rem;
   &:hover {
-    background-color: rgb(211, 137, 0);
+    background-color: var(--color-primary);
     border-radius: 5px;
-    color: white;
+    font-weight: 500;
+    color: #fafafa;
   }
 }
 
 .Lista {
+  overflow: auto;
+  list-style: none;
   margin-bottom: 10px;
 }

@@ -11,7 +11,7 @@
   backdrop-filter: blur(7px);
   width: 16rem;
   height: 24rem;
-  margin: 2rem;
+  margin: 0.5rem;
   display: inline-block;
   border-radius: 0.5rem;
   transition: 250ms linear;
@@ -73,7 +73,7 @@
   margin-top: 0.5rem;
   cursor: pointer;
   color: var(--color-primary);
-  background-color: transparent;
+  background-color: #fafafa;
   padding: 0.5rem 1rem;
   border: solid 2px var(--color-primary);
   font-weight: 700;

@@ -17,7 +17,7 @@ export default function OrderDetails() {
   const [order, setOrder] = useState(false);
   const [review, setReview] = useState([]);
   const [show, setShow] = useState(false);
-
+  
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_API}/order/${orderID}/order`)
@@ -86,7 +86,7 @@ export default function OrderDetails() {
               <td>Precio Unidad</td>
               <td>Cantidad</td>
               <td>Subtotal</td>
-              <td>Reseña</td>
+              {order.status === "completa" ? <td>Reseña</td> : null}
             </tr>
             {order.products.length &&
               order.products.map((producto) => {
@@ -110,7 +110,7 @@ export default function OrderDetails() {
                     <td>{producto.price}</td>
                     <td>{producto.lineOrder.quantity}</td>
                     <td>{producto.price * producto.lineOrder.quantity}</td>
-                    <td>{getReview(producto.id, order.user.id)}</td>
+                    {order.status === "completa" ? <td>{getReview(producto.id, order.user.id)}</td> : null}
                   </tr>
                 );
               })}

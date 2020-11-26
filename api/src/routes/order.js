@@ -44,11 +44,16 @@ order.get("/:id", (req, res, next) => {
 });
 
 order.put("/:id", (req, res, next) => {
-  Order.findOne({ where: { id: req.params.id } })
+  Order.findOne({ where: { id: req.params.id }, include: Product })
     .then((orden) => {
       for (var key in req.body) {
-        if (orden[key] === undefined) return res.sendStatus(400);
         orden[key] = req.body[key];
+        if (key === "status" && req.body[key] === "cancelada") {
+          orden.products.forEach((p) => {
+            p.stock += p.lineOrder.quantity;
+            p.save();
+          });
+        }
       }
       orden.save();
       res.json(orden);

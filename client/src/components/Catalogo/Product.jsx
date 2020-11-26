@@ -101,7 +101,9 @@ function Product(props) {
                 <Review review={review} key={index} />
               ))
             ) : (
-              <div>No hay reseñas disponibles para este producto</div>
+              <div style={{ margin: "0.5rem", color: "var(--color-text)" }}>
+                No hay reseñas disponibles para este producto
+              </div>
             )}
           </section>
         </div>

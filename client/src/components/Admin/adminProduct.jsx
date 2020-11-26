@@ -27,14 +27,14 @@ export default function AdminProduct({ setProducto }) {
     <div className={style.size}>
       <div className={style.btns}>
         <button
-          className={style.button}
+          className={style.Btn}
           name="crud"
           onClick={() => push("/admin/crud")}
         >
           NUEVO PRODUCTO
         </button>
         <button
-          className={style.button}
+          className={style.Btn}
           name="newCategory"
           onClick={() => push("/admin/newCategory")}
         >
@@ -73,7 +73,7 @@ export default function AdminProduct({ setProducto }) {
               <td className={style.td}>
                 <ion-icon
                   name="create-outline"
-                  className={style.ionicon}
+                  color="var(--color-primary)"
                   onClick={() => {
                     setProducto(product);
                     push("/admin/crud");

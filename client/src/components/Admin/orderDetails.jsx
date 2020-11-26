@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ReviewForm from "../Forms/ReviewForm.jsx";
 import { useLocation } from "react-router";
+import style from "../../CSS/Admin/adminOrderDetails.module.scss";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 
@@ -27,9 +28,11 @@ export default function OrderDetails() {
           var axiosArr = [];
           data.products.forEach((p) => {
             axiosArr.push(
+
               axios.get(
                 `${process.env.REACT_APP_API}/reviews/${p.id}/${data.user.id}`
               )
+
             );
           });
           Promise.all(axiosArr).then((r) => {
@@ -63,30 +66,24 @@ export default function OrderDetails() {
   return (
     <div>
       {order ? (
-        <div>
-          <div>
-            <ul>
-              <li>Cliente:</li>
-              <li>Email:</li>
-              <li>Direccion:</li>
-              <li>Fecha de Inicio:</li>
-              <li>Status:</li>
-            </ul>
-            <ul>
-              <li>{order.user.firstName + " " + order.user.lastName}</li>
-              <li>{order.user.email}</li>
-              <li>{order.user.shippingAdress}</li>
-              <li>{order.createdAt}</li>
-              <li>{order.status}</li>
-            </ul>
-          </div>
-          <table>
-            <tr>
-              <td>Producto</td>
-              <td>Precio Unidad</td>
-              <td>Cantidad</td>
-              <td>Subtotal</td>
-              {order.status === "completa" ? <td>Reseña</td> : null}
+        <div className={style.container}>
+          <table className={style.orders}>
+            <tr className={style.tr}>
+              <th className={style.th}>Cliente</th>
+              <th className={style.th} i>
+                Email
+              </th>
+              <th className={style.th}>Direccion</th>
+              <th className={style.th}>Fecha de Inicio</th>
+              <th className={style.th}>Status</th>
+            </tr>
+            <tr className={style.tr}>
+
+              <td className={style.td}>Producto</td>
+              <td className={style.td}>Precio Unidad</td>
+              <td className={style.td}>Cantidad</td>
+              <td className={style.td}>Subtotal</td>
+              {order.status === "completa" ? <td className={style.td}>Reseña</td> : null}
             </tr>
             {order.products.length &&
               order.products.map((producto) => {
@@ -99,32 +96,46 @@ export default function OrderDetails() {
                   } else {
                     return (
                       <button
+
+                        className={style.Btn}
                         onClick={() => setShow({ true: true, pid, uid })}
-                      />
+                      >
+                        Dejar reseña
+                      </button>
+
                     );
                   }
                 };
                 return (
-                  <tr>
-                    <td>{producto.title}</td>
-                    <td>{producto.price}</td>
-                    <td>{producto.lineOrder.quantity}</td>
-                    <td>{producto.price * producto.lineOrder.quantity}</td>
-                    {order.status === "completa" ? <td>{getReview(producto.id, order.user.id)}</td> : null}
+                  
+                  <tr className={style.tr}>
+                    <td className={style.td}>{producto.title}</td>
+                    <td className={style.td}>{producto.price}</td>
+                    <td className={style.td}>{producto.lineOrder.quantity}</td>
+                    <td className={style.td}>{producto.price * producto.lineOrder.quantity}</td>
+                    {order.status === "completa" ? <td className={style.td}>{getReview(producto.id, order.user.id)}</td> : null}
+
                   </tr>
                 );
               })}
           </table>
-          <h3>Total</h3>
-          <h3>{Total()}</h3>
+          <table>
+            <tr className={style.tr}>
+              <th className={style.th}>Total</th>
+              <th className={style.td}>{Total()}</th>
+            </tr>
+          </table>
           {/* id userid status createdAt products precio */}
           {show.true ? (
-            <ReviewForm
-              productId={show.pid}
-              userId={show.uid}
-              notShow={notShow}
-              orderId={orderID}
-            />
+            <div>
+              <ReviewForm
+                productId={show.pid}
+                userId={show.uid}
+                notShow={notShow}
+                orderId={orderID}
+              />
+            </div>
+
           ) : null}
         </div>
       ) : null}

@@ -1,10 +1,16 @@
 const order = require("express").Router();
 const { Order, Product, User } = require("../db.js");
+const { Op } = require("sequelize");
 
 order.get("/", (req, res, next) => {
   const page = req.query.page;
   const limit = req.query.limit || 12;
   const offset = page ? (page - 1) * limit : null;
+
+  let where = req.query.admin;
+  if (where) {
+    where = { status: { [Op.not]: "carrito" } };
+  }
 
   let order = req.query.order;
   if (order) {
@@ -13,7 +19,7 @@ order.get("/", (req, res, next) => {
 
   if (req.user) {
     if (req.user.isAdmin) {
-      Order.findAndCountAll({ include: Product, limit, offset, order })
+      Order.findAndCountAll({ include: Product, limit, offset, order, where })
         .then((ordenes) => res.json(ordenes))
         .catch(next);
     } else res.sendStatus(401);

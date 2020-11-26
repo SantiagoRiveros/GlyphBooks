@@ -13,7 +13,9 @@ export default function OrderTable() {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API}/order?page=${page}&order=${sort}`)
+      .get(
+        `${process.env.REACT_APP_API}/order?page=${page}&order=${sort}&admin=true`
+      )
       .then(({ data }) => {
         setOrder(data);
       });
@@ -24,13 +26,17 @@ export default function OrderTable() {
     newOrder === sort && (newOrder = JSON.stringify([[e.target.name, "DESC"]]));
     setSort(newOrder);
   };
-  
+
   const handleChange = (e) => {
-    e.preventDefault()
-    axios.put(`http://localhost:3000/order/${e.target.name}`, { status: e.target.value })
-      .then(() => {
-        setStatus(status + 1)
+    e.preventDefault();
+    axios
+      .put(`${process.env.REACT_APP_API}/order/${e.target.name}`, {
+        status: e.target.value,
       })
+      .then(() => {
+        setStatus(status + 1);
+      });
+  };
 
   return (
     <div className={style.size}>
@@ -57,13 +63,20 @@ export default function OrderTable() {
               <td className={style.td}>{order.id}</td>
               <td className={style.td}>{order.userId}</td>
               <td className={style.td}>
-                <select name={order.id} id="estado" value={order.status} onChange={handleChange}>
-                  <option value="carrito">Carrito</option>
-                  <option value="creada">Creada</option>
-                  <option value="procesando">Procesando</option>
-                  <option value="cancelada">Cancelada</option>
-                  <option value="completa">Completa</option>
-                </select>
+                {order.status === "procesando" ? (
+                  <select
+                    name={order.id}
+                    id="estado"
+                    value={order.status}
+                    onChange={handleChange}
+                  >
+                    <option value="procesando">Procesando</option>
+                    <option value="cancelada">Cancelada</option>
+                    <option value="completa">Completa</option>
+                  </select>
+                ) : (
+                  order.status
+                )}
               </td>
               <td className={style.td}>{order.createdAt}</td>
               <td className={style.td}>

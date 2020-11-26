@@ -206,6 +206,11 @@ user.put("/:idUser/cart", (req, res, next) => {
       if (sinStock.length) {
         return res.status(409).send(sinStock);
       }
+      orden.products.forEach((p) => {
+        p.stock -= p.lineOrder.quantity;
+        p.save();
+      });
+
       orden.status = req.body.status;
       orden.save();
       res.status(200).json(orden);

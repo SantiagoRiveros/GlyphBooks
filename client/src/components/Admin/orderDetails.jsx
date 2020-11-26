@@ -70,7 +70,6 @@ export default function OrderDetails() {
               <li>{order.createdAt}</li>
               <li>{order.status}</li>
             </ul>
-            {console.log(order.status)}
           </div>
           <table>
             <tr>

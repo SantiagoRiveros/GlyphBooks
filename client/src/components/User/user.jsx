@@ -7,7 +7,7 @@ import { Switch, Route, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import style from "../../CSS/User.module.scss";
 
-export default function User({ logOut }) {
+export default function User({ logOut, setLocalUser, localUser }) {
   const { user } = useSelector((state) => state.user);
   const { replace } = useHistory();
   return (
@@ -22,7 +22,13 @@ export default function User({ logOut }) {
       <Switch>
         <Route
           path="/cuenta/details"
-          render={() => <UserDetails user={user} />}
+          render={() => (
+            <UserDetails
+              user={user}
+              setLocalUser={setLocalUser}
+              localUser={localUser}
+            />
+          )}
         />
         <Route
           path="/cuenta/orders"

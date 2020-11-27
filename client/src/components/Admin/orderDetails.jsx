@@ -3,6 +3,7 @@ import ReviewForm from "../Forms/ReviewForm.jsx";
 import { useLocation } from "react-router";
 import style from "../../CSS/Admin/adminOrderDetails.module.scss";
 import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 import axios from "axios";
 
 function useQuery() {
@@ -19,16 +20,20 @@ export default function OrderDetails() {
   const [review, setReview] = useState([]);
   const [show, setShow] = useState(false);
 
+  const { user } = useSelector((state) => state.user);
+
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/order/${orderID}/order`)
+      .get(`${process.env.REACT_APP_API}/order/${orderID}/order`)
       .then(({ data }) => {
         setOrder(data);
         if (data.products) {
           var axiosArr = [];
           data.products.forEach((p) => {
             axiosArr.push(
-              axios.get(`http://localhost:3000/reviews/${p.id}/${data.user.id}`)
+              axios.get(
+                `${process.env.REACT_APP_API}/reviews/${p.id}/${data.user.id}`
+              )
             );
           });
           Promise.all(axiosArr).then((r) => {
@@ -65,6 +70,7 @@ export default function OrderDetails() {
         <div>
           <table className={style.orders}>
             <tr className={style.tr}>
+              <th className={style.th}>ID orden</th>
               <th className={style.th}>Cliente</th>
               <th className={style.th} i>
                 Email
@@ -73,9 +79,10 @@ export default function OrderDetails() {
               <th className={style.th}>Fecha de Inicio</th>
               <th className={style.th}>Status</th>
             </tr>
-            <tr>
+            <tr className={style.tr}>
+              <td className={style.td}>{order.id}</td>
               <td className={style.td}>
-                {order.user.firstName + " " + order.user.lastName}
+                {`${order.user.firstName} ${order.user.lastName}`}
               </td>
               <td className={style.td}>{order.user.email}</td>
               <td className={style.td}>{order.user.shippingAdress}</td>
@@ -85,12 +92,13 @@ export default function OrderDetails() {
           </table>
           <table className={style.orders}>
             <tr className={style.tr}>
-              <th className={style.th}>Producto</th>
-              <th className={style.th}>Precio Unitario</th>
-              <th className={style.th}>Cantidad</th>
-              <th className={style.th}>Subtotal</th>
-              <th className={style.th}>Total</th>
-              <th className={style.th}>Reseña</th>
+              <td className={style.th}>Producto</td>
+              <td className={style.th}>Precio Unidad</td>
+              <td className={style.th}>Cantidad</td>
+              <td className={style.th}>Subtotal</td>
+              {order.status === "completa" ? (
+                <td className={style.th}>Reseña</td>
+              ) : null}
             </tr>
             {order.products.length &&
               order.products.map((producto) => {
@@ -98,9 +106,7 @@ export default function OrderDetails() {
                   var p = review.filter((r) => {
                     return r.productId === pid && uid === r.userId;
                   });
-                  if (p.length > 0) {
-                    return p[0].title;
-                  } else {
+                  if (order.userId === user.id && !p.length) {
                     return (
                       <button
                         className={style.Btn}
@@ -109,6 +115,10 @@ export default function OrderDetails() {
                         Dejar reseña
                       </button>
                     );
+                  } else if (p.length > 0) {
+                    return p[0].title;
+                  } else {
+                    return "el usuario aun no dejo ninguna reseña";
                   }
                 };
                 return (
@@ -119,10 +129,11 @@ export default function OrderDetails() {
                     <td className={style.td}>
                       {producto.price * producto.lineOrder.quantity}
                     </td>
-                    <td className={style.td}>{Total()}</td>
-                    <td className={style.td}>
-                      {getReview(producto.id, order.user.id)}
-                    </td>
+                    {order.status === "completa" ? (
+                      <td className={style.td}>
+                        {getReview(producto.id, order.userId)}
+                      </td>
+                    ) : null}
                   </tr>
                 );
               })}

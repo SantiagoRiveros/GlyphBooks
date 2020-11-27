@@ -1,14 +1,25 @@
 const order = require("express").Router();
 const { Order, Product, User } = require("../db.js");
+const { Op } = require("sequelize");
 
 order.get("/", (req, res, next) => {
   const page = req.query.page;
   const limit = req.query.limit || 12;
   const offset = page ? (page - 1) * limit : null;
 
+  let where = req.query.admin;
+  if (where) {
+    where = { status: { [Op.not]: "carrito" } };
+  }
+
+  let order = req.query.order;
+  if (order) {
+    order = JSON.parse(order);
+  }
+
   if (req.user) {
     if (req.user.isAdmin) {
-      Order.findAndCountAll({ include: Product, limit, offset })
+      Order.findAndCountAll({ include: Product, limit, offset, order, where })
         .then((ordenes) => res.json(ordenes))
         .catch(next);
     } else res.sendStatus(401);
@@ -33,11 +44,16 @@ order.get("/:id", (req, res, next) => {
 });
 
 order.put("/:id", (req, res, next) => {
-  Order.findOne({ where: { id: req.params.id } })
+  Order.findOne({ where: { id: req.params.id }, include: Product })
     .then((orden) => {
       for (var key in req.body) {
-        if (orden[key] === undefined) return res.sendStatus(400);
         orden[key] = req.body[key];
+        if (key === "status" && req.body[key] === "cancelada") {
+          orden.products.forEach((p) => {
+            p.stock += p.lineOrder.quantity;
+            p.save();
+          });
+        }
       }
       orden.save();
       res.json(orden);

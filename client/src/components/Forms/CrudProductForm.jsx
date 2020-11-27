@@ -46,14 +46,16 @@ export default function CrudProducts({ product, setProduct }) {
 
   const handleSubmit = (e) => {
     if (!product) {
-      axios.post("http://localhost:3000/products", input).then(({ data }) => {
-        setProduct(data);
-      });
+      axios
+        .post(`${process.env.REACT_APP_API}/products`, input)
+        .then(({ data }) => {
+          setProduct(data);
+        });
 
       e.preventDefault();
     } else {
       axios
-        .put(`http://localhost:3000/products/${product.id}`, input)
+        .put(`${process.env.REACT_APP_API}/products/${product.id}`, input)
         .then(({ data }) => {
           console.log(data);
           setInput(data);
@@ -65,10 +67,12 @@ export default function CrudProducts({ product, setProduct }) {
 
   const handleDelete = () => {
     if (product) {
-      axios.delete(`http://localhost:3000/products/${product.id}`).then(() => {
-        setProduct(null);
-        push("/admin/products");
-      });
+      axios
+        .delete(`${process.env.REACT_APP_API}/products/${product.id}`)
+        .then(() => {
+          setProduct(null);
+          push("/admin/products");
+        });
     } else {
       push("/admin/products");
     }

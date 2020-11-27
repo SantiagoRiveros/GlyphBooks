@@ -90,3 +90,14 @@
   text-align: center;
   margin: 0.5rem;
 }
+
+.vacio {
+  position: relative;
+  top: 30%;
+  align-self: center;
+  margin: 4.5rem;
+  padding-bottom: 1rem;
+  font-size: 25px;
+  color: var(--color-primary);
+  border-bottom: 0.1rem solid var(--color-primary);
+}

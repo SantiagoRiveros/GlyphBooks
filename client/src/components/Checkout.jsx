@@ -7,6 +7,7 @@ import OrderDetails from "./Admin/orderDetails.jsx";
 
 export default function Checkout(props) {
   const [check, setCheck] = useState(false);
+  const [sinStock, setSinStock] = useState([]);
   const { user } = useSelector((state) => state.user);
   const [input, setInput] = useState("");
   const { push } = useHistory();
@@ -14,7 +15,9 @@ export default function Checkout(props) {
 
   const handleSubmit = () => {
     axios
-      .put(`http://localhost:3000/users/${user.id}`, { shippingAdress: input })
+      .put(`${process.env.REACT_APP_API}/users/${user.id}`, {
+        shippingAdress: input,
+      })
       .then(({ data }) => {
         props.setLocalUser({ ...props.localUser, user: data });
         push("/catalogo");
@@ -25,19 +28,15 @@ export default function Checkout(props) {
     const { orderId } = props.items[0].lineOrder;
     if (user.id) {
       axios
-        .put(`http://localhost:3000/users/${user.id}/cart`, {
+        .put(`${process.env.REACT_APP_API}/users/${user.id}/cart`, {
           orderId,
           status: "procesando",
         })
-        .then((res) =>
-          Promise.all(
-            props.items.map((i) => {
-              return axios.put(`http://localhost:3000/products/${i.id}`, {
-                stock: i.stock - i.lineOrder.quantity,
-              });
-            })
-          )
-        )
+        .then((res) => {
+          if ((res.status = 409)) {
+            setSinStock(res.data);
+          }
+        })
         .then(() => {
           dispatch(cerrarCarrito());
         });

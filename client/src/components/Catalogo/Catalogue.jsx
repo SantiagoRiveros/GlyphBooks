@@ -7,6 +7,7 @@ import { useLocation } from "react-router";
 import { connect, useSelector } from "react-redux";
 import style from "../../CSS/catalogue.module.scss";
 import axios from "axios";
+import SortBar from "./sortBar";
 
 function useQuery() {
   let search = useLocation().search;
@@ -23,6 +24,7 @@ function Catalogue(props) {
   const { push } = useHistory();
   const [productos, setProductos] = useState([]);
   const [category, setCategory] = useState("");
+  const [sort, setSort] = useState("");
   const { page } = useQuery();
 
   const searched = useSelector((state) => state.cart.productos);
@@ -30,20 +32,21 @@ function Catalogue(props) {
   useEffect(() => {
     axios
       .get(
-        `http://localhost:3000/products?page=${
+        `${process.env.REACT_APP_API}/products?page=${
           page || 1
-        }&category=${category}&where=${searched}`
+        }&category=${category}&search=${searched}&order=${sort}&stock=${true}`
       )
       .then(({ data }) => {
         setProductos(data);
       })
       .catch((err) => console.log(err));
-  }, [page, category, searched]);
+  }, [page, category, searched, sort]);
 
   return (
     <div className={style.Fondo}>
       <Sidebar className={style.Sidebar} setCategory={setCategory} />
       <div className={style.Orden}>
+        <SortBar setSort={setSort} sort={sort} className={style.sortBar} />
         <div className={style.Catalogue}>
           {productos.count &&
             productos.rows.map((producto) => {

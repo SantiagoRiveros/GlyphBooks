@@ -29,7 +29,7 @@ export default function Carrito(props) {
   const handleDelete = () => {
     if (idUser && props.items.length) {
       axios
-        .delete(`http://localhost:3000/users/${idUser}/cart`)
+        .delete(`${process.env.REACT_APP_API}/users/${idUser}/cart`)
         .then(() => dispatch(cerrarCarrito()));
     } else {
       dispatch(cerrarCarrito());
@@ -46,9 +46,10 @@ export default function Carrito(props) {
   return (
     <div className={style.container}>
       <div className={open}>
-        <ul>
-          {props.items.length
-            ? props.items.map((item) => (
+        {props.items.length ? (
+          <div>
+            <ul>
+              {props.items.map((item) => (
                 <li key={item.id}>
                   <CartProduct
                     key={item.id}
@@ -59,18 +60,21 @@ export default function Carrito(props) {
                     producto={item}
                   />
                 </li>
-              ))
-            : null}
-        </ul>
-        <p className={style.total}>TOTAL: ${total}</p>
-        <div className={style.btnContainer}>
-          <button className={style.btn} onClick={handleFinalizar}>
-            finalizar
-          </button>
-          <button className={style.btn} onClick={handleDelete}>
-            eliminar
-          </button>
-        </div>
+              ))}
+            </ul>
+            <p className={style.total}>TOTAL: ${total}</p>
+            <div className={style.btnContainer}>
+              <button className={style.btn} onClick={handleFinalizar}>
+                finalizar
+              </button>
+              <button className={style.btn} onClick={handleDelete}>
+                eliminar
+              </button>
+            </div>
+          </div>
+        ) : (
+          <span className={style.vacio}>El carrito esta vacio</span>
+        )}
       </div>
     </div>
   );

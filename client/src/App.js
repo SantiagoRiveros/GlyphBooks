@@ -64,7 +64,7 @@ function App(props) {
     } else {
       let { id: idUser } = localUser.user;
       axios
-        .get(`http://localhost:3000/users/${idUser}/cart`)
+        .get(`${process.env.REACT_APP_API}/users/${idUser}/cart`)
         .then(({ data }) => {
           if (data[0]) {
             dispatch(agregarVarios(data[0].products));
@@ -124,6 +124,8 @@ function App(props) {
           path="/cuenta"
           render={() => (
             <Cuenta
+              setLocalUser={setLocalUser}
+              localUser={localUser}
               logOut={() => {
                 removeLocalUser();
                 setCarritoLocal([]);

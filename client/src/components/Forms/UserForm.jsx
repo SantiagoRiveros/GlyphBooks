@@ -13,7 +13,36 @@ export default function NewForm() {
     shippingAdress: "",
   });
 
+  const [errors, setErrors] = useState({ campos: true, email: true });
+
+  const validate = (input) => {
+    let errors = {};
+    if (!input.email) {
+      errors.campos = "Todos los campos son obligatorios";
+    } else if (!/\S+@\S+\.\S+/.test(input.email)) {
+      errors.email = "Email invalido";
+    }
+
+    if (
+      !input.firstName ||
+      !input.lastName ||
+      !input.password ||
+      !input.shippingAdress
+    ) {
+      errors.campos = "Todos los campos son obligatorios";
+    }
+
+    return errors;
+  };
+
   const handleChange = (e) => {
+    setErrors(
+      validate({
+        ...input,
+        [e.target.name]: e.target.value,
+      })
+    );
+
     setInput({
       ...input,
       [e.target.name]: e.target.value,
@@ -21,16 +50,27 @@ export default function NewForm() {
   };
 
   const handleSubmit = (e) => {
-    axios.post(`http://localhost:3000/auth/register`, input).then(() => {
-      push("/");
-    });
+    axios
+      .post(`${process.env.REACT_APP_API}/auth/register`, input)
+      .then(() => {
+        push("/");
+      })
+      .catch((err) => {
+        if (err.response.status === 400) {
+          setErrors({
+            email: "este email ya esta vinvulado a una cuenta de Glyph Books",
+          });
+        } else {
+          console.log(err);
+        }
+      });
 
     e.preventDefault();
   };
 
   return (
     <div className={style.fondo}>
-      <div className={style.loginbox}>
+      <form className={style.loginbox} onSubmit={handleSubmit}>
         <h1>Nuevo usuario</h1>
         <div className={style.textbox}>
           <input
@@ -78,16 +118,19 @@ export default function NewForm() {
             value={input.shippingAdress}
             name="shippingAdress"
             onChange={handleChange}
-            placeholder="Direccion"
+            placeholder="Dirección"
           />
         </div>
+        {errors.email?.length || errors.campos?.length ? (
+          <p>{errors.campos || errors.email}</p>
+        ) : null}
         <input
-          onClick={handleSubmit}
-          type="button"
+          disabled={errors.campos || errors.email}
+          type="submit"
           className={style.btn}
           value="Crear cuenta"
         />
-      </div>
+      </form>
     </div>
   );
 }

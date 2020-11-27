@@ -17,6 +17,14 @@
   left: 50%;
   transform: translate(-50%, -50%);
   color: var(--color-primary);
+
+  p {
+    background-color: var(--color-primary);
+    padding: 1rem;
+    color: white;
+    font-weight: 700;
+    margin-top: 1rem;
+  }
 }
 
 .loginbox h1 {
@@ -60,7 +68,11 @@
   font-size: 1rem;
   transition-duration: 500ms;
 
-  &:hover {
+  &:disabled {
+    cursor: default;
+  }
+
+  &:hover:enabled {
     background-color: var(--color-primary);
     color: #fff;
   }

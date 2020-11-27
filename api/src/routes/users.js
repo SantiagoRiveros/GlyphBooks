@@ -75,7 +75,10 @@ user.post("/forgot", async (req, res, next) => {
       if (err) {
         console.log("Ocurrio un error", err);
       } else {
-        console.log("Email enviado");
+        req.flash(
+          "passwordReset",
+          "Tu contraseña ha sido reestablecida satisfactoriamente."
+        );
       }
     });
   }
@@ -123,30 +126,6 @@ user.put("/passwordReset/:token", async (req, res, next) => {
 
   return res.status(204).json({ message: "Ocurrio un error" });
 });
-
-// user.post("/reset/:token", function (req, res) {
-//   const userData = User.findOne(
-//     {
-//       where: { resetPasswordToken: req.params.token },
-//       resetPasswordExpires: { $gt: Date.now() },
-//     },
-//     async function (err, user) {
-//       if (!userData) {
-//         // req.flash("error", "El link es invalido o ya expiro.");
-//         return res.redirect("back");
-//       }
-//       if (req.body.password === req.body.password2) {
-//         userData.password = req.body.password;
-//         await userData.save({ fields: ["password"] });
-
-//         return res.status(201).json({ message: "se cambio la contraseña" });
-//       } else {
-//         // req.flash("error", "Las contraseñas no son iguales");
-//         return res.redirect("back");
-//       }
-//     }
-//   );
-// });
 
 user.get("/:idUser/cart", (req, res, next) => {
   User.findOne({ where: { id: req.params.idUser } })

@@ -72,10 +72,10 @@ VALUES ('Harry Potter y la piedra filosofal', 'Harry Potter se ha quedado huérf
 ('Misery', 'Paul Sheldon es un escritor que sufre un grave accidente y recobra el conocimiento en una apartada casa en la que vive una sospechosa mujer, corpulenta y de extraño carácter. Se trata de una antigua enfermera, involucrada en varias muertes misteriosas ocurridas en diversos hospitales. Fanática de un personaje de una serie de libros que él ha decidido dejar de escribir, está dispuesta a hacer todo lo necesario para convencerlo de que retome la escritura. Esta mujer es capaz de los mayores horrores, y Paul, con las piernas rotas y entre terribles dolores, tendrá que luchar por su vida.', 'Stephen King', 5, 1450, 'https://usishield.com/wp-content/uploads/2019/10/220px-Stephen_King_Misery_cover.jpg'),
 ('La naranja mecánica', 'El protagonista, Alex, y sus amigos, o drugos, viven en un mundo de crueldad y destrucción. Tras la brutal violación de la mujer de un escritor, Alex es detenido y llevado a un centro de rehabilitación, donde será elegido para participar en un novedoso y drástico experimento que pretende que aborrezca la violencia.', 'Anthony Burgess', 20, 550, 'https://http2.mlstatic.com/D_NQ_NP_757947-MLA42494491153_072020-O.webp'),
 ('El diario de Ana Frank', 'Ana, a la sazón una niña de trece años, escribió su estremecedor Diario: un testimonio único en su género sobre el horror y la barbarie nazi, y sobre los sentimientos y experiencias de la propia Ana y sus acompañantes. Ana murió en el campo de Bergen-Belsen en marzo de 1945. Su Diario nunca morirá.', 'Ana Frank', 18, 980, 'https://http2.mlstatic.com/D_NQ_NP_740940-MLA43347990382_092020-O.webp'),
-('Caos', 'Una fiesta, varias habitaciones, tres tiempos: pasado errático, presente mágico, futuro incierto. Puertas que abren a mundos y cierran miedos. Cinco colores jugando a adivinar de qué color pintás la vida. Historias dentro de historias.', 'Magalí Tajes', 12, 800, 'https://http2.mlstatic.com/D_NQ_NP_683433-MLA40609686160_012020-O.webp'),
+('Más fuerte que la adversidad', 'Más fuerte que la adversidad es un aliado emocional y una herramienta indispensable para aprender a desarrollar la confianza en nosotros mismos, tomar el control de lo que sí depende de nosotros, enfrentar la incertidumbre y aprender a gestionar emociones como la ansiedad, la tristeza y la ira.', 'Walter Riso', 5, 990, 'https://planetadelibrosar5.cdnstatics.com/usuaris/libros/fotos/325/m_libros/324347_portada_mas-fuerte-que-la-adversidad_walter-riso_202009252054.jpg'),
 ('Calu Rivero', 'Carla Soledad Rivero nació en Recreo, Catamarca, el 5 de abril de 1987. Es actriz. Activista ambiental, colabora con entidades que propician una moda sustentable.', 'Calu Rivero', 850, 600, 'https://cdn.cienradios.com/wp-content/uploads/sites/3/2019/03/Calu-Rivero-libro-1.jpg'),
 ('Sexo ATR', 'La Lic. Cecilia Ce nos ofrece en este libro-guía información sexual valiosísima de una manera gráfica, divertida, empática y respetuosa, con la intención de que cada uno haga su propio recorrido de autodescubrimiento y reafirmación, para disfrutar de la sexualidad en libertad. Este es el libro sobre sexo que todos siempre ansiamos tener. Esta es la educación sexual que queremos.', 'Cecilia Ce', 63, 1340, 'https://puntoed.com.ar/img/libros/sexo-atr-a-todo-ritmo-la-educacion-sexual-que-queremos.jpg'),
-('Más fuerte que la adversidad', 'Más fuerte que la adversidad es un aliado emocional y una herramienta indispensable para aprender a desarrollar la confianza en nosotros mismos, tomar el control de lo que sí depende de nosotros, enfrentar la incertidumbre y aprender a gestionar emociones como la ansiedad, la tristeza y la ira.', 'Walter Riso', 5, 990, 'https://planetadelibrosar5.cdnstatics.com/usuaris/libros/fotos/325/m_libros/324347_portada_mas-fuerte-que-la-adversidad_walter-riso_202009252054.jpg');
+('Caos', 'Una fiesta, varias habitaciones, tres tiempos: pasado errático, presente mágico, futuro incierto. Puertas que abren a mundos y cierran miedos. Cinco colores jugando a adivinar de qué color pintás la vida. Historias dentro de historias.', 'Magalí Tajes', 12, 800, 'https://http2.mlstatic.com/D_NQ_NP_683433-MLA40609686160_012020-O.webp');
 
 INSERT INTO "Categories" (name, "createdAt", "updatedAt")
 
@@ -249,17 +249,17 @@ VALUES ('2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00', 1, 2),
 ('2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00', 67, 8),
 ('2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00', 68, 7),
 ('2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00', 68, 8),
-('2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00', 69, 4),
-('2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00', 69, 6),
-('2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00', 69, 19),
 ('2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00', 69, 13),
+('2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00', 69, 15),
+('2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00', 69, 19),
 ('2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00', 70, 6),
 ('2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00', 70, 13),
 ('2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00', 70, 19),
 ('2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00', 71, 15),
 ('2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00', 71, 19),
+('2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00', 72, 4),
+('2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00', 72, 6),
 ('2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00', 72, 13),
-('2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00', 72, 15),
 ('2017-08-09 07:00:00 -7:00', '2017-08-09 08:00:00 -7:00', 72, 19);
 
 INSERT INTO "users" ("firstName", "lastName", "password", "email", "shippingAdress", "isAdmin", "createdAt", "updatedAt")

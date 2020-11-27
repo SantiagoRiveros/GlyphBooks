@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import style from "../../CSS/userOrders.module.scss";
 
 export default function UserOrders({ user }) {
   const [order, setOrder] = useState([]);
@@ -14,27 +15,29 @@ export default function UserOrders({ user }) {
       });
   }, [user]);
   return (
-    <div>
-      <table>
-        <tr>
-          <th>ID</th>
-          <th>Status</th>
-          <th>Creation Date</th>
-          <th>Details</th>
+    <div className={style.container}>
+      <table className={style.orders}>
+        <tr className={style.tr}>
+          <th className={style.th} h>
+            ID
+          </th>
+          <th className={style.th}>Status</th>
+          <th className={style.th}>Creation Date</th>
+          <th className={style.th}>Detalles</th>
         </tr>
         {order.length &&
           order.map((orden) => (
-            <tr>
-              <th>{orden.id}</th>
-              <th>{orden.status}</th>
-              <th>{orden.createdAt}</th>
-              <th>
-                <button
+            <tr className={style.tr}>
+              <td className={style.td}>{orden.id}</td>
+              <td className={style.td}>{orden.status}</td>
+              <td className={style.td}>{orden.createdAt}</td>
+              <td className={style.td}>
+                <ion-icon
+                  name="information-circle-outline"
+                  color="var(--color-primary)"
                   onClick={() => push(`/cuenta/orderDetails/${orden.id}`)}
-                >
-                  O
-                </button>
-              </th>
+                ></ion-icon>
+              </td>
             </tr>
           ))}
       </table>

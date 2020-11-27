@@ -1,10 +1,5 @@
 .fondo {
-  margin: 0;
-  padding: 0;
-  background: url("https://img.freepik.com/foto-gratis/interior-sala-grunge-3d-foco-fondo-ambiente-ahumado_1048-11333.jpg?size=626&ext=jpg")
-    no-repeat;
-  background-size: cover;
-  height: calc(100vh - 80px);
+  margin-top: 6rem;
 }
 
 .form {
@@ -12,8 +7,9 @@
   position: absolute;
   top: 50%;
   left: 50%;
+  text-align: center;
   transform: translate(-50%, -50%);
-  color: #fca311;
+  color: var(--color-primary);
 }
 
 .form h1 {
@@ -45,12 +41,20 @@
 }
 
 .btn {
-  width: 100%;
-  background: none;
-  border: 2px solid #fca311;
-  color: white;
-  padding: 5px;
-  font-size: 18px;
+  text-transform: uppercase;
+  margin: 0.5rem;
   cursor: pointer;
-  margin: 12px 0;
+  color: var(--color-primary);
+  background-color: #fafafa;
+  padding: 0.5rem 1rem;
+  border: solid 2px var(--color-primary);
+  font-weight: 700;
+  font-size: 1rem;
+
+  transition-duration: 500ms;
+
+  &:hover {
+    background-color: var(--color-primary);
+    color: #fff;
+  }
 }

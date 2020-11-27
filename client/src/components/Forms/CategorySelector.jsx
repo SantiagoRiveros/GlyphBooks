@@ -50,18 +50,20 @@ export default function AddCategory({ producto, setProducto }) {
   };
   return (
     <div className={style.container}>
-      <h1>Agrega categorias a tu producto!</h1>
       <form onSubmit={handleSubmit}>
-        <select onChange={handleChange}>
-          {categorias.length &&
-            categorias.map((category) => (
-              <option key={category.id} value={category.id}>
-                {category.name}
-              </option>
-            ))}
-        </select>
-        <input type="submit" value="Agregar" />
-        <button onClick={() => push("/admin/products")}>hecho</button>
+        <h1>Agregar categorias al producto</h1>
+        <div className={style.category}>
+          <select onChange={handleChange}>
+            {categorias.length &&
+              categorias.map((category) => (
+                <option key={category.id} value={category.id}>
+                  {category.name}
+                </option>
+              ))}
+          </select>
+          <input type="submit" value="Agregar" />{" "}
+        </div>
+        <button onClick={() => push("/admin/products")}>Finalizar</button>
       </form>
     </div>
   );

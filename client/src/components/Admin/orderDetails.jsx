@@ -60,9 +60,9 @@ export default function OrderDetails() {
   }
 
   return (
-    <div>
+    <div className={style.container}>
       {order ? (
-        <div className={style.container}>
+        <div>
           <table className={style.orders}>
             <tr className={style.tr}>
               <th className={style.th}>Cliente</th>

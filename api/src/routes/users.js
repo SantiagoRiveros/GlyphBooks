@@ -62,7 +62,7 @@ user.post("/forgot", async (req, res, next) => {
       to: userData.email,
       from: "glyphbooksecommerce@gmail.com",
       subject: "Reseteo de contraseña",
-      text:
+      html:
         `Entra en este link para cambiar la contraseña ` +
         `${process.env.FRONT}/password/` +
         token,

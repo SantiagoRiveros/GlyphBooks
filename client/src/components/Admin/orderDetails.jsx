@@ -132,6 +132,12 @@ export default function OrderDetails() {
                     {order.status === "completa" ? (
                       <td className={style.td}>
                         {getReview(producto.id, order.userId)}
+                        <button
+                          className={style.Btn}
+                          onClick={() => setShow({ true: true })}
+                        >
+                          Editar
+                        </button>
                       </td>
                     ) : null}
                   </tr>

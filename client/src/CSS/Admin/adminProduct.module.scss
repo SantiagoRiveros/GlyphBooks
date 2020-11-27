@@ -7,7 +7,8 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin-top: 5%;
+  margin-top: 5rem;
+  background: transparent;
   margin-left: 125px;
 }
 
@@ -21,25 +22,6 @@
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 10px;
-}
-
-.button {
-  cursor: pointer;
-  display: flex;
-  background-color: #ffffff;
-  border-radius: 6px;
-  color: #14213d;
-  border: 2px solid #14213d;
-  padding: 5px 10px;
-  margin: 5px 30px;
-  transition: all 0.5s;
-  &:hover {
-    cursor: pointer;
-    color: white;
-    transform: scale(1.15);
-    border-color: transparent;
-    background-color: orange;
-  }
 }
 
 .products {
@@ -63,6 +45,22 @@
   padding: 8px;
 }
 
+.td:nth-child(1) {
+  text-align: center;
+}
+
+.td:nth-child(7) {
+  text-align: center;
+}
+
+.td:nth-child(5) {
+  text-align: center;
+}
+
+.td:nth-child(6) {
+  text-align: center;
+}
+
 .tr:nth-child(even) {
   background-color: #dbdbdb93;
 }
@@ -71,41 +69,28 @@
   background-color: rgb(194, 194, 194);
 }
 
-.ionicon {
-  color: white;
-  font-size: 23px;
-  padding: 7px 13px;
-  margin-top: 19px;
-  cursor: pointer;
-}
-
-.ionicon:hover {
-  background: #white;
-  transition: 0.5s;
-  border-radius: 3px;
+.Pagination {
+  display: flex;
+  align-items: center;
+  margin: auto;
+  height: 50px;
 }
 
 .Btn {
-    display: flex;
-    background-color: #ffffff;
-    border-radius: 6px;
-    color: #14213d;
-    border: 2px solid #14213d;
-    padding: 5px 10px;
-    margin: 5px 30px;
-    transition: all 0.5s;
-    &:hover {
-      cursor: pointer;
-      color: white;
-      transform: scale(1.15);
-      border-color: transparent;
-      background-color: orange;
-    }
-  }
+  text-transform: uppercase;
+  margin-top: 0.5rem;
+  cursor: pointer;
+  color: var(--color-primary);
+  background-color: #fafafa;
+  padding: 0.5rem 1rem;
+  border: solid 2px var(--color-primary);
+  font-weight: 700;
+  font-size: 1rem;
+  margin: 0.5rem;
+  transition-duration: 500ms;
 
-  .Pagination {
-    display: flex;
-    align-items: center;
-    margin: auto;
-    height: 50px
+  &:hover {
+    background-color: var(--color-primary);
+    color: #fff;
   }
+}

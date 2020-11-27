@@ -67,7 +67,7 @@ export default function AdminUsers() {
               <td className={style.td}>
                 <ion-icon
                   name="trash-outline"
-                  className={style.ionicon}
+                  color="var(--color-primary)"
                   onClick={() => handleDelete(review.id, review.productId)}
                 ></ion-icon>
               </td>

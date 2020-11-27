@@ -177,7 +177,7 @@ user.put("/:id", (req, res, next) => {
 
   const request = req.body;
   if (req.user) {
-    if (req.user.isAdmin) {
+    if (req.user.isAdmin || Number(req.user.id) === Number(id)) {
       User.findOne({ where: { id } })
         .then((user) => {
           for (const key in request) {
@@ -206,6 +206,11 @@ user.put("/:idUser/cart", (req, res, next) => {
       if (sinStock.length) {
         return res.status(409).send(sinStock);
       }
+      orden.products.forEach((p) => {
+        p.stock -= p.lineOrder.quantity;
+        p.save();
+      });
+
       orden.status = req.body.status;
       orden.save();
       res.status(200).json(orden);

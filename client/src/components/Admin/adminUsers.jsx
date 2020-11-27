@@ -42,6 +42,7 @@ export default function AdminUsers(props) {
     <div className={style.size}>
       <table className={style.users}>
         <tr className={style.tr}>
+
           <th className={style.th}>
             ID <button name={"id"} onClick={handleSort}></button>
           </th>
@@ -54,6 +55,7 @@ export default function AdminUsers(props) {
           <th className={style.th}>
             Rol <button name={"isAdmin"} onClick={handleSort}></button>
           </th>
+
           <th className={style.th}>Eliminar</th>
         </tr>
         {users.count &&
@@ -67,23 +69,33 @@ export default function AdminUsers(props) {
               <td className={style.td}>
                 {user.isAdmin ? "Admin" : "User"}
                 {Number(props.user.user?.id) !== Number(user.id) ? (
-                  <button onClick={() => handleSetRole(user.id, user.isAdmin)}>
-                    SetRole
+                  <button
+                    className={style.Btn}
+                    onClick={() => handleSetRole(user.id, user.isAdmin)}
+                  >
+                    Cambiar Rol
                   </button>
                 ) : null}
+              </td>
+              <td className={style.td}>
+                <button
+                  className={style.Btn}
+                  onClick={() => push(`/admin/userDetails/${user.id}`)}
+                >
+                  Detalles
+                </button>
               </td>
               <td className={style.td}>
                 {Number(props.user.user?.id) !== Number(user.id) ? (
                   <ion-icon
                     name="trash-outline"
+                    color="var(--color-primary)"
+                    color="var(--color-primary)"
                     onClick={() => handleDelete(user.id)}
                   >
                     Eliminar
                   </ion-icon>
                 ) : null}
-                <button onClick={() => push(`/admin/userDetails/${user.id}`)}>
-                  Details
-                </button>
               </td>
             </tr>
           ))}

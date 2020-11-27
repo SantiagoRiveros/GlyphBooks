@@ -1,5 +1,5 @@
 import React from "react";
-import style from ".././CSS/Faq.module.css";
+import style from ".././CSS/Faq.module.scss";
 
 export default function Faq() {
   return (

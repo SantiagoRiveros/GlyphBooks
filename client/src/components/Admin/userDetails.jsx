@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import axios from "axios";
+import style from "../../CSS/Admin/userDetails.module.scss";
 
 function useQuery() {
   let url = useLocation();
@@ -24,12 +25,23 @@ export default function UserDetails() {
   }, []);
 
   return (
-    <div>
-      <h3>Nombre:{user.firstName}</h3>
-      <h3>Apellido:{user.lastName}</h3>
-      <h3>Email:{user.email}</h3>
-      <h3>Direccion{user.shippingAdress}</h3>
-      <h3>Rol: {user.isAdmin ? "Admin" : "User"}</h3>
+    <div className={style.container}>
+      <table className={style.users}>
+        <tr className={style.tr}>
+          <th className={style.th}>Nombre</th>
+          <th className={style.th}>Apellido</th>
+          <th className={style.th}>Email</th>
+          <th className={style.th}>Direccion</th>
+          <th className={style.th}>Rol</th>
+        </tr>
+        <tr>
+          <td className={style.td}>{user.firstName}</td>
+          <td className={style.td}>{user.lastName}</td>
+          <td className={style.td}>{user.email}</td>
+          <td className={style.td}>{user.shippingAdress}</td>
+          <td className={style.td}>{user.isAdmin ? "Admin" : "User"}</td>
+        </tr>
+      </table>
     </div>
   );
 }

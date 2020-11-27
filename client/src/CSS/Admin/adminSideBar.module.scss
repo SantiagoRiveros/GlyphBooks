@@ -1,35 +1,38 @@
 .sideBar {
-    width: auto;
-    padding-top: 100px;
-    padding-left: 20px;
-    text-indent: 0px;
-    border-bottom-right-radius: 5px;
-    border-top-right-radius: 5px;
-    margin-left: auto;
-    flex: 20%;
-    position: fixed
-  }
+  width: auto;
+  padding-top: 4.5rem;
+  padding-left: 1.5rem;
+  text-indent: 0px;
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+  margin-left: auto;
+  flex: 20%;
+  position: fixed;
+}
 
 .title {
-    text-align: left;
-    color: orange;
-    font-size: 25px;
-    font-family: Avantgarde;
+  text-align: left;
+  color: var(--color-primary);
+  font-size: 1.5rem;
+  font-weight: 600;
 }
 
 .lista {
-    margin-bottom: 10px;
+  overflow: auto;
+  list-style: none;
+  margin-bottom: 10px;
 }
-  
+
 .option {
-padding: 5px;
-  color: black;
-  font-family: Avantgarde;
+  padding: 5px;
+  color: var(--color-text);
   cursor: pointer;
   transition: 0.3s;
+  font-size: 1rem;
   &:hover {
-    background-color: rgb(211, 137, 0);
+    background-color: var(--color-primary);
     border-radius: 5px;
-    color: white;
+    font-weight: 500;
+    color: #fafafa;
   }
 }

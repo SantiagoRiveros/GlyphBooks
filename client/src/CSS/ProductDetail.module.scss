@@ -1,5 +1,5 @@
 .container {
-  margin-top: 4rem;
+  margin-top: 5rem;
   min-height: calc(100vh - 4rem);
   display: flex;
   justify-content: center;
@@ -28,14 +28,14 @@
   margin: 0 auto;
   height: 75vh;
   section {
-    flex: 4;
+    flex: 3;
     padding: 2rem 0;
     display: flex;
     justify-content: center;
     align-items: center;
     .img {
       max-height: 45rem;
-      height: calc(75vh - 12rem);
+      height: calc(75vh - 5rem);
       position: relative;
       box-shadow: 0px 2px 16px 0px rgba(0, 0, 0, 0.73);
       -webkit-box-shadow: 0px 2px 16px 0px rgba(0, 0, 0, 0.73);
@@ -147,4 +147,33 @@
 .no {
   margin: 0.5rem;
   color: var(--color-text);
+}
+
+.rereviews {
+  color: var(--color-text);
+  font-size: 1.5rem;
+  padding-top: 1.5rem;
+  font-weight: 400;
+}
+.reviews {
+  max-height: 40vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  ::-webkit-scrollbar {
+    width: 20px;
+  }
+
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-primary);
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #c7881b;
+  }
 }

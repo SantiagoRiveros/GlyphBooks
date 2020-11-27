@@ -39,6 +39,7 @@ export default function OrderTable() {
   };
 
   return (
+      <div className={style.container}>
     <div className={style.size}>
       <table className={style.orders}>
         <tr>
@@ -104,6 +105,7 @@ export default function OrderTable() {
       >
         Next
       </button>
+
     </div>
   );
 }

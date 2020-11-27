@@ -39,6 +39,7 @@ export default function AdminUsers(props) {
   }
 
   return (
+                  <div className={style.container}>
     <div className={style.size}>
       <table className={style.users}>
         <tr className={style.tr}>
@@ -69,51 +70,44 @@ export default function AdminUsers(props) {
               <td className={style.td}>
                 {user.isAdmin ? "Admin" : "User"}
                 {Number(props.user.user?.id) !== Number(user.id) ? (
+
                   <button
                     className={style.Btn}
-                    onClick={() => handleSetRole(user.id, user.isAdmin)}
+                    onClick={() => push(`/admin/userDetails/${user.id}`)}
                   >
-                    Cambiar Rol
+                    Detalles
                   </button>
-                ) : null}
-              </td>
-              <td className={style.td}>
-                <button
-                  className={style.Btn}
-                  onClick={() => push(`/admin/userDetails/${user.id}`)}
-                >
-                  Detalles
-                </button>
-              </td>
-              <td className={style.td}>
-                {Number(props.user.user?.id) !== Number(user.id) ? (
-                  <ion-icon
-                    name="trash-outline"
-                    color="var(--color-primary)"
-                    color="var(--color-primary)"
-                    onClick={() => handleDelete(user.id)}
-                  >
-                    Eliminar
-                  </ion-icon>
-                ) : null}
-              </td>
-            </tr>
-          ))}
-      </table>
-      <button
-        className={style.Btn}
-        disabled={page === 1 || page === "1"}
-        onClick={() => setPage(page - 1)}
-      >
-        Back
-      </button>
-      <button
-        className={style.Btn}
-        disabled={parseInt(page) === pageLimit}
-        onClick={() => setPage(page + 1)}
-      >
-        Next
-      </button>
+                </td>
+                <td className={style.td}>
+                  {Number(props.user.user?.id) !== Number(user.id) ? (
+                    <ion-icon
+                      name="trash-outline"
+                      color="var(--color-primary)"
+                      color="var(--color-primary)"
+                      onClick={() => handleDelete(user.id)}
+                    >
+                      Eliminar
+                    </ion-icon>
+                  ) : null}
+                </td>
+              </tr>
+            ))}
+        </table>
+        <button
+          className={style.Btn}
+          disabled={page === 1 || page === "1"}
+          onClick={() => setPage(page - 1)}
+        >
+          Back
+        </button>
+        <button
+          className={style.Btn}
+          disabled={parseInt(page) === pageLimit}
+          onClick={() => setPage(page + 1)}
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 }

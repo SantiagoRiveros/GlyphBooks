@@ -3,6 +3,7 @@ import ReviewForm from "../Forms/ReviewForm.jsx";
 import { useLocation } from "react-router";
 import style from "../../CSS/Admin/adminOrderDetails.module.scss";
 import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 import axios from "axios";
 
 function useQuery() {
@@ -18,7 +19,9 @@ export default function OrderDetails() {
   const [order, setOrder] = useState(false);
   const [review, setReview] = useState([]);
   const [show, setShow] = useState(false);
-  
+
+  const { user } = useSelector((state) => state.user);
+
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_API}/order/${orderID}/order`)
@@ -28,11 +31,9 @@ export default function OrderDetails() {
           var axiosArr = [];
           data.products.forEach((p) => {
             axiosArr.push(
-
               axios.get(
                 `${process.env.REACT_APP_API}/reviews/${p.id}/${data.user.id}`
               )
-
             );
           });
           Promise.all(axiosArr).then((r) => {
@@ -69,6 +70,7 @@ export default function OrderDetails() {
         <div className={style.container}>
           <table className={style.orders}>
             <tr className={style.tr}>
+              <th className={style.th}>ID orden</th>
               <th className={style.th}>Cliente</th>
               <th className={style.th} i>
                 Email
@@ -78,12 +80,25 @@ export default function OrderDetails() {
               <th className={style.th}>Status</th>
             </tr>
             <tr className={style.tr}>
-
-              <td className={style.td}>Producto</td>
-              <td className={style.td}>Precio Unidad</td>
-              <td className={style.td}>Cantidad</td>
-              <td className={style.td}>Subtotal</td>
-              {order.status === "completa" ? <td className={style.td}>Reseña</td> : null}
+              <td className={style.td}>{order.id}</td>
+              <td className={style.td}>
+                {`${order.user.firstName} ${order.user.lastName}`}
+              </td>
+              <td className={style.td}>{order.user.email}</td>
+              <td className={style.td}>{order.user.shippingAdress}</td>
+              <td className={style.td}>{order.createdAt}</td>
+              <td className={style.td}>{order.status}</td>
+            </tr>
+          </table>
+          <table className={style.orders}>
+            <tr className={style.tr}>
+              <td className={style.th}>Producto</td>
+              <td className={style.th}>Precio Unidad</td>
+              <td className={style.th}>Cantidad</td>
+              <td className={style.th}>Subtotal</td>
+              {order.status === "completa" ? (
+                <td className={style.th}>Reseña</td>
+              ) : null}
             </tr>
             {order.products.length &&
               order.products.map((producto) => {
@@ -91,30 +106,34 @@ export default function OrderDetails() {
                   var p = review.filter((r) => {
                     return r.productId === pid && uid === r.userId;
                   });
-                  if (p.length > 0) {
-                    return p[0].title;
-                  } else {
+                  if (order.userId === user.id && !p.length) {
                     return (
                       <button
-
                         className={style.Btn}
                         onClick={() => setShow({ true: true, pid, uid })}
                       >
                         Dejar reseña
                       </button>
-
                     );
+                  } else if (p.length > 0) {
+                    return p[0].title;
+                  } else {
+                    return "el usuario aun no dejo ninguna reseña";
                   }
                 };
                 return (
-                  
                   <tr className={style.tr}>
                     <td className={style.td}>{producto.title}</td>
                     <td className={style.td}>{producto.price}</td>
                     <td className={style.td}>{producto.lineOrder.quantity}</td>
-                    <td className={style.td}>{producto.price * producto.lineOrder.quantity}</td>
-                    {order.status === "completa" ? <td className={style.td}>{getReview(producto.id, order.user.id)}</td> : null}
-
+                    <td className={style.td}>
+                      {producto.price * producto.lineOrder.quantity}
+                    </td>
+                    {order.status === "completa" ? (
+                      <td className={style.td}>
+                        {getReview(producto.id, order.userId)}
+                      </td>
+                    ) : null}
                   </tr>
                 );
               })}
@@ -135,7 +154,6 @@ export default function OrderDetails() {
                 orderId={orderID}
               />
             </div>
-
           ) : null}
         </div>
       ) : null}

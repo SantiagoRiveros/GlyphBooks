@@ -7,6 +7,7 @@ import OrderDetails from "./Admin/orderDetails.jsx";
 
 export default function Checkout(props) {
   const [check, setCheck] = useState(false);
+  const [sinStock, setSinStock] = useState([]);
   const { user } = useSelector((state) => state.user);
   const [input, setInput] = useState("");
   const { push } = useHistory();
@@ -31,18 +32,11 @@ export default function Checkout(props) {
           orderId,
           status: "procesando",
         })
-        .then((res) =>
-          Promise.all(
-            props.items.map((i) => {
-              return axios.put(
-                `${process.env.REACT_APP_API}/products/${i.id}`,
-                {
-                  stock: i.stock - i.lineOrder.quantity,
-                }
-              );
-            })
-          )
-        )
+        .then((res) => {
+          if ((res.status = 409)) {
+            setSinStock(res.data);
+          }
+        })
         .then(() => {
           dispatch(cerrarCarrito());
         });

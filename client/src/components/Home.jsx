@@ -18,7 +18,7 @@ export default function Homepage() {
     const order = JSON.stringify([["id", "DESC"]]);
     axios
 
-      .get(`http://localhost:3000/products?order=${order}&limit=15`)
+      .get(`${process.env.REACT_APP_API}/products?order=${order}&limit=15`)
 
       .then(({ data }) => {
         setNews(data.rows.splice(3));

@@ -8,21 +8,27 @@ server.get("/", (req, res, next) => {
   const offset = page ? (page - 1) * limit : null;
   var count;
 
-  let where = req.query.where;
-  if (where) {
+  let where = {};
+
+  let search = req.query.search;
+  if (search) {
     where = {
+      ...where,
       [Op.or]: [
-        { title: { [Op.iLike]: "%" + where + "%" } },
-        { description: { [Op.iLike]: "%" + where + "%" } },
-        { author: { [Op.iLike]: "%" + where + "%" } },
+        { title: { [Op.iLike]: "%" + search + "%" } },
+        { description: { [Op.iLike]: "%" + search + "%" } },
+        { author: { [Op.iLike]: "%" + search + "%" } },
       ],
-      stock: { [Op.gt]: 0 },
     };
-  } else {
+  }
+  let stock = req.query.stock;
+  if (stock) {
     where = {
+      ...where,
       stock: { [Op.gt]: 0 },
     };
   }
+
   let order = req.query.order;
   if (order) {
     order = JSON.parse(order);

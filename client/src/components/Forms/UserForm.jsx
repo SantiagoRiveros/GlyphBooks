@@ -13,7 +13,7 @@ export default function NewForm() {
     shippingAdress: "",
   });
 
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState({ campos: true, email: true });
 
   const validate = (input) => {
     let errors = {};
@@ -56,12 +56,12 @@ export default function NewForm() {
         push("/");
       })
       .catch((err) => {
-        if (err.message === "Request failed with status code 400") {
+        if (err.response.status === 400) {
           setErrors({
             email: "este email ya esta vinvulado a una cuenta de Glyph Books",
           });
         } else {
-          console.log(err.message);
+          console.log(err);
         }
       });
 
@@ -121,9 +121,11 @@ export default function NewForm() {
             placeholder="Dirección"
           />
         </div>
-        <p>{errors.email || errors.campos}</p>
+        {errors.email?.length || errors.campos?.length ? (
+          <p>{errors.campos || errors.email}</p>
+        ) : null}
         <input
-          disabled={errors.email || errors.campos}
+          disabled={errors.campos || errors.email}
           type="submit"
           className={style.btn}
           value="Crear cuenta"

@@ -17,6 +17,14 @@
   left: 50%;
   transform: translate(-50%, -50%);
   color: var(--color-primary);
+
+  p {
+    background-color: var(--color-primary);
+    padding: 1rem;
+    color: white;
+    font-weight: 700;
+    margin-top: 1rem;
+  }
 }
 
 .loginbox h1 {

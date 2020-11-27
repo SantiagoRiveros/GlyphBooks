@@ -13,7 +13,36 @@ export default function NewForm() {
     shippingAdress: "",
   });
 
+  const [errors, setErrors] = useState({});
+
+  const validate = (input) => {
+    let errors = {};
+    if (!input.email) {
+      errors.campos = "Todos los campos son obligatorios";
+    } else if (!/\S+@\S+\.\S+/.test(input.email)) {
+      errors.email = "Email invalido";
+    }
+
+    if (
+      !input.firstName ||
+      !input.lastName ||
+      !input.password ||
+      !input.shippingAdress
+    ) {
+      errors.campos = "Todos los campos son obligatorios";
+    }
+
+    return errors;
+  };
+
   const handleChange = (e) => {
+    setErrors(
+      validate({
+        ...input,
+        [e.target.name]: e.target.value,
+      })
+    );
+
     setInput({
       ...input,
       [e.target.name]: e.target.value,
@@ -30,7 +59,7 @@ export default function NewForm() {
 
   return (
     <div className={style.fondo}>
-      <div className={style.loginbox}>
+      <form className={style.loginbox} onSubmit={handleSubmit}>
         <h1>Nuevo usuario</h1>
         <div className={style.textbox}>
           <input
@@ -78,16 +107,17 @@ export default function NewForm() {
             value={input.shippingAdress}
             name="shippingAdress"
             onChange={handleChange}
-            placeholder="Direccion"
+            placeholder="Dirección"
           />
         </div>
+        <p>{errors.email || errors.campos}</p>
         <input
-          onClick={handleSubmit}
-          type="button"
+          disabled={errors}
+          type="submit"
           className={style.btn}
           value="Crear cuenta"
         />
-      </div>
+      </form>
     </div>
   );
 }

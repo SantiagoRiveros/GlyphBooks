@@ -60,7 +60,11 @@
   font-size: 1rem;
   transition-duration: 500ms;
 
-  &:hover {
+  &:disabled {
+    cursor: default;
+  }
+
+  &:hover:enabled {
     background-color: var(--color-primary);
     color: #fff;
   }

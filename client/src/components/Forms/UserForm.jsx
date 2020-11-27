@@ -50,9 +50,20 @@ export default function NewForm() {
   };
 
   const handleSubmit = (e) => {
-    axios.post(`${process.env.REACT_APP_API}/auth/register`, input).then(() => {
-      push("/");
-    });
+    axios
+      .post(`${process.env.REACT_APP_API}/auth/register`, input)
+      .then(() => {
+        push("/");
+      })
+      .catch((err) => {
+        if (err.message === "Request failed with status code 400") {
+          setErrors({
+            email: "este email ya esta vinvulado a una cuenta de Glyph Books",
+          });
+        } else {
+          console.log(err.message);
+        }
+      });
 
     e.preventDefault();
   };
@@ -112,7 +123,7 @@ export default function NewForm() {
         </div>
         <p>{errors.email || errors.campos}</p>
         <input
-          disabled={errors}
+          disabled={errors.email || errors.campos}
           type="submit"
           className={style.btn}
           value="Crear cuenta"

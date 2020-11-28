@@ -44,10 +44,8 @@ export default function Homepage() {
               )}
             </section>
             <section>
-              <h1>
-                {first?.title || null}
-                <span>nuevo</span>
-              </h1>
+              <h1>{first?.title || null}</h1>
+              <span>nuevo</span>
               <p>{first?.description || null}</p>
               <button onClick={() => push(`/products/${first?.id}`)}>
                 Ver más
@@ -61,10 +59,8 @@ export default function Homepage() {
               )}
             </section>
             <section>
-              <h1>
-                {second?.title || null}
-                <span>nuevo</span>
-              </h1>
+              <h1>{second?.title || null}</h1>
+              <span>nuevo</span>
               <p>{second?.description || null}</p>
               <button onClick={() => push(`/products/${second?.id}`)}>
                 Ver más
@@ -100,10 +96,8 @@ export default function Homepage() {
             )}
           </section>
           <section>
-            <h1>
-              {third?.title || null}
-              <span>nuevo</span>
-            </h1>
+            <h1>{third?.title || null}</h1>
+            <span>nuevo</span>
             <p>{third?.description || null}</p>
             <button onClick={() => push(`/products/${third?.id}`)}>
               Ver más

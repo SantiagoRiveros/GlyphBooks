@@ -22,6 +22,13 @@ export default function OrderDetails() {
 
   const { user } = useSelector((state) => state.user);
 
+  const truncateString = (str, num) => {
+    if (str.length <= num) {
+      return str;
+    }
+    return str.slice(0, num) + "...";
+  };
+
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_API}/order/${orderID}/order`)
@@ -110,7 +117,9 @@ export default function OrderDetails() {
                     return (
                       <button
                         className={style.Btn}
-                        onClick={() => setShow({ true: true, pid, uid, reviewId: false })}
+                        onClick={() =>
+                          setShow({ true: true, pid, uid, reviewId: false })
+                        }
                       >
                         Dejar reseña
                       </button>
@@ -123,7 +132,9 @@ export default function OrderDetails() {
                 };
                 return (
                   <tr className={style.tr}>
-                    <td className={style.td}>{producto.title}</td>
+                    <td className={style.td}>
+                      {truncateString(producto.title, 50)}
+                    </td>
                     <td className={style.td}>{producto.price}</td>
                     <td className={style.td}>{producto.lineOrder.quantity}</td>
                     <td className={style.td}>
@@ -134,14 +145,19 @@ export default function OrderDetails() {
                         {getReview(producto.id, order.userId)}
                         <button
                           className={style.Btn}
-                          onClick={() => setShow({
-                            true: true,
-                            pid: producto.id,
-                            uid: order.userId,
-                            reviewId: review.filter(r => {
-                              return r.productId === producto.id && r.userId === order.userId
-                            })[0].id
-                          })}
+                          onClick={() =>
+                            setShow({
+                              true: true,
+                              pid: producto.id,
+                              uid: order.userId,
+                              reviewId: review.filter((r) => {
+                                return (
+                                  r.productId === producto.id &&
+                                  r.userId === order.userId
+                                );
+                              }),
+                            })
+                          }
                         >
                           Editar
                         </button>

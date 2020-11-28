@@ -6,7 +6,6 @@ import icon from "../template/Images/logo.svg";
 import ShoppingBagIcon from "./Icons/ShoppingBagIcon";
 import SearchBar from "./Catalogo/searchBar";
 
-
 export default function NavBar(props) {
   // const { user } = useSelector((state) => state.user);
   /* const test = () => {
@@ -37,7 +36,7 @@ export default function NavBar(props) {
           {!props.localUser ? (
             <Link to="/ingresar">Ingresar</Link>
           ) : (
-            <Link to="/cuenta">Cuenta</Link>
+            <Link to="/cuenta/details">Cuenta</Link>
           )}
         </li>
         <li>

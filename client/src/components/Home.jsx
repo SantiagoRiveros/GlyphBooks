@@ -12,6 +12,13 @@ export default function Homepage() {
   const [third, setThird] = useState(null);
   const { push } = useHistory();
 
+  const truncateString = (str, num) => {
+    if (str.length <= num) {
+      return str;
+    }
+    return str.slice(0, num) + "...";
+  };
+
   useEffect(() => {
     const order = JSON.stringify([["id", "DESC"]]);
     axios
@@ -44,13 +51,22 @@ export default function Homepage() {
               )}
             </section>
             <section>
-              <h1>{first?.title || null}</h1>
-              <span>nuevo</span>
-              <p>{first?.description || null}</p>
+
+              {first ? (
+                first.title.length < 20 ? (
+                  <h1>{first.title}</h1>
+                ) : (
+                  <h2 className={style.largeTitle}>
+                    {truncateString(first.title, 100)} <hr></hr>
+                  </h2>
+                )
+              ) : null}
+              <p>{first ? truncateString(first.description, 265) : null}</p>
               <button onClick={() => push(`/products/${first?.id}`)}>
                 Ver más
               </button>
             </section>
+            <span className={style.nuevo}>nuevo</span>
           </div>
           <div className={style.content2}>
             <section>
@@ -59,13 +75,21 @@ export default function Homepage() {
               )}
             </section>
             <section>
-              <h1>{second?.title || null}</h1>
-              <span>nuevo</span>
-              <p>{second?.description || null}</p>
+              {second ? (
+                second.title.length < 20 ? (
+                  <h1>{second.title}</h1>
+                ) : (
+                  <h2 className={style.largeTitle}>
+                    {truncateString(second.title, 100)} <hr></hr>
+                  </h2>
+                )
+              ) : null}
+              <p>{second ? truncateString(second.description, 265) : null}</p>
               <button onClick={() => push(`/products/${second?.id}`)}>
                 Ver más
               </button>
             </section>
+            <span className={style.nuevo}>nuevo</span>
           </div>
         </div>
       </div>
@@ -96,13 +120,21 @@ export default function Homepage() {
             )}
           </section>
           <section>
-            <h1>{third?.title || null}</h1>
-            <span>nuevo</span>
-            <p>{third?.description || null}</p>
+            {third ? (
+              third.title.length < 20 ? (
+                <h1>{third.title}</h1>
+              ) : (
+                <h2 className={style.largeTitle}>
+                  {truncateString(third.title, 100)} <hr></hr>
+                </h2>
+              )
+            ) : null}
+            <p>{third ? truncateString(third.description, 265) : null}</p>
             <button onClick={() => push(`/products/${third?.id}`)}>
               Ver más
             </button>
           </section>
+          <span className={style.nuevo}>nuevo</span>
         </div>
       </div>
       <div className={style.titulo}>

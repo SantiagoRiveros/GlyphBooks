@@ -98,10 +98,11 @@ export default function CrudProducts({ product, setProduct }) {
           <textarea
             className={style.textarea}
             rows={5}
-            placeholder="Descripcion"
+            placeholder="Descripcion (máximo mil caracteres)"
             value={input.description}
             name="description"
             onChange={handleChange}
+            maxLength={1000}
           />
         </div>
         <div className={style.textbox}>

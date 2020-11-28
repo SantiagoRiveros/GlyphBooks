@@ -22,7 +22,7 @@ server.use(cookieParser());
 server.use(morgan("dev"));
 server.use(
   session({
-    coockie: { maxAge: 60000 },
+    cookie: { maxAge: 60000 },
     secret: "secret",
     resave: false,
     saveUninitialized: false,

@@ -51,6 +51,7 @@ export default function Homepage() {
               )}
             </section>
             <section>
+
               {first ? (
                 first.title.length < 20 ? (
                   <h1>{first.title}</h1>

@@ -40,35 +40,47 @@ export default function UserDetails({ user, setLocalUser, localUser }) {
           <td className={style.td}>{user.isAdmin ? "Admin" : "Usuario"}</td>
         </tr>
       </table>
-      <button onClick={() => setCheck(!check)}>Editar</button>
+      <button className={style.btn} onClick={() => setCheck(!check)}>
+        Editar
+      </button>
 
       {check && (
-        <div>
+        <div className={style.textbox}>
           <input
             type="text"
             name="firstName"
+            placeholder="*nombre"
             onChange={handleChange}
             value={input.firstName}
           />
           <input
             type="text"
             name="lastName"
+            placeholder="*apellido"
             onChange={handleChange}
             value={input.lastName}
           />
           <input
             type="text"
             name="email"
+            placeholder="*email"
             onChange={handleChange}
             value={input.email}
           />
           <input
             type="text"
             name="shippingAdress"
+            placeholder="dirección"
             onChange={handleChange}
             value={input.shippingAdress}
           />
-          <button onClick={handleSubmit}>Hecho</button>
+          <button
+            disabled={!input.firstName || !input.lastName || !input.email}
+            className={style.btn}
+            onClick={handleSubmit}
+          >
+            Hecho
+          </button>
         </div>
       )}
     </div>

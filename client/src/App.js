@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { useLocalStorage } from "react-use";
 import { agregarVarios, login } from "./actions/actions";
 import axios from "axios";
-import ReactGA from "react-ga";
+// import ReactGA from "react-ga";
 import "./App.scss";
 import "./normalize.css";
 import Footer from "./components/Footer";
@@ -88,7 +88,11 @@ function App(props) {
         onCartClick={() => setShow((prevShow) => !prevShow)}
         localUser={localUser}
       />
-      <Carrito cartShow={show} items={props.carrito.cart.items} />
+      <Carrito
+        cartShow={show}
+        setShow={setShow}
+        items={props.carrito.cart.items}
+      />
       <Switch>
         <Route exact path="/" component={Homepage} />
         <Route path="/catalogo" render={() => <Catalogo />} />
@@ -96,7 +100,9 @@ function App(props) {
         <Route
           exact
           path="/products/:id"
-          render={({ match }) => <Producto id={match.params.id} />}
+          render={({ match }) => (
+            <Producto id={match.params.id} setShow={setShow} />
+          )}
         />
         <Route
           path="/ingresar"

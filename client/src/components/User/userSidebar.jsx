@@ -11,7 +11,7 @@ export default function UserSidebar({ user, logOut }) {
       <ul>
         <li onClick={() => push(`/cuenta/details`)}>Detalles</li>
         <li onClick={() => push(`/cuenta/orders`)}>Compras</li>
-        {user.isAdmin && <li onClick={() => push(`/admin`)}>ADMIN</li>}
+        {user.isAdmin && <li onClick={() => push(`/admin/products`)}>ADMIN</li>}
 
         <button onClick={logOut}>LogOut</button>
       </ul>

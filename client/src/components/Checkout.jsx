@@ -1,17 +1,21 @@
-import React, { useReducer, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { cerrarCarrito } from "../actions/actions";
 import OrderDetails from "./Admin/orderDetails.jsx";
+import style from "../CSS/checkout.module.scss";
 
 export default function Checkout(props) {
-  const [check, setCheck] = useState(false);
   const [sinStock, setSinStock] = useState([]);
   const { user } = useSelector((state) => state.user);
   const [input, setInput] = useState("");
   const { push } = useHistory();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    setInput(user.shippingAdress);
+  }, [user, setInput]);
 
   const handleSubmit = () => {
     axios
@@ -48,22 +52,15 @@ export default function Checkout(props) {
   };
 
   return (
-    <div>
+    <div className={style.container}>
       <OrderDetails />
-      <div>
-        <input
-          onChange={() => {
-            setCheck(!check);
-            setInput(user.shippingAdress);
-          }}
-          type="checkbox"
-        />
-        <h3>¿Deseas usar una direccion distinta?</h3>
-      </div>
-      {check && (
+      <div className={style.textbox}>
+        <h3>Indica la dirección de envio</h3>
         <input onChange={handleChange} type="text" value={input}></input>
-      )}
+      </div>
       <button
+        className={style.btn}
+        disabled={!input}
         onClick={() => {
           handleCart();
           handleSubmit();

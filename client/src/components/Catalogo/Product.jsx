@@ -46,8 +46,8 @@ function Product(props) {
         })
         .then(({ data }) => {
           if (data.length) {
-            let libro = data[0].products.find((p) => p.id === producto.id);
             props.dispatch(agregarVarios(data[0].products));
+            props.setShow(true);
           }
         })
         .catch((error) => {
@@ -80,6 +80,7 @@ function Product(props) {
           </section>
           <section>
             <h1>{product.title}</h1>
+            <h2 style={{ paddingBottom: "1rem" }}>{product.author}</h2>
             <p>{product.description}</p>
             <div
               style={{

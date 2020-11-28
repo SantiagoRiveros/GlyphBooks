@@ -39,6 +39,7 @@ export default function Carrito(props) {
   const handleFinalizar = () => {
     if (props.items.length) {
       const { orderId } = props.items[0].lineOrder;
+      props.setShow(false);
       push(`/checkout/${orderId}`);
     }
   };

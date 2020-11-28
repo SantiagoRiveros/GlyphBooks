@@ -55,6 +55,7 @@ export default function AdminUsers(props) {
             <th className={style.th}>
               Rol <button name={"isAdmin"} onClick={handleSort}></button>
             </th>
+            <th className={style.th}>Detalles</th>
 
             <th className={style.th}>Eliminar</th>
           </tr>
@@ -71,11 +72,19 @@ export default function AdminUsers(props) {
                   {Number(props.user.user?.id) !== Number(user.id) ? (
                     <button
                       className={style.Btn}
-                      onClick={() => push(`/admin/userDetails/${user.id}`)}
+                      onClick={() => handleSetRole(user.id, user.isAdmin)}
                     >
-                      Detalles
+                      Cambiar
                     </button>
                   ) : null}
+                </td>
+                <td>
+                  <button
+                    className={style.Btn}
+                    onClick={() => push(`/admin/userDetails/${user.id}`)}
+                  >
+                    Detalles
+                  </button>
                 </td>
                 <td className={style.td}>
                   {Number(props.user.user?.id) !== Number(user.id) ? (

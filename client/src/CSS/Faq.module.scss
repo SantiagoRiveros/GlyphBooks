@@ -7,12 +7,21 @@
 }
 
 .html {
+  background: rgb(252, 237, 211);
+  background: linear-gradient(
+    2deg,
+    rgba(252, 237, 211, 1) 0%,
+    rgba(253, 246, 233, 1) 25%,
+    rgba(250, 250, 250, 1) 100%
+  );
+  height: 90vh;
+  display: flex;
   font-size: 10px;
   box-sizing: border-box;
   width: 100%;
-  height: 100vh;
+
   background-color: white;
-  display: flex;
+
   align-items: center;
   justify-content: center;
 }
@@ -21,11 +30,12 @@
   width: 100%;
   max-width: 80rem;
   margin: 0 auto;
+
   padding: 0 1.5rem;
 }
 
 .accordionitem {
-  background-color: #14213d;
+  background-color: #fafafa95;
   border-radius: 0.4rem;
   margin-bottom: 1rem;
   padding: 1rem;
@@ -33,13 +43,14 @@
 }
 
 .accordionlink {
-  font-size: 1.6rem;
-  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.5rem;
+  color: var(--color-primary);
   text-decoration: none;
-  background-color: #14213d;
+  background-color: #fafafa95;
   width: 100%;
   display: flex;
   align-items: center;
+  font-weight: 600;
   justify-content: space-between;
   padding: 1rem 0;
 }
@@ -56,7 +67,7 @@
   max-height: 0;
   overflow: hidden;
   position: relative;
-  background-color: #212038;
+  background-color: transparent;
   transition: max-height 650ms;
 }
 
@@ -72,7 +83,7 @@
 }
 
 .answer p {
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--color-primary);
   font-size: 1.4rem;
   padding: 2rem;
 }

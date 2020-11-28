@@ -23,7 +23,7 @@ review.get("/:productId", (req, res, next) => {
 
 review.get("/:productId/:userId", (req, res, next) => {
   const { productId, userId } = req.params;
-  Review.findOne({ where: { productId, userId } }).then((reviews) => {
+  Review.findOne({ where: { productId, userId }, order: [['createdAt','DESC']] }).then((reviews) => {
     res.send(reviews);
   });
 });

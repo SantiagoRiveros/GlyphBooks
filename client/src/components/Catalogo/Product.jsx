@@ -96,15 +96,20 @@ function Product(props) {
               <label style={{ marginLeft: "1.5rem" }}>Stock:</label>
               <span style={{ marginLeft: "0.5rem" }}>{product.stock}</span>
             </div>
-            {product?.reviews?.length ? (
-              product.reviews.map((review, index) => (
-                <Review review={review} key={index} />
-              ))
-            ) : (
-              <div style={{ margin: "0.5rem", color: "var(--color-text)" }}>
-                No hay reseñas disponibles para este producto
-              </div>
-            )}
+            <span className={style.rereviews}>
+              Reseñas de nuestros usuarios
+            </span>
+            <div className={style.reviews}>
+              {product?.reviews?.length ? (
+                product.reviews.map((review, index) => (
+                  <Review review={review} key={index} />
+                ))
+              ) : (
+                <div style={{ margin: "0.5rem", color: "var(--color-text)" }}>
+                  No hay reseñas disponibles para este producto
+                </div>
+              )}
+            </div>
           </section>
         </div>
       </div>

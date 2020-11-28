@@ -6,15 +6,15 @@ module.exports = (sequelize) => {
 const Review = sequelize.define('review', {
     rating: {
         type: DataTypes.INTEGER,
-        allowNull: false,    
+        allowNull: false,
     },
     title: {
         type: DataTypes.STRING,
-        allowNull: false,    
+        allowNull: false,
     },
     body: {
         type: DataTypes.STRING,
-        allowNull: false,    
+        allowNull: false,
     }
   });
 }

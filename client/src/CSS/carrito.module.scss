@@ -6,6 +6,7 @@
 .sidebar {
   position: absolute;
   width: 500px;
+  top: 5rem;
   height: 10%;
   background: rgba(255, 255, 255, 0.2);
   right: -500px;
@@ -29,7 +30,7 @@
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
   transition: 0.4s;
   right: 0;
-  top: 4rem;
+  top: 5rem;
   position: fixed;
 }
 
@@ -88,4 +89,15 @@
   font-size: 1.5rem;
   text-align: center;
   margin: 0.5rem;
+}
+
+.vacio {
+  position: relative;
+  top: 30%;
+  align-self: center;
+  margin: 4.5rem;
+  padding-bottom: 1rem;
+  font-size: 25px;
+  color: var(--color-primary);
+  border-bottom: 0.1rem solid var(--color-primary);
 }

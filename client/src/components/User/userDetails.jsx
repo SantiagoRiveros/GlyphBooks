@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import style from "../../CSS/userDetails.module.scss";
 
 export default function UserDetails({ user, setLocalUser, localUser }) {
   const [check, setCheck] = useState(false);
@@ -22,15 +23,25 @@ export default function UserDetails({ user, setLocalUser, localUser }) {
   };
 
   return (
-    <div>
-      <ul>
-        <li>Nombre:{user.firstName}</li>
-        <li>Apellido:{user.lastName}</li>
-        <li>Email:{user.email}</li>
-        <li>Direccion:{user.shippingAdress}</li>
-        <li>Rol: {user.isAdmin ? "Admin" : "Usuario"}</li>
-        <button onClick={() => setCheck(!check)}>Editar</button>
-      </ul>
+    <div className={style.container}>
+      <table className={style.users}>
+        <tr className={style.tr}>
+          <th className={style.th}>Nombre</th>
+          <th className={style.th}>Apellido</th>
+          <th className={style.th}>Email</th>
+          <th className={style.th}>Direccion</th>
+          <th className={style.th}>Rol</th>
+        </tr>
+        <tr>
+          <td className={style.td}>{user.firstName}</td>
+          <td className={style.td}>{user.lastName}</td>
+          <td className={style.td}>{user.email}</td>
+          <td className={style.td}>{user.shippingAdress}</td>
+          <td className={style.td}>{user.isAdmin ? "Admin" : "Usuario"}</td>
+        </tr>
+      </table>
+      <button onClick={() => setCheck(!check)}>Editar</button>
+
       {check && (
         <div>
           <input

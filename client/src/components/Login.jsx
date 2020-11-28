@@ -99,6 +99,21 @@ export default function Login({ setLocalUser }) {
           type="button"
           className={style.btn}
         />
+        <button
+        onClick={() =>
+          (window.location = `${process.env.REACT_APP_API}/auth/login/auth/google`)
+        }
+        >
+        <i className="fab fa-google"></i>
+        </button>
+      <button
+        onClick={() =>
+          (window.location =
+            `${process.env.REACT_APP_API}/auth/login/auth/facebook`)
+        }
+      >
+        <i className="fab fa-facebook"></i>
+      </button>
         <a onClick={() => push("/forgot")}>¿Olvidaste tu contraseña?</a>
       </div>
     </div>

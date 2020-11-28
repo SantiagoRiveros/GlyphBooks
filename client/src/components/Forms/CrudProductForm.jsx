@@ -10,6 +10,7 @@ export default function CrudProducts({ product, setProduct }) {
     description: "",
     author: "",
     price: 1,
+    discount: 0,
     stock: 1,
     img: null,
   });
@@ -123,6 +124,18 @@ export default function CrudProducts({ product, setProduct }) {
             type="number"
             value={input.price}
             name="price"
+            onChange={handleChange}
+          />
+        </div>
+        <div className={style.error}>
+          {!input.author && <span>{error}</span>}
+        </div>
+        <div className={style.textbox}>
+          <input
+            placeholder="Descuento"
+            type="number"
+            value={input.discount}
+            name="discount"
             onChange={handleChange}
           />
         </div>

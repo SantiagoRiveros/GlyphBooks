@@ -75,7 +75,10 @@ user.post("/forgot", async (req, res, next) => {
       if (err) {
         console.log("Ocurrio un error", err);
       } else {
-        console.log("Email enviado");
+        req.flash(
+          "passwordReset",
+          "Tu contraseña ha sido reestablecida satisfactoriamente."
+        );
       }
     });
   }
@@ -124,30 +127,6 @@ user.put("/passwordReset/:token", async (req, res, next) => {
   return res.status(204).json({ message: "Ocurrio un error" });
 });
 
-// user.post("/reset/:token", function (req, res) {
-//   const userData = User.findOne(
-//     {
-//       where: { resetPasswordToken: req.params.token },
-//       resetPasswordExpires: { $gt: Date.now() },
-//     },
-//     async function (err, user) {
-//       if (!userData) {
-//         // req.flash("error", "El link es invalido o ya expiro.");
-//         return res.redirect("back");
-//       }
-//       if (req.body.password === req.body.password2) {
-//         userData.password = req.body.password;
-//         await userData.save({ fields: ["password"] });
-
-//         return res.status(201).json({ message: "se cambio la contraseña" });
-//       } else {
-//         // req.flash("error", "Las contraseñas no son iguales");
-//         return res.redirect("back");
-//       }
-//     }
-//   );
-// });
-
 user.get("/:idUser/cart", (req, res, next) => {
   User.findOne({ where: { id: req.params.idUser } })
     .then((usuario) => {
@@ -184,6 +163,7 @@ user.put("/:id", (req, res, next) => {
             user[key] = request[key];
           }
           user.save();
+
           res.send(user);
         })
         .catch(next);
@@ -193,10 +173,15 @@ user.put("/:id", (req, res, next) => {
 
 user.put("/:idUser/cart", (req, res, next) => {
   var sinStock = [];
+  var userData;
   User.findOne({ where: { id: req.params.idUser } })
-    .then((usuario) =>
-      usuario.getOrders({ where: { id: req.body.orderId }, include: Product })
-    )
+    .then((usuario) => {
+      userData = usuario;
+      return usuario.getOrders({
+        where: { id: req.body.orderId },
+        include: Product,
+      });
+    })
     .then(([orden]) => {
       orden.products.forEach((p) => {
         if (p.lineOrder.quantity > p.stock) {
@@ -206,6 +191,31 @@ user.put("/:idUser/cart", (req, res, next) => {
       if (sinStock.length) {
         return res.status(409).send(sinStock);
       }
+
+      var smtpTransport = nodemailer.createTransport({
+        service: "Gmail",
+        auth: {
+          user: "glyphbooksecommerce@gmail.com",
+          pass: "HenryEcommerce123",
+        },
+      });
+      var mailOptions = {
+        to: userData.email,
+        from: "glyphbooksecommerce@gmail.com",
+        subject: "Tu compra",
+        text:
+          "Muchas gracias por tu compra, la misma actualmente esta siendo procesada",
+      };
+
+      smtpTransport.sendMail(mailOptions, function (err) {
+        if (err) {
+          console.log("Ocurrio un error", err);
+        } else {
+          console.log("email enviado");
+          req.flash("Confirmation", "La orden ha sido procesada correctamente");
+        }
+      });
+
       orden.products.forEach((p) => {
         p.stock -= p.lineOrder.quantity;
         p.save();

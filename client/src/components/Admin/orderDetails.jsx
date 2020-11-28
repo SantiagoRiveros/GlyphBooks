@@ -110,7 +110,7 @@ export default function OrderDetails() {
                     return (
                       <button
                         className={style.Btn}
-                        onClick={() => setShow({ true: true, pid, uid })}
+                        onClick={() => setShow({ true: true, pid, uid, reviewId: false })}
                       >
                         Dejar reseña
                       </button>
@@ -132,6 +132,19 @@ export default function OrderDetails() {
                     {order.status === "completa" ? (
                       <td className={style.td}>
                         {getReview(producto.id, order.userId)}
+                        <button
+                          className={style.Btn}
+                          onClick={() => setShow({
+                            true: true,
+                            pid: producto.id,
+                            uid: order.userId,
+                            reviewId: review.filter(r => {
+                              return r.productId === producto.id && r.userId === order.userId
+                            })[0].id
+                          })}
+                        >
+                          Editar
+                        </button>
                       </td>
                     ) : null}
                   </tr>
@@ -152,6 +165,7 @@ export default function OrderDetails() {
                 userId={show.uid}
                 notShow={notShow}
                 orderId={orderID}
+                reviewId={show.reviewId}
               />
             </div>
           ) : null}

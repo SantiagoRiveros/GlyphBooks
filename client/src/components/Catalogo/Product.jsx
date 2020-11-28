@@ -62,7 +62,6 @@ function Product(props) {
     axios
       .get(`${process.env.REACT_APP_API}/products/search/${props.id}`)
       .then(({ data }) => {
-        console.log(data.book)
         setProduct(data.book);
       });
   }, [props.id]);

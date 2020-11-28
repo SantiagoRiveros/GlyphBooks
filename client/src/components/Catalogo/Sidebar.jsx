@@ -28,7 +28,6 @@ export default function SideBar({ setCategory }) {
         >
           Todo
         </li>
-        {console.log(categorias)}
         {categorias.length &&
           categorias.map((category) => (
             <li

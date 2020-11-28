@@ -1,7 +1,6 @@
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-        import style from "../../CSS/userDetails.module.scss";
+import style from "../../CSS/userDetails.module.scss";
 
 export default function UserDetails({ user, setLocalUser, localUser }) {
   const [check, setCheck] = useState(false);
@@ -23,7 +22,6 @@ export default function UserDetails({ user, setLocalUser, localUser }) {
     });
   };
 
-
   return (
     <div className={style.container}>
       <table className={style.users}>
@@ -42,8 +40,8 @@ export default function UserDetails({ user, setLocalUser, localUser }) {
           <td className={style.td}>{user.isAdmin ? "Admin" : "Usuario"}</td>
         </tr>
       </table>
-        <button onClick={() => setCheck(!check)}>Editar</button>
-      </ul>
+      <button onClick={() => setCheck(!check)}>Editar</button>
+
       {check && (
         <div>
           <input

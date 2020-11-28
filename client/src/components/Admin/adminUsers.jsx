@@ -39,44 +39,43 @@ export default function AdminUsers(props) {
   }
 
   return (
-                  <div className={style.container}>
-    <div className={style.size}>
-      <table className={style.users}>
-        <tr className={style.tr}>
+    <div className={style.container}>
+      <div className={style.size}>
+        <table className={style.users}>
+          <tr className={style.tr}>
+            <th className={style.th}>
+              ID <button name={"id"} onClick={handleSort}></button>
+            </th>
+            <th className={style.th}>
+              Nombre <button name={"lastName"} onClick={handleSort}></button>
+            </th>
+            <th className={style.th}>
+              Email <button name={"email"} onClick={handleSort}></button>
+            </th>
+            <th className={style.th}>
+              Rol <button name={"isAdmin"} onClick={handleSort}></button>
+            </th>
 
-          <th className={style.th}>
-            ID <button name={"id"} onClick={handleSort}></button>
-          </th>
-          <th className={style.th}>
-            Nombre <button name={"lastName"} onClick={handleSort}></button>
-          </th>
-          <th className={style.th}>
-            Email <button name={"email"} onClick={handleSort}></button>
-          </th>
-          <th className={style.th}>
-            Rol <button name={"isAdmin"} onClick={handleSort}></button>
-          </th>
-
-          <th className={style.th}>Eliminar</th>
-        </tr>
-        {users.count &&
-          users.rows.map((user) => (
-            <tr className={style.tr}>
-              <td className={style.td}>{user.id}</td>
-              <td className={style.td}>
-                {user.firstName + " " + user.lastName}
-              </td>
-              <td className={style.td}>{user.email}</td>
-              <td className={style.td}>
-                {user.isAdmin ? "Admin" : "User"}
-                {Number(props.user.user?.id) !== Number(user.id) ? (
-
-                  <button
-                    className={style.Btn}
-                    onClick={() => push(`/admin/userDetails/${user.id}`)}
-                  >
-                    Detalles
-                  </button>
+            <th className={style.th}>Eliminar</th>
+          </tr>
+          {users.count &&
+            users.rows.map((user) => (
+              <tr className={style.tr}>
+                <td className={style.td}>{user.id}</td>
+                <td className={style.td}>
+                  {user.firstName + " " + user.lastName}
+                </td>
+                <td className={style.td}>{user.email}</td>
+                <td className={style.td}>
+                  {user.isAdmin ? "Admin" : "User"}
+                  {Number(props.user.user?.id) !== Number(user.id) ? (
+                    <button
+                      className={style.Btn}
+                      onClick={() => push(`/admin/userDetails/${user.id}`)}
+                    >
+                      Detalles
+                    </button>
+                  ) : null}
                 </td>
                 <td className={style.td}>
                   {Number(props.user.user?.id) !== Number(user.id) ? (

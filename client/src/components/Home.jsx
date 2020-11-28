@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import style from "../CSS/homepage.module.scss";
-import bkg from "../template/Images/bkg.jpg";
-import bkgg from "../template/Images/bkg2.jpg";
 import axios from "axios";
 import Producto from "./Catalogo/productCard";
 import { useHistory } from "react-router-dom";
@@ -31,6 +29,11 @@ export default function Homepage() {
     <div className={style.home}>
       <div className={style.page}>
         <div className={style.banner}>
+          <blockquote>
+            La lectura de un buen libro es un diálogo incesante en que el libro
+            habla y el alma contesta
+          </blockquote>
+          <h4> André Maurois </h4>
           <img className={style.imgn} src={banner} alt="banner" />
         </div>
         <div className={style.imgLibros}>
@@ -111,9 +114,7 @@ export default function Homepage() {
       <div className={style.titulo}>
         <h1>Ofertas</h1>
       </div>
-      <div className={style.fondoo}>
-        <img src={bkgg} alt="" className={style.bkgg} />
-      </div>
+      <div className={style.fondo}></div>
     </div>
   );
 }

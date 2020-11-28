@@ -22,6 +22,14 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
+      discount: {
+        type: DataTypes.INTEGER,
+        validate: (value)=> {
+          if(value < 0 || value > 100) {
+            throw new Error("valor invalido")
+          }
+        }
+      },
       stock: {
         type: DataTypes.INTEGER,
         defaultValue: 1,

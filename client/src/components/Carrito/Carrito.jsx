@@ -18,7 +18,7 @@ export default function Carrito(props) {
     if (props.items.length) {
       setTotal(
         props.items
-          .map((i) => i.price * i.lineOrder.quantity)
+          .map((i) => i.lineOrder?.price * i.lineOrder.quantity)
           .reduce((acc, cur) => acc + cur)
       );
     } else {
@@ -56,7 +56,7 @@ export default function Carrito(props) {
                     stock={item.stock}
                     title={item.title}
                     img={item.img}
-                    price={item.price}
+                    price={item.lineOrder?.price}
                     producto={item}
                   />
                 </li>

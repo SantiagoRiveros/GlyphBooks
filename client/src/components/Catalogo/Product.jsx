@@ -30,11 +30,15 @@ function Product(props) {
           return;
         }
       } else {
+        let price = producto.price;
+        let descuento = producto.discount/100;
+        price -= price * descuento
+
         nextStep = axios.post(
           `${process.env.REACT_APP_API}/users/${user.id}/cart`,
           {
             id: producto.id,
-            price: producto.price,
+            price,
           }
         );
       }

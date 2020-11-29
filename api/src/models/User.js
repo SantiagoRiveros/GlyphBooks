@@ -33,10 +33,10 @@ module.exports = (sequelize) => {
     },
     shippingAdress: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     googleId: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
     },
     isAdmin: {
       type: DataTypes.BOOLEAN,

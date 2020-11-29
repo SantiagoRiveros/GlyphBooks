@@ -51,19 +51,15 @@ passport.use(
       session: false,
     },
     async (token, tokenSecret, profile, done) => {
-      let user = User.findOne(profile.id);
+      let user = await User.findOne({ where: { googleId: profile.id } });
       if (!user)
-        user = await User.create(
-          profile.first_name,
-          profile.last_name,
-          profile.email,
-          null,
-          "GUEST",
-          null,
-          profile.id,
-          profile.picture
-        );
-      const { id, firstName, lastName, isAdmin } = user;
+        user = await User.create({
+          firstName: profile.name.givenName,
+          lastName: profile.name.familyName,
+          email: profile.emails[0].value,
+          googleId: profile.id,
+        });
+      const { id, firstName, lastName, email, isAdmin } = user;
       return done(null, {
         id,
         firstName,

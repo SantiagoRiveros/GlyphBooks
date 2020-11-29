@@ -1,14 +1,62 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import style from "../CSS/login.module.scss";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login, agregarVarios } from "../actions/actions";
+import { useMemo } from "react";
+import jwt from "jsonwebtoken";
 
 export default function Login({ setLocalUser }) {
   const { push } = useHistory();
   const dispatch = useDispatch();
   const [input, setInput] = useState({ email: "", password: "" });
+  const { search } = useLocation();
+  const query = useMemo(() => {
+    const result = search.slice(1).split("&");
+    return result.reduce((data, item) => {
+      const pair = item.split("=");
+      data[pair[0]] = pair[1];
+      return data;
+    }, {});
+  }, [search]);
+  useEffect(() => {
+    if (query.token) {
+      const user = jwt.decode(query.token);
+      setLocalUser({ token: query.token, user });
+      const idUser = user.id;
+      axios
+        .post(`${process.env.REACT_APP_API}/users/${idUser}/cart`, {
+          id: items[0].id,
+          price: items[0].price,
+        })
+        .then(() =>
+          Promise.all(
+            items.map((p) => {
+              let request = {
+                id: p.id,
+                price: p.price,
+                quantity: p.lineOrder.quantity,
+              };
+              return axios.post(
+                `${process.env.REACT_APP_API}/users/${idUser}/cart`,
+                request
+              );
+            })
+          )
+        )
+        .then(() => {
+          return axios.get(`${process.env.REACT_APP_API}/users/${idUser}/cart`);
+        })
+        .then(({ data }) => {
+          if (data[0]) {
+            dispatch(agregarVarios(data[0].products));
+          }
+          push("/");
+        });
+    }
+  }, [query]);
+  console.log(search);
 
   const { items } = useSelector((state) => state.cart);
 
@@ -100,20 +148,19 @@ export default function Login({ setLocalUser }) {
           className={style.btn}
         />
         <button
-        onClick={() =>
-          (window.location = `${process.env.REACT_APP_API}/auth/login/auth/google`)
-        }
+          onClick={() =>
+            (window.location = `${process.env.REACT_APP_API}/auth/login/auth/google`)
+          }
         >
-        <i className="fab fa-google"></i>
+          <i className="fab fa-google"></i>
         </button>
-      <button
-        onClick={() =>
-          (window.location =
-            `${process.env.REACT_APP_API}/auth/login/auth/facebook`)
-        }
-      >
-        <i className="fab fa-facebook"></i>
-      </button>
+        <button
+          onClick={() =>
+            (window.location = `${process.env.REACT_APP_API}/auth/login/auth/facebook`)
+          }
+        >
+          <i className="fab fa-facebook"></i>
+        </button>
         <a onClick={() => push("/forgot")}>¿Olvidaste tu contraseña?</a>
       </div>
     </div>

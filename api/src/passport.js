@@ -8,6 +8,8 @@ const jwt = require("jsonwebtoken"),
 
 const SECRET = process.env.AUTH_SECRET || "secret";
 
+const { Op } = require("sequelize");
+
 passport.use(
   new LocalStrategy(
     {
@@ -51,7 +53,14 @@ passport.use(
       session: false,
     },
     async (token, tokenSecret, profile, done) => {
-      let user = await User.findOne({ where: { googleId: profile.id } });
+      let user = await User.findOne({
+        where: {
+          [Op.or]: [
+            { googleId: profile.id },
+            { email: profile.emails[0].value },
+          ],
+        },
+      });
       if (!user)
         user = await User.create({
           firstName: profile.name.givenName,

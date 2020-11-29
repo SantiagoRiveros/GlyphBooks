@@ -25,35 +25,48 @@ export default function Login({ setLocalUser }) {
       const user = jwt.decode(query.token);
       setLocalUser({ token: query.token, user });
       const idUser = user.id;
-      axios
-        .post(`${process.env.REACT_APP_API}/users/${idUser}/cart`, {
-          id: items[0].id,
-          price: items[0].price,
-        })
-        .then(() =>
-          Promise.all(
-            items.map((p) => {
-              let request = {
-                id: p.id,
-                price: p.price,
-                quantity: p.lineOrder.quantity,
-              };
-              return axios.post(
-                `${process.env.REACT_APP_API}/users/${idUser}/cart`,
-                request
-              );
-            })
+      if (items.length) {
+        axios
+          .post(`${process.env.REACT_APP_API}/users/${idUser}/cart`, {
+            id: items[0].id,
+            price: items[0].price,
+          })
+          .then(() =>
+            Promise.all(
+              items.map((p) => {
+                let request = {
+                  id: p.id,
+                  price: p.price,
+                  quantity: p.lineOrder.quantity,
+                };
+                return axios.post(
+                  `${process.env.REACT_APP_API}/users/${idUser}/cart`,
+                  request
+                );
+              })
+            )
           )
-        )
-        .then(() => {
-          return axios.get(`${process.env.REACT_APP_API}/users/${idUser}/cart`);
-        })
-        .then(({ data }) => {
-          if (data[0]) {
-            dispatch(agregarVarios(data[0].products));
-          }
-          push("/");
-        });
+          .then(() => {
+            return axios.get(
+              `${process.env.REACT_APP_API}/users/${idUser}/cart`
+            );
+          })
+          .then(({ data }) => {
+            if (data[0]) {
+              dispatch(agregarVarios(data[0].products));
+            }
+            push("/");
+          });
+      } else {
+        axios
+          .get(`${process.env.REACT_APP_API}/users/${idUser}/cart`)
+          .then(({ data }) => {
+            if (data[0]) {
+              dispatch(agregarVarios(data[0].products));
+            }
+            push("/");
+          });
+      }
     }
   }, [query]);
   console.log(search);

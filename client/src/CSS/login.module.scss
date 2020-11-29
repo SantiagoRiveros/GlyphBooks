@@ -58,12 +58,13 @@
 }
 
 .btn {
+  display: flex;
   text-transform: uppercase;
   margin-top: 1rem;
   cursor: pointer;
   color: var(--color-primary);
   background-color: transparent;
-  padding: 1rem 3rem;
+  padding: 1rem 2rem;
   border: solid 2px var(--color-primary);
   font-weight: 700;
   font-size: 1rem;
@@ -71,6 +72,13 @@
   justify-content: center;
   width: 50%;
   margin: 1rem;
+
+  img {
+    position: relative;
+    left: 0;
+    width: 2.5rem;
+    height: 2.5rem;
+  }
 
   &:hover {
     background-color: var(--color-primary);

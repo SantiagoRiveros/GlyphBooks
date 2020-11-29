@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { login, agregarVarios } from "../actions/actions";
 import { useMemo } from "react";
 import jwt from "jsonwebtoken";
+import google from "../template/Images/google-logo.png";
 
 export default function Login({ setLocalUser }) {
   const { push } = useHistory();
@@ -161,11 +162,13 @@ export default function Login({ setLocalUser }) {
           className={style.btn}
         />
         <button
+          className={style.btn}
           onClick={() =>
             (window.location = `${process.env.REACT_APP_API}/auth/login/auth/google`)
           }
         >
-          <i className="fab fa-google"></i>
+          <img src={google} alt="" />
+          ingresar con Google
         </button>
         {/* <button
           onClick={() =>

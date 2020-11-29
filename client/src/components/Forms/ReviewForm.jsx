@@ -110,7 +110,7 @@ export default function Review({
         {(input.body.length > 255 || !input.body) && <span>{error2}</span>}
       </div>
       <button
-        disabled={error || error2}
+        disabled={error || error2 || !input.rating}
         className={style.Btn}
         onClick={handleSubmit}
       >

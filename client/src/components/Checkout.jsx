@@ -7,15 +7,15 @@ import OrderDetails from "./Admin/orderDetails.jsx";
 import style from "../CSS/checkout.module.scss";
 
 export default function Checkout(props) {
-  const [sinStock, setSinStock] = useState([]);
+  const [order, setOrder] = useState([]);
   const { user } = useSelector((state) => state.user);
   const [input, setInput] = useState("");
   const { push } = useHistory();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setInput(user.shippingAdress);
-  }, []);
+    setInput(order.user?.shippingAdress);
+  }, [order]);
 
   const handleSubmit = () => {
     axios
@@ -38,7 +38,7 @@ export default function Checkout(props) {
         })
         .then((res) => {
           if ((res.status = 409)) {
-            setSinStock(res.data);
+            console.log(res);
           }
         })
         .then(() => {
@@ -53,7 +53,7 @@ export default function Checkout(props) {
 
   return (
     <div className={style.container}>
-      <OrderDetails />
+      <OrderDetails checkout={setOrder} />
       <div className={style.textbox}>
         <h3>Indica la dirección de envio</h3>
         <input onChange={handleChange} type="text" value={input}></input>

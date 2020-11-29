@@ -60,7 +60,9 @@ function Product(props) {
           console.log(error);
         });
     } else {
-      props.dispatch(agregarAlCarrito(producto));
+      let price = descuento ? descuento : producto.price;
+      props.dispatch(agregarAlCarrito({ ...producto, price }));
+      props.setShow(true);
     }
   };
 

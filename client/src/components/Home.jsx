@@ -163,6 +163,7 @@ export default function Homepage() {
                 id={producto.id}
                 OnClick={() => push(`/productos/${producto.id}`)}
                 categories={producto.Categories}
+                discount={producto.discount}
               />
             );
           })}

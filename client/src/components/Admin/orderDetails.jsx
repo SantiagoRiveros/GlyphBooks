@@ -13,7 +13,7 @@ function useQuery() {
   return orderID;
 }
 
-export default function OrderDetails() {
+export default function OrderDetails(props) {
   const orderID = useQuery();
   const { push } = useHistory();
   const [order, setOrder] = useState(false);
@@ -34,6 +34,9 @@ export default function OrderDetails() {
       .get(`${process.env.REACT_APP_API}/order/${orderID}/order`)
       .then(({ data }) => {
         setOrder(data);
+        if (props.checkout) {
+          props.checkout(data);
+        }
         if (data.products) {
           var axiosArr = [];
           data.products.forEach((p) => {
@@ -125,7 +128,24 @@ export default function OrderDetails() {
                       </button>
                     );
                   } else if (p.length > 0) {
-                    return p[0].title;
+                    return (
+                      <div>
+                        {p[0].title}
+                        <button
+                          className={style.Btn}
+                          onClick={() =>
+                            setShow({
+                              true: true,
+                              pid: producto.id,
+                              uid: order.userId,
+                              reviewId: p[0].id,
+                            })
+                          }
+                        >
+                          Editar
+                        </button>
+                      </div>
+                    );
                   } else {
                     return "el usuario aun no dejo ninguna reseña";
                   }
@@ -143,24 +163,6 @@ export default function OrderDetails() {
                     {order.status === "completa" ? (
                       <td className={style.td}>
                         {getReview(producto.id, order.userId)}
-                        <button
-                          className={style.Btn}
-                          onClick={() =>
-                            setShow({
-                              true: true,
-                              pid: producto.id,
-                              uid: order.userId,
-                              reviewId: review.filter((r) => {
-                                return (
-                                  r.productId === producto.id &&
-                                  r.userId === order.userId
-                                );
-                              }),
-                            })
-                          }
-                        >
-                          Editar
-                        </button>
                       </td>
                     ) : null}
                   </tr>

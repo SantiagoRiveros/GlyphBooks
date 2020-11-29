@@ -16,7 +16,10 @@ function cartReducer(state = initialState, action) {
     case AGREGAR_CARRITO: {
       var found = false;
       !action.producto.lineOrder &&
-        (action.producto.lineOrder = { quantity: 1 });
+        (action.producto.lineOrder = {
+          quantity: 1,
+          price: action.producto.price,
+        });
       var newItems = state.items.map((product) => {
         if (product.id === action.producto.id) {
           if (product.lineOrder.quantity < action.producto.stock) {

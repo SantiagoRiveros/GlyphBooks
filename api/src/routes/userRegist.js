@@ -9,9 +9,15 @@ const SECRET = process.env.AUTH_SECRET || "SECRET";
 autenticate.post("/register", (req, res, next) => {
   const users = req.body;
 
-  User.create({ ...users })
-    .then(() => res.sendStatus(201))
-    .catch(next);
+  User.findOne({ where: { email: req.body.email } }).then((user) => {
+    if (user) {
+      return res.sendStatus(400);
+    } else {
+      User.create({ ...users })
+        .then((user) => res.status(201).send(user))
+        .catch(next);
+    }
+  });
 });
 
 autenticate.post("/login", (req, res, next) => {

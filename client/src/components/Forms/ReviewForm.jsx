@@ -3,7 +3,13 @@ import ReactStars from "react-rating-stars-component";
 import style from "../../CSS/reviewForm.module.scss";
 import axios from "axios";
 
-export default function Review({ productId, userId, notShow, orderId, reviewId }) {
+export default function Review({
+  productId,
+  userId,
+  notShow,
+  orderId,
+  reviewId,
+}) {
   const [error, setError] = useState("");
   const [error2, setError2] = useState("");
   const [input, setInput] = useState({
@@ -21,12 +27,12 @@ export default function Review({ productId, userId, notShow, orderId, reviewId }
   };
 
   const handleSubmit = (e) => {
-    if(reviewId) {
+    if (reviewId) {
       axios
         .put(`${process.env.REACT_APP_API}/reviews/${reviewId}`, input)
         .then((data) => {
           notShow();
-        })
+        });
     } else {
       axios
         .post(
@@ -35,7 +41,7 @@ export default function Review({ productId, userId, notShow, orderId, reviewId }
         )
         .then((data) => {
           notShow();
-        })
+        });
     }
     e.preventDefault();
   };
@@ -57,16 +63,16 @@ export default function Review({ productId, userId, notShow, orderId, reviewId }
     } else setError(null);*/
     const validate = function (field, set) {
       if (!field) {
-        set('este campo es obligatorio')
+        set("este campo es obligatorio");
       } else if (field.length > 255) {
-        set('puede contener hasta 255 caracteres')
+        set("puede contener hasta 255 caracteres");
       } else {
-        set(null)
+        set(null);
       }
-    }
+    };
     validate(input.title, setError);
     validate(input.body, setError2);
-  }, [input])
+  }, [input]);
 
   return (
     <div className={style.container}>
@@ -88,7 +94,9 @@ export default function Review({ productId, userId, notShow, orderId, reviewId }
           placeholder="Título de tu reseña"
         />
       </div>
-      <div className={style.error}>{(input.title.length > 255 || !input.title) && <span>{error}</span>}</div>
+      <div className={style.error}>
+        {(input.title.length > 255 || !input.title) && <span>{error}</span>}
+      </div>
       <div className={style.textbox}>
         <input
           type="text"
@@ -98,10 +106,16 @@ export default function Review({ productId, userId, notShow, orderId, reviewId }
           placeholder="Contanos"
         />
       </div>
-      <div className={style.error}>{(input.body.length > 255 || !input.body) && <span>{error2}</span>}</div>
-      {(!error && <button className={style.Btn} onClick={handleSubmit}>
+      <div className={style.error}>
+        {(input.body.length > 255 || !input.body) && <span>{error2}</span>}
+      </div>
+      <button
+        disabled={error || error2}
+        className={style.Btn}
+        onClick={handleSubmit}
+      >
         Listo
-      </button>) || (error && <button className={style.Btn}>Listo</button>)}
+      </button>
     </div>
   );
 }

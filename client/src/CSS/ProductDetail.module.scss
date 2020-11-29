@@ -3,6 +3,17 @@
   min-height: calc(100vh - 4rem);
   display: flex;
   justify-content: center;
+
+  .off {
+    font-size: 1.5rem;
+    padding: 0.3rem;
+    background-color: var(--color-primary);
+    position: absolute;
+    top: 9rem;
+    right: 10rem;
+    border-radius: 2rem;
+  }
+
   .bkg {
     width: 100vw;
     height: calc(100vh - 4rem);

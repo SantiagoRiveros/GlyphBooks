@@ -39,6 +39,12 @@ export default function CrudProducts({ product, setProduct }) {
   }, [input, setError]);
 
   const handleChange = (e) => {
+    if (
+      e.target.name === "discount" &&
+      (e.target.value > 100 || e.target.value < 0)
+    ) {
+      return;
+    }
     setInput({
       ...input,
       [e.target.name]: e.target.value,
@@ -46,9 +52,10 @@ export default function CrudProducts({ product, setProduct }) {
   };
 
   const handleSubmit = (e) => {
+    let discount = !input.discount ? 0 : input.discount;
     if (!product) {
       axios
-        .post(`${process.env.REACT_APP_API}/products`, input)
+        .post(`${process.env.REACT_APP_API}/products`, { ...input, discount })
         .then(({ data }) => {
           setProduct(data);
         });
@@ -128,18 +135,6 @@ export default function CrudProducts({ product, setProduct }) {
           />
         </div>
         <div className={style.error}>
-          {!input.author && <span>{error}</span>}
-        </div>
-        <div className={style.textbox}>
-          <input
-            placeholder="Descuento"
-            type="number"
-            value={input.discount}
-            name="discount"
-            onChange={handleChange}
-          />
-        </div>
-        <div className={style.error}>
           {!input.price && <span>{error}</span>}
         </div>
         <div className={style.textbox}>
@@ -160,6 +155,16 @@ export default function CrudProducts({ product, setProduct }) {
             type="text"
             value={input.img}
             name="img"
+            onChange={handleChange}
+          />
+        </div>
+        <div className={style.textbox}>
+          <h4>Agregar descuento? (ingrese el porcentaje)</h4>
+          <input
+            placeholder="Descuento"
+            type="number"
+            value={input.discount}
+            name="discount"
             onChange={handleChange}
           />
         </div>

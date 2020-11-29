@@ -21,9 +21,9 @@ export default function OrderTable() {
       });
   }, [page, sort, status]);
 
-  const handleSort = (e) => {
-    let newOrder = JSON.stringify([[e.target.name, "ASC"]]);
-    newOrder === sort && (newOrder = JSON.stringify([[e.target.name, "DESC"]]));
+  const handleSort = (name) => {
+    let newOrder = JSON.stringify([[name, "ASC"]]);
+    newOrder === sort && (newOrder = JSON.stringify([[name, "DESC"]]));
     setSort(newOrder);
   };
 
@@ -43,17 +43,32 @@ export default function OrderTable() {
       <table className={style.orders}>
         <tr>
           <th className={style.th}>
-            ID <button name={"id"} onClick={handleSort}></button>
+            ID
+            <ion-icon
+              name="chevron-down-outline"
+              onClick={() => handleSort("id")}
+            ></ion-icon>
           </th>
           <th className={style.th}>
-            User ID <button name={"userId"} onClick={handleSort}></button>
+            User ID
+            <ion-icon
+              name="chevron-down-outline"
+              onClick={() => handleSort("userId")}
+            ></ion-icon>
           </th>
           <th className={style.th}>
-            Status <button name={"status"} onClick={handleSort}></button>
+            Status
+            <ion-icon
+              name="chevron-down-outline"
+              onClick={() => handleSort("status")}
+            ></ion-icon>
           </th>
           <th className={style.th}>
-            Creation Date{" "}
-            <button name={"createdAt"} onClick={handleSort}></button>
+            Fecha de creacion
+            <ion-icon
+              name="chevron-down-outline"
+              onClick={() => handleSort("createdAt")}
+            ></ion-icon>
           </th>
           <th className={style.th}>Details</th>
         </tr>

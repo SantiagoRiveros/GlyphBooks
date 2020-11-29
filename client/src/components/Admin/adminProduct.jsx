@@ -44,24 +44,40 @@ export default function AdminProduct({ setProducto }) {
       <table className={style.products}>
         <tr className={style.tr}>
           <th className={style.th}>
-            ID <button name={"id"} onClick={handleSort}></button>
-          </th>
-          <th className={style.th}>
-            Titulo{" "}
+            ID
             <ion-icon
               name="chevron-down-outline"
-              onClick={() => handleSort("name")}
+              onClick={() => handleSort("id")}
             ></ion-icon>
           </th>
           <th className={style.th}>
-            Autor <button name={"author"} onClick={handleSort}></button>
+            Titulo
+            <ion-icon
+              name="chevron-down-outline"
+              onClick={() => handleSort("title")}
+            ></ion-icon>
+          </th>
+          <th className={style.th}>
+            Autor
+            <ion-icon
+              name="chevron-down-outline"
+              onClick={() => handleSort("author")}
+            ></ion-icon>
           </th>
           <th className={style.th}>Descripcion</th>
           <th className={style.th}>
-            Precio <button name={"price"} onClick={handleSort}></button>
+            Precio
+            <ion-icon
+              name="chevron-down-outline"
+              onClick={() => handleSort("price")}
+            ></ion-icon>
           </th>
           <th className={style.th}>
-            Stock <button name={"stock"} onClick={handleSort}></button>
+            Stock
+            <ion-icon
+              name="chevron-down-outline"
+              onClick={() => handleSort("stock")}
+            ></ion-icon>
           </th>
           <th className={style.th}>Editar</th>
         </tr>

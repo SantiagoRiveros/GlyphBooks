@@ -10,9 +10,9 @@ export default function AdminUsers(props) {
   const [sort, setSort] = useState("");
   const pageLimit = Math.ceil(users.count / 12);
 
-  const handleSort = (e) => {
-    let newOrder = JSON.stringify([[e.target.name, "ASC"]]);
-    newOrder === sort && (newOrder = JSON.stringify([[e.target.name, "DESC"]]));
+  const handleSort = (name) => {
+    let newOrder = JSON.stringify([[name, "ASC"]]);
+    newOrder === sort && (newOrder = JSON.stringify([[name, "DESC"]]));
     setSort(newOrder);
   };
 
@@ -43,16 +43,32 @@ export default function AdminUsers(props) {
       <table className={style.users}>
         <tr className={style.tr}>
           <th className={style.th}>
-            ID <button name={"id"} onClick={handleSort}></button>
+            ID
+            <ion-icon
+              name="chevron-down-outline"
+              onClick={() => handleSort("id")}
+            ></ion-icon>
           </th>
           <th className={style.th}>
-            Nombre <button name={"lastName"} onClick={handleSort}></button>
+            Nombre
+            <ion-icon
+              name="chevron-down-outline"
+              onClick={() => handleSort("lastName")}
+            ></ion-icon>
           </th>
           <th className={style.th}>
-            Email <button name={"email"} onClick={handleSort}></button>
+            Email
+            <ion-icon
+              name="chevron-down-outline"
+              onClick={() => handleSort("email")}
+            ></ion-icon>
           </th>
           <th className={style.th}>
-            Rol <button name={"isAdmin"} onClick={handleSort}></button>
+            Rol
+            <ion-icon
+              name="chevron-down-outline"
+              onClick={() => handleSort("isAdmin")}
+            ></ion-icon>
           </th>
           <th className={style.th}>Detalles</th>
 

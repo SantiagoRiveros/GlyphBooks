@@ -31,36 +31,42 @@
 }
 
 .th {
-  text-align: left;
   background-color: orange;
   color: white;
+  min-width: auto;
+  text-align: -webkit-center;
   border: 1px solid #ddd;
-  padding: 8px;
+  padding: 0.5rem;
 
   ion-icon {
-    margin-bottom: 1rem;
+    margin: 0.2rem;
+    padding: 0.2rem;
+    display: flex;
+
     background-color: transparent;
-    color: white;
     cursor: pointer;
+    transition-duration: 500ms;
+    &:hover {
+      background-color: #fafafa40;
+    }
   }
 }
 
 .td {
   border: 1px solid #ddd;
   padding: 8px;
+  ion-icon {
+    background-color: transparent;
+    cursor: pointer;
+    padding-bottom: 0.5rem;
+    transition-duration: 500ms;
+    &:hover {
+      background-color: #fafafa40;
+    }
+  }
 }
 
 .td:nth-child(1) {
-  text-align: center;
-}
-
-.th:nth-child(2) {
-  align-items: center;
-  text-align: center;
-  display: flex;
-}
-
-.td:nth-child(3) {
   text-align: center;
 }
 

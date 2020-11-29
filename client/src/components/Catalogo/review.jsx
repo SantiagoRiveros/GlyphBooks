@@ -16,7 +16,7 @@ export default function Review({ review }) {
             edit={false}
           />
         </div>
-        <h3 className={style.user}>{review.userId}</h3>
+        <h3 className={style.user}>{review.user?.firstName}</h3>
         <h4 className={style.date}>
           {new Date(review.createdAt).toDateString()}
         </h4>

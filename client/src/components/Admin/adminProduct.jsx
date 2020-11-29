@@ -10,9 +10,9 @@ export default function AdminProduct({ setProducto }) {
   const [page, setPage] = useState(1);
   const pageLimit = Math.ceil(productos.count / 12);
 
-  const handleSort = (e) => {
-    let newOrder = JSON.stringify([[e.target.name, "ASC"]]);
-    newOrder === sort && (newOrder = JSON.stringify([[e.target.name, "DESC"]]));
+  const handleSort = (name) => {
+    let newOrder = JSON.stringify([[name, "ASC"]]);
+    newOrder === sort && (newOrder = JSON.stringify([[name, "DESC"]]));
     setSort(newOrder);
   };
 
@@ -47,7 +47,11 @@ export default function AdminProduct({ setProducto }) {
             ID <button name={"id"} onClick={handleSort}></button>
           </th>
           <th className={style.th}>
-            Titulo <button name={"title"} onClick={handleSort}></button>
+            Titulo{" "}
+            <ion-icon
+              name="chevron-down-outline"
+              onClick={() => handleSort("name")}
+            ></ion-icon>
           </th>
           <th className={style.th}>
             Autor <button name={"author"} onClick={handleSort}></button>

@@ -1,17 +1,23 @@
 .container {
   margin-top: 5rem;
-  min-height: calc(100vh - 4rem);
+  min-height: calc(100vh - 2rem);
   display: flex;
   justify-content: center;
 
   .off {
-    font-size: 1.5rem;
-    padding: 0.3rem;
+    font-size: 1rem;
     background-color: var(--color-primary);
+    width: fit-content;
+    padding: 0 1rem;
+    height: 3rem;
+    right: 5rem;
+    display: flex;
     position: absolute;
-    top: 9rem;
-    right: 10rem;
-    border-radius: 2rem;
+    align-items: center;
+    border-radius: 9999px;
+    text-transform: uppercase;
+    color: #fafafa;
+    font-weight: 700;
   }
 
   .bkg {
@@ -82,7 +88,7 @@
     flex-direction: column;
     align-items: flex-start !important;
     justify-content: flex-start !important;
-    flex: 2;
+    flex: 3;
     h1 {
       font-weight: 400;
       font-size: 3.5rem;
@@ -167,8 +173,10 @@
   font-weight: 400;
 }
 .reviews {
-  max-height: 40vh;
+  display: flex;
+  flex-direction: column;
   overflow-y: auto;
+  min-height: 12rem;
   overflow-x: hidden;
   ::-webkit-scrollbar {
     width: 20px;

@@ -31,13 +31,18 @@
 }
 
 .th {
-  padding-top: 12px;
-  padding-bottom: 12px;
   text-align: left;
   background-color: orange;
   color: white;
   border: 1px solid #ddd;
   padding: 8px;
+
+  ion-icon {
+    margin-bottom: 1rem;
+    background-color: transparent;
+    color: white;
+    cursor: pointer;
+  }
 }
 
 .td {
@@ -46,6 +51,16 @@
 }
 
 .td:nth-child(1) {
+  text-align: center;
+}
+
+.th:nth-child(2) {
+  align-items: center;
+  text-align: center;
+  display: flex;
+}
+
+.td:nth-child(3) {
   text-align: center;
 }
 
@@ -93,4 +108,11 @@
     background-color: var(--color-primary);
     color: #fff;
   }
+}
+
+.btnone {
+  background-color: transparent;
+  border: transparent;
+  height: fit-content;
+  width: fit-content;
 }

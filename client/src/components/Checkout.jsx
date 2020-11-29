@@ -15,7 +15,7 @@ export default function Checkout(props) {
 
   useEffect(() => {
     setInput(user.shippingAdress);
-  }, [user, setInput]);
+  }, []);
 
   const handleSubmit = () => {
     axios

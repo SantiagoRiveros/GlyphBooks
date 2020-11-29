@@ -21,11 +21,25 @@ server.get("/", (req, res, next) => {
       ],
     };
   }
+
   let stock = req.query.stock;
   if (stock) {
     where = {
       ...where,
       stock: { [Op.gt]: 0 },
+    };
+  }
+
+  let oferta = req.query.oferta;
+  if (Number(oferta) === 1) {
+    where = {
+      ...where,
+      discount: { [Op.gt]: 0 },
+    };
+  } else if (Number(oferta) === 2) {
+    where = {
+      ...where,
+      discount: 0,
     };
   }
 

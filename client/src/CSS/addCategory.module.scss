@@ -1,9 +1,9 @@
 .container {
-  padding: 10px 20px;
   h1 {
     font-size: 25px;
     border-bottom: 3px solid var(--color-primary);
-    padding: 13px 0;
+    padding: 0.2rem;
+    margin: 0;
   }
   form {
     align-items: center;
@@ -32,9 +32,6 @@
       background-color: var(--color-primary);
       color: #fff;
     }
-  }
-  category {
-    display: flex;
   }
 
   button {

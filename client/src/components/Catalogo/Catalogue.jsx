@@ -58,6 +58,7 @@ function Catalogue(props) {
                     price={producto.price}
                     key={producto.id}
                     id={producto.id}
+                    discount={producto.discount}
                     OnClick={() => push(`/productos/${producto.id}`)}
                     categories={producto.Categories}
                   />

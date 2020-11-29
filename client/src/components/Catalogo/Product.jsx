@@ -11,6 +11,10 @@ function Product(props) {
   const { user } = useSelector((state) => state.user);
   const { items } = useSelector((state) => state.cart);
 
+  const descuento = product?.discount
+    ? Math.floor(product.price - product.price * (product.discount / 100))
+    : null;
+
   const agregarCarrito = (producto) => {
     if (user !== "guest") {
       const notNew = items.find((p) => Number(p.id) === Number(producto.id));
@@ -30,9 +34,7 @@ function Product(props) {
           return;
         }
       } else {
-        let price = producto.price;
-        let descuento = producto.discount/100;
-        price -= price * descuento
+        let price = descuento ? descuento : producto.price;
 
         nextStep = axios.post(
           `${process.env.REACT_APP_API}/users/${user.id}/cart`,
@@ -96,7 +98,7 @@ function Product(props) {
               <button onClick={() => agregarCarrito(product)}>
                 <ShoppingBagIcon color="var(--color-primary)" size={24} />
                 <span>COMPRAR</span>
-                <span>{`$ ${product.price}`}</span>
+                <span>{`$ ${descuento || product.price}`}</span>
               </button>
               <label style={{ marginLeft: "1.5rem" }}>Stock:</label>
               <span style={{ marginLeft: "0.5rem" }}>{product.stock}</span>
@@ -117,6 +119,9 @@ function Product(props) {
             </div>
           </section>
         </div>
+        {descuento ? (
+          <h2 className={style.off}>%{product.discount} OFF</h2>
+        ) : null}
       </div>
     );
   } else {

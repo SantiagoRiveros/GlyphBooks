@@ -60,11 +60,11 @@ export default function OrderDetails() {
   }, [show]);
 
   function Total() {
-    let total = 0;
-    order.products.map((producto) => {
-      total = total + producto.price * producto.lineOrder.quantity;
-    });
-    return total;
+    return order.products
+      .map((el) => el.lineOrder.price * el.lineOrder.quantity)
+      .reduce((acc, cur) => {
+        return acc + cur;
+      });
   }
 
   function notShow() {
@@ -135,10 +135,10 @@ export default function OrderDetails() {
                     <td className={style.td}>
                       {truncateString(producto.title, 50)}
                     </td>
-                    <td className={style.td}>{producto.price}</td>
+                    <td className={style.td}>{producto.lineOrder.price}</td>
                     <td className={style.td}>{producto.lineOrder.quantity}</td>
                     <td className={style.td}>
-                      {producto.price * producto.lineOrder.quantity}
+                      {producto.lineOrder.price * producto.lineOrder.quantity}
                     </td>
                     {order.status === "completa" ? (
                       <td className={style.td}>

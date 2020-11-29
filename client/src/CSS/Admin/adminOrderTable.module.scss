@@ -12,18 +12,30 @@
 }
 
 .th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: var(--color-primary);
-  color: #fafafa;
+  background-color: orange;
+  color: white;
+  min-width: auto;
+  text-align: -webkit-center;
   border: 1px solid #ddd;
-  padding: 8px;
+  padding: 0.5rem;
+  ion-icon {
+    margin: 0.2rem;
+    padding: 0.2rem;
+    display: flex;
+    background-color: transparent;
+    cursor: pointer;
+
+    transition-duration: 500ms;
+    &:hover {
+      background-color: #fafafa40;
+    }
+  }
 }
 
 .td {
   border: 1px solid #ddd;
   padding: 8px;
+  text-align: center;
 }
 
 .tr:nth-child(even) {
@@ -32,18 +44,6 @@
 
 .tr:hover {
   background-color: rgb(194, 194, 194);
-}
-
-.td:nth-child(1) {
-  text-align: center;
-}
-
-.td:nth-child(4) {
-  text-align: center;
-}
-
-.td:nth-child(5) {
-  text-align: center;
 }
 
 .Btn {

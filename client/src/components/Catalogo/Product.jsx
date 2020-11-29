@@ -119,11 +119,11 @@ function Product(props) {
                 </div>
               )}
             </div>
+            {descuento ? (
+              <h2 className={style.off}>%{product.discount} OFF</h2>
+            ) : null}
           </section>
         </div>
-        {descuento ? (
-          <h2 className={style.off}>%{product.discount} OFF</h2>
-        ) : null}
       </div>
     );
   } else {

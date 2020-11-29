@@ -10,9 +10,9 @@ export default function AdminUsers(props) {
   const [sort, setSort] = useState("");
   const pageLimit = Math.ceil(users.count / 12);
 
-  const handleSort = (e) => {
-    let newOrder = JSON.stringify([[e.target.name, "ASC"]]);
-    newOrder === sort && (newOrder = JSON.stringify([[e.target.name, "DESC"]]));
+  const handleSort = (name) => {
+    let newOrder = JSON.stringify([[name, "ASC"]]);
+    newOrder === sort && (newOrder = JSON.stringify([[name, "DESC"]]));
     setSort(newOrder);
   };
 
@@ -39,83 +39,97 @@ export default function AdminUsers(props) {
   }
 
   return (
-    <div className={style.container}>
-      <div className={style.size}>
-        <table className={style.users}>
-          <tr className={style.tr}>
-            <th className={style.th}>
-              ID <button name={"id"} onClick={handleSort}></button>
-            </th>
-            <th className={style.th}>
-              Nombre <button name={"lastName"} onClick={handleSort}></button>
-            </th>
-            <th className={style.th}>
-              Email <button name={"email"} onClick={handleSort}></button>
-            </th>
-            <th className={style.th}>
-              Rol <button name={"isAdmin"} onClick={handleSort}></button>
-            </th>
-            <th className={style.th}>Detalles</th>
+    <div className={style.size}>
+      <table className={style.users}>
+        <tr className={style.tr}>
+          <th className={style.th}>
+            ID
+            <ion-icon
+              name="chevron-down-outline"
+              onClick={() => handleSort("id")}
+            ></ion-icon>
+          </th>
+          <th className={style.th}>
+            Nombre
+            <ion-icon
+              name="chevron-down-outline"
+              onClick={() => handleSort("lastName")}
+            ></ion-icon>
+          </th>
+          <th className={style.th}>
+            Email
+            <ion-icon
+              name="chevron-down-outline"
+              onClick={() => handleSort("email")}
+            ></ion-icon>
+          </th>
+          <th className={style.th}>
+            Rol
+            <ion-icon
+              name="chevron-down-outline"
+              onClick={() => handleSort("isAdmin")}
+            ></ion-icon>
+          </th>
+          <th className={style.th}>Detalles</th>
 
-            <th className={style.th}>Eliminar</th>
-          </tr>
-          {users.count &&
-            users.rows.map((user) => (
-              <tr className={style.tr}>
-                <td className={style.td}>{user.id}</td>
-                <td className={style.td}>
-                  {user.firstName + " " + user.lastName}
-                </td>
-                <td className={style.td}>{user.email}</td>
-                <td className={style.td}>
-                  {user.isAdmin ? "Admin" : "User"}
-                  {Number(props.user.user?.id) !== Number(user.id) ? (
-                    <button
-                      className={style.Btn}
-                      onClick={() => handleSetRole(user.id, user.isAdmin)}
-                    >
-                      Cambiar
-                    </button>
-                  ) : null}
-                </td>
-                <td>
+          <th className={style.th}>Eliminar</th>
+        </tr>
+        {users.count &&
+          users.rows.map((user) => (
+            <tr className={style.tr}>
+              <td className={style.td}>{user.id}</td>
+              <td className={style.td}>
+                {user.firstName + " " + user.lastName}
+              </td>
+              <td className={style.td}>{user.email}</td>
+              <td className={style.td}>
+                {user.isAdmin ? "Admin" : "User"}
+                {Number(props.user.user?.id) !== Number(user.id) ? (
                   <button
                     className={style.Btn}
-                    onClick={() => push(`/admin/userDetails/${user.id}`)}
+                    onClick={() => handleSetRole(user.id, user.isAdmin)}
                   >
-                    Detalles
+                    Cambiar
                   </button>
-                </td>
-                <td className={style.td}>
-                  {Number(props.user.user?.id) !== Number(user.id) ? (
-                    <ion-icon
-                      name="trash-outline"
-                      color="var(--color-primary)"
-                      color="var(--color-primary)"
-                      onClick={() => handleDelete(user.id)}
-                    >
-                      Eliminar
-                    </ion-icon>
-                  ) : null}
-                </td>
-              </tr>
-            ))}
-        </table>
-        <button
-          className={style.Btn}
-          disabled={page === 1 || page === "1"}
-          onClick={() => setPage(page - 1)}
-        >
-          Back
-        </button>
-        <button
-          className={style.Btn}
-          disabled={parseInt(page) === pageLimit}
-          onClick={() => setPage(page + 1)}
-        >
-          Next
-        </button>
-      </div>
+                ) : null}
+              </td>
+              <td>
+                <button
+                  className={style.Btn}
+                  onClick={() => push(`/admin/userDetails/${user.id}`)}
+                >
+                  Detalles
+                </button>
+              </td>
+              <td className={style.td}>
+                {Number(props.user.user?.id) !== Number(user.id) ? (
+                  <ion-icon
+                    name="trash-outline"
+                    color="var(--color-primary)"
+                    color="var(--color-primary)"
+                    onClick={() => handleDelete(user.id)}
+                  >
+                    Eliminar
+                  </ion-icon>
+                ) : null}
+              </td>
+            </tr>
+          ))}
+      </table>
+      <button
+        className={style.Btn}
+        disabled={page === 1 || page === "1"}
+        onClick={() => setPage(page - 1)}
+      >
+        Back
+      </button>
+      <button
+        className={style.Btn}
+        disabled={parseInt(page) === pageLimit}
+        onClick={() => setPage(page + 1)}
+      >
+        Next
+      </button>
     </div>
   );
 }

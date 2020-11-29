@@ -10,9 +10,9 @@ export default function AdminProduct({ setProducto }) {
   const [page, setPage] = useState(1);
   const pageLimit = Math.ceil(productos.count / 12);
 
-  const handleSort = (e) => {
-    let newOrder = JSON.stringify([[e.target.name, "ASC"]]);
-    newOrder === sort && (newOrder = JSON.stringify([[e.target.name, "DESC"]]));
+  const handleSort = (name) => {
+    let newOrder = JSON.stringify([[name, "ASC"]]);
+    newOrder === sort && (newOrder = JSON.stringify([[name, "DESC"]]));
     setSort(newOrder);
   };
 
@@ -44,20 +44,40 @@ export default function AdminProduct({ setProducto }) {
       <table className={style.products}>
         <tr className={style.tr}>
           <th className={style.th}>
-            ID <button name={"id"} onClick={handleSort}></button>
+            ID
+            <ion-icon
+              name="chevron-down-outline"
+              onClick={() => handleSort("id")}
+            ></ion-icon>
           </th>
           <th className={style.th}>
-            Titulo <button name={"title"} onClick={handleSort}></button>
+            Titulo
+            <ion-icon
+              name="chevron-down-outline"
+              onClick={() => handleSort("title")}
+            ></ion-icon>
           </th>
           <th className={style.th}>
-            Autor <button name={"author"} onClick={handleSort}></button>
+            Autor
+            <ion-icon
+              name="chevron-down-outline"
+              onClick={() => handleSort("author")}
+            ></ion-icon>
           </th>
           <th className={style.th}>Descripcion</th>
           <th className={style.th}>
-            Precio <button name={"price"} onClick={handleSort}></button>
+            Precio
+            <ion-icon
+              name="chevron-down-outline"
+              onClick={() => handleSort("price")}
+            ></ion-icon>
           </th>
           <th className={style.th}>
-            Stock <button name={"stock"} onClick={handleSort}></button>
+            Stock
+            <ion-icon
+              name="chevron-down-outline"
+              onClick={() => handleSort("stock")}
+            ></ion-icon>
           </th>
           <th className={style.th}>Editar</th>
         </tr>

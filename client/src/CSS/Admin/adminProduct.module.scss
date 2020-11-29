@@ -31,18 +31,39 @@
 }
 
 .th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
   background-color: orange;
   color: white;
+  min-width: auto;
+  text-align: -webkit-center;
   border: 1px solid #ddd;
-  padding: 8px;
+  padding: 0.5rem;
+
+  ion-icon {
+    margin: 0.2rem;
+    padding: 0.2rem;
+    display: flex;
+
+    background-color: transparent;
+    cursor: pointer;
+    transition-duration: 500ms;
+    &:hover {
+      background-color: #fafafa40;
+    }
+  }
 }
 
 .td {
   border: 1px solid #ddd;
   padding: 8px;
+  ion-icon {
+    background-color: transparent;
+    cursor: pointer;
+    padding-bottom: 0.5rem;
+    transition-duration: 500ms;
+    &:hover {
+      background-color: #fafafa40;
+    }
+  }
 }
 
 .td:nth-child(1) {
@@ -93,4 +114,11 @@
     background-color: var(--color-primary);
     color: #fff;
   }
+}
+
+.btnone {
+  background-color: transparent;
+  border: transparent;
+  height: fit-content;
+  width: fit-content;
 }

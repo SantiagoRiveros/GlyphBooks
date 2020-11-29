@@ -10,9 +10,9 @@ export default function AdminUsers() {
   const [sort, setSort] = useState("");
   const pageLimit = Math.ceil(reviews.count / 12);
 
-  const handleSort = (e) => {
-    let newOrder = JSON.stringify([[e.target.name, "ASC"]]);
-    newOrder === sort && (newOrder = JSON.stringify([[e.target.name, "DESC"]]));
+  const handleSort = (name) => {
+    let newOrder = JSON.stringify([[name, "ASC"]]);
+    newOrder === sort && (newOrder = JSON.stringify([[name, "DESC"]]));
     setSort(newOrder);
   };
 
@@ -37,21 +37,40 @@ export default function AdminUsers() {
       <table className={style.reviews}>
         <tr className={style.tr}>
           <th className={style.th}>
-            ID <button name={"id"} onClick={handleSort}></button>
+            ID
+            <ion-icon
+              name="chevron-down-outline"
+              onClick={() => handleSort("id")}
+            ></ion-icon>
           </th>
           <th className={style.th}>
-            Titulo <button name={"title"} onClick={handleSort}></button>
+            Titulo
+            <ion-icon
+              name="chevron-down-outline"
+              onClick={() => handleSort("title")}
+            ></ion-icon>
           </th>
           <th className={style.th}>Cuerpo</th>
           <th className={style.th}>
-            Calificacion <button name={"rating"} onClick={handleSort}></button>
+            Calificacion
+            <ion-icon
+              name="chevron-down-outline"
+              onClick={() => handleSort("rating")}
+            ></ion-icon>
           </th>
           <th className={style.th}>
-            Creada por <button name={"userId"} onClick={handleSort}></button>
+            Creada por
+            <ion-icon
+              name="chevron-down-outline"
+              onClick={() => handleSort("userId")}
+            ></ion-icon>
           </th>
           <th className={style.th}>
-            Fecha de creacion{" "}
-            <button name={"createdAt"} onClick={handleSort}></button>
+            Fecha de creacion
+            <ion-icon
+              name="chevron-down-outline"
+              onClick={() => handleSort("createdAt")}
+            ></ion-icon>
           </th>
           <th className={style.th}>Eliminar</th>
         </tr>

@@ -116,36 +116,40 @@ export default function OrderDetails(props) {
                   var p = review.filter((r) => {
                     return r.productId === pid && uid === r.userId;
                   });
-                  if (order.userId === user.id && !p.length) {
-                    return (
-                      <button
-                        className={style.Btn}
-                        onClick={() =>
-                          setShow({ true: true, pid, uid, reviewId: false })
-                        }
-                      >
-                        Dejar reseña
-                      </button>
-                    );
-                  } else if (p.length > 0) {
-                    return (
-                      <div>
-                        {p[0].title}
+                  if (order.userId === user.id) {
+                    if (!p.length) {
+                      return (
                         <button
                           className={style.Btn}
                           onClick={() =>
-                            setShow({
-                              true: true,
-                              pid: producto.id,
-                              uid: order.userId,
-                              reviewId: p[0].id,
-                            })
+                            setShow({ true: true, pid, uid, reviewId: false })
                           }
                         >
-                          Editar
+                          Dejar reseña
                         </button>
-                      </div>
-                    );
+                      );
+                    } else if (p.length > 0) {
+                      return (
+                        <div>
+                          {p[0].title}
+                          <button
+                            className={style.Btn}
+                            onClick={() =>
+                              setShow({
+                                true: true,
+                                pid: producto.id,
+                                uid: order.userId,
+                                reviewId: p[0].id,
+                              })
+                            }
+                          >
+                            Editar
+                          </button>
+                        </div>
+                      );
+                    }
+                  } else if (p.length > 0) {
+                    return p[0].title;
                   } else {
                     return "el usuario aun no dejo ninguna reseña";
                   }

@@ -5,6 +5,15 @@ import style from "../../CSS/userDetails.module.scss";
 export default function UserDetails({ user, setLocalUser, localUser }) {
   const [check, setCheck] = useState(false);
   const [input, setInput] = useState({ ...user });
+  const [usuario, setUsuario] = useState({});
+
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_API}/users/${user.id}`)
+      .then(({ data }) => {
+        setUsuario(data);
+      });
+  }, {});
 
   const handleSubmit = () => {
     axios
@@ -36,7 +45,7 @@ export default function UserDetails({ user, setLocalUser, localUser }) {
           <td className={style.td}>{user.firstName}</td>
           <td className={style.td}>{user.lastName}</td>
           <td className={style.td}>{user.email}</td>
-          <td className={style.td}>{user.shippingAdress}</td>
+          <td className={style.td}>{usuario.shippingAdress}</td>
           <td className={style.td}>{user.isAdmin ? "Admin" : "Usuario"}</td>
         </tr>
       </table>

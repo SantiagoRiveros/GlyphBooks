@@ -49,7 +49,7 @@ passport.use(
       clientID:
         "478528675293-v7rf9cliuhpas3hhnknihd1odhedgtfn.apps.googleusercontent.com",
       clientSecret: "h3nSLlMRr6lOuYlFGiXUsqsm",
-      callbackURL: "http://localhost:3001/auth/login/auth/google/callback",
+      callbackURL: `${process.env.FRONT}/auth/login/auth/google/callback`,
       session: false,
     },
     async (token, tokenSecret, profile, done) => {
